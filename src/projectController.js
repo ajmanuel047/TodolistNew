@@ -1,20 +1,57 @@
 // import { createNewProject } from "./eventController"
 import { createEmptyProject } from "./createNewProject"
-
+import { createProject } from "./createNewProject"
 let projects = []
 
-function createProject(){
+function createNewProjects(value){
+  // console.log(value)
+    const newProject = createProject(value).newProject()
+    projects.push(newProject)
+    // console.log('log')
 
-  // console.log(createNewProject())
-     projects.push(createEmptyProject().getEmptyProject())
+    for(let i = 0; i < projects.length; i++){
+      if(projects[i]['projectName'] == null){
+        // console.log('it does')
+        projects[i]['projectName'] = value
+      }
+    }
+    console.log(projects)
+    // return { newProject }
+
 }
 
-function allProjects(){
-  console.log(projects)
+function allProjects(value){
+  
+  const getProjects = () => projects
+  // console.log(projects)
+  return { getProjects }
 }
 
 
-export { createProject, allProjects }
+export { createNewProjects, allProjects }
+
+
+// function createProject(value){
+     
+//   function newProject (){
+//     let project = {
+//         'projectName' : null,
+//         'todos' : []
+//     }
+    
+//     const getNewProject = () => project
+//     return { project, getNewProject }
+//   }
+
+//   const getEmptyProject = () => newProject().getNewProject();
+//   const getNewProject = () => newProject().project
+//   console.log(getEmptyProject())
+//   console.log(getNewProject())
+//   const pushProject = () => projects.push(newProject())
+  
+//   console.log(projects)
+//   return { pushProject }
+// }
 
 
 // greeting.js
