@@ -5,3 +5,41 @@ body {
 .projectName {
     margin-bottom: 5px;
 }
+
+/* .todoInput {
+    position: relative;
+    top: -10px;
+    display: block;
+} */
+
+.submitProject {
+    margin-top: 7px;
+}
+
+h2 {
+    font-size: 1.7rem;
+}
+
+h3 {
+    /* background-color: blue; */
+    display: inline-block;
+    font-size: 1.5rem;
+    
+}
+
+.createNewTodo {
+    margin-left: 60px;
+    position: relative;
+    bottom: 2px;
+    /* background-color: blue; */
+}
+
+.todoInput {
+    position: relative;
+    bottom: 15px;
+}
+
+.newTaskInputButton {
+    position: relative;
+    bottom: 15px;
+}
