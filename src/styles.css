@@ -36,10 +36,11 @@ h3 {
 
 .todoInput {
     position: relative;
-    bottom: 15px;
+    bottom: 14px;
 }
 
-.newTaskInputButton {
+.submitTaskButton {
     position: relative;
-    bottom: 15px;
+    bottom: 14px;
+    
 }

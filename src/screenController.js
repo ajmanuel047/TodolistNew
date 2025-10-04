@@ -3,6 +3,7 @@ import "./styles.css"
 // import { createNewProject } from "./projectController";
 import { allProjects } from "./projectController";
 import { createNewProjects } from "./projectController";
+import { createTodo } from "./projectController";
 
 // tomorrow's first task, remove project name title and replace it
 // by the project name text when the submit button is clicked
@@ -26,7 +27,7 @@ function eventController(){
         document.body.style.backgroundColor = 'green'
         // createProject()
         // createNewProjects()
-        // allProjects()
+        allProjects()
         displayProject()
         // console.log('yes')
       })}
@@ -63,48 +64,75 @@ function eventController(){
         // console.log(document.querySelector('.newProjectButton'))
         const currentTodo = document.querySelectorAll('.createNewTodo')
         // console.log(currentTodo)
-        for(let i = 0; i < currentTodo.length; i++){
-          currentTodo[i].addEventListener('click',function(e){
-            console.log(e)
-            if(e.target.className == `createNewTodo ${i+1}`){
-               document.body.style.backgroundColor = 'orange'
-               console.log(this.button)
-               const todoInput = document.createElement('input');
-               todoInput.classList.add('todoInput');
-               const newTaskInputButton = document.createElement('button')
-               newTaskInputButton.textContent = 'Add Task'
-               newTaskInputButton.classList.add('newTaskInputButton')
-               this.parentElement.appendChild(todoInput)
-               this.parentElement.appendChild(newTaskInputButton)
-               
+        currentTodo.forEach((button) => {
+          button.addEventListener('click', createTaskDisplay)
+          
+        })
+        // for(let i = 0; i < currentTodo.length; i++){
+          
+        //   currentTodo[i].addEventListener('click',function(e){
+        //     console.log(i)
+        //     // if(e.target.className == `createNewTodo ${i}`){
+        //       console.log('yes')
+        //        document.body.style.backgroundColor = 'orange'
+              //  const todoInput = document.createElement('input');
+              //  todoInput.classList.add('todoInput');
+              //  const submitTaskButton = document.createElement('button')
+              //  submitTaskButton.textContent = 'Add Task'
+              //  submitTaskButton.classList.add('submitTaskButton')
+              //  this.parentElement.appendChild(todoInput)
+              //  this.parentElement.appendChild(submitTaskButton)
+              //  submitTask()
               //  createTaskDisplay();
-            }
+            // }
             
             
-          })
-        }
-        // let todoButtons = Array.from(currentTodo)
-        // console.log(todoButtons)
-        // currentTodo.addEventListener('click', function(e){
-        //   document.body.style.backgroundColor = 'orange'
-        //   console.log(e)
-        // }) 
+        //   })
+        // }
   }
+
+   const submitTask = function(){     
+        const taskButtons = document.querySelectorAll('.submitTaskButton')
+        const todoInputs = document.querySelectorAll('.todoInput')
+        // console.log(todoInputs)
+        for(let i = 0; i < taskButtons.length; i++){
+           taskButtons[i].addEventListener('click', function(){
+             let taskInput = todoInputs[i].value
+             document.body.style.backgroundColor = 'purple'
+            //  let taskInput = userInput().getTaskInput()
+             createTodo(taskInput)
+             todoInputs[i].value = ''
+        }) 
+        }
+     
+  } 
   return { createNewProject, runSubmitProject, runCreateTaskButton }
 }
 
 function userInput(){
-  let input = document.querySelector('.projectNameInput').value;
-  // createProject(userInput);
-  const getUserInput = () => input
-  // console.log(getUserInput())
+  let projectNameInput = document.querySelector('.projectNameInput').value;
+  // let taskInput = null
+  if(document.querySelector('.todoInput')){
+  if(document.querySelector('.todoInput')){
+    //  taskInput = document.querySelector('.todoInput').value
+    //  console.log(document.querySelector('.todoInput').value)
+  }
+  }
+
+  
+  
+  const getUserInput = () => projectNameInput
+  // const getTaskInput = () => taskInput
   document.querySelector('.projectNameInput').value = ''
   // console.log(allProjects().getProjects())
 
-  return { getUserInput }
+  return { 
+    getUserInput 
+    // getTaskInput 
+  }
 }
 
-let count = 0
+let count = -1
 function createNewProjectContainer(){
 
        function taskbuttonNumber(){
@@ -162,6 +190,7 @@ function createNewProjectContainer(){
       newProjectContainer.appendChild(submitProject);
       eventController().runSubmitProject()
       eventController().runCreateTaskButton()
+      // eventController().submitTask()
 }
 
 function displayProject(){
@@ -177,8 +206,15 @@ function displayProject(){
 }
      
 function createTaskDisplay(){
-      const todoDiv = document.querySelector('.todoDiv')
-      const todoInput = document.createElement('input');
-      todoInput.classList.add('todoInput');
-      this.todoDiv.appendChild(todoInput)  
+    document.body.style.backgroundColor = 'blue'
+    console.log('yes')
+    const todoInput = document.createElement('input');
+    todoInput.classList.add('todoInput');
+    console.log(this.className)
+    const submitTaskButton = document.createElement('button')
+    submitTaskButton.textContent = 'Add Task'
+    submitTaskButton.classList.add('submitTaskButton')
+    this.parentElement.appendChild(todoInput)
+    this.parentElement.appendChild(submitTaskButton)
+    
 }

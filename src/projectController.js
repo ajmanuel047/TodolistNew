@@ -20,15 +20,37 @@ function createNewProjects(value){
 
 }
 
+// let projects = [
+//     {
+//      'projectName': 'church',
+//      'todo' : [{'title' : 'Wake up early', 'Description' : 'So I can prepare for service'},
+//               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
+//     },
+//     {
+//      'projectName' : 'school',
+//      'todo' : [{'title' : 'study for exam', 'Description' : 'Spend 30mins studying'}, 
+//               {'title' : 'attend lectures', 'Description' : 'attend additional tutorial'}]    
+//     }]
+
+function createTodo(taskInput){
+  console.log(taskInput)
+  console.log(projects)
+
+}
+
 function allProjects(value){
   
   const getProjects = () => projects
-  // console.log(projects)
+  console.log(projects)
   return { getProjects }
 }
 
 
-export { createNewProjects, allProjects }
+export { 
+        createNewProjects, 
+        allProjects, 
+        createTodo 
+      }
 
 
 // function createProject(value){
