@@ -15,7 +15,7 @@ function createNewProjects(value){
         projects[i]['projectName'] = value
       }
     }
-    console.log(projects)
+    // console.log(projects)
     // return { newProject }
 
 }
@@ -32,16 +32,44 @@ function createNewProjects(value){
 //               {'title' : 'attend lectures', 'Description' : 'attend additional tutorial'}]    
 //     }]
 
-function createTodo(taskInput){
-  console.log(taskInput)
+function createTodo(currentProjectName, arr){
+  // console.log(arr)
+  // let totalInputs = document.querySelectorAll('.todoInput')
+  function pushTodo () { 
+    projects.forEach((obj) => {
+      // console.log(obj)
+      for(let i = 0; i < arr.length; i++){
+          if(obj.projectName == currentProjectName){
+            // console.log(obj.projectName)
+            // console.log('yes it is')
+            let newObject = {}
+            newObject.title = `${arr[i]}`
+            // let newObject = Object.assign(obj, )
+            
+
+
+            obj.todos.push(newObject)
+      
+    }
+      }
+
+    
+    
+  })
   console.log(projects)
+  }
+  const createObject = () => pushTodo()
+
+  return {
+          createObject
+         }
 
 }
 
 function allProjects(value){
   
   const getProjects = () => projects
-  console.log(projects)
+  // console.log(projects)
   return { getProjects }
 }
 
