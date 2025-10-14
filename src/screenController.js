@@ -68,7 +68,7 @@ function eventController(){
         const currentTodo = document.querySelectorAll('.createNewTodo')
         // // console.log(currentTodo)
         currentTodo.forEach((button) => {
-          button.addEventListener('click', createTaskDisplay)
+          button.addEventListener('click', createTask().getInputAndButton())
         })   
   }
 
@@ -81,6 +81,7 @@ function eventController(){
         taskInputs.forEach((inputs) => {
           inputs.remove()
         })
+       createTask().getdisplayTodo()
        
   } 
 
@@ -170,16 +171,20 @@ function createNewProjectContainer(){
       todoDiv.classList.add('todoDiv');
       newProjectContainer.appendChild(todoDiv);
 
-      const todoName = document.createElement('h3');
-      todoName.classList.add('todoName');
-      todoName.textContent = 'Tasks'
-      todoDiv.appendChild(todoName)
+      const todoTitleDiv = document.createElement('div')
+      todoTitleDiv.classList.add('todoDivTitle')
+      todoDiv.appendChild(todoTitleDiv)
+
+      const task = document.createElement('h3');
+      task.classList.add('task');
+      task.textContent = 'Tasks'
+      todoTitleDiv.appendChild(task)
 
       const createNewTodo = document.createElement('button');
       createNewTodo.classList.add('createNewTodo')
       createNewTodo.classList.add(`${taskbuttonNumber().getNewCount()}`)
       createNewTodo.textContent = 'New Task';
-      todoDiv.appendChild(createNewTodo);
+      todoTitleDiv.appendChild(createNewTodo);
       
 
       const submitProject = document.createElement('button')
@@ -203,7 +208,9 @@ function displayProject(){
   }
 }
      
-function createTaskDisplay(currentProjectName){
+function createTask(currentProjectName){
+
+    function createInputAndButton (){
       document.body.style.backgroundColor = 'blue'
     setTimeout(() => {
       document.body.style.backgroundColor = 'pink'
@@ -213,39 +220,39 @@ function createTaskDisplay(currentProjectName){
     const currentContainer = document.querySelector('.newProjectContainer')
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
-    // console.log(this.parentElement)
-// currentContainer.firstChild.after(newProjectName,document.querySelector('.titleContainer'))
+
     const currentTodo = document.querySelectorAll('.createNewTodo')
-        // // console.log(currentTodo)
-   
-      
-      // console.log(this.parentElement.parentElement.lastChild)
-      if(this.parentElement.parentElement.lastChild.className !== 'submitProject' && this.parentElement.parentElement.lastChild.className !== 'save' ){
+      //  console.log(this.closest('.newProjectContainer').lastElementChild)
+      if(this.parentElement.parentElement.parentElement.lastChild.className !== 'submitProject' && this.parentElement.parentElement.lastChild.className !== 'save' ){
           const saveButton = document.createElement('button');
           saveButton.textContent = 'Save Changes'
           saveButton.classList.add('save')
           this.parentElement.after(saveButton, todoInput)
       }
-    // console.log(eventController().getCurrentProjectName())
-
-    // console.log(this.className)
-    // console.log(this.className)
-    // console.log(createTodo().createObject())
-    // const submitTaskButton = document.createElement('button')
-    // submitTaskButton.textContent = 'Add Task'
-    // submitTaskButton.classList.add('submitTaskButton')
     this.parentElement.appendChild(todoInput)
+    }
     
-    // this.parentElement.appendChild(submitTaskButton)
+    
+function displayTodo (){
+  let currentContainer = document.querySelector('.projectContainer').lastChild
+  let projects = allProjects().getProjects()
+  
+  let currentTask = projects[projects.length - 1]['todos']
+  console.log(currentTask)
 
-    // if(document.querySelector('.submitTaskButton')){
-    //     eventController().submitTask()
-      
-    // }
-           //   if(document.querySelector('.submitTaskButton')){
-        //         const taskButtons = document.querySelector('.submitTaskButton')
-        //   taskButtons.addEventListener('click', function(){
-        //     console.log('check')
-        //     document.body.style.backgroundColor = 'yellow'
-    
+  for(let i = 0; i < currentTask.length; i++){
+    let currentTodo = currentTask[i]['title']
+    const todo = document.createElement('h4')
+    todo.textContent = currentTodo
+    todo.classList.add('todo')
+    currentContainer.appendChild(todo)
+  }
+}
+    const getInputAndButton = () => createInputAndButton
+    const getdisplayTodo = () => displayTodo()
+
+    return {
+             getInputAndButton,
+             getdisplayTodo
+           }
 }
