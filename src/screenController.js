@@ -48,7 +48,7 @@ function eventController(){
         // console.log(currentProjectName)
         
         let currentContainer = document.querySelector('.projectContainer').lastChild;
-        let newProjectName = document.createElement('h1')
+        let newProjectName = document.createElement('h2')
         newProjectName.textContent = currentProjectName
         currentContainer.firstChild.after(newProjectName,document.querySelector('.titleContainer'))
 
@@ -61,15 +61,31 @@ function eventController(){
 
 
       })
-  }}
+  }
+runCreateTaskButton()
+}
 
   const runCreateTaskButton = function(){
         let currentContainer = document.querySelector('.projectContainer')
         const currentTodo = document.querySelectorAll('.createNewTodo')
-        // // console.log(currentTodo)
-        currentTodo.forEach((button) => {
-          button.addEventListener('click', createTask().getInputAndButton())
-        })   
+        console.log(currentTodo)
+        
+        // if(document.querySelector('.createNewTodo')){
+        //   document.querySelector('.createNewTodo').addEventListener('click', function(){
+        //     document.body.style.backgroundColor = 'purple'
+        //   })
+        // }
+       const taskCreator = createTask()
+
+        currentTodo.forEach((button) => {  
+          console.log(currentTodo) 
+          // if(!button.dataset.listenerAdded){
+          //   button.addEventListener('click', createTask().getInputAndButton())
+          //   button.dataset.listenerAdded = 'true'
+          // }
+          button.onclick = createTask().getInputAndButton()
+        })  
+        
   }
 
   const submitTask = function(currentProjectName){    
@@ -103,26 +119,13 @@ function userInput(){
   taskInputs.forEach((inputs) => {
     arr.push(inputs.value)
   })  
-  // document.querySelector('.todoInput').value = ''
-
-         
-  if(document.querySelector('.todoInput')){
-  if(document.querySelector('.todoInput')){
-    // console.log(document.querySelector('.todoInput').value)
-    //  taskInput = document.querySelector('.todoInput').value
-    //  console.log(document.querySelector('.todoInput').value)
-  }
-  }
-
+ 
   
   
   const getUserInput = () => projectNameInput
   const getTaskNameInput = () => arr
   // const getTaskInput = () => taskInput
   document.querySelector('.projectNameInput').value = ''
-  // document.querySelector('.todoInput').value = ''
-  
-  // console.log(allProjects().getProjects())
 
   return { 
     getUserInput,
@@ -192,7 +195,7 @@ function createNewProjectContainer(){
       submitProject.textContent = 'Submit Project';      
       newProjectContainer.appendChild(submitProject);
       eventController().runSubmitProject()
-      eventController().runCreateTaskButton()
+      // eventController().runCreateTaskButton()
       // eventController().submitTask()
 }
 
@@ -217,11 +220,11 @@ function createTask(currentProjectName){
     }, "500")
     
     // console.log('yes')
-    const currentContainer = document.querySelector('.newProjectContainer')
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
-
-    const currentTodo = document.querySelectorAll('.createNewTodo')
+    console.log(todoInput)
+    // console.log(this)
+    // console.log(this)
       //  console.log(this.closest('.newProjectContainer').lastElementChild)
       if(this.parentElement.parentElement.parentElement.lastChild.className !== 'submitProject' && this.parentElement.parentElement.lastChild.className !== 'save' ){
           const saveButton = document.createElement('button');
@@ -232,7 +235,7 @@ function createTask(currentProjectName){
     this.parentElement.appendChild(todoInput)
     }
     
-    
+     console.log(this)
 function displayTodo (){
   let currentContainer = document.querySelector('.projectContainer').lastChild
   let projects = allProjects().getProjects()
@@ -256,3 +259,8 @@ function displayTodo (){
              getdisplayTodo
            }
 }
+
+
+// task for today start whenever new task button is clicked when 
+// the task is already there it pushes the task down so you need to
+// fix that

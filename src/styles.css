@@ -17,7 +17,8 @@ body {
 }
 
 h2 {
-    font-size: 1.7rem;
+    font-size: 2.5rem;
+    margin-bottom: 2px;
 }
 
 h3 {
@@ -40,12 +41,15 @@ h3 {
 
 .todoDiv {
    /* background-color: blue; */
+   /* margin-top: 20px; */
    /* height: 70px; */
 }
 
 .todoInput {
     position: relative;
     bottom: 14px;
+    background-color: orange;
+    display: block;
 }
 
 .submitTaskButton {
