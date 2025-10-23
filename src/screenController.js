@@ -49,6 +49,7 @@ function eventController(){
         
         let currentContainer = document.querySelector('.projectContainer').lastChild;
         let newProjectName = document.createElement('h2')
+        newProjectName.classList.add('newProjectName')
         newProjectName.textContent = currentProjectName
         currentContainer.firstChild.after(newProjectName,document.querySelector('.titleContainer'))
 
@@ -68,7 +69,8 @@ runCreateTaskButton()
   const runCreateTaskButton = function(){
         let currentContainer = document.querySelector('.projectContainer')
         const currentTodo = document.querySelectorAll('.createNewTodo')
-        console.log(currentTodo)
+        const todoInput = document.querySelector('.todoInput')
+        // console.log(currentTodo)
         
         // if(document.querySelector('.createNewTodo')){
         //   document.querySelector('.createNewTodo').addEventListener('click', function(){
@@ -78,7 +80,6 @@ runCreateTaskButton()
        const taskCreator = createTask()
 
         currentTodo.forEach((button) => {  
-          console.log(currentTodo) 
           // if(!button.dataset.listenerAdded){
           //   button.addEventListener('click', createTask().getInputAndButton())
           //   button.dataset.listenerAdded = 'true'
@@ -220,36 +221,76 @@ function createTask(currentProjectName){
     }, "500")
     
     // console.log('yes')
+    const task = document.querySelector('h4')
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
-    console.log(todoInput)
+    // console.log(todoInput)
+    const todoDiv = document.querySelector('.todoDiv')
+    const currentTodoDiv = document.querySelector('.newProjectContainer').lastChild
+    // console.log(currentTodoDiv)
     // console.log(this)
-    // console.log(this)
-      //  console.log(this.closest('.newProjectContainer').lastElementChild)
-      if(this.parentElement.parentElement.parentElement.lastChild.className !== 'submitProject' && this.parentElement.parentElement.lastChild.className !== 'save' ){
+    // const projectName = document.querySelector('.newProjectName')
+    // console.log(projectName)
+    // if(projectName.textContent){
+    //    console.log(projectName.textContent)
+    // }
+    const currentContainer = document.querySelectorAll('.newProjectContainer')
+    currentContainer.forEach((container) => {
+      // console.log(container.lastChild.className)
+      // i think save changes appear again in the previous container when 
+      // i click new task and i think it is because of the loop as the below
+      // code runs on each item of newProjectContainer
+      let input = document.querySelector('.todoInput')
+      // console.log(container.lastChild)
+          // console.log(container.lastChild.contains())
+      if(container.lastChild.className !== 'submitProject' && container.lastChild.className !== 'save'){
           const saveButton = document.createElement('button');
-          saveButton.textContent = 'Save Changes'
+          saveButton.textContent = 'Save Changes'  
           saveButton.classList.add('save')
-          this.parentElement.after(saveButton, todoInput)
+          
+          container.appendChild(saveButton)
       }
-    this.parentElement.appendChild(todoInput)
-    }
+    })
+
+    // console.log(this.parentElement.parentElement.parentElement.lastChild.className)
+      // if(this.parentElement.parentElement.parentElement.lastChild.className !== 'submitProject' && this.parentElement.parentElement.lastChild.className !== 'save' ){
+      //     const saveButton = document.createElement('button');
+      //     saveButton.textContent = 'Save Changes'
+      //     saveButton.classList.add('save')
+      //     this.parentElement.parentElement.after(saveButton, todoInput)
+      // }
+      // console.log(this.parentElement.parentElement)
+        this.parentElement.parentElement.appendChild(todoInput)
     
-     console.log(this)
+    }
+
 function displayTodo (){
   let currentContainer = document.querySelector('.projectContainer').lastChild
   let projects = allProjects().getProjects()
-  
+  let newTitle = document.querySelector('h2')
+  const todoDiv = document.querySelectorAll('.todoDiv')
+  // console.log(todoDiv)
   let currentTask = projects[projects.length - 1]['todos']
-  console.log(currentTask)
-
   for(let i = 0; i < currentTask.length; i++){
-    let currentTodo = currentTask[i]['title']
-    const todo = document.createElement('h4')
-    todo.textContent = currentTodo
-    todo.classList.add('todo')
-    currentContainer.appendChild(todo)
+    let currentTodo = currentTask[i]['title']   
+     const todo = document.createElement('h4')
+     todo.textContent = currentTodo
+     todo.classList.add('todo')    
+     currentContainer.appendChild(todo)
   }
+  // console.log(currentTask)
+//   let div = null
+//   const todo = document.createElement('h4')
+//   todoDiv.forEach((currentDiv) => {
+//     // console.log(currentDiv)
+//     div = currentDiv    
+//     for(let i = 0; i < currentTask.length; i++){
+//         let currentTodo = currentTask[i]['title']        
+//         todo.textContent = currentTodo
+//         todo.classList.add('todo')       
+//     }   
+//   })
+// div.appendChild(todo)  
 }
     const getInputAndButton = () => createInputAndButton
     const getdisplayTodo = () => displayTodo()
