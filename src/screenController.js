@@ -70,7 +70,7 @@ runCreateTaskButton()
         let currentContainer = document.querySelector('.projectContainer')
         const currentTodo = document.querySelectorAll('.createNewTodo')
         const todoInput = document.querySelector('.todoInput')
-        // console.log(currentTodo)
+        
         
         // if(document.querySelector('.createNewTodo')){
         //   document.querySelector('.createNewTodo').addEventListener('click', function(){
@@ -234,8 +234,9 @@ function createTask(currentProjectName){
     // if(projectName.textContent){
     //    console.log(projectName.textContent)
     // }
-    const currentContainer = document.querySelectorAll('.newProjectContainer')
-    currentContainer.forEach((container) => {
+    const containers = document.querySelectorAll('.newProjectContainer')
+    containers.forEach((container) => {
+      console.log(container)
       // console.log(container.lastChild.className)
       // i think save changes appear again in the previous container when 
       // i click new task and i think it is because of the loop as the below
@@ -243,12 +244,14 @@ function createTask(currentProjectName){
       let input = document.querySelector('.todoInput')
       // console.log(container.lastChild)
           // console.log(container.lastChild.contains())
-      if(container.lastChild.className !== 'submitProject' && container.lastChild.className !== 'save'){
+       let currentContainer = this.parentElement.parentElement.parentElement
+      //  console.log(currentContainer.lastChild.className)
+      if(currentContainer.lastChild.className !== 'submitProject' && currentContainer.lastChild.className !== 'save'){
           const saveButton = document.createElement('button');
           saveButton.textContent = 'Save Changes'  
           saveButton.classList.add('save')
           
-          container.appendChild(saveButton)
+          currentContainer.appendChild(saveButton)
       }
     })
 
@@ -263,13 +266,12 @@ function createTask(currentProjectName){
         this.parentElement.parentElement.appendChild(todoInput)
     
     }
-
 function displayTodo (){
   let currentContainer = document.querySelector('.projectContainer').lastChild
   let projects = allProjects().getProjects()
   let newTitle = document.querySelector('h2')
-  const todoDiv = document.querySelectorAll('.todoDiv')
-  // console.log(todoDiv)
+  const todoDiv = document.querySelector('.todoDiv')
+  console.log(currentContainer)
   let currentTask = projects[projects.length - 1]['todos']
   for(let i = 0; i < currentTask.length; i++){
     let currentTodo = currentTask[i]['title']   
@@ -301,7 +303,4 @@ function displayTodo (){
            }
 }
 
-
-// task for today start whenever new task button is clicked when 
-// the task is already there it pushes the task down so you need to
-// fix that
+// your task is to try and access todoDiv of the last element

@@ -46,7 +46,7 @@ function createTodo(currentProjectName, arr){
       }
     
   })
-  console.log(projects)
+  // console.log(projects)
   }
   const createObject = () => pushTodo()
 
