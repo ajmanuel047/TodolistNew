@@ -145,6 +145,15 @@ const runEditButton = function(){
          currentProjectName.setAttribute('contenteditable', false)
          currentProjectName.classList.remove('editContent')
          currentProjectName.style.cursor = 'auto'
+         const saveCompletedisplay = document.createElement('p')
+         saveCompletedisplay.textContent = 'Saved'
+         saveCompletedisplay.classList.add('saved')
+         // adjust the saveCompletedisplay because it not moving when the text
+         // is longer
+         this.parentElement.appendChild(saveCompletedisplay)
+         setTimeout(() => {
+           saveCompletedisplay.remove()
+         }, 1000)
          createNewProjects(previousValue, currentProjectName.textContent)
          for(let i = 0; i < projects.length; i++){
              if(projects[i]['projectName'] == currentProjectName.textContent){
