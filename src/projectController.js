@@ -4,14 +4,9 @@ import { createProject } from "./createNewProject"
 let projects = []
 
 function createNewProjects(value, value2){
-    console.log(value)
-    console.log(value2)
     const newProject = createProject(value).newProject()
     projects.push(newProject)
-    // console.log('log')
-    // let position = 1
     for(let i = 0; i < projects.length; i++){
-
       if(projects[i]['projectName'] == null){
         projects[i]['projectName'] = value
         console.log(i)

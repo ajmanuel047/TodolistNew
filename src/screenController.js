@@ -24,6 +24,7 @@ const newProjectButton = (function(){
 
 function eventController(){
   let currentProjectName = null;
+  let projects = allProjects().getProjects()
   const createNewProject = function (){
     if(document.querySelector('.newProjectButton')){
       document.querySelector('.newProjectButton').addEventListener('click', function(){
@@ -144,12 +145,13 @@ const runEditButton = function(){
          currentProjectName.setAttribute('contenteditable', false)
          currentProjectName.classList.remove('editContent')
          currentProjectName.style.cursor = 'auto'
-        //  let previousProjectName = currentProjectName
-        //  let newProjectName = currentProjectName.textContent   
-        //  console.log(currentProjectName.textContent)
-        //  console.log(previousValue)
          createNewProjects(previousValue, currentProjectName.textContent)
-        
+         for(let i = 0; i < projects.length; i++){
+             if(projects[i]['projectName'] == currentProjectName.textContent){
+                currentProjectName.textContent = projects[i]['projectName']
+             }
+         }
+         
       }
       currentProjectName.addEventListener('focus', function(e){
         document.body.style.backgroundColor = 'skyblue'
