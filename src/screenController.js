@@ -5,6 +5,14 @@ import { allProjects } from "./projectController";
 import { createNewProjects } from "./projectController";
 import { createTodo } from "./projectController";
 
+document.addEventListener('keydown', function(e){
+  if(e.key == 'Enter'){
+    document.body.style.backgroundColor = 'orange'
+    e.preventDefault()
+  }
+})
+
+
 const newProjectButton = (function(){
   const createNewProjectButton = document.createElement('button');
   createNewProjectButton.classList.add('newProjectButton');
@@ -51,19 +59,28 @@ function eventController(){
         let newProjectName = document.createElement('h2')
         newProjectName.classList.add('newProjectName')
         newProjectName.textContent = currentProjectName
-        currentContainer.firstChild.after(newProjectName,document.querySelector('.titleContainer'))
-
+       
         submitTask(currentProjectName)
+
+        const editButton = document.createElement('button')
+        editButton.textContent = 'Edit'
+        editButton.classList.add('editProjectName')
+
+        currentContainer.firstChild.appendChild(newProjectName)
+        currentContainer.firstChild.appendChild(editButton)
+
         document.querySelector('.projectName').remove()
         document.querySelector('.projectNameInput').remove()
         document.querySelector('.submitProject').remove()
         }
-
+runEditButton()
 
 
       })
+      
   }
 runCreateTaskButton()
+
 }
 
   const runCreateTaskButton = function(){
@@ -99,16 +116,69 @@ runCreateTaskButton()
           inputs.remove()
         })
        createTask().getdisplayTodo()
+      //  console.log(document.querySelector('.editProjectName'))
        
   } 
 
+const runEditButton = function(){
+  let currentEditButton = document.querySelectorAll('.editProjectName')
+  // console.log(currentEditButton)
+  // console.log(document.querySelector('.editProjectName'))
+
+  // console.log('me')
+  let previousValue = null
+  currentEditButton.forEach((button) => {
+    button.onclick = function(){
+      // document.body.style.backgroundColor = 'blue'
+      const currentProjectName = this.parentElement.firstChild
+      // console.log(currentProjectName.textContent)
+      currentProjectName.setAttribute('contenteditable', true)
+      currentProjectName.classList.add('editContent')
+      currentProjectName.style.cursor = 'pointer'
+      // if(button.textContent == 'Edit'){
+      //   currentProjectName.setAttribute('contenteditable', true)
+      //   button.textContent = 'Save'
+      // }
+      if(button.textContent == 'Save'){
+         button.textContent = 'Edit'
+         currentProjectName.setAttribute('contenteditable', false)
+         currentProjectName.classList.remove('editContent')
+         currentProjectName.style.cursor = 'auto'
+        //  let previousProjectName = currentProjectName
+        //  let newProjectName = currentProjectName.textContent   
+        //  console.log(currentProjectName.textContent)
+        //  console.log(previousValue)
+         createNewProjects(previousValue, currentProjectName.textContent)
+        
+      }
+      currentProjectName.addEventListener('focus', function(e){
+        document.body.style.backgroundColor = 'skyblue'
+        previousValue = this.textContent
+        // console.log(previousValue)
+        currentProjectName.setAttribute('contenteditable', true)
+        // i want you to add a smalled blue saved text so when it is
+        // saved it would appear
+        button.textContent = 'Save'
+        currentProjectName.style.cursor = 'auto'
+
+      })
+    }
+  })
+
+
+  // currentEditButton.addEventListener('click', function(){
+  //   document.body.style.backgroundColor = 'black'
+  // })
+
+}  
   const getCurrentProjectName = () => currentProjectName
   return { 
           createNewProject, 
           runSubmitProject, 
           runCreateTaskButton, 
           submitTask,
-          getCurrentProjectName
+          getCurrentProjectName,
+          runEditButton
          }
 }
 
@@ -157,6 +227,7 @@ function createNewProjectContainer(){
       const newProjectContainer = document.createElement('div');
       newProjectContainer.classList.add('newProjectContainer');
       document.querySelector('.projectContainer').appendChild(newProjectContainer);
+
       
       const titleContainer = document.createElement('div')
       titleContainer.classList.add('titleContainer')
@@ -236,11 +307,6 @@ function createTask(currentProjectName){
     // }
     const containers = document.querySelectorAll('.newProjectContainer')
     containers.forEach((container) => {
-      console.log(container)
-      // console.log(container.lastChild.className)
-      // i think save changes appear again in the previous container when 
-      // i click new task and i think it is because of the loop as the below
-      // code runs on each item of newProjectContainer
       let input = document.querySelector('.todoInput')
       // console.log(container.lastChild)
           // console.log(container.lastChild.contains())
@@ -255,14 +321,6 @@ function createTask(currentProjectName){
       }
     })
 
-    // console.log(this.parentElement.parentElement.parentElement.lastChild.className)
-      // if(this.parentElement.parentElement.parentElement.lastChild.className !== 'submitProject' && this.parentElement.parentElement.lastChild.className !== 'save' ){
-      //     const saveButton = document.createElement('button');
-      //     saveButton.textContent = 'Save Changes'
-      //     saveButton.classList.add('save')
-      //     this.parentElement.parentElement.after(saveButton, todoInput)
-      // }
-      // console.log(this.parentElement.parentElement)
         this.parentElement.parentElement.appendChild(todoInput)
     
     }
@@ -271,7 +329,7 @@ function displayTodo (){
   let projects = allProjects().getProjects()
   let newTitle = document.querySelector('h2')
   const todoDiv = document.querySelector('.todoDiv')
-  console.log(currentContainer)
+  // console.log(currentContainer)
   let currentTask = projects[projects.length - 1]['todos']
   for(let i = 0; i < currentTask.length; i++){
     let currentTodo = currentTask[i]['title']   
@@ -303,4 +361,8 @@ function displayTodo (){
            }
 }
 
-// your task is to try and access todoDiv of the last element
+
+function editContent (contentToEdit){
+  contentToEdit.setAttribute('contenteditable', true)
+}
+// task for today is time to edit project name and others

@@ -32,6 +32,16 @@ h3 {
     height: 50px;
 } */
 
+
+[contenteditable]:focus {
+  background-color: orange;
+  outline: 0px solid orange;
+}
+
+.editContent {
+    background-color: orange;
+}
+
 .createNewTodo {
     margin-left: 60px;
     position: relative;

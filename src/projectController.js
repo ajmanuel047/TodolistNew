@@ -3,19 +3,24 @@ import { createEmptyProject } from "./createNewProject"
 import { createProject } from "./createNewProject"
 let projects = []
 
-function createNewProjects(value){
-  // console.log(value)
+function createNewProjects(value, value2){
+    console.log(value)
+    console.log(value2)
     const newProject = createProject(value).newProject()
     projects.push(newProject)
     // console.log('log')
-
+    // let position = 1
     for(let i = 0; i < projects.length; i++){
+
       if(projects[i]['projectName'] == null){
-        // console.log('it does')
         projects[i]['projectName'] = value
+        console.log(i)
+      }else if(projects[i]['projectName'] == value){
+        projects[i]['projectName'] = value2
+        projects.splice(i + 1, 1)
       }
     }
-    // console.log(projects)
+    console.log(projects)
     // return { newProject }
 
 }
