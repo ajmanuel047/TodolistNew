@@ -90,18 +90,19 @@ h4 {
 }
 
 .todo {
-    margin-bottom: 2px;
+    /* margin-bottom: 2px; */
     
 }
 
 .editTodoButton, .editProjectName {
     font-size: 0.6rem;
+    display: block;
 }
 
 .newProjectName {
-     margin-bottom: -3px;
+     /* margin-bottom: -3px; */
 }
 
 .todoInput {
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }

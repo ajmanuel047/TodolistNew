@@ -70,14 +70,26 @@ function eventController(){
         const todoDivs = document.querySelectorAll('.todoDiv')
         const currentTodoDiv = todoDivs[todoDivs.length - 1]
 
-        const editTodoButton = document.createElement('button')
-        editTodoButton.textContent = 'Edit'
-        editTodoButton.classList.add('editTodoButton')
+        const todos = document.querySelectorAll('.todo')
+        const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
+        
+        currentTodoContainer.forEach((currentTodo) => {
+          const editTodoButton = document.createElement('button')
+          editTodoButton.textContent = 'Edit'
+          editTodoButton.classList.add('editTodoButton')
+          currentTodo.appendChild(editTodoButton)
+          // console.log(todos)
+          // console.log()
+        })
+
+       
+
+
         
         currentContainer.firstChild.appendChild(newProjectName)
         currentContainer.firstChild.appendChild(editProjectNameButton)
 
-        currentTodoDiv.appendChild(editTodoButton)
+        // currentTodoDiv.appendChild(editTodoButton)
 
         document.querySelector('.projectName').remove()
         document.querySelector('.projectNameInput').remove()
