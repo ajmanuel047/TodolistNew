@@ -63,12 +63,21 @@ function eventController(){
        
         submitTask(currentProjectName)
 
-        const editButton = document.createElement('button')
-        editButton.textContent = 'Edit'
-        editButton.classList.add('editProjectName')
+        const editProjectNameButton = document.createElement('button')
+        editProjectNameButton.textContent = 'Edit'
+        editProjectNameButton.classList.add('editProjectName')
 
+        const todoDivs = document.querySelectorAll('.todoDiv')
+        const currentTodoDiv = todoDivs[todoDivs.length - 1]
+
+        const editTodoButton = document.createElement('button')
+        editTodoButton.textContent = 'Edit'
+        editTodoButton.classList.add('editTodoButton')
+        
         currentContainer.firstChild.appendChild(newProjectName)
-        currentContainer.firstChild.appendChild(editButton)
+        currentContainer.firstChild.appendChild(editProjectNameButton)
+
+        currentTodoDiv.appendChild(editTodoButton)
 
         document.querySelector('.projectName').remove()
         document.querySelector('.projectNameInput').remove()
@@ -339,16 +348,29 @@ function displayTodo (){
   let currentContainer = document.querySelector('.projectContainer').lastChild
   let projects = allProjects().getProjects()
   let newTitle = document.querySelector('h2')
-  const todoDiv = document.querySelector('.todoDiv')
-  // console.log(currentContainer)
+  const todoDiv = document.querySelectorAll('.todoDiv')
+  const currentTodoDiv = todoDiv[todoDiv.length - 1]
   let currentTask = projects[projects.length - 1]['todos']
   for(let i = 0; i < currentTask.length; i++){
     let currentTodo = currentTask[i]['title']   
      const todo = document.createElement('h4')
      todo.textContent = currentTodo
      todo.classList.add('todo')    
-     currentContainer.appendChild(todo)
+     currentTodoDiv.appendChild(todo)
+     
   }
+
+//  todoDiv.forEach((div) => {
+//     for(let i = 0; i < currentTask.length; i++){
+//       let currentTodo = currentTask[i]['title']   
+//       const todo = document.createElement('h4')
+//       todo.textContent = currentTodo
+//       todo.classList.add('todo')    
+//       div.appendChild(todo)
+//       console.log(this)
+//     }
+//   })
+
   // console.log(currentTask)
 //   let div = null
 //   const todo = document.createElement('h4')
