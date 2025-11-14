@@ -203,18 +203,39 @@ const runEditButton = function(){
 
 const runTodoEditButton = function(){
   const editTodoButtons = document.querySelectorAll('.editTodoButton')
+  console.log(editTodoButtons)
   if(document.querySelector('.editTodoButton')){
       editTodoButtons.forEach((buttons) => {
       buttons.onclick = function(e){
       document.body.style.backgroundColor = 'purple'
-      const currentTodo = this.parentElement.children[1]
-      console.log(currentTodo)
-      // console.log(e) 
-      currentTodo.setAttribute('contenteditable', true)
+      
+      let arr = [].slice.call(this.parentElement.children)
+      console.log(arr) 
+      for(let i = 0; i < arr.length; i++){
+        // console.log(arr[i].className)
+        if(arr[i].className == 'todo'){
+          const currentTodo = this.parentElement.children[i]
+          console.log(currentTodo)
+          currentTodo.setAttribute('contenteditable', true)
+
+          currentTodo.addEventListener('focus', function(e){
+          document.body.style.backgroundColor = 'skyblue'
+          // previousValue = this.textContent
+          // console.log(previousValue)
+          currentTodo.setAttribute('contenteditable', true)
+          // i want you to add a smalled blue saved text so when it is
+          // saved it would appear
+          buttons.textContent = 'Save'
+          currentTodo.style.cursor = 'auto'
+
+        })
+        }
+      }
+      // currentTodo.setAttribute('contenteditable', true)
 
     //   currentTodo.addEventListener('focus', function(e){
     //   document.body.style.backgroundColor = 'skyblue'
-    //   previousValue = this.textContent
+    //   // previousValue = this.textContent
     //   // console.log(previousValue)
     //   currentTodo.setAttribute('contenteditable', true)
     //   // i want you to add a smalled blue saved text so when it is
