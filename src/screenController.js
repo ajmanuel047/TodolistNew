@@ -67,19 +67,15 @@ function eventController(){
         editProjectNameButton.textContent = 'Edit'
         editProjectNameButton.classList.add('editProjectName')
 
-        const todoDivs = document.querySelectorAll('.todoDiv')
-        const currentTodoDiv = todoDivs[todoDivs.length - 1]
-
-        const todos = document.querySelectorAll('.todo')
         const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
         
         currentTodoContainer.forEach((currentTodo) => {
+          console.log(currentTodo)
           const editTodoButton = document.createElement('button')
           editTodoButton.textContent = 'Edit'
           editTodoButton.classList.add('editTodoButton')
-          currentTodo.appendChild(editTodoButton)
-          // console.log(todos)
-          // console.log()
+          currentTodo.after(currentTodo, editTodoButton)
+
         })
 
        
@@ -96,7 +92,7 @@ function eventController(){
         document.querySelector('.submitProject').remove()
         }
 runEditButton()
-
+runTodoEditButton()
 
       })
       
@@ -153,7 +149,8 @@ const runEditButton = function(){
     button.onclick = function(){
       // document.body.style.backgroundColor = 'blue'
       const currentProjectName = this.parentElement.firstChild
-      // console.log(currentProjectName.textContent)
+      console.log(this.parentElement)
+      console.log(currentProjectName)
       currentProjectName.setAttribute('contenteditable', true)
       currentProjectName.classList.add('editContent')
       currentProjectName.style.cursor = 'pointer'
@@ -203,6 +200,35 @@ const runEditButton = function(){
   // })
 
 }  
+
+const runTodoEditButton = function(){
+  const editTodoButtons = document.querySelectorAll('.editTodoButton')
+  if(document.querySelector('.editTodoButton')){
+      editTodoButtons.forEach((buttons) => {
+      buttons.onclick = function(e){
+      document.body.style.backgroundColor = 'purple'
+      const currentTodo = this.parentElement.children[1]
+      console.log(currentTodo)
+      // console.log(e) 
+      currentTodo.setAttribute('contenteditable', true)
+
+    //   currentTodo.addEventListener('focus', function(e){
+    //   document.body.style.backgroundColor = 'skyblue'
+    //   previousValue = this.textContent
+    //   // console.log(previousValue)
+    //   currentTodo.setAttribute('contenteditable', true)
+    //   // i want you to add a smalled blue saved text so when it is
+    //   // saved it would appear
+    //   buttons.textContent = 'Save'
+    //   currentTodo.style.cursor = 'auto'
+
+    // })
+  }
+  })
+
+  }
+
+}
   const getCurrentProjectName = () => currentProjectName
   return { 
           createNewProject, 
