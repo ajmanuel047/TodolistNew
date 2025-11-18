@@ -212,35 +212,35 @@ const runTodoEditButton = function(){
       
       let arr = [].slice.call(this.parentElement.children)
       // console.log(arr) 
-        console.log(e.target)
+        // console.log(e.target)
        if(buttons.textContent == 'Save'){
-        console.log(currentTodo)
+        // console.log(currentTodo)
          buttons.textContent = 'Edit'
          currentTodo.setAttribute('contenteditable', false)
          currentTodo.classList.remove('editContent')
          currentTodo.style.cursor = 'auto'
-        //  const saveCompletedisplay = document.createElement('p')
-        //  saveCompletedisplay.textContent = 'Saved'
-        //  saveCompletedisplay.classList.add('saved')
-         // adjust the saveCompletedisplay because it not moving when the text
-         // is longer
-        //  this.parentElement.appendChild(saveCompletedisplay)
-        //  setTimeout(() => {
-        //    saveCompletedisplay.remove()
-        //  }, 1000)
-        //  createNewProjects(previousValue, currentProjectName.textContent)
-        //  for(let i = 0; i < projects.length; i++){
-        //      if(projects[i]['projectName'] == currentProjectName.textContent){
-        //         currentProjectName.textContent = projects[i]['projectName']
-        //      }
-        //  }         
+         const saveCompletedisplay = document.createElement('p')
+         saveCompletedisplay.textContent = 'Saved'
+         saveCompletedisplay.classList.add('saved')
+        //  adjust the saveCompletedisplay because it not moving when the text
+        //  is longer
+         this.parentElement.appendChild(saveCompletedisplay)
+         setTimeout(() => {
+           saveCompletedisplay.remove()
+         }, 1000)
+        // createNewProjects(previousValue, currentProjectName.textContent)
+         for(let i = 0; i < projects.length; i++){
+             if(projects[i]['projectName'] == currentProjectName.textContent){
+                currentProjectName.textContent = projects[i]['projectName']
+             }
+         }         
       } else if(buttons.textContent == 'Edit'){
       for(let i = 0; i < arr.length; i++){
         // console.log(arr[i].className)
         if(arr[i].className == 'todo'){
-          console.log(i)
+          // console.log(i)
           currentTodo = this.parentElement.children[i]
-          console.log(currentTodo)
+          // console.log(currentTodo)
           currentTodo.setAttribute('contenteditable', true)
           // currentTodo.style.backgroundColor = 'orange'
           currentTodo.classList.add('editContent')
@@ -430,7 +430,7 @@ function createTask(currentProjectName){
 function displayTodo (){
  
   let currentContainer = Array.from(document.querySelector('.projectContainer').lastChild.querySelectorAll('.todoDivContent'))
-  console.log(currentContainer)
+  // console.log(currentContainer)
   let projects = allProjects().getProjects()
   let newTitle = document.querySelector('h2')
   const todoDiv = Array.from(document.querySelectorAll('.todoDivContent'))
@@ -450,7 +450,7 @@ function displayTodo (){
   // }
   // })
   for(let i = 0; i < currentTask.length; i++){
-    console.log(todoDiv)
+    // console.log(todoDiv)
      let currentTodo = currentTask[i]['title']   
      const todo = document.createElement('h4')
      todo.textContent = currentTodo
