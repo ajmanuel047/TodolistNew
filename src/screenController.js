@@ -70,7 +70,7 @@ function eventController(){
         const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
         
         currentTodoContainer.forEach((currentTodo) => {
-          console.log(currentTodo)
+          // console.log(currentTodo)
           const editTodoButton = document.createElement('button')
           editTodoButton.textContent = 'Edit'
           editTodoButton.classList.add('editTodoButton')
@@ -203,47 +203,66 @@ const runEditButton = function(){
 
 const runTodoEditButton = function(){
   const editTodoButtons = document.querySelectorAll('.editTodoButton')
-  console.log(editTodoButtons)
+  // console.log(editTodoButtons)
+  let currentTodo = null
   if(document.querySelector('.editTodoButton')){
       editTodoButtons.forEach((buttons) => {
       buttons.onclick = function(e){
-      document.body.style.backgroundColor = 'purple'
+      // document.body.style.backgroundColor = 'purple'
       
       let arr = [].slice.call(this.parentElement.children)
-      console.log(arr) 
+      // console.log(arr) 
+        console.log(e.target)
+       if(buttons.textContent == 'Save'){
+        console.log(currentTodo)
+         buttons.textContent = 'Edit'
+         currentTodo.setAttribute('contenteditable', false)
+         currentTodo.classList.remove('editContent')
+         currentTodo.style.cursor = 'auto'
+        //  const saveCompletedisplay = document.createElement('p')
+        //  saveCompletedisplay.textContent = 'Saved'
+        //  saveCompletedisplay.classList.add('saved')
+         // adjust the saveCompletedisplay because it not moving when the text
+         // is longer
+        //  this.parentElement.appendChild(saveCompletedisplay)
+        //  setTimeout(() => {
+        //    saveCompletedisplay.remove()
+        //  }, 1000)
+        //  createNewProjects(previousValue, currentProjectName.textContent)
+        //  for(let i = 0; i < projects.length; i++){
+        //      if(projects[i]['projectName'] == currentProjectName.textContent){
+        //         currentProjectName.textContent = projects[i]['projectName']
+        //      }
+        //  }         
+      } else if(buttons.textContent == 'Edit'){
       for(let i = 0; i < arr.length; i++){
         // console.log(arr[i].className)
         if(arr[i].className == 'todo'){
-          const currentTodo = this.parentElement.children[i]
+          console.log(i)
+          currentTodo = this.parentElement.children[i]
           console.log(currentTodo)
           currentTodo.setAttribute('contenteditable', true)
-
+          // currentTodo.style.backgroundColor = 'orange'
+          currentTodo.classList.add('editContent')
+          currentTodo.style.cursor = 'pointer'
           currentTodo.addEventListener('focus', function(e){
           document.body.style.backgroundColor = 'skyblue'
           // previousValue = this.textContent
           // console.log(previousValue)
-          currentTodo.setAttribute('contenteditable', true)
+          // currentTodo.setAttribute('contenteditable', true)
           // i want you to add a smalled blue saved text so when it is
           // saved it would appear
           buttons.textContent = 'Save'
           currentTodo.style.cursor = 'auto'
 
         })
+
+
         }
       }
-      // currentTodo.setAttribute('contenteditable', true)
+      }
 
-    //   currentTodo.addEventListener('focus', function(e){
-    //   document.body.style.backgroundColor = 'skyblue'
-    //   // previousValue = this.textContent
-    //   // console.log(previousValue)
-    //   currentTodo.setAttribute('contenteditable', true)
-    //   // i want you to add a smalled blue saved text so when it is
-    //   // saved it would appear
-    //   buttons.textContent = 'Save'
-    //   currentTodo.style.cursor = 'auto'
 
-    // })
   }
   })
 
@@ -371,12 +390,16 @@ function createTask(currentProjectName){
     }, "500")
     
     // console.log('yes')
-    const task = document.querySelector('h4')
+    // const task = document.querySelector('h4')
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
+
+    const todoDivContent = document.createElement('div')
+    todoDivContent.classList.add('todoDivContent')
+    
     // console.log(todoInput)
-    const todoDiv = document.querySelector('.todoDiv')
-    const currentTodoDiv = document.querySelector('.newProjectContainer').lastChild
+    // const todoDiv = document.querySelector('.todoDiv')
+    // const currentTodoDiv = document.querySelector('.newProjectContainer').lastChild
     // console.log(currentTodoDiv)
     // console.log(this)
     // const projectName = document.querySelector('.newProjectName')
@@ -386,7 +409,7 @@ function createTask(currentProjectName){
     // }
     const containers = document.querySelectorAll('.newProjectContainer')
     containers.forEach((container) => {
-      let input = document.querySelector('.todoInput')
+   //   let input = document.querySelector('.todoInput')
       // console.log(container.lastChild)
           // console.log(container.lastChild.contains())
        let currentContainer = this.parentElement.parentElement.parentElement
@@ -400,49 +423,41 @@ function createTask(currentProjectName){
       }
     })
 
+        this.parentElement.parentElement.appendChild(todoDivContent)
         this.parentElement.parentElement.appendChild(todoInput)
-    
+        
     }
 function displayTodo (){
-  let currentContainer = document.querySelector('.projectContainer').lastChild
+ 
+  let currentContainer = Array.from(document.querySelector('.projectContainer').lastChild.querySelectorAll('.todoDivContent'))
+  console.log(currentContainer)
   let projects = allProjects().getProjects()
   let newTitle = document.querySelector('h2')
-  const todoDiv = document.querySelectorAll('.todoDiv')
+  const todoDiv = Array.from(document.querySelectorAll('.todoDivContent'))
+  
   const currentTodoDiv = todoDiv[todoDiv.length - 1]
   let currentTask = projects[projects.length - 1]['todos']
+  // console.log(currentTask)
+  // todoDiv.forEach((div) => {
+  //   console.log(div)
+  // for(let i = 0; i < currentTask.length; i++){
+  //   let currentTodo = currentTask[i]['title']   
+  //    const todo = document.createElement('h4')
+  //    todo.textContent = currentTodo
+  //    todo.classList.add('todo')    
+  //    div.appendChild(todo)
+     
+  // }
+  // })
   for(let i = 0; i < currentTask.length; i++){
-    let currentTodo = currentTask[i]['title']   
+    console.log(todoDiv)
+     let currentTodo = currentTask[i]['title']   
      const todo = document.createElement('h4')
      todo.textContent = currentTodo
      todo.classList.add('todo')    
-     currentTodoDiv.appendChild(todo)
-     
+     currentContainer[i].appendChild(todo)
   }
 
-//  todoDiv.forEach((div) => {
-//     for(let i = 0; i < currentTask.length; i++){
-//       let currentTodo = currentTask[i]['title']   
-//       const todo = document.createElement('h4')
-//       todo.textContent = currentTodo
-//       todo.classList.add('todo')    
-//       div.appendChild(todo)
-//       console.log(this)
-//     }
-//   })
-
-  // console.log(currentTask)
-//   let div = null
-//   const todo = document.createElement('h4')
-//   todoDiv.forEach((currentDiv) => {
-//     // console.log(currentDiv)
-//     div = currentDiv    
-//     for(let i = 0; i < currentTask.length; i++){
-//         let currentTodo = currentTask[i]['title']        
-//         todo.textContent = currentTodo
-//         todo.classList.add('todo')       
-//     }   
-//   })
-// div.appendChild(todo)  
 }
     const getInputAndButton = () => createInputAndButton
     const getdisplayTodo = () => displayTodo()
@@ -457,4 +472,8 @@ function displayTodo (){
 function editContent (contentToEdit){
   contentToEdit.setAttribute('contenteditable', true)
 }
-// task for today is time to edit project name and others
+// solved previous issue but an existing problem that was there
+// before has been revealed. when i press the edit button when there
+// is more than one todoitem, it highlights the two to edit.
+// the issue as always should be from the loop where i got the currentTodo
+// start from there

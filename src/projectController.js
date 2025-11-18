@@ -9,13 +9,13 @@ function createNewProjects(value, value2){
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == null){
         projects[i]['projectName'] = value
-        console.log(i)
+        // console.log(i)
       }else if(projects[i]['projectName'] == value){
         projects[i]['projectName'] = value2
         projects.splice(i + 1, 1)
       }
     }
-    console.log(projects)
+    // console.log(projects)
     // return { newProject }
 
 }
