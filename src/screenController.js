@@ -205,13 +205,14 @@ const runTodoEditButton = function(){
   const editTodoButtons = document.querySelectorAll('.editTodoButton')
   // console.log(editTodoButtons)
   let currentTodo = null
+  let previousTodo = null
   if(document.querySelector('.editTodoButton')){
       editTodoButtons.forEach((buttons) => {
       buttons.onclick = function(e){
       // document.body.style.backgroundColor = 'purple'
       
       let arr = [].slice.call(this.parentElement.children)
-      // console.log(arr) 
+      let currentProjectName = this.parentElement.parentElement.parentElement.firstChild.firstChild.textContent 
         // console.log(e.target)
        if(buttons.textContent == 'Save'){
         // console.log(currentTodo)
@@ -228,17 +229,20 @@ const runTodoEditButton = function(){
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-        // createNewProjects(previousValue, currentProjectName.textContent)
+         console.log(currentProjectName)
+        //  console.log(previousTodo)
+         createTodo(currentProjectName, arr, currentTodo.textContent, previousTodo).editTodo()
          for(let i = 0; i < projects.length; i++){
              if(projects[i]['projectName'] == currentProjectName.textContent){
                 currentProjectName.textContent = projects[i]['projectName']
-             }
+                console.log('me')
+              }
          }         
       } else if(buttons.textContent == 'Edit'){
       for(let i = 0; i < arr.length; i++){
         // console.log(arr[i].className)
         if(arr[i].className == 'todo'){
-          // console.log(i)
+          previousTodo = this.parentElement.children[i].textContent
           currentTodo = this.parentElement.children[i]
           // console.log(currentTodo)
           currentTodo.setAttribute('contenteditable', true)

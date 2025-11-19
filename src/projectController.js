@@ -32,26 +32,56 @@ function createNewProjects(value, value2){
 //               {'title' : 'attend lectures', 'Description' : 'attend additional tutorial'}]    
 //     }]
 
-function createTodo(currentProjectName, arr){
+function createTodo(currentProjectName, arr, currentTodo, previousTodo){
+  // console.log(currentTodo)
+  // console.log(previousTodo)
+  // console.log(currentProjectName)
   function pushTodo () { 
     projects.forEach((obj) => {
-      // console.log(obj)
+        //  console.log(obj.todos)
+        //  console.log(obj)
       for(let i = 0; i < arr.length; i++){
           if(obj.projectName == currentProjectName){
             let newObject = {}
             newObject.title = `${arr[i]}`
-            obj.todos.push(newObject)
-      
-    }
-      }
-    
-  })
+            obj.todos.push(newObject)      
+          }
+      }    
+      // if(obj.projectName == currentProjectName){
+      //    console.log(obj.todos)
+      //    console.log(obj)
+      // }
+    })
+    //  console.log(projects)
+ }
+
+ function editTodo(){
+  // console.log('test')
   // console.log(projects)
+  for(let i = 0; i < projects.length; i++){
+  // console.log(projects[i]['projectName'])
+    if(projects[i]['projectName'] == currentProjectName){
+      // console.log(currentProjectName)
+      // console.log(projects[i]['todos'])
+      for(let j = 0; j < projects[i]['todos'].length; j++){
+        // console.log(projects[i]['todos'][j]['title'])
+        // console.log('me')
+        if(projects[i]['todos'][j]['title'] == previousTodo){
+          // console.log(previousTodo)
+          // console.log(currentTodo)
+          projects[i]['todos'][j]['title'] = currentTodo
+          
+        }
+      }
+    }
   }
+  console.log(projects)
+ }
   const createObject = () => pushTodo()
 
   return {
-          createObject
+          createObject,
+          editTodo
          }
 
 }
