@@ -229,13 +229,16 @@ const runTodoEditButton = function(){
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-         console.log(currentProjectName)
-        //  console.log(previousTodo)
          createTodo(currentProjectName, arr, currentTodo.textContent, previousTodo).editTodo()
          for(let i = 0; i < projects.length; i++){
-             if(projects[i]['projectName'] == currentProjectName.textContent){
-                currentProjectName.textContent = projects[i]['projectName']
-                console.log('me')
+             if(projects[i]['projectName'] == currentProjectName){
+                for(let j = 0; j < projects[i]['todos'].length; j++ ){
+                    if(projects[i]['todos'][j]['title'] == currentTodo.textContent){
+                        let newTodo = projects[i]['todos'][j]['title']
+                        console.log(newTodo)
+                        currentTodo.textContent = newTodo
+                    }
+                  }
               }
          }         
       } else if(buttons.textContent == 'Edit'){
