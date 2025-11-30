@@ -337,6 +337,7 @@ const runSaveChanges = function(){
           submitTask,
           getCurrentProjectName,
           runEditButton,
+          runTodoEditButton,
           runSaveChanges
          }
 }
@@ -381,6 +382,8 @@ function createTodoButton (){
         todoDivContent.appendChild(editTodoButton)
       }
     }
+    eventController().runTodoEditButton()
+    console.log(allProjects().getProjects())
   })
 //   currentTodoContainer.forEach((currentTodo) => {
 //   // console.log(currentTodo)
@@ -581,3 +584,14 @@ function editContent (contentToEdit){
 // is more than one todoitem, it highlights the two to edit.
 // the issue as always should be from the loop where i got the currentTodo
 // start from there
+
+// NEWEST
+// Two new bugs
+/*
+1. Creating two new projects with just one todo each is ok
+when i create a second todo for the second it adds to both the first 
+and the second and so on
+2. When i create a project with its todo before i create a second project
+withs its own todo its ok. But after doing this if i am to add a new 
+todo to the previous project wahala arises
+*/
