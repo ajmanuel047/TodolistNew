@@ -67,18 +67,29 @@ function eventController(){
         editProjectNameButton.textContent = 'Edit'
         editProjectNameButton.classList.add('editProjectName')
 
-        const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
+        // const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
         
-        currentTodoContainer.forEach((currentTodo) => {
-          // console.log(currentTodo)
-          const editTodoButton = document.createElement('button')
-          editTodoButton.textContent = 'Edit'
-          editTodoButton.classList.add('editTodoButton')
-          currentTodo.after(currentTodo, editTodoButton)
+        // currentTodoContainer.forEach((currentTodo) => {
+        //   // console.log(currentTodo)
+        //   const editTodoButton = document.createElement('button')
+        //   editTodoButton.textContent = 'Edit'
+        //   editTodoButton.classList.add('editTodoButton')
+        //   currentTodo.after(currentTodo, editTodoButton)
 
-        })
+        // })
 
-       
+        createTodoButton()
+        
+        // function createTodoButton (currentTodoContainer){
+        //   currentTodoContainer.forEach((currentTodo) => {
+        //   // console.log(currentTodo)
+        //   const editTodoButton = document.createElement('button')
+        //   editTodoButton.textContent = 'Edit'
+        //   editTodoButton.classList.add('editTodoButton')
+        //   currentTodo.after(currentTodo, editTodoButton)
+
+        // })
+        // }
 
 
         
@@ -120,6 +131,7 @@ runCreateTaskButton()
           //   button.dataset.listenerAdded = 'true'
           // }
           button.onclick = createTask().getInputAndButton()
+          
         })  
         
   }
@@ -127,7 +139,7 @@ runCreateTaskButton()
   const submitTask = function(currentProjectName){    
     const currentContainer = document.querySelector('.newProjectContainer')             
         let arr = userInput().getTaskNameInput() 
-        // console.log(taskInput)      
+        // console.log(arr)      
         createTodo(currentProjectName, arr).createObject()
         let taskInputs =  document.querySelectorAll('.todoInput')
         taskInputs.forEach((inputs) => {
@@ -241,7 +253,8 @@ const runTodoEditButton = function(){
                   }
               }
          }         
-      } else if(buttons.textContent == 'Edit'){
+      } 
+      else if(buttons.textContent == 'Edit'){
       for(let i = 0; i < arr.length; i++){
         // console.log(arr[i].className)
         if(arr[i].className == 'todo'){
@@ -254,27 +267,67 @@ const runTodoEditButton = function(){
           currentTodo.style.cursor = 'pointer'
           currentTodo.addEventListener('focus', function(e){
           document.body.style.backgroundColor = 'skyblue'
-          // previousValue = this.textContent
-          // console.log(previousValue)
-          // currentTodo.setAttribute('contenteditable', true)
-          // i want you to add a smalled blue saved text so when it is
-          // saved it would appear
           buttons.textContent = 'Save'
           currentTodo.style.cursor = 'auto'
-
-        })
-
-
+          })
         }
       }
+     }
+   }
+ })
+}
+}
+
+const runSaveChanges = function(){
+
+    if(document.querySelector('.saveChanges')){
+      const saveChanges = document.querySelectorAll('.saveChanges')
+      const saveChangesButtons = document.querySelectorAll('.saveChanges')
+      
+      saveChangesButtons.forEach((button) => {
+        button.onclick = function(e){
+       // console.log(e.target.className)
+        document.body.style.backgroundColor = 'violet'
+        if(e.target.className == 'saveChanges'){
+     //      console.log(typeof this.parentElement)
+           let todoInput = this.parentElement.querySelector('.todoInput')
+          //  console.log(todoInput.value)
+          //  console.log(userInput().getTaskNameInput())
+            let arr = []
+            const taskInputs = document.querySelectorAll('.todoInput')  
+            const todos = Array.from(document.querySelectorAll('.todo'))  
+            // const currentTodo = this.parentElement.querySelector('.todo')
+            // console.log(currentTodo)
+            todos.forEach((todo) => {
+              arr.push(todo.textContent)
+            })
+
+            taskInputs.forEach((inputs) => {
+              arr.push(inputs.value)
+            })  
+
+         
+           const currentTodo = arr[arr.length - 1]
+           const currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
+           createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
+           // console.log(this.parentElement.querySelector('.todoDiv').lastChild)
+           createTask().getdisplayTodo()
+          //  createTask().getInputAndButton()
+           todoInput.remove()           
+           this.remove()
+           
+        }
       }
+      })
 
-
-  }
-  })
-
-  }
-
+      
+    }
+    // saveChangesButtons.forEach((button) => {
+    //   button.addEventListener('click', function(){
+    //     console.log('buttons')
+    //   })
+    // })
+  // }
 }
   const getCurrentProjectName = () => currentProjectName
   return { 
@@ -283,7 +336,8 @@ const runTodoEditButton = function(){
           runCreateTaskButton, 
           submitTask,
           getCurrentProjectName,
-          runEditButton
+          runEditButton,
+          runSaveChanges
          }
 }
 
@@ -308,6 +362,35 @@ function userInput(){
     getTaskNameInput 
     // getTaskInput 
   }
+}
+
+        
+function createTodoButton (){
+  const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
+  const currentTodoDivContent = document.querySelectorAll('.todoDivContent')
+  
+  currentTodoDivContent.forEach((todoDivContent) => {
+   console.log(todoDivContent)
+    if(todoDivContent.lastChild){
+       console.log(todoDivContent.lastChild)
+      if(todoDivContent.lastChild.className == 'todo'){
+         console.log(todoDivContent.lastChild)
+        const editTodoButton = document.createElement('button')
+        editTodoButton.textContent = 'Edit'
+        editTodoButton.classList.add('editTodoButton')
+        todoDivContent.appendChild(editTodoButton)
+      }
+    }
+  })
+//   currentTodoContainer.forEach((currentTodo) => {
+//   // console.log(currentTodo)
+  
+//   const editTodoButton = document.createElement('button')
+//   editTodoButton.textContent = 'Edit'
+//   editTodoButton.classList.add('editTodoButton')
+//   currentTodo.after(currentTodo, editTodoButton)
+
+// })
 }
 
 let count = -1
@@ -403,7 +486,9 @@ function createTask(currentProjectName){
 
     const todoDivContent = document.createElement('div')
     todoDivContent.classList.add('todoDivContent')
-    
+    // console.log(this)
+    // console.log('test')
+   
     // console.log(todoInput)
     // const todoDiv = document.querySelector('.todoDiv')
     // const currentTodoDiv = document.querySelector('.newProjectContainer').lastChild
@@ -421,12 +506,12 @@ function createTask(currentProjectName){
           // console.log(container.lastChild.contains())
        let currentContainer = this.parentElement.parentElement.parentElement
       //  console.log(currentContainer.lastChild.className)
-      if(currentContainer.lastChild.className !== 'submitProject' && currentContainer.lastChild.className !== 'save'){
+      if(currentContainer.lastChild.className !== 'submitProject' && currentContainer.lastChild.className !== 'saveChanges'){
           const saveButton = document.createElement('button');
           saveButton.textContent = 'Save Changes'  
-          saveButton.classList.add('save')
-          
+          saveButton.classList.add('saveChanges')          
           currentContainer.appendChild(saveButton)
+          eventController().runSaveChanges()
       }
     })
 
@@ -456,15 +541,27 @@ function displayTodo (){
      
   // }
   // })
+  // console.log(currentTask[currentTask.length - 1])
+  // console.log(currentTask)
+  const todo = document.createElement('h4')
+  // const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
+  // createTodoButton()
   for(let i = 0; i < currentTask.length; i++){
-    // console.log(todoDiv)
-     let currentTodo = currentTask[i]['title']   
-     const todo = document.createElement('h4')
+    // console.log(todo)    
+     let currentTodo = currentTask[i]['title']        
      todo.textContent = currentTodo
      todo.classList.add('todo')    
+    //  console.log(todo)
      currentContainer[i].appendChild(todo)
   }
-
+   createTodoButton()
+  let divLength = document.querySelector('.projectContainer').lastChild.querySelector('.todoDiv').children.length
+  let divCurrentContent = document.querySelector('.projectContainer').lastChild.querySelector('.todoDiv').children[divLength - 1].textContent
+  // if(divCurrentContent == currentTask[currentTask.length - 1]){
+  //   console.log('yes')
+  // }else{
+    
+  // }
 }
     const getInputAndButton = () => createInputAndButton
     const getdisplayTodo = () => displayTodo()

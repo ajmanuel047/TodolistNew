@@ -33,31 +33,50 @@ function createNewProjects(value, value2){
 //     }]
 
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
-  // console.log(currentTodo)
-  // console.log(previousTodo)
-  // console.log(currentProjectName)
+ 
+  // console.log(arr)
+ // console.log(typeof arr)
   function pushTodo () { 
     projects.forEach((obj) => {
         //  console.log(obj.todos)
         //  console.log(obj)
-      for(let i = 0; i < arr.length; i++){
-          if(obj.projectName == currentProjectName){
-            let newObject = {}
-            newObject.title = `${arr[i]}`
-            obj.todos.push(newObject)      
-          }
-      }    
+        if(typeof arr == 'string'){
+          const value = arr.split()[0]
+          let newObject = {}
+          newObject.title = value
+          obj.todos.push(newObject)  
+        }else{
+          for(let i = 0; i < arr.length; i++){
+                if(obj.projectName == currentProjectName){
+                  let newObject = {}
+                  newObject.title = `${arr[i]}`
+   //               console.log(`${arr[i]}`)
+                  obj.todos.push(newObject)      
+                }
+            }  
+        }
+      // for(let i = 0; i < arr.length; i++){
+      //     if(obj.projectName == currentProjectName){
+      //       let newObject = {}
+      //       newObject.title = `${arr[i]}`
+      //       console.log(`${arr[i]}`)
+      //       obj.todos.push(newObject)      
+      //     }
+      // }    
       // if(obj.projectName == currentProjectName){
       //    console.log(obj.todos)
       //    console.log(obj)
       // }
     })
-    //  console.log(projects)
+     // console.log(projects)
  }
 
  function editTodo(){
-  // console.log('test')
+  //  console.log('test')
   // console.log(projects)
+  //  console.log(currentTodo)
+  //  console.log(currentProjectName)
+   // console.log(currentTodo)
   for(let i = 0; i < projects.length; i++){
   // console.log(projects[i]['projectName'])
     if(projects[i]['projectName'] == currentProjectName){
@@ -75,7 +94,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
       }
     }
   }
-  // console.log(projects)
+ // console.log(projects)
  }
   const createObject = () => pushTodo()
 
