@@ -249,6 +249,7 @@ const runTodoEditButton = function(){
                         let newTodo = projects[i]['todos'][j]['title']
                         console.log(newTodo)
                         currentTodo.textContent = newTodo
+                        console.log(allProjects().getProjects())
                     }
                   }
               }
@@ -287,7 +288,7 @@ const runSaveChanges = function(){
       saveChangesButtons.forEach((button) => {
         button.onclick = function(e){
        // console.log(e.target.className)
-        document.body.style.backgroundColor = 'violet'
+        document.body.style.backgroundColor = 'skyblue'
         if(e.target.className == 'saveChanges'){
      //      console.log(typeof this.parentElement)
            let todoInput = this.parentElement.querySelector('.todoInput')
@@ -371,11 +372,11 @@ function createTodoButton (){
   const currentTodoDivContent = document.querySelectorAll('.todoDivContent')
   
   currentTodoDivContent.forEach((todoDivContent) => {
-   console.log(todoDivContent)
+  //  console.log(todoDivContent)
     if(todoDivContent.lastChild){
-       console.log(todoDivContent.lastChild)
+      //  console.log(todoDivContent.lastChild)
       if(todoDivContent.lastChild.className == 'todo'){
-         console.log(todoDivContent.lastChild)
+        //  console.log(todoDivContent.lastChild)
         const editTodoButton = document.createElement('button')
         editTodoButton.textContent = 'Edit'
         editTodoButton.classList.add('editTodoButton')
@@ -383,7 +384,7 @@ function createTodoButton (){
       }
     }
     eventController().runTodoEditButton()
-    console.log(allProjects().getProjects())
+    // console.log(allProjects().getProjects())
   })
 //   currentTodoContainer.forEach((currentTodo) => {
 //   // console.log(currentTodo)
@@ -585,7 +586,7 @@ function editContent (contentToEdit){
 // the issue as always should be from the loop where i got the currentTodo
 // start from there
 
-// NEWEST
+// NEWEST 
 // Two new bugs
 /*
 1. Creating two new projects with just one todo each is ok
