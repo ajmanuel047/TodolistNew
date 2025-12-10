@@ -40,15 +40,15 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
     projects.forEach((obj) => {
         //  console.log(obj.todos)
         //  console.log(typeof arr)
-          console.log(arr)
-          console.log(obj)
+          // console.log(arr)
+          // console.log(obj)
         if(typeof arr == 'string'){
           if(obj.projectName == currentProjectName){
           const value = arr.split()[0]
           let newObject = {}
           newObject.title = value
           obj.todos.push(newObject)  
-          console.log('this runs')
+          // console.log('this runs')
           }
         }
         else{
@@ -59,7 +59,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
                   newObject.title = `${arr[i]}`
    //               console.log(`${arr[i]}`)
                   obj.todos.push(newObject)     
-                  console.log('it runs') 
+                  // console.log('it runs') 
                 }
             }  
         }
@@ -76,7 +76,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
       //    console.log(obj)
       // }
     })
-      console.log(projects)
+      // console.log(projects)
  }
 
  function editTodo(){

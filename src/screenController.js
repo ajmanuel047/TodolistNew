@@ -40,8 +40,9 @@ function eventController(){
       })}
   }
   const runSubmitProject = function(){
+    
     if(document.querySelector('.submitProject')){
-      document.querySelector('.submitProject').addEventListener('click', function(){
+      document.querySelector('.submitProject').addEventListener('click', function(e){
         // document.body.style.backgroundColor = 'black'
         let projectName = userInput().getUserInput(); 
         // console.log(projectName)
@@ -61,7 +62,8 @@ function eventController(){
         newProjectName.classList.add('newProjectName')
         newProjectName.textContent = currentProjectName
        
-        submitTask(currentProjectName)
+       
+        
 
         const editProjectNameButton = document.createElement('button')
         editProjectNameButton.textContent = 'Edit'
@@ -95,8 +97,12 @@ function eventController(){
         
         currentContainer.firstChild.appendChild(newProjectName)
         currentContainer.firstChild.appendChild(editProjectNameButton)
-
+        let targetDiv = e.target.parentElement
+        submitTask(currentProjectName, targetDiv)
+       
         // currentTodoDiv.appendChild(editTodoButton)
+ const newProjectNameDiv = this.parentElement.querySelector('.newProjectName')
+ createTask(newProjectNameDiv)
 
         document.querySelector('.projectName').remove()
         document.querySelector('.projectNameInput').remove()
@@ -136,7 +142,7 @@ runCreateTaskButton()
         
   }
 
-  const submitTask = function(currentProjectName){    
+  const submitTask = function(currentProjectName, targetDiv){    
     const currentContainer = document.querySelector('.newProjectContainer')             
         let arr = userInput().getTaskNameInput() 
         // console.log(arr)      
@@ -145,7 +151,8 @@ runCreateTaskButton()
         taskInputs.forEach((inputs) => {
           inputs.remove()
         })
-       createTask().getdisplayTodo()
+      //  console.log(this)
+       createTask(currentProjectName).displayTodo(targetDiv)
       //  console.log(document.querySelector('.editProjectName'))
        
   } 
@@ -249,7 +256,7 @@ const runTodoEditButton = function(){
                         let newTodo = projects[i]['todos'][j]['title']
                         console.log(newTodo)
                         currentTodo.textContent = newTodo
-                        console.log(allProjects().getProjects())
+                        // console.log(allProjects().getProjects())
                     }
                   }
               }
@@ -312,7 +319,7 @@ const runSaveChanges = function(){
            const currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
            createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
            // console.log(this.parentElement.querySelector('.todoDiv').lastChild)
-           createTask().getdisplayTodo()
+           createTask().displayTodo()
           //  createTask().getInputAndButton()
            todoInput.remove()           
            this.remove()
@@ -475,8 +482,8 @@ function displayProject(){
   }
 }
      
-function createTask(currentProjectName){
-
+function createTask(currentProjectName, newProjectNameDiv){
+   
     function createInputAndButton (){
       document.body.style.backgroundColor = 'blue'
     setTimeout(() => {
@@ -490,19 +497,6 @@ function createTask(currentProjectName){
 
     const todoDivContent = document.createElement('div')
     todoDivContent.classList.add('todoDivContent')
-    // console.log(this)
-    // console.log('test')
-   
-    // console.log(todoInput)
-    // const todoDiv = document.querySelector('.todoDiv')
-    // const currentTodoDiv = document.querySelector('.newProjectContainer').lastChild
-    // console.log(currentTodoDiv)
-    // console.log(this)
-    // const projectName = document.querySelector('.newProjectName')
-    // console.log(projectName)
-    // if(projectName.textContent){
-    //    console.log(projectName.textContent)
-    // }
     const containers = document.querySelectorAll('.newProjectContainer')
     containers.forEach((container) => {
    //   let input = document.querySelector('.todoInput')
@@ -521,58 +515,31 @@ function createTask(currentProjectName){
 
         this.parentElement.parentElement.appendChild(todoDivContent)
         this.parentElement.parentElement.appendChild(todoInput)
-        
     }
-function displayTodo (){
- 
-  let currentContainer = Array.from(document.querySelector('.projectContainer').lastChild.querySelectorAll('.todoDivContent'))
-  // console.log(currentContainer)
-  let projects = allProjects().getProjects()
-  let newTitle = document.querySelector('h2')
-  const todoDiv = Array.from(document.querySelectorAll('.todoDivContent'))
-  
-  const currentTodoDiv = todoDiv[todoDiv.length - 1]
-  let currentTask = projects[projects.length - 1]['todos']
-  // console.log(currentTask)
-  // todoDiv.forEach((div) => {
-  //   console.log(div)
-  // for(let i = 0; i < currentTask.length; i++){
-  //   let currentTodo = currentTask[i]['title']   
-  //    const todo = document.createElement('h4')
-  //    todo.textContent = currentTodo
-  //    todo.classList.add('todo')    
-  //    div.appendChild(todo)
-     
-  // }
-  // })
-  // console.log(currentTask[currentTask.length - 1])
-  // console.log(currentTask)
-  const todo = document.createElement('h4')
-  // const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
-  // createTodoButton()
-  for(let i = 0; i < currentTask.length; i++){
-    // console.log(todo)    
-     let currentTodo = currentTask[i]['title']        
-     todo.textContent = currentTodo
-     todo.classList.add('todo')    
-    //  console.log(todo)
-     currentContainer[i].appendChild(todo)
+
+function displayTodo (targetDiv){  
+  const projects = allProjects().getProjects()
+  for(let i = 0; i < projects.length; i++){        
+    if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
+      let currentTask = projects[i]['todos']
+        for(let j = 0; j < currentTask.length; j++){
+        const todo = document.createElement('h4')
+        let currentTodo = currentTask[j]['title']
+        todo.textContent = currentTodo
+        todo.classList.add('todo') 
+        let currentContainer = targetDiv.querySelector('.todoDivContent')
+        currentContainer.appendChild(todo)
+        createTodoButton()
+      }
+    }
   }
-   createTodoButton()
-  let divLength = document.querySelector('.projectContainer').lastChild.querySelector('.todoDiv').children.length
-  let divCurrentContent = document.querySelector('.projectContainer').lastChild.querySelector('.todoDiv').children[divLength - 1].textContent
-  // if(divCurrentContent == currentTask[currentTask.length - 1]){
-  //   console.log('yes')
-  // }else{
-    
-  // }
 }
     const getInputAndButton = () => createInputAndButton
-    const getdisplayTodo = () => displayTodo()
+    // const getdisplayTodo = () => displayTodo()
 
     return {
              getInputAndButton,
-             getdisplayTodo
+             displayTodo
            }
 }
 
@@ -595,4 +562,19 @@ and the second and so on
 2. When i create a project with its todo before i create a second project
 withs its own todo its ok. But after doing this if i am to add a new 
 todo to the previous project wahala arises
+
+I am trying to get the current project name in display todo so i can
+solve 2 above which was partially solved when i solved 1 but now when
+i add the new task it goes to the last project and i think it has 
+something to do with my targeting so i am trying to get the current 
+project name so like always i can use it to target the right project
+being clicked
+
+I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
+MY HEAD FIRST. IT HAS ALWAYS BEEN THE MOST EFFICIENT WAY I HAVE USED TO
+SOLVE PROBLEMS. THINK OF THE SOLUTION IN YOUR HEAD FIRST AND THEN CREATE
+THAT SOLUTION INTO CODE. YOU NEED TO VISUALIZE IT BEFORE YOU START WRITING
+THE CODE. ALSO, THE BASICS OF CODING IS THAT YOU HAVE TO BREAK A COMPLEX
+PROBLEM INTO SMALLER PIECES OR PROBLEMS AND SOLVE THEM. BEFORE YOU KNOW
+IT YOU WILL HAVE GOTTEN THE OVERALL SOLUTION OF WHAT YOU ARE TRYING TO DO
 */
