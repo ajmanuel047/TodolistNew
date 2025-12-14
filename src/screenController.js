@@ -101,8 +101,8 @@ function eventController(){
         submitTask(currentProjectName, targetDiv)
        
         // currentTodoDiv.appendChild(editTodoButton)
- const newProjectNameDiv = this.parentElement.querySelector('.newProjectName')
- createTask(newProjectNameDiv)
+ // const newProjectNameDiv = this.parentElement.querySelector('.newProjectName')
+ createTask()
 
         document.querySelector('.projectName').remove()
         document.querySelector('.projectNameInput').remove()
@@ -294,7 +294,7 @@ const runSaveChanges = function(){
       
       saveChangesButtons.forEach((button) => {
         button.onclick = function(e){
-       // console.log(e.target.className)
+        const targetDiv = e.target.parentElement
         document.body.style.backgroundColor = 'skyblue'
         if(e.target.className == 'saveChanges'){
      //      console.log(typeof this.parentElement)
@@ -319,7 +319,7 @@ const runSaveChanges = function(){
            const currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
            createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
            // console.log(this.parentElement.querySelector('.todoDiv').lastChild)
-           createTask().displayTodo()
+           createTask(currentProjectName).displayTodo(targetDiv)
           //  createTask().getInputAndButton()
            todoInput.remove()           
            this.remove()
@@ -484,17 +484,15 @@ function displayProject(){
      
 function createTask(currentProjectName, newProjectNameDiv){
    
-    function createInputAndButton (){
-      document.body.style.backgroundColor = 'blue'
+    function createInputAndButton (){    
+    if(!document.querySelector('.todoInput')){
+    document.body.style.backgroundColor = 'blue'
     setTimeout(() => {
       document.body.style.backgroundColor = 'pink'
     }, "500")
-    
-    // console.log('yes')
-    // const task = document.querySelector('h4')
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
-
+    
     const todoDivContent = document.createElement('div')
     todoDivContent.classList.add('todoDivContent')
     const containers = document.querySelectorAll('.newProjectContainer')
@@ -517,20 +515,28 @@ function createTask(currentProjectName, newProjectNameDiv){
         this.parentElement.parentElement.appendChild(todoInput)
     }
 
+
+    }
+
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
-  for(let i = 0; i < projects.length; i++){        
+  
+  for(let i = 0; i < projects.length; i++){         
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
       let currentTask = projects[i]['todos']
+      console.log(currentTask[currentTask.length - 1])
+      const todo = document.createElement('h4')
         for(let j = 0; j < currentTask.length; j++){
-        const todo = document.createElement('h4')
+        
         let currentTodo = currentTask[j]['title']
         todo.textContent = currentTodo
         todo.classList.add('todo') 
         let currentContainer = targetDiv.querySelector('.todoDivContent')
         currentContainer.appendChild(todo)
-        createTodoButton()
+        
+        // console.log(projects)
       }
+      createTodoButton()
     }
   }
 }
