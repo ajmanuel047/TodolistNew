@@ -36,8 +36,8 @@ function eventController(){
         displayProject()
         // console.log('yes')
         }
-
-      })}
+      })
+    }
   }
   const runSubmitProject = function(){
     
@@ -60,54 +60,39 @@ function eventController(){
         let currentContainer = document.querySelector('.projectContainer').lastChild;
         let newProjectName = document.createElement('h2')
         newProjectName.classList.add('newProjectName')
-        newProjectName.textContent = currentProjectName
-       
-       
-        
-
+        newProjectName.textContent = currentProjectName 
+            
         const editProjectNameButton = document.createElement('button')
         editProjectNameButton.textContent = 'Edit'
         editProjectNameButton.classList.add('editProjectName')
-
-        // const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
-        
-        // currentTodoContainer.forEach((currentTodo) => {
-        //   // console.log(currentTodo)
-        //   const editTodoButton = document.createElement('button')
-        //   editTodoButton.textContent = 'Edit'
-        //   editTodoButton.classList.add('editTodoButton')
-        //   currentTodo.after(currentTodo, editTodoButton)
-
-        // })
-
-        createTodoButton()
-        
-        // function createTodoButton (currentTodoContainer){
-        //   currentTodoContainer.forEach((currentTodo) => {
-        //   // console.log(currentTodo)
-        //   const editTodoButton = document.createElement('button')
-        //   editTodoButton.textContent = 'Edit'
-        //   editTodoButton.classList.add('editTodoButton')
-        //   currentTodo.after(currentTodo, editTodoButton)
-
-        // })
-        // }
-
-
-        
+        createTodoButton()      
+       
         currentContainer.firstChild.appendChild(newProjectName)
         currentContainer.firstChild.appendChild(editProjectNameButton)
         let targetDiv = e.target.parentElement
         submitTask(currentProjectName, targetDiv)
-       
-        // currentTodoDiv.appendChild(editTodoButton)
- // const newProjectNameDiv = this.parentElement.querySelector('.newProjectName')
- createTask()
+      
+        createTask()
 
         document.querySelector('.projectName').remove()
         document.querySelector('.projectNameInput').remove()
         document.querySelector('.submitProject').remove()
         }
+        else {
+          if(!document.querySelector('.errorMessage')){
+          console.log('check')
+          const errorMessage = document.createElement('p')
+          errorMessage.textContent = 'Please fill empty field(s) and submit'
+          errorMessage.classList.add('errorMessage')
+          errorMessage.style.marginTop = '7px'
+          console.log(this.parentElement.parentElement.firstChild)
+          this.parentElement.parentElement.querySelector('.projectNameInput').after(errorMessage)
+          setTimeout(() => {
+          document.querySelector('.errorMessage').remove()
+          }, 2000)
+          }
+          // this.parentElement.parentElement.before(document.querySelector('.todoDiv'), errorMessage)  
+      }
 runEditButton()
 runTodoEditButton()
 
