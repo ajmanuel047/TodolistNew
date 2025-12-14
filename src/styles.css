@@ -13,7 +13,7 @@ body {
 } */
 
 .submitProject {
-    margin-top: 7px;
+    margin-top: 0px;
 }
 
 h2 {
@@ -109,4 +109,11 @@ h4 {
 
 .todoInput {
     margin-top: 19px;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 0.6rem;
+    font-style: italic;
+    margin-top: -10px;
 }

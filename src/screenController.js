@@ -497,12 +497,8 @@ function createTask(currentProjectName, newProjectNameDiv){
     todoDivContent.classList.add('todoDivContent')
     const containers = document.querySelectorAll('.newProjectContainer')
     containers.forEach((container) => {
-   //   let input = document.querySelector('.todoInput')
-      // console.log(container.lastChild)
-          // console.log(container.lastChild.contains())
        let currentContainer = this.parentElement.parentElement.parentElement
-      //  console.log(currentContainer.lastChild.className)
-      if(currentContainer.lastChild.className !== 'submitProject' && currentContainer.lastChild.className !== 'saveChanges'){
+       if(currentContainer.lastChild.className !== 'submitProject' && currentContainer.lastChild.className !== 'saveChanges'){
           const saveButton = document.createElement('button');
           saveButton.textContent = 'Save Changes'  
           saveButton.classList.add('saveChanges')          
@@ -513,10 +509,20 @@ function createTask(currentProjectName, newProjectNameDiv){
 
         this.parentElement.parentElement.appendChild(todoDivContent)
         this.parentElement.parentElement.appendChild(todoInput)
+    } else{
+      console.log('no')
+      if(!document.querySelector('.errorMessage')){
+      const errorMessage = document.createElement('p')
+      errorMessage.textContent = 'Please fill empty field(s) and submit'
+      errorMessage.classList.add('errorMessage')
+      console.log(this.parentElement.querySelector('.todoDivContent')) 
+      this.after(document.querySelector('.todoInput'), errorMessage)
+      setTimeout(() => {
+        document.querySelector('.errorMessage').remove()
+      }, 2000)
+      }
     }
-
-
-    }
+  }
 
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
