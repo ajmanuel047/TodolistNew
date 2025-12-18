@@ -13,7 +13,7 @@ body {
 } */
 
 .submitProject {
-    margin-top: 3px;
+    margin-top: 9px;
 }
 
 h2 {
@@ -116,4 +116,5 @@ h4 {
     font-size: 0.6rem;
     font-style: italic;
     margin-top: -10px;
+    position: absolute;
 }

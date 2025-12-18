@@ -46,58 +46,54 @@ function eventController(){
         // document.body.style.backgroundColor = 'black'
         let projectName = userInput().getUserInput(); 
         // console.log(projectName)
-        if(projectName){
-        createNewProjects(projectName)
-        const projects = allProjects().getProjects()
-        
-        for(let i = 0; i < projects.length; i++){
-          if(projects[i]['projectName'] == projectName){
-             currentProjectName = projects[i]['projectName']    
-          }
-        }
-        // console.log(currentProjectName)
-        
-        let currentContainer = document.querySelector('.projectContainer').lastChild;
-        let newProjectName = document.createElement('h2')
-        newProjectName.classList.add('newProjectName')
-        newProjectName.textContent = currentProjectName 
-            
-        const editProjectNameButton = document.createElement('button')
-        editProjectNameButton.textContent = 'Edit'
-        editProjectNameButton.classList.add('editProjectName')
-        createTodoButton()      
-       
-        currentContainer.firstChild.appendChild(newProjectName)
-        currentContainer.firstChild.appendChild(editProjectNameButton)
-        let targetDiv = e.target.parentElement
-        submitTask(currentProjectName, targetDiv)
-      
-        createTask()
+       // console.log(this.parentElement.querySelector('.todoInput'))
 
-        document.querySelector('.projectName').remove()
-        document.querySelector('.projectNameInput').remove()
-        document.querySelector('.submitProject').remove()
+       if(projectName){
+        if(!this.parentElement.querySelector('.todoInput')){
+          console.log('null check 1')
+          newProject(projectName, currentProjectName)
+          document.querySelector('.projectName').remove()
+          document.querySelector('.projectNameInput').remove()
+          document.querySelector('.submitProject').remove()
         }
-        else {
+        else if(this.parentElement.querySelector('.todoInput').value !== ''){   
+          console.log('null check 2')
+          newProject(projectName, currentProjectName)
+          console.log(this.parentElement.querySelector('.newProjectName').textContent)
+          createTodoButton()    
+        
+          let targetDiv = e.target.parentElement
+          submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
+        
+          createTask()
+          console.log('runnning')
+          document.querySelector('.projectName').remove()
+          document.querySelector('.projectNameInput').remove()
+          document.querySelector('.submitProject').remove()
+        }
+        else if(this.parentElement.querySelector('.todoInput').value == ''){
+          console.log('todo is empty and project name not')
           if(!document.querySelector('.errorMessage')){
-          console.log('check')
-          const errorMessage = document.createElement('p')
-          errorMessage.textContent = 'Please fill empty field(s) and submit'
-          errorMessage.classList.add('errorMessage')
-          errorMessage.style.marginTop = '7px'
-          console.log(this.parentElement.parentElement.firstChild)
-          this.parentElement.parentElement.querySelector('.projectNameInput').after(errorMessage)
-          setTimeout(() => {
-          document.querySelector('.errorMessage').remove()
-          }, 2000)
+              this.parentElement.querySelector('.todoInput').after(errorMessage())
+              setTimeout(() => {
+              document.querySelector('.errorMessage').remove()
+              }, 2000)  
           }
-          // this.parentElement.parentElement.before(document.querySelector('.todoDiv'), errorMessage)  
-      }
+        }
+       }
+     else if(!projectName){          
+          console.log('check')
+          if(!document.querySelector('.errorMessage')){
+              this.parentElement.parentElement.querySelector('.projectNameInput').after(errorMessage())
+              this.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
+              setTimeout(() => {
+              document.querySelector('.errorMessage').remove()
+              }, 2000) 
+          }             
+      } 
 runEditButton()
 runTodoEditButton()
-
-      })
-      
+      })      
   }
 runCreateTaskButton()
 
@@ -349,7 +345,7 @@ function userInput(){
   const getUserInput = () => projectNameInput
   const getTaskNameInput = () => arr
   // const getTaskInput = () => taskInput
-  document.querySelector('.projectNameInput').value = ''
+  // document.querySelector('.projectNameInput').value = ''
 
   return { 
     getUserInput,
@@ -497,11 +493,7 @@ function createTask(currentProjectName, newProjectNameDiv){
     } else{
       console.log('no')
       if(!document.querySelector('.errorMessage')){
-      const errorMessage = document.createElement('p')
-      errorMessage.textContent = 'Please fill empty field(s) and submit'
-      errorMessage.classList.add('errorMessage')
-      console.log(this.parentElement.querySelector('.todoDivContent')) 
-      this.after(document.querySelector('.todoInput'), errorMessage)
+      this.after(document.querySelector('.todoInput'), errorMessage())
       setTimeout(() => {
         document.querySelector('.errorMessage').remove()
       }, 2000)
@@ -515,7 +507,7 @@ function displayTodo (targetDiv){
   for(let i = 0; i < projects.length; i++){         
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
       let currentTask = projects[i]['todos']
-      console.log(currentTask[currentTask.length - 1])
+      // console.log(currentTask[currentTask.length - 1])
       const todo = document.createElement('h4')
         for(let j = 0; j < currentTask.length; j++){
         
@@ -544,6 +536,39 @@ function displayTodo (targetDiv){
 function editContent (contentToEdit){
   contentToEdit.setAttribute('contenteditable', true)
 }
+
+function errorMessage(){
+  const message = document.createElement('p')
+  message.textContent = 'Please fill empty field(s) and submit'
+  message.classList.add('errorMessage')
+  return message
+}
+
+function newProject(projectName, currentProjectName){
+  
+  createNewProjects(projectName)
+  const projects = allProjects().getProjects()        
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['projectName'] == projectName){
+      currentProjectName = projects[i]['projectName']    
+    }
+  }
+    
+  let currentContainer = document.querySelector('.projectContainer').lastChild;
+  let newProjectName = document.createElement('h2')
+  newProjectName.classList.add('newProjectName')
+  newProjectName.textContent = currentProjectName 
+      
+  const editProjectNameButton = document.createElement('button')
+  editProjectNameButton.textContent = 'Edit'
+  editProjectNameButton.classList.add('editProjectName')        
+
+  currentContainer.firstChild.appendChild(newProjectName)
+  currentContainer.firstChild.appendChild(editProjectNameButton)
+
+}
+// work on submit button when todo field is empty. It should not submit
+// or something in that nature when the todo field is empty
 // solved previous issue but an existing problem that was there
 // before has been revealed. when i press the edit button when there
 // is more than one todoitem, it highlights the two to edit.
