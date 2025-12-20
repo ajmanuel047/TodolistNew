@@ -108,7 +108,7 @@ h4 {
 }
 
 .todoInput {
-    margin-top: 19px;
+    margin-top: 27px;
 }
 
 .errorMessage {
@@ -117,4 +117,8 @@ h4 {
     font-style: italic;
     margin-top: -10px;
     position: absolute;
+}
+
+.saveChanges {
+    margin-top: 5px;
 }

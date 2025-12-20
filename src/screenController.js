@@ -57,16 +57,16 @@ function eventController(){
           document.querySelector('.submitProject').remove()
         }
         else if(this.parentElement.querySelector('.todoInput').value !== ''){   
-          console.log('null check 2')
+          // console.log('null check 2')
           newProject(projectName, currentProjectName)
-          console.log(this.parentElement.querySelector('.newProjectName').textContent)
+         //  console.log(this.parentElement.querySelector('.newProjectName').textContent)
           createTodoButton()    
         
           let targetDiv = e.target.parentElement
           submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
         
           createTask()
-          console.log('runnning')
+          // console.log('runnning')
           document.querySelector('.projectName').remove()
           document.querySelector('.projectNameInput').remove()
           document.querySelector('.submitProject').remove()
@@ -490,15 +490,21 @@ function createTask(currentProjectName, newProjectNameDiv){
 
         this.parentElement.parentElement.appendChild(todoDivContent)
         this.parentElement.parentElement.appendChild(todoInput)
-    } else{
+    } 
+    else{
       console.log('no')
+      console.log(this.parentElement.parentElement.querySelector('.todoInput'))
       if(!document.querySelector('.errorMessage')){
-      this.after(document.querySelector('.todoInput'), errorMessage())
-      setTimeout(() => {
-        document.querySelector('.errorMessage').remove()
-      }, 2000)
+        
+        
+        this.parentElement.parentElement.querySelector('.todoInput').after(errorMessage())
+        document.querySelector('.errorMessage').style.marginTop = '-12px'
+        //   this.after(document.querySelector('.todoInput'), errorMessage())
+        setTimeout(() => {
+          document.querySelector('.errorMessage').remove()
+        }, 2000)
+        }
       }
-    }
   }
 
 function displayTodo (targetDiv){  
