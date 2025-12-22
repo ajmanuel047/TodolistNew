@@ -14,11 +14,28 @@ document.addEventListener('keydown', function(e){
 
 
 const newProjectButton = (function(){
+
+  const headerDiv = document.createElement('div')
+  headerDiv.classList.add('headerDiv')
+  document.body.appendChild(headerDiv)
+
   const createNewProjectButton = document.createElement('button');
   createNewProjectButton.classList.add('newProjectButton');
   createNewProjectButton.textContent = 'Create Project';
-  document.body.appendChild(createNewProjectButton)
+  headerDiv.appendChild(createNewProjectButton)
+
+  const headerAddToProjectDiv = document.createElement('div')
+  headerAddToProjectDiv.classList.add('headerAddToProjectDiv')
+  headerDiv.appendChild(headerAddToProjectDiv)
+
+  const addTodo = document.createElement('p')
+  addTodo.classList.add('addTodo')
+  addTodo.textContent = 'Click Here To Add Todo To Any Project'
+  headerAddToProjectDiv.appendChild(addTodo)
+
   eventController().createNewProject()
+  eventController().runAddTodo()
+  console.log(document.querySelector('.addTodo'))
   return { createNewProjectButton }
 })()
 
@@ -311,12 +328,17 @@ const runSaveChanges = function(){
 
       
     }
-    // saveChangesButtons.forEach((button) => {
-    //   button.addEventListener('click', function(){
-    //     console.log('buttons')
-    //   })
-    // })
-  // }
+}
+
+const runAddTodo = function (){
+  const addTodo = document.querySelector('.addTodo')
+    addTodo.addEventListener('click', function(){    
+
+    if(!document.querySelector('.selectProject')){
+       document.body.style.backgroundColor = 'blue'
+       createTodoInputAndButton()
+    }    
+  })
 }
   const getCurrentProjectName = () => currentProjectName
   return { 
@@ -327,7 +349,8 @@ const runSaveChanges = function(){
           getCurrentProjectName,
           runEditButton,
           runTodoEditButton,
-          runSaveChanges
+          runSaveChanges,
+          runAddTodo
          }
 }
 
@@ -407,7 +430,6 @@ function createNewProjectContainer(){
       const newProjectContainer = document.createElement('div');
       newProjectContainer.classList.add('newProjectContainer');
       document.querySelector('.projectContainer').appendChild(newProjectContainer);
-
       
       const titleContainer = document.createElement('div')
       titleContainer.classList.add('titleContainer')
@@ -494,9 +516,7 @@ function createTask(currentProjectName, newProjectNameDiv){
     else{
       console.log('no')
       console.log(this.parentElement.parentElement.querySelector('.todoInput'))
-      if(!document.querySelector('.errorMessage')){
-        
-        
+      if(!document.querySelector('.errorMessage')){    
         this.parentElement.parentElement.querySelector('.todoInput').after(errorMessage())
         document.querySelector('.errorMessage').style.marginTop = '-12px'
         //   this.after(document.querySelector('.todoInput'), errorMessage())
@@ -572,6 +592,35 @@ function newProject(projectName, currentProjectName){
   currentContainer.firstChild.appendChild(newProjectName)
   currentContainer.firstChild.appendChild(editProjectNameButton)
 
+}
+
+function createTodoInputAndButton (){
+
+  const headerAddToProjectDiv = document.querySelector('.headerAddToProjectDiv')
+        
+  const selectProject = document.createElement('select')
+  selectProject.classList.add('selectProject')
+
+  const addOption = document.createElement('option')
+  addOption.textContent = 'Select A Project'
+  addOption.value = ''    
+
+  const headerTodoDiv = document.createElement('div')
+  headerTodoDiv.classList.add('headerTodoDiv')
+
+  const todoInput = document.createElement('input')
+  todoInput.classList.add('headerTodoInput')
+  todoInput.placeholder = 'Type in Todo'
+
+  const todoSubmitButton = document.createElement('button')
+  todoSubmitButton.classList.add('todoSubmitButton')
+  todoSubmitButton.textContent = 'Submit Todo'
+
+  selectProject.appendChild(addOption)
+  headerAddToProjectDiv.appendChild(selectProject)
+  headerAddToProjectDiv.appendChild(headerTodoDiv)
+  headerTodoDiv.appendChild(todoInput)
+  headerTodoDiv.appendChild(todoSubmitButton)
 }
 // work on submit button when todo field is empty. It should not submit
 // or something in that nature when the todo field is empty

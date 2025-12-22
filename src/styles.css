@@ -122,3 +122,13 @@ h4 {
 .saveChanges {
     margin-top: 5px;
 }
+
+.selectProject {
+    margin-top: -10px;
+    margin-bottom: 17px;
+    width: 160px;
+}
+
+.addTodo {
+    cursor: pointer;
+}
