@@ -35,6 +35,7 @@ const newProjectButton = (function(){
 
   eventController().createNewProject()
   eventController().runAddTodo()
+  
   console.log(document.querySelector('.addTodo'))
   return { createNewProjectButton }
 })()
@@ -331,16 +332,24 @@ const runSaveChanges = function(){
 }
 
 const runAddTodo = function (){
-  const addTodo = document.querySelector('.addTodo')
-    addTodo.addEventListener('click', function(){    
+  const addTodo = document.querySelector('.addTodo')    
+    
+    addTodo.onclick = function(){    
+      if(!document.querySelector('.selectProject')){
+        document.body.style.backgroundColor = 'blue'
+        createTodoInputAndButton()
+        eventController().runUpdateDropDown()
+      }    
+    }
+}
 
-    if(!document.querySelector('.selectProject')){
-       document.body.style.backgroundColor = 'blue'
-       createTodoInputAndButton()
-    }    
-  })
+const runUpdateDropDown = function () {
+  const selectProject = document.querySelector('.selectProject')
+  selectProject.onclick = updateDropDown
+
 }
   const getCurrentProjectName = () => currentProjectName
+
   return { 
           createNewProject, 
           runSubmitProject, 
@@ -350,7 +359,8 @@ const runAddTodo = function (){
           runEditButton,
           runTodoEditButton,
           runSaveChanges,
-          runAddTodo
+          runAddTodo,
+          runUpdateDropDown
          }
 }
 
@@ -621,6 +631,31 @@ function createTodoInputAndButton (){
   headerAddToProjectDiv.appendChild(headerTodoDiv)
   headerTodoDiv.appendChild(todoInput)
   headerTodoDiv.appendChild(todoSubmitButton)
+}
+
+function updateDropDown () {
+  document.body.style.backgroundColor = 'purple'
+  const selectProject = document.querySelector('.selectProject')
+  let arr = []
+  for(let i = 0; i < selectProject.options.length; i++){
+    console.log(selectProject.options[i].value)
+    if(selectProject.options[i].value){
+      arr.push(selectProject.options[i].value)
+    }
+  }
+  const projects = allProjects().getProjects()
+  console.log(projects)
+
+  for(let i = 0; i < projects.length; i++){
+    console.log(projects[i]['projectName'])
+    if(!arr.includes(projects[i]['projectName'])){
+       const options = document.createElement('option')
+       options.textContent = `${projects[i]['projectName']}`
+       options.value = `${projects[i]['projectName'].toLowerCase()}`
+       selectProject.add(options)
+       console.log(selectProject)
+    }
+  }
 }
 // work on submit button when todo field is empty. It should not submit
 // or something in that nature when the todo field is empty
