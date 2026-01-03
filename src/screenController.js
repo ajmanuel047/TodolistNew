@@ -36,7 +36,7 @@ const newProjectButton = (function(){
   eventController().createNewProject()
   eventController().runAddTodo()
   
-  console.log(document.querySelector('.addTodo'))
+ // console.log(document.querySelector('.addTodo'))
   return { createNewProjectButton }
 })()
 
@@ -339,6 +339,7 @@ const runAddTodo = function (){
         document.body.style.backgroundColor = 'blue'
         createTodoInputAndButton()
         eventController().runUpdateDropDown()
+        eventController().runtodoSubmitButton()
       }    
     }
 }
@@ -347,6 +348,11 @@ const runUpdateDropDown = function () {
   const selectProject = document.querySelector('.selectProject')
   selectProject.onclick = updateDropDown
 
+}
+
+const runtodoSubmitButton = function (){
+  const todoSubmitButton = document.querySelector('.todoSubmitButton')
+  todoSubmitButton.onclick = submitTodo
 }
   const getCurrentProjectName = () => currentProjectName
 
@@ -360,29 +366,40 @@ const runUpdateDropDown = function () {
           runTodoEditButton,
           runSaveChanges,
           runAddTodo,
-          runUpdateDropDown
+          runUpdateDropDown,
+          runtodoSubmitButton
          }
 }
 
 function userInput(){
-  let projectNameInput = document.querySelector('.projectNameInput').value;
+  let projectNameInput;
+  let headerTodoInput;
   // let taskInput = null
+  if(document.querySelector('.projectNameInput')){
+    projectNameInput = document.querySelector('.projectNameInput').value
+  }
+
   let arr = []
   const taskInputs = document.querySelectorAll('.todoInput')  
   taskInputs.forEach((inputs) => {
     arr.push(inputs.value)
   })  
  
-  
+  if(document.querySelector('.headerTodoInput')){
+    headerTodoInput = document.querySelector('.headerTodoInput').value
+  }
+ 
   
   const getUserInput = () => projectNameInput
   const getTaskNameInput = () => arr
+  const getHeaderTodoInput = () => headerTodoInput
   // const getTaskInput = () => taskInput
   // document.querySelector('.projectNameInput').value = ''
 
   return { 
     getUserInput,
-    getTaskNameInput 
+    getTaskNameInput,
+    getHeaderTodoInput 
     // getTaskInput 
   }
 }
@@ -539,7 +556,7 @@ function createTask(currentProjectName, newProjectNameDiv){
 
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
-  
+ // console.log(targetDiv)
   for(let i = 0; i < projects.length; i++){         
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
       let currentTask = projects[i]['todos']
@@ -638,24 +655,67 @@ function updateDropDown () {
   const selectProject = document.querySelector('.selectProject')
   let arr = []
   for(let i = 0; i < selectProject.options.length; i++){
-    console.log(selectProject.options[i].value)
+  //  console.log(selectProject.options[i].value)
     if(selectProject.options[i].value){
       arr.push(selectProject.options[i].value)
     }
   }
   const projects = allProjects().getProjects()
-  console.log(projects)
+//console.log(projects)
 
   for(let i = 0; i < projects.length; i++){
-    console.log(projects[i]['projectName'])
+  //  console.log(projects[i]['projectName'])
     if(!arr.includes(projects[i]['projectName'])){
        const options = document.createElement('option')
        options.textContent = `${projects[i]['projectName']}`
        options.value = `${projects[i]['projectName'].toLowerCase()}`
        selectProject.add(options)
-       console.log(selectProject)
+    //   console.log(selectProject)
     }
   }
+}
+
+
+function submitTodo () {  
+
+  if(document.querySelector('.headerTodoInput').value){
+    document.body.style.backgroundColor = 'brown'
+   // console.log(userInput().getHeaderTodoInput())
+    let selectedProject = document.querySelector('.selectProject').value
+    let targetDiv;
+    let projectNames = document.querySelectorAll('.newProjectName')
+    projectNames.forEach((projectName) => {
+      console.log(selectedProject)
+      console.log(projectName.textContent)
+      if(selectedProject == projectName.textContent){
+        targetDiv = projectName.parentElement.parentElement
+      }
+      
+      // console.log(targetDiv)
+      // eventController().submitTask(selectedProject, targetDiv)
+      // console.log(projectName.textContent)
+    //   createTodo(selectedProject, [userInput().getHeaderTodoInput()]).createObject()
+    //  // console.log(allProjects().getProjects())
+    //   createTask().displayTodo(targetDiv)
+      // document.querySelector('.headerTodoInput').value = ''
+      // we are getting close
+      // seems the loop may or not be a problem
+      // when i try adding the todo to a second project it does not work well
+      // its adds the first todo to the first project while also adding
+      // to the second project and does same when a second project already
+      // exist and i try adding to the first
+    })
+    console.log(targetDiv)
+           createTodo(selectedProject, [userInput().getHeaderTodoInput()]).createObject()
+      console.log(allProjects().getProjects())
+      createTask().displayTodo(targetDiv)
+    document.querySelector('.headerTodoInput').value = ''
+    // createTask()
+    // create error messages
+    // ensure without project already existing this should not work
+    // and an error message should be displayed
+  }
+
 }
 // work on submit button when todo field is empty. It should not submit
 // or something in that nature when the todo field is empty
