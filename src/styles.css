@@ -1,5 +1,10 @@
+/* * {
+    font-size: 0.7rem;
+} */
+
 body {
     background-color: pink;
+    
 }
 
 .projectName {
@@ -111,7 +116,7 @@ h4 {
     margin-top: 27px;
 }
 
-.errorMessage {
+.errorMessage, .selectProjectErrorMessage {
     color: red;
     font-size: 0.6rem;
     font-style: italic;

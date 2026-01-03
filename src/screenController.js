@@ -677,8 +677,9 @@ function updateDropDown () {
 
 
 function submitTodo () {  
+  // console.log(document.querySelector('.selectProject').value)
 
-  if(document.querySelector('.headerTodoInput').value){
+  if(document.querySelector('.headerTodoInput').value && document.querySelector('.selectProject').value){
     document.body.style.backgroundColor = 'brown'
    // console.log(userInput().getHeaderTodoInput())
     let selectedProject = document.querySelector('.selectProject').value
@@ -690,33 +691,36 @@ function submitTodo () {
       if(selectedProject == projectName.textContent){
         targetDiv = projectName.parentElement.parentElement
       }
-      
-      // console.log(targetDiv)
-      // eventController().submitTask(selectedProject, targetDiv)
-      // console.log(projectName.textContent)
-    //   createTodo(selectedProject, [userInput().getHeaderTodoInput()]).createObject()
-    //  // console.log(allProjects().getProjects())
-    //   createTask().displayTodo(targetDiv)
-      // document.querySelector('.headerTodoInput').value = ''
-      // we are getting close
-      // seems the loop may or not be a problem
-      // when i try adding the todo to a second project it does not work well
-      // its adds the first todo to the first project while also adding
-      // to the second project and does same when a second project already
-      // exist and i try adding to the first
     })
-    console.log(targetDiv)
-           createTodo(selectedProject, [userInput().getHeaderTodoInput()]).createObject()
-      console.log(allProjects().getProjects())
+      createTodo(selectedProject, [userInput().getHeaderTodoInput()]).createObject()
       createTask().displayTodo(targetDiv)
-    document.querySelector('.headerTodoInput').value = ''
+      document.querySelector('.headerTodoInput').value = ''
     // createTask()
     // create error messages
     // ensure without project already existing this should not work
     // and an error message should be displayed
+  } else if(!document.querySelector('.headerTodoInput').value){
+      if(!document.querySelector('.errorMessage')){
+      document.querySelector('.headerTodoInput').after(errorMessage())
+      document.querySelector('.errorMessage').style.marginTop = '7px'
+      setTimeout(() => {
+      document.querySelector('.errorMessage').remove()
+      }, 2000)  
   }
-
-}
+  }
+else if(!document.querySelector('.selectProject').value){   
+  if(!document.querySelector('.selectProjectErrorMessage')){
+     const selectProjectErrorMessage = document.createElement('p')
+     selectProjectErrorMessage.textContent = 'Please Select And/Or Create A Project' 
+     selectProjectErrorMessage.classList.add('selectProjectErrorMessage')
+     document.querySelector('.selectProject').after(selectProjectErrorMessage)
+     document.querySelector('.selectProjectErrorMessage').style.marginTop = '-14px'  
+      setTimeout(() => {
+       document.querySelector('.selectProjectErrorMessage').remove()
+       }, 3000)  
+     }
+   }
+ }
 // work on submit button when todo field is empty. It should not submit
 // or something in that nature when the todo field is empty
 // solved previous issue but an existing problem that was there
