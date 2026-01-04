@@ -7,7 +7,7 @@ import { createTodo } from "./projectController";
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
-    document.body.style.backgroundColor = 'orange'
+   // document.body.style.backgroundColor = 'orange'
     e.preventDefault()
   }
 })
@@ -47,7 +47,7 @@ function eventController(){
     if(document.querySelector('.newProjectButton')){
       document.querySelector('.newProjectButton').addEventListener('click', function(){
         if(!document.querySelector('.submitProject')){
-        document.body.style.backgroundColor = 'green'
+       // document.body.style.backgroundColor = 'green'
         // createProject()
         // createNewProjects()
         // allProjects()
@@ -244,6 +244,7 @@ const runTodoEditButton = function(){
         //  adjust the saveCompletedisplay because it not moving when the text
         //  is longer
          this.parentElement.appendChild(saveCompletedisplay)
+         console.log(this.parentElement)
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
@@ -255,7 +256,7 @@ const runTodoEditButton = function(){
                         let newTodo = projects[i]['todos'][j]['title']
                         console.log(newTodo)
                         currentTodo.textContent = newTodo
-                        // console.log(allProjects().getProjects())
+                         console.log(allProjects().getProjects())
                     }
                   }
               }
@@ -336,7 +337,8 @@ const runAddTodo = function (){
     
     addTodo.onclick = function(){    
       if(!document.querySelector('.selectProject')){
-        document.body.style.backgroundColor = 'blue'
+     //   document.body.style.backgroundColor = 'blue'
+        document.querySelector('.addTodo').textContent = 'Use The Below To Add Todo To Any Project'
         createTodoInputAndButton()
         eventController().runUpdateDropDown()
         eventController().runtodoSubmitButton()
@@ -516,9 +518,9 @@ function createTask(currentProjectName, newProjectNameDiv){
    
     function createInputAndButton (){    
     if(!document.querySelector('.todoInput')){
-    document.body.style.backgroundColor = 'blue'
+   // document.body.style.backgroundColor = 'blue'
     setTimeout(() => {
-      document.body.style.backgroundColor = 'pink'
+     // document.body.style.backgroundColor = 'pink'
     }, "500")
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
@@ -539,6 +541,7 @@ function createTask(currentProjectName, newProjectNameDiv){
 
         this.parentElement.parentElement.appendChild(todoDivContent)
         this.parentElement.parentElement.appendChild(todoInput)
+      //  console.log(todoDivContent)
     } 
     else{
       console.log('no')
@@ -563,13 +566,16 @@ function displayTodo (targetDiv){
       // console.log(currentTask[currentTask.length - 1])
       const todo = document.createElement('h4')
         for(let j = 0; j < currentTask.length; j++){
-        
+        console.log(targetDiv)
         let currentTodo = currentTask[j]['title']
         todo.textContent = currentTodo
         todo.classList.add('todo') 
-        let currentContainer = targetDiv.querySelector('.todoDivContent')
+        let containers = targetDiv.querySelectorAll('.todoDivContent')
+        containers.forEach((currentContainer) => {
         currentContainer.appendChild(todo)
+        })
         
+        // console.log(currentContainer)
         // console.log(projects)
       }
       createTodoButton()
@@ -651,7 +657,7 @@ function createTodoInputAndButton (){
 }
 
 function updateDropDown () {
-  document.body.style.backgroundColor = 'purple'
+  // document.body.style.backgroundColor = 'purple'
   const selectProject = document.querySelector('.selectProject')
   let arr = []
   for(let i = 0; i < selectProject.options.length; i++){
@@ -680,7 +686,7 @@ function submitTodo () {
   // console.log(document.querySelector('.selectProject').value)
 
   if(document.querySelector('.headerTodoInput').value && document.querySelector('.selectProject').value){
-    document.body.style.backgroundColor = 'brown'
+  //  document.body.style.backgroundColor = 'brown'
    // console.log(userInput().getHeaderTodoInput())
     let selectedProject = document.querySelector('.selectProject').value
     let targetDiv;
@@ -721,6 +727,12 @@ else if(!document.querySelector('.selectProject').value){
      }
    }
  }
+// bug i previously fixed is back. edit of todo not properly working
+// it is not showing in the projects
+// after save button is clicked the todo should not be editable until the
+// todo button is clicked again
+// the saved message is displaying only in the last todo and the current one
+
 // work on submit button when todo field is empty. It should not submit
 // or something in that nature when the todo field is empty
 // solved previous issue but an existing problem that was there
