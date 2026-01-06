@@ -524,7 +524,7 @@ function createTask(currentProjectName, newProjectNameDiv){
     }, "500")
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
-    
+  //  console.log('test')
     const todoDivContent = document.createElement('div')
     todoDivContent.classList.add('todoDivContent')
     const containers = document.querySelectorAll('.newProjectContainer')
@@ -541,11 +541,11 @@ function createTask(currentProjectName, newProjectNameDiv){
 
         this.parentElement.parentElement.appendChild(todoDivContent)
         this.parentElement.parentElement.appendChild(todoInput)
-      //  console.log(todoDivContent)
+   //     console.log(todoDivContent)
     } 
     else{
-      console.log('no')
-      console.log(this.parentElement.parentElement.querySelector('.todoInput'))
+    //  console.log('no')
+  //    console.log(this.parentElement.parentElement.querySelector('.todoInput'))
       if(!document.querySelector('.errorMessage')){    
         this.parentElement.parentElement.querySelector('.todoInput').after(errorMessage())
         document.querySelector('.errorMessage').style.marginTop = '-12px'
@@ -559,10 +559,10 @@ function createTask(currentProjectName, newProjectNameDiv){
 
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
- // console.log(targetDiv)
+  console.log(targetDiv)
   for(let i = 0; i < projects.length; i++){   
-   // console.log(projects[i]['projectName'].toLowerCase())      
-  //  console.log(targetDiv.querySelector('.newProjectName').textContent.toLowerCase())      
+  // console.log(projects[i]['projectName'].toLowerCase())      
+ //  console.log(targetDiv.querySelector('.newProjectName').textContent.toLowerCase())      
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
     //  console.log(projects[i]['projectName'])
       // console.log(targetDiv.querySelector('.newProjectName').textContent)
@@ -571,7 +571,7 @@ function displayTodo (targetDiv){
       const todo = document.createElement('h4')
      // console.log(currentTask)
         for(let j = 0; j < currentTask.length; j++){
-        // console.log(targetDiv)
+     //   console.log(targetDiv)
           let currentTodo = currentTask[j]['title']
      //     console.log(currentTodo)
           todo.textContent = currentTodo
@@ -697,14 +697,22 @@ function submitTodo () {
     let selectedProject = document.querySelector('.selectProject').value
     let targetDiv;
     let projectNames = document.querySelectorAll('.newProjectName')
+    let todoDivContent = document.createElement('div')
+    todoDivContent.classList.add('todoDivContent')
+
     projectNames.forEach((projectName) => {
-      console.log(selectedProject)
-      console.log(projectName.textContent)
+  //    console.log(selectedProject)
+  //    console.log(projectName.textContent)
       if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
         targetDiv = projectName.parentElement.parentElement
+        targetDiv.querySelector('.todoDiv').appendChild(todoDivContent)
+        console.log(targetDiv)
       }
     })
+  //  console.log(targetDiv.querySelector('.todoDiv'))
       createTodo(selectedProject, [userInput().getHeaderTodoInput()]).createObject()
+      // createTask().getInputAndButton()
+      
       createTask().displayTodo(targetDiv)
     //  console.log(targetDiv)
       document.querySelector('.headerTodoInput').value = ''
