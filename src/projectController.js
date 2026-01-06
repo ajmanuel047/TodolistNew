@@ -36,11 +36,11 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
  
   // console.log(arr)
  // console.log(typeof arr)
- console.log(currentProjectName)
+// console.log(currentProjectName)
 
   function pushTodo () { 
     projects.forEach((obj) => {
-       console.log(obj.projectName)
+ //      console.log(obj.projectName)
         //  console.log(obj.todos)
         //  console.log(typeof arr)
           // console.log(arr)

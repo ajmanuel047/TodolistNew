@@ -564,8 +564,8 @@ function displayTodo (targetDiv){
    // console.log(projects[i]['projectName'].toLowerCase())      
   //  console.log(targetDiv.querySelector('.newProjectName').textContent.toLowerCase())      
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
-      console.log(projects[i]['projectName'])
-      console.log(targetDiv.querySelector('.newProjectName').textContent)
+    //  console.log(projects[i]['projectName'])
+      // console.log(targetDiv.querySelector('.newProjectName').textContent)
       let currentTask = projects[i]['todos']
       // console.log(currentTask[currentTask.length - 1])
       const todo = document.createElement('h4')
@@ -680,7 +680,7 @@ function updateDropDown () {
     if(!arr.includes(projects[i]['projectName'])){
        const options = document.createElement('option')
        options.textContent = `${projects[i]['projectName']}`
-       options.value = `${projects[i]['projectName'].toLowerCase()}`
+       options.value = `${projects[i]['projectName']}`
        selectProject.add(options)
     //   console.log(selectProject)
     }
