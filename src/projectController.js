@@ -36,14 +36,17 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
  
   // console.log(arr)
  // console.log(typeof arr)
+ console.log(currentProjectName)
+
   function pushTodo () { 
     projects.forEach((obj) => {
+       console.log(obj.projectName)
         //  console.log(obj.todos)
         //  console.log(typeof arr)
           // console.log(arr)
           // console.log(obj)
         if(typeof arr == 'string'){
-          if(obj.projectName == currentProjectName){
+          if(obj.projectName.toLowerCase() == currentProjectName.toLowerCase()){
           const value = arr.split()[0]
           let newObject = {}
           newObject.title = value
@@ -54,7 +57,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
         else{
           // console.log(typeof arr)
           for(let i = 0; i < arr.length; i++){
-                if(obj.projectName == currentProjectName){
+                if(obj.projectName.toLowerCase() == currentProjectName.toLowerCase()){
                   let newObject = {}
                   newObject.title = `${arr[i]}`
    //               console.log(`${arr[i]}`)

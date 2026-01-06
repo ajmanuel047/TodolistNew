@@ -244,7 +244,7 @@ const runTodoEditButton = function(){
         //  adjust the saveCompletedisplay because it not moving when the text
         //  is longer
          this.parentElement.appendChild(saveCompletedisplay)
-         console.log(this.parentElement)
+       //  console.log(this.parentElement)
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
@@ -254,7 +254,7 @@ const runTodoEditButton = function(){
                 for(let j = 0; j < projects[i]['todos'].length; j++ ){
                     if(projects[i]['todos'][j]['title'] == currentTodo.textContent){
                         let newTodo = projects[i]['todos'][j]['title']
-                        console.log(newTodo)
+            //            console.log(newTodo)
                         currentTodo.textContent = newTodo
                          console.log(allProjects().getProjects())
                     }
@@ -516,7 +516,7 @@ function displayProject(){
      
 function createTask(currentProjectName, newProjectNameDiv){
    
-    function createInputAndButton (){    
+  function createInputAndButton (){    
     if(!document.querySelector('.todoInput')){
    // document.body.style.backgroundColor = 'blue'
     setTimeout(() => {
@@ -560,20 +560,26 @@ function createTask(currentProjectName, newProjectNameDiv){
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
  // console.log(targetDiv)
-  for(let i = 0; i < projects.length; i++){         
+  for(let i = 0; i < projects.length; i++){   
+   // console.log(projects[i]['projectName'].toLowerCase())      
+  //  console.log(targetDiv.querySelector('.newProjectName').textContent.toLowerCase())      
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
+      console.log(projects[i]['projectName'])
+      console.log(targetDiv.querySelector('.newProjectName').textContent)
       let currentTask = projects[i]['todos']
       // console.log(currentTask[currentTask.length - 1])
       const todo = document.createElement('h4')
+     // console.log(currentTask)
         for(let j = 0; j < currentTask.length; j++){
-        console.log(targetDiv)
-        let currentTodo = currentTask[j]['title']
-        todo.textContent = currentTodo
-        todo.classList.add('todo') 
-        let containers = targetDiv.querySelectorAll('.todoDivContent')
-        containers.forEach((currentContainer) => {
-        currentContainer.appendChild(todo)
-        })
+        // console.log(targetDiv)
+          let currentTodo = currentTask[j]['title']
+     //     console.log(currentTodo)
+          todo.textContent = currentTodo
+          todo.classList.add('todo') 
+          let containers = targetDiv.querySelectorAll('.todoDivContent')
+          containers.forEach((currentContainer) => {
+          currentContainer.appendChild(todo)
+          })
         
         // console.log(currentContainer)
         // console.log(projects)
@@ -694,12 +700,13 @@ function submitTodo () {
     projectNames.forEach((projectName) => {
       console.log(selectedProject)
       console.log(projectName.textContent)
-      if(selectedProject == projectName.textContent){
+      if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
         targetDiv = projectName.parentElement.parentElement
       }
     })
       createTodo(selectedProject, [userInput().getHeaderTodoInput()]).createObject()
       createTask().displayTodo(targetDiv)
+    //  console.log(targetDiv)
       document.querySelector('.headerTodoInput').value = ''
     // createTask()
     // create error messages
@@ -727,6 +734,7 @@ else if(!document.querySelector('.selectProject').value){
      }
    }
  }
+ // content editable not working well after using click here to add todo to any project
 // bug i previously fixed is back. edit of todo not properly working
 // it is not showing in the projects
 // after save button is clicked the todo should not be editable until the

@@ -44,7 +44,7 @@ h3 {
 }
 
 .editContent {
-    background-color: orange;
+    /* background-color: orange; */
 }
 
 .saved {
@@ -78,7 +78,7 @@ h3 {
 .todoInput {
     position: relative;
     bottom: 14px;
-    background-color: orange;
+    /* background-color: orange; */
     display: block;
 }
 
