@@ -3,7 +3,7 @@ function createProject(name){
   let projects = {
     'projectName' : null,
     'todos' : [],
-    // 'Description' : '',
+    'description' : null,
     // 'Project Notes' : '',
     // 'Todo list' : [],
     // 'Date Created' : '',

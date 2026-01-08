@@ -4,6 +4,7 @@ import "./styles.css"
 import { allProjects } from "./projectController";
 import { createNewProjects } from "./projectController";
 import { createTodo } from "./projectController";
+import { addDescriptionToProject } from "./projectController";
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
@@ -68,7 +69,7 @@ function eventController(){
 
        if(projectName){
         if(!this.parentElement.querySelector('.todoInput')){
-          console.log('null check 1')
+      //    console.log('null check 1')
           newProject(projectName, currentProjectName)
           document.querySelector('.projectName').remove()
           document.querySelector('.projectNameInput').remove()
@@ -78,8 +79,7 @@ function eventController(){
           // console.log('null check 2')
           newProject(projectName, currentProjectName)
          //  console.log(this.parentElement.querySelector('.newProjectName').textContent)
-          createTodoButton()    
-        
+          createTodoButton()                     
           let targetDiv = e.target.parentElement
           submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
         
@@ -111,6 +111,8 @@ function eventController(){
       } 
 runEditButton()
 runTodoEditButton()
+// console.log(projectName)
+createDescription(projectName).getDescriptionInput()
       })      
   }
 runCreateTaskButton()
@@ -376,9 +378,11 @@ const runtodoSubmitButton = function (){
 function userInput(){
   let projectNameInput;
   let headerTodoInput;
+  let projectDescription;
   // let taskInput = null
   if(document.querySelector('.projectNameInput')){
     projectNameInput = document.querySelector('.projectNameInput').value
+   // console.log(projectNameInput)
   }
 
   let arr = []
@@ -390,18 +394,25 @@ function userInput(){
   if(document.querySelector('.headerTodoInput')){
     headerTodoInput = document.querySelector('.headerTodoInput').value
   }
+
+  if(document.querySelector('.descriptionInput')){
+    projectDescription = document.querySelector('.descriptionInput').value
+  }
  
+  
   
   const getUserInput = () => projectNameInput
   const getTaskNameInput = () => arr
   const getHeaderTodoInput = () => headerTodoInput
+  const getProjectDescription = () => projectDescription
   // const getTaskInput = () => taskInput
   // document.querySelector('.projectNameInput').value = ''
 
   return { 
     getUserInput,
     getTaskNameInput,
-    getHeaderTodoInput 
+    getHeaderTodoInput,
+    getProjectDescription 
     // getTaskInput 
   }
 }
@@ -491,7 +502,20 @@ function createNewProjectContainer(){
       createNewTodo.classList.add(`${taskbuttonNumber().getNewCount()}`)
       createNewTodo.textContent = 'New Task';
       todoTitleDiv.appendChild(createNewTodo);
-      
+
+      const descriptionDiv = document.createElement('div')
+      descriptionDiv.classList.add('descriptionDiv')
+      newProjectContainer.appendChild(descriptionDiv)
+
+      const descriptionHeading = document.createElement('h3')
+      descriptionHeading.classList.add('descriptionHeading')
+      descriptionHeading.textContent = 'Describe Your Project'
+      descriptionDiv.appendChild(descriptionHeading)
+
+      const descriptionInput = document.createElement('input')
+      descriptionInput.classList.add('descriptionInput')
+      descriptionInput.placeholder = 'Describe Your Project'
+      descriptionDiv.appendChild(descriptionInput)
 
       const submitProject = document.createElement('button')
       submitProject.classList.add('submitProject');
@@ -559,7 +583,7 @@ function createTask(currentProjectName, newProjectNameDiv){
 
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
-  console.log(targetDiv)
+ // console.log(targetDiv)
   for(let i = 0; i < projects.length; i++){   
   // console.log(projects[i]['projectName'].toLowerCase())      
  //  console.log(targetDiv.querySelector('.newProjectName').textContent.toLowerCase())      
@@ -631,6 +655,31 @@ function newProject(projectName, currentProjectName){
   currentContainer.firstChild.appendChild(newProjectName)
   currentContainer.firstChild.appendChild(editProjectNameButton)
 
+}
+
+
+function createDescription (projectName){ 
+
+  function descriptionInput () {
+     const description = userInput().getProjectDescription()
+    // console.log(description)
+     addDescriptionToProject(projectName, description)
+     document.querySelector('.descriptionInput').remove()
+    // console.log(projectName)
+    // console.log('description') 
+    let projects = allProjects().getProjects()
+    console.log(projects)
+  }
+
+  function displayDescription (){
+
+  }
+
+  const getDescriptionInput = () => descriptionInput()
+
+  return {
+    getDescriptionInput
+  }
 }
 
 function createTodoInputAndButton (){
@@ -742,6 +791,8 @@ else if(!document.querySelector('.selectProject').value){
      }
    }
  }
+
+ 
  // content editable not working well after using click here to add todo to any project
 // bug i previously fixed is back. edit of todo not properly working
 // it is not showing in the projects

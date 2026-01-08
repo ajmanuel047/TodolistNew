@@ -8,7 +8,7 @@ function createNewProjects(value, value2){
     projects.push(newProject)
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == null){
-        projects[i]['projectName'] = value
+         projects[i]['projectName'] = value
         // console.log(i)
       }else if(projects[i]['projectName'] == value){
         projects[i]['projectName'] = value2
@@ -116,6 +116,15 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 
 }
 
+ function addDescriptionToProject (projectName, description) {
+   for(let i = 0; i < projects.length; i++){
+     if(projects[i]['projectName'] == projectName){
+        projects[i]['description'] = description
+     }
+   }
+ }
+
+
 function allProjects(value){
   
   const getProjects = () => projects
@@ -127,7 +136,8 @@ function allProjects(value){
 export { 
         createNewProjects, 
         allProjects, 
-        createTodo 
+        createTodo,
+        addDescriptionToProject
       }
 
 
