@@ -113,6 +113,7 @@ runEditButton()
 runTodoEditButton()
 // console.log(projectName)
 createDescription(projectName).getDescriptionInput()
+createDescription(projectName).getDisplayDescription()
       })      
   }
 runCreateTaskButton()
@@ -659,7 +660,7 @@ function newProject(projectName, currentProjectName){
 
 
 function createDescription (projectName){ 
-
+  
   function descriptionInput () {
      const description = userInput().getProjectDescription()
     // console.log(description)
@@ -667,18 +668,34 @@ function createDescription (projectName){
      document.querySelector('.descriptionInput').remove()
     // console.log(projectName)
     // console.log('description') 
-    let projects = allProjects().getProjects()
-    console.log(projects)
+
   }
 
   function displayDescription (){
-
+   // console.log(projects)
+    let projects = allProjects().getProjects()
+    // console.log(projects)
+    // console.log(projectName)
+    for(let i = 0; i < projects.length; i++){
+      if(projects[i]['projectName'] == projectName){
+        console.log(projects[i]['description'])
+        let description = document.createElement('p')
+        description.classList.add('description')
+        description.textContent = projects[i]['description']
+        let descriptionHeading = document.querySelectorAll('.descriptionHeading')
+        descriptionHeading.forEach((div) => {
+          div.appendChild(description)
+        })
+      }
+    }
   }
 
   const getDescriptionInput = () => descriptionInput()
+  const getDisplayDescription = () => displayDescription()
 
   return {
-    getDescriptionInput
+    getDescriptionInput,
+    getDisplayDescription
   }
 }
 

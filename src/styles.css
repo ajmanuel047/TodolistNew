@@ -18,7 +18,7 @@ body {
 } */
 
 .submitProject {
-    margin-top: 9px;
+    margin-top: 15px;
 }
 
 h2 {
@@ -136,4 +136,12 @@ h4 {
 
 .addTodo {
     cursor: pointer;
+}
+
+.descriptionHeading {
+    margin-bottom: 10px;
+}
+
+.description {
+    margin-top: 2px;
 }
