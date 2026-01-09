@@ -114,6 +114,7 @@ runTodoEditButton()
 // console.log(projectName)
 createDescription(projectName).getDescriptionInput()
 createDescription(projectName).getDisplayDescription()
+runEditDescription(projectName)
       })      
   }
 runCreateTaskButton()
@@ -169,6 +170,7 @@ const runEditButton = function(){
   currentEditButton.forEach((button) => {
     button.onclick = function(){
       // document.body.style.backgroundColor = 'blue'
+      // console.log(this)
       const currentProjectName = this.parentElement.firstChild
       console.log(this.parentElement)
       console.log(currentProjectName)
@@ -359,6 +361,54 @@ const runtodoSubmitButton = function (){
   const todoSubmitButton = document.querySelector('.todoSubmitButton')
   todoSubmitButton.onclick = submitTodo
 }
+
+const runEditDescription = function (projectName) {
+ // console.log(projectName)
+  const editDescriptionButton = document.querySelectorAll('.editDescription')
+  let previousDescription;
+  // console.log(this)
+  editDescriptionButton.forEach((editButton) => {
+    // console.log(this)
+    editButton.onclick = function () {
+ //     console.log(this.parentElement.querySelector('.description'))
+      editDescription()
+      const currentDescription = this.parentElement.querySelector('.description')
+      currentDescription.setAttribute('contenteditable', true)
+      currentDescription.classList.add('editContent')
+      currentDescription.style.cursor = 'pointer'
+
+      if(editButton.textContent == 'Save'){
+         editButton.textContent = 'Edit'
+         currentDescription.setAttribute('contenteditable', false)
+         currentDescription.classList.remove('editContent')
+         currentDescription.style.cursor = 'auto'
+         const saveCompletedisplay = document.createElement('p')
+         saveCompletedisplay.textContent = 'Saved'
+         saveCompletedisplay.classList.add('saved')
+         // adjust the saveCompletedisplay because it not moving when the text
+         // is longer
+         this.parentElement.appendChild(saveCompletedisplay)
+         setTimeout(() => {
+           saveCompletedisplay.remove()
+         }, 1000)
+        console.log(currentDescription.textContent)
+         addDescriptionToProject(projectName, currentDescription.textContent)
+         console.log(allProjects().getProjects())
+        for(let i = 0; i < projects.length; i++){
+             if(projects[i]['projectName'] == projectName){
+                currentDescription.textContent = projects[i]['description']
+             }
+         }         
+      }
+
+      currentDescription.addEventListener('focus', function(e){
+        document.body.style.backgroundColor = 'skyblue'
+        editButton.textContent = 'Save'
+        currentDescription.style.cursor = 'auto'
+      })
+    }
+  })  
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -372,7 +422,8 @@ const runtodoSubmitButton = function (){
           runSaveChanges,
           runAddTodo,
           runUpdateDropDown,
-          runtodoSubmitButton
+          runtodoSubmitButton,
+          runEditDescription
          }
 }
 
@@ -683,8 +734,14 @@ function createDescription (projectName){
         description.classList.add('description')
         description.textContent = projects[i]['description']
         let descriptionHeading = document.querySelectorAll('.descriptionHeading')
+       
+        let editDescription = document.createElement('button')
+        editDescription.classList.add('editDescription')
+        editDescription.textContent = 'Edit'
+        
         descriptionHeading.forEach((div) => {
           div.appendChild(description)
+          div.appendChild(editDescription)
         })
       }
     }
@@ -697,6 +754,10 @@ function createDescription (projectName){
     getDescriptionInput,
     getDisplayDescription
   }
+}
+
+function editDescription (){
+  document.body.style.backgroundColor = 'orange'
 }
 
 function createTodoInputAndButton (){
