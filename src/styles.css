@@ -11,14 +11,15 @@ body {
     margin-bottom: 5px;
 }
 
-/* .todoInput {
-    position: relative;
+.todoInput {
+    /* position: relative;
     top: -10px;
-    display: block;
-} */
+    display: block; */
+    margin-bottom: -14px;
+}
 
 .submitProject {
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 h2 {

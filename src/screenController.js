@@ -64,57 +64,145 @@ function eventController(){
       document.querySelector('.submitProject').addEventListener('click', function(e){
         // document.body.style.backgroundColor = 'black'
         let projectName = userInput().getUserInput(); 
-        // console.log(projectName)
-       // console.log(this.parentElement.querySelector('.todoInput'))
-
-       if(projectName){
-        if(!this.parentElement.querySelector('.todoInput')){
-      //    console.log('null check 1')
-          newProject(projectName, currentProjectName)
-          document.querySelector('.projectName').remove()
-          document.querySelector('.projectNameInput').remove()
-          document.querySelector('.submitProject').remove()
-        }
-        else if(this.parentElement.querySelector('.todoInput').value !== ''){   
-          // console.log('null check 2')
-          newProject(projectName, currentProjectName)
-         //  console.log(this.parentElement.querySelector('.newProjectName').textContent)
-          createTodoButton()                     
-          let targetDiv = e.target.parentElement
-          submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
-        
-          createTask()
-          // console.log('runnning')
-          document.querySelector('.projectName').remove()
-          document.querySelector('.projectNameInput').remove()
-          document.querySelector('.submitProject').remove()
-        }
-        else if(this.parentElement.querySelector('.todoInput').value == ''){
-          console.log('todo is empty and project name not')
-          if(!document.querySelector('.errorMessage')){
-              this.parentElement.querySelector('.todoInput').after(errorMessage())
-              setTimeout(() => {
-              document.querySelector('.errorMessage').remove()
-              }, 2000)  
+        let description = userInput().getProjectDescription()
+        let todo = userInput().getTaskNameInput()
+        let inputFields = document.querySelectorAll('input')
+        // console.log(inputFields)
+        inputFields.forEach((inputField) => {
+          
+          if(inputField.className !== 'headerTodoInput'){
+            if(inputField.value !== ''){
+          //  console.log(inputField.value).
+          // console.log(this.parentElement.querySelector('.newProjectName'))  
+              if(projectName && document.querySelector('.projectName') && description){
+                if(document.querySelector('.todoInput')){
+                  if(document.querySelector('.todoInput').value !== ''){
+                    newProject(projectName, currentProjectName)
+                    createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDescriptionInput()
+                  //document.querySelector('.descriptionInput').remove()
+                    createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDisplayDescription()
+                    createTodoButton()                     
+                    let targetDiv = e.target.parentElement
+                    submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
+                    createTask()
+                      if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
+                        document.querySelector('.projectName').remove()
+                        document.querySelector('.projectNameInput').remove()
+                        document.querySelector('.descriptionInput').remove()
+                        document.querySelector('.submitProject').remove()
+                       }
+                   }
+                 }             
+                  else if(!document.querySelector('.todoInput')){
+                  newProject(projectName, currentProjectName)
+                  createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDescriptionInput()
+                //document.querySelector('.descriptionInput').remove()
+                  createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDisplayDescription()
+                  
+                  if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
+                  document.querySelector('.projectName').remove()
+                  document.querySelector('.projectNameInput').remove()
+                  document.querySelector('.descriptionInput').remove()
+                  document.querySelector('.submitProject').remove()
+                  }
+                }
+            }          
           }
+        else if(inputField.value == ''){            
+              if(!document.querySelector('.errorMessage')){
+               inputField.after(errorMessage())
+               this.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
+               setTimeout(() => {
+               document.querySelector('.errorMessage').remove()
+               }, 2000) 
+            }   
+          } 
         }
-       }
-     else if(!projectName){          
-          console.log('check')
-          if(!document.querySelector('.errorMessage')){
-              this.parentElement.parentElement.querySelector('.projectNameInput').after(errorMessage())
-              this.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
-              setTimeout(() => {
-              document.querySelector('.errorMessage').remove()
-              }, 2000) 
-          }             
-      } 
-runEditButton()
-runTodoEditButton()
-// console.log(projectName)
-createDescription(projectName).getDescriptionInput()
-createDescription(projectName).getDisplayDescription()
-runEditDescription(projectName)
+
+ 
+          // else if(document.querySelector('.descriptionInput')){
+          //   console.log('checking')
+          //     if(!document.querySelector('.errorMessage')){
+          //      this.parentElement.parentElement.querySelector('.descriptionInput').after(errorMessage())
+          //      this.parentElement.querySelector('.errorMessage').style.marginTop = '3px'
+          //      setTimeout(() => {
+          //      document.querySelector('.errorMessage').remove()
+          //      }, 2000) 
+          //   }  
+          // }
+        })
+        runEditButton()
+        runEditDescription(projectName)
+// runTodoEditButton()
+        // document.querySelector('.projectName').remove()
+        // document.querySelector('.projectNameInput').remove()
+//         let projectName = userInput().getUserInput(); 
+//         let description = userInput().getProjectDescription()
+//         console.log(description)
+//         // console.log(projectName)
+//        // console.log(this.parentElement.querySelector('.todoInput'))
+
+//        if(projectName){
+//         if(!this.parentElement.querySelector('.todoInput')){
+//       //    console.log('null check 1')
+//           newProject(projectName, currentProjectName)
+//           document.querySelector('.projectName').remove()
+//           document.querySelector('.projectNameInput').remove()
+//           document.querySelector('.submitProject').remove()
+//         }
+//         else if(this.parentElement.querySelector('.todoInput').value !== ''){   
+//           // console.log('null check 2')
+//           newProject(projectName, currentProjectName)
+//          //  console.log(this.parentElement.querySelector('.newProjectName').textContent)
+//           createTodoButton()                     
+//           let targetDiv = e.target.parentElement
+//           submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
+        
+//           createTask()
+//           // console.log('runnning')
+//           document.querySelector('.projectName').remove()
+//           document.querySelector('.projectNameInput').remove()
+//           document.querySelector('.submitProject').remove()
+//         }
+//         else if(this.parentElement.querySelector('.todoInput').value == ''){
+//           console.log('todo is empty and project name not')
+//           if(!document.querySelector('.errorMessage')){
+//               this.parentElement.querySelector('.todoInput').after(errorMessage())
+//               setTimeout(() => {
+//               document.querySelector('.errorMessage').remove()
+//               }, 2000)  
+//           }
+//         }
+//        }
+//      else if(!projectName){          
+//           console.log('check')
+//           if(!document.querySelector('.errorMessage')){
+//               this.parentElement.parentElement.querySelector('.projectNameInput').after(errorMessage())
+//               this.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
+//               setTimeout(() => {
+//               document.querySelector('.errorMessage').remove()
+//               }, 2000) 
+//           }             
+//       } 
+// runEditButton()
+// runTodoEditButton()
+//          if(document.querySelector('.descriptionInput').value !== ''){
+//           console.log('description')
+//           createDescription(projectName).getDescriptionInput()
+//           createDescription(projectName).getDisplayDescription()
+
+//           runEditDescription(projectName)
+//         }
+ 
+// // console.log(projectName)
+// // console.log(document.querySelector('.descriptionInput')){}
+// // if(document.querySelector('.descriptionInput').value == ''){
+  
+// // }
+// // createDescription(projectName).getDescriptionInput()
+// // createDescription(projectName).getDisplayDescription()
+
+// // runEditDescription(projectName)
       })      
   }
 runCreateTaskButton()
@@ -172,8 +260,8 @@ const runEditButton = function(){
       // document.body.style.backgroundColor = 'blue'
       // console.log(this)
       const currentProjectName = this.parentElement.firstChild
-      console.log(this.parentElement)
-      console.log(currentProjectName)
+      // console.log(this.parentElement)
+      // console.log(currentProjectName)
       currentProjectName.setAttribute('contenteditable', true)
       currentProjectName.classList.add('editContent')
       currentProjectName.style.cursor = 'pointer'
@@ -201,7 +289,7 @@ const runEditButton = function(){
                 currentProjectName.textContent = projects[i]['projectName']
              }
          }
-         
+         console.log(allProjects().getProjects())
       }
       currentProjectName.addEventListener('focus', function(e){
         document.body.style.backgroundColor = 'skyblue'
@@ -392,7 +480,8 @@ const runEditDescription = function (projectName) {
            saveCompletedisplay.remove()
          }, 1000)
         console.log(currentDescription.textContent)
-         addDescriptionToProject(projectName, currentDescription.textContent)
+        console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+         addDescriptionToProject(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentDescription.textContent)
          console.log(allProjects().getProjects())
         for(let i = 0; i < projects.length; i++){
              if(projects[i]['projectName'] == projectName){
@@ -622,7 +711,8 @@ function createTask(currentProjectName, newProjectNameDiv){
     else{
     //  console.log('no')
   //    console.log(this.parentElement.parentElement.querySelector('.todoInput'))
-      if(!document.querySelector('.errorMessage')){    
+      if(!document.querySelector('.errorMessage')){ 
+        // console.log('message')   
         this.parentElement.parentElement.querySelector('.todoInput').after(errorMessage())
         document.querySelector('.errorMessage').style.marginTop = '-12px'
         //   this.after(document.querySelector('.todoInput'), errorMessage())
@@ -665,7 +755,7 @@ function displayTodo (targetDiv){
   }
 }
     const getInputAndButton = () => createInputAndButton
-    // const getdisplayTodo = () => displayTodo()
+    const getdisplayTodo = () => displayTodo()
 
     return {
              getInputAndButton,
@@ -711,12 +801,21 @@ function newProject(projectName, currentProjectName){
 
 
 function createDescription (projectName){ 
-  
+ // console.log(userInput().getProjectDescription())
+ // console.log(projectName)
+  if(userInput().getProjectDescription() == undefined){
+    // console.log('yes')
+  }
+  else{
+    // console.log('no')
+  }
   function descriptionInput () {
+    // console.log(document.querySelector('.descriptionInput'))
      const description = userInput().getProjectDescription()
-    // console.log(description)
+    //  console.log(description)
+    // console.log(document.querySelector('.descriptionInput'))
      addDescriptionToProject(projectName, description)
-     document.querySelector('.descriptionInput').remove()
+    //  document.querySelector('.descriptionInput').remove()
     // console.log(projectName)
     // console.log('description') 
 
@@ -727,9 +826,13 @@ function createDescription (projectName){
     let projects = allProjects().getProjects()
     // console.log(projects)
     // console.log(projectName)
+    // console.log(document.querySelector('.descriptionInput'))
+//     if(document.querySelector('.descriptionInput')){
+// console.log('yes')
+//     }
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == projectName){
-        console.log(projects[i]['description'])
+        // console.log(projects[i]['description'])
         let description = document.createElement('p')
         description.classList.add('description')
         description.textContent = projects[i]['description']
@@ -847,16 +950,8 @@ function submitTodo () {
     // create error messages
     // ensure without project already existing this should not work
     // and an error message should be displayed
-  } else if(!document.querySelector('.headerTodoInput').value){
-      if(!document.querySelector('.errorMessage')){
-      document.querySelector('.headerTodoInput').after(errorMessage())
-      document.querySelector('.errorMessage').style.marginTop = '7px'
-      setTimeout(() => {
-      document.querySelector('.errorMessage').remove()
-      }, 2000)  
-  }
-  }
-else if(!document.querySelector('.selectProject').value){   
+  } 
+  else if(!document.querySelector('.selectProject').value){   
   if(!document.querySelector('.selectProjectErrorMessage')){
      const selectProjectErrorMessage = document.createElement('p')
      selectProjectErrorMessage.textContent = 'Please Select And/Or Create A Project' 
@@ -868,6 +963,17 @@ else if(!document.querySelector('.selectProject').value){
        }, 3000)  
      }
    }
+  else if(!document.querySelector('.headerTodoInput').value){
+      if(!document.querySelector('.errorMessage')){
+        console.log('message')   
+      document.querySelector('.headerTodoInput').after(errorMessage())
+      document.querySelector('.errorMessage').style.marginTop = '7px'
+      setTimeout(() => {
+      document.querySelector('.errorMessage').remove()
+      }, 2000)  
+  }
+  }
+
  }
 
  
