@@ -7,6 +7,11 @@ body {
     
 }
 
+.newProjectContainer {
+    width: 400px;
+    /* background-color: orange; */
+}
+
 .projectName {
     margin-bottom: 5px;
 }
@@ -137,22 +142,44 @@ h4 {
 
 .addTodo {
     cursor: pointer;
+    width:fit-content;
+    /* background-color: orange; */
 }
 
-.descriptionHeading {
+.descriptionHeading, .notesHeading {
     margin-bottom: 10px;
 }
 
-.descriptionInput {
+.descriptionInput, .noteInput {
     display: block;
 }
 
-.description {
+.description, .note {
     margin-top: 2px;
     margin-bottom: 0px;
-    font-weight: normal;
+    font-weight: normal;    
+}
+
+.descriptionDiv, .noteDiv {
+    /* width: 350px; */
+    /* background-color: orange; */
+    word-break: break-all;
+    /* word-wrap: break-word; */
+}
+
+.note {
+    /* width: fit-content; */
+    /* white-space: initial; */
+}
+
+.noteInput {
+    margin-top: -10px;
 }
 
 .editDescription {
    font-size: 0.65rem;
+}
+
+.noteHeading {
+    margin-top: 25px;
 }

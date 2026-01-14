@@ -124,6 +124,15 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
      }
    }
  }
+ 
+ function addNoteToProject (projectName, note) {
+  console.log(note)
+   for(let i = 0; i < projects.length; i++){
+     if(projects[i]['projectName'] == projectName){
+        projects[i]['projectNote'] = note
+     }
+   }
+ }
 
 
 function allProjects(value){
@@ -138,7 +147,8 @@ export {
         createNewProjects, 
         allProjects, 
         createTodo,
-        addDescriptionToProject
+        addDescriptionToProject,
+        addNoteToProject
       }
 
 
