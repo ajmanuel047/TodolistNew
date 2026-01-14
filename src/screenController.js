@@ -88,6 +88,7 @@ function eventController(){
                     createNote(this.parentElement.querySelector('.newProjectName').textContent).getNoteInput()
                   //document.querySelector('.descriptionInput').remove()
                     createNote(this.parentElement.querySelector('.newProjectName').textContent).getDisplayNote()
+                   
                     document.querySelector('.noteHeading').style.marginTop = '15px'
                     let targetDiv = e.target.parentElement
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
@@ -146,6 +147,7 @@ function eventController(){
         })
         runEditButton()
         runEditDescription(projectName)
+        runEditNote(projectName)
 // runTodoEditButton()
         // document.querySelector('.projectName').remove()
         // document.querySelector('.projectNameInput').remove()
@@ -511,6 +513,56 @@ const runEditDescription = function (projectName) {
     }
   })  
 }
+
+const runEditNote = function (projectName) {
+ // console.log(projectName)
+  const editNoteButton = document.querySelectorAll('.editNote')
+  // let previousDescription;
+  // console.log(this)
+  editNoteButton.forEach((editButton) => {
+    // console.log(this)
+    editButton.onclick = function () {
+ //     console.log(this.parentElement.querySelector('.description'))
+      editNote()
+      const currentNote = this.parentElement.querySelector('.note')
+      currentNote.setAttribute('contenteditable', true)
+      currentNote.classList.add('editContent')
+      currentNote.style.cursor = 'pointer'
+
+      if(editButton.textContent == 'Save'){
+         editButton.textContent = 'Edit'
+         currentNote.setAttribute('contenteditable', false)
+         currentNote.classList.remove('editContent')
+         currentNote.style.cursor = 'auto'
+         const saveCompletedisplay = document.createElement('p')
+         saveCompletedisplay.textContent = 'Saved'
+         saveCompletedisplay.classList.add('saved')
+         // adjust the saveCompletedisplay because it not moving when the text
+         // is longer
+         this.parentElement.appendChild(saveCompletedisplay)
+         setTimeout(() => {
+           saveCompletedisplay.remove()
+         }, 1000)
+        console.log(currentNote.textContent)
+        console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+         addNoteToProject(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent)
+         console.log(allProjects().getProjects())
+        for(let i = 0; i < projects.length; i++){
+             if(projects[i]['projectName'] == projectName){
+                currentNote.textContent = projects[i]['projectNote']
+             }
+         }         
+      }
+
+      currentNote.addEventListener('focus', function(e){
+        document.body.style.backgroundColor = 'skyblue'
+        editButton.textContent = 'Save'
+        currentNote.style.cursor = 'auto'
+      })
+    }
+  })  
+}
+
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -525,7 +577,8 @@ const runEditDescription = function (projectName) {
           runAddTodo,
           runUpdateDropDown,
           runtodoSubmitButton,
-          runEditDescription
+          runEditDescription,
+          runEditNote
          }
 }
 
@@ -897,18 +950,22 @@ function editDescription (){
   document.body.style.backgroundColor = 'orange'
 }
 
+function editNote(){
+  document.body.style.backgroundColor = 'blue'
+}
+
 function createNote (projectName){ 
 
   function noteInput () {
      const note = userInput().getNoteInput()
-     console.log(note)
+    //  console.log(note)
      addNoteToProject(projectName, note)
   }
 
   function displayNote (){
    // console.log(projects)
     let projects = allProjects().getProjects()
-    // console.log(projects)
+     console.log(projects)
     // console.log(projectName)
     // console.log(document.querySelector('.descriptionInput'))
 //     if(document.querySelector('.descriptionInput')){
@@ -922,13 +979,13 @@ function createNote (projectName){
         note.textContent = projects[i]['projectNote']
         let notesHeading = document.querySelectorAll('.noteHeading')
        
-        // let editDescription = document.createElement('button')
-        // editDescription.classList.add('editDescription')
-        // editDescription.textContent = 'Edit'
+        let editNote = document.createElement('button')
+        editNote.classList.add('editNote')
+        editNote.textContent = 'Edit'
         
         notesHeading.forEach((div) => {
           div.appendChild(note)
-          // div.appendChild(editDescription)
+          div.appendChild(editNote)
         })
       }
     }
