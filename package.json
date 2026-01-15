@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
+  "scripts": {
     "dev": "webpack serve",
     "test": "webpack && node dist/main.js",
-    "deploy": "git subtree push --prefix dist origin gh-pages" 
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,8 @@
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
   }
 }

@@ -6,6 +6,9 @@ import { createNewProjects } from "./projectController";
 import { createTodo } from "./projectController";
 import { addDescriptionToProject } from "./projectController";
 import { addNoteToProject } from "./projectController";
+import { formatDate } from "./dateformatter"
+import { formatRFC7231 } from "date-fns"
+import { dateController } from "./projectController.js"
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
@@ -145,6 +148,9 @@ function eventController(){
           //   }  
           // }
         })
+        // console.log(projectName)
+        dateProjectWasCreated(projectName)
+        // console.log(dateController())
         runEditButton()
         runEditDescription(projectName)
         runEditNote(projectName)
@@ -1113,6 +1119,22 @@ function submitTodo () {
 
  }
 
+ function dateProjectWasCreated(projectName){
+  console.log(projectName)
+      const currentDate = document.createElement('p')
+      currentDate.classList.add('currentDate')
+      let calenderValues;
+      dateController()
+      let projects = allProjects().getProjects()
+      for (let i = 0; i < projects.length; i++) {
+        if (projects[i]['projectName'] == projectName) {
+          console.log(projects[i]['Date Created'])
+          currentDate.textContent = `Created ${projects[i]['Date Created']}`
+          console.log(projects)
+        }
+      }
+      document.querySelector('.projectContainer').lastChild.querySelector('.titleContainer').after(currentDate)
+ }
  
  // content editable not working well after using click here to add todo to any project
 // bug i previously fixed is back. edit of todo not properly working

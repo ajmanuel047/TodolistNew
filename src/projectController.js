@@ -1,6 +1,7 @@
 // import { createNewProject } from "./eventController"
 import { createEmptyProject } from "./createNewProject"
 import { createProject } from "./createNewProject"
+import { formatDate } from "./dateformatter"
 let projects = []
 
 function createNewProjects(value, value2){
@@ -117,6 +118,20 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 
 }
 
+function dateController(currentProjectName, calenderValues){
+      //  console.log(calenderValues)
+       console.log(currentProjectName)
+      //  console.log(projects[0]['Project Name'])
+    for(let i = 0; i < projects.length; i++){
+        if(projects[i]['Project Name'] == currentProjectName){
+            projects[i]['Date Created'] = formatDate().getDate()
+            projects[i]['Due Date'] = formatDate(calenderValues).dueDate()
+        }
+    }
+     console.log(projects)
+    
+}
+
  function addDescriptionToProject (projectName, description) {
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['projectName'] == projectName){
@@ -126,7 +141,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
  }
  
  function addNoteToProject (projectName, note) {
-  console.log(note)
+  // console.log(note)
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['projectName'] == projectName){
         projects[i]['projectNote'] = note
@@ -147,6 +162,7 @@ export {
         createNewProjects, 
         allProjects, 
         createTodo,
+        dateController,
         addDescriptionToProject,
         addNoteToProject
       }
