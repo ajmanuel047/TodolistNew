@@ -124,8 +124,8 @@ function dateController(currentProjectName, calenderValues){
       //  console.log(projects[0]['Project Name'])
     for(let i = 0; i < projects.length; i++){
         if(projects[i]['Project Name'] == currentProjectName){
-            projects[i]['Date Created'] = formatDate().getDate()
-            projects[i]['Due Date'] = formatDate(calenderValues).dueDate()
+            projects[i]['dateCreated'] = formatDate().getDate()
+            projects[i]['dueDate'] = formatDate(calenderValues).dueDate()
         }
     }
      console.log(projects)

@@ -148,12 +148,15 @@ function eventController(){
           //   }  
           // }
         })
-        // console.log(projectName)
+        
         dateProjectWasCreated(projectName)
+        addDate(projectName).getCreateButton()
+        runCalenderButton()
         // console.log(dateController())
         runEditButton()
         runEditDescription(projectName)
         runEditNote(projectName)
+        // console.log(this)
 // runTodoEditButton()
         // document.querySelector('.projectName').remove()
         // document.querySelector('.projectNameInput').remove()
@@ -569,6 +572,20 @@ const runEditNote = function (projectName) {
   })  
 }
 
+const runCalenderButton = function(projectName){
+  const calerderButtons = document.querySelectorAll('.dueDateButton')
+
+  calerderButtons.forEach((button) => {
+    // button.onclick = addDate().getDisplayCalender()
+   
+    button.onclick = function(e){
+      const targetDiv = e.target.parentElement
+      // console.log(targetDiv)
+      addDate(targetDiv).getDisplayCalender()
+    }
+  })
+}
+
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -584,7 +601,8 @@ const runEditNote = function (projectName) {
           runUpdateDropDown,
           runtodoSubmitButton,
           runEditDescription,
-          runEditNote
+          runEditNote,
+          runCalenderButton
          }
 }
 
@@ -704,6 +722,10 @@ function createNewProjectContainer(){
       const projectNameInput = document.createElement('input');
       projectNameInput.classList.add('projectNameInput');
       newProjectContainer.appendChild(projectNameInput);
+
+      const dateDiv = document.createElement('dateDiv')
+      dateDiv.classList.add('dateDiv')
+      newProjectContainer.appendChild(dateDiv)
 
       const todoDiv = document.createElement('div');
       todoDiv.classList.add('todoDiv');
@@ -1120,7 +1142,7 @@ function submitTodo () {
  }
 
  function dateProjectWasCreated(projectName){
-  console.log(projectName)
+ // console.log(projectName)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
@@ -1128,12 +1150,55 @@ function submitTodo () {
       let projects = allProjects().getProjects()
       for (let i = 0; i < projects.length; i++) {
         if (projects[i]['projectName'] == projectName) {
-          console.log(projects[i]['Date Created'])
-          currentDate.textContent = `Created ${projects[i]['Date Created']}`
-          console.log(projects)
+          console.log(projects[i]['dateCreated'])
+          currentDate.textContent = `Created ${projects[i]['dateCreated']}`
+      //    console.log(projects)
         }
       }
-      document.querySelector('.projectContainer').lastChild.querySelector('.titleContainer').after(currentDate)
+      document.querySelector('.projectContainer').lastChild.querySelector('.dateDiv').appendChild(currentDate)
+ }
+
+ function addDate(targetDiv){
+  
+  const dueDateDiv = null
+  function addDueDateButton(){
+    
+    const dueDateDiv = document.createElement('div')
+    dueDateDiv.classList.add('dueDateDiv')
+
+    const addButton = document.createElement('button')
+    addButton.textContent = 'Add Due Date'
+    addButton.classList.add('dueDateButton')
+  
+    document.querySelector('.projectContainer').lastChild.querySelector('.currentDate').after(dueDateDiv)
+    document.querySelector('.projectContainer').lastChild.querySelector('.dueDateDiv').appendChild(addButton)
+    
+  }
+
+  function displayCalender(){
+    console.log(targetDiv)
+    document.body.style.backgroundColor = 'orange'
+    // console.log('test')
+    
+    const calender = document.createElement('input')
+    calender.classList.add('calender')
+    calender.setAttribute('type', 'date')
+    if(!targetDiv.querySelector('.calender')){
+        targetDiv.appendChild(calender) 
+        // displays error message because it cannot read style 
+        // if add date button is already clicked for first project
+        // when trying to submit second project
+    }
+    
+  }
+
+ const getCreateButton = () => addDueDateButton()
+ const getDisplayCalender = () => displayCalender()
+
+ return {
+    getCreateButton,
+    getDisplayCalender
+ }
  }
  
  // content editable not working well after using click here to add todo to any project
