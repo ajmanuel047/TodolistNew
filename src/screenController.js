@@ -75,7 +75,7 @@ function eventController(){
         // console.log(inputFields)
         inputFields.forEach((inputField) => {
           
-          if(inputField.className !== 'headerTodoInput'){
+          if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender'){
             if(inputField.value !== ''){
             // console.log(note)
           // console.log(this.parentElement.querySelector('.newProjectName'))  
