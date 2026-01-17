@@ -152,6 +152,7 @@ function eventController(){
         dateProjectWasCreated(projectName)
         addDate(projectName).getCreateButton()
         runCalenderButton()
+        
         // console.log(dateController())
         runEditButton()
         runEditDescription(projectName)
@@ -582,10 +583,39 @@ const runCalenderButton = function(projectName){
       const targetDiv = e.target.parentElement
       // console.log(targetDiv)
       addDate(targetDiv).getDisplayCalender()
+      runCalender(targetDiv)
     }
   })
 }
 
+const runCalender = function(targetDiv){
+  const calenders = document.querySelectorAll('.calender')
+  // console.log(calenders)
+  calenders.forEach((calender) => {
+    calender.addEventListener('blur', function(){
+      // console.log('check')
+      const calenderValues = calender.value
+      // console.log(calenderValues)
+      const projectName = targetDiv.parentElement.parentElement.querySelector('.newProjectName').textContent
+      document.body.style.backgroundColor = 'green'
+      dateController(projectName, calenderValues)
+      let dueDate = null
+      let projects = allProjects().getProjects()
+      for(let i = 0; i < projects.length; i++){
+        if(projectName == projects[i]['projectName']){
+          dueDate = projects[i]['dueDate']
+        }
+      }
+      const dueDateElement = document.createElement('p')
+      dueDateElement.classList.add('dueDate')
+      dueDateElement.textContent = `Due Date is ${dueDate}`
+      targetDiv.appendChild(dueDateElement)
+
+      targetDiv.querySelector('button').remove()
+      targetDiv.querySelector('.calender').remove()
+    })
+  })
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -602,7 +632,8 @@ const runCalenderButton = function(projectName){
           runtodoSubmitButton,
           runEditDescription,
           runEditNote,
-          runCalenderButton
+          runCalenderButton,
+          runCalender
          }
 }
 
@@ -1142,11 +1173,11 @@ function submitTodo () {
  }
 
  function dateProjectWasCreated(projectName){
- // console.log(projectName)
+ console.log(projectName)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
-      dateController()
+      dateController(projectName)
       let projects = allProjects().getProjects()
       for (let i = 0; i < projects.length; i++) {
         if (projects[i]['projectName'] == projectName) {
@@ -1185,9 +1216,6 @@ function submitTodo () {
     calender.setAttribute('type', 'date')
     if(!targetDiv.querySelector('.calender')){
         targetDiv.appendChild(calender) 
-        // displays error message because it cannot read style 
-        // if add date button is already clicked for first project
-        // when trying to submit second project
     }
     
   }
