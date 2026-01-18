@@ -588,8 +588,8 @@ const runCalenderButton = function(projectName){
   })
 }
 
-const runCalender = function(targetDiv){
-  const calenders = document.querySelectorAll('.calender')
+function displayDueDate(targetDiv){
+    const calenders = document.querySelectorAll('.calender')
   // console.log(calenders)
   calenders.forEach((calender) => {
     calender.addEventListener('blur', function(){
@@ -597,7 +597,7 @@ const runCalender = function(targetDiv){
       const calenderValues = calender.value
       // console.log(calenderValues)
       const projectName = targetDiv.parentElement.parentElement.querySelector('.newProjectName').textContent
-      document.body.style.backgroundColor = 'green'
+      // document.body.style.backgroundColor = 'green'
       dateController(projectName, calenderValues)
       let dueDate = null
       let projects = allProjects().getProjects()
@@ -606,15 +606,42 @@ const runCalender = function(targetDiv){
           dueDate = projects[i]['dueDate']
         }
       }
-      const dueDateElement = document.createElement('p')
-      dueDateElement.classList.add('dueDate')
-      dueDateElement.textContent = `Due Date is ${dueDate}`
-      targetDiv.appendChild(dueDateElement)
+      // console.log(targetDiv)
+      if(!targetDiv.querySelector('.dueDate')){
+        const dueDateElement = document.createElement('p')
+        dueDateElement.classList.add('dueDate')
+        dueDateElement.textContent = `Due Date is ${dueDate}`
+        targetDiv.appendChild(dueDateElement)
+      }else{
+        targetDiv.querySelector('.dueDate').textContent = `Due Date is ${dueDate}`
+      }
 
       targetDiv.querySelector('button').remove()
       targetDiv.querySelector('.calender').remove()
+      changeDate(targetDiv)
     })
   })
+}
+
+function changeDate(targetDiv){
+      const changeDueDate = document.createElement('button')
+      changeDueDate.classList.add('changeDueDate')
+      changeDueDate.textContent = 'Change Date'
+      targetDiv.appendChild(changeDueDate)
+
+      const changeDateButtons = document.querySelectorAll('.changeDueDate')
+      changeDateButtons.forEach((button) => {
+        button.onclick = function(){
+        // document.body.style.backgroundColor = 'orange'
+        addDate(targetDiv).getDisplayCalender()
+        displayDueDate(targetDiv)
+        }
+      })
+}
+
+const runCalender = function(targetDiv){
+  displayDueDate(targetDiv)
+  
 }
   const getCurrentProjectName = () => currentProjectName
 
@@ -1006,7 +1033,7 @@ function createDescription (projectName){
 }
 
 function editDescription (){
-  document.body.style.backgroundColor = 'orange'
+  // document.body.style.backgroundColor = 'orange'
 }
 
 function editNote(){
@@ -1208,7 +1235,7 @@ function submitTodo () {
 
   function displayCalender(){
     console.log(targetDiv)
-    document.body.style.backgroundColor = 'orange'
+    // document.body.style.backgroundColor = 'orange'
     // console.log('test')
     
     const calender = document.createElement('input')

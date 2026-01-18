@@ -187,3 +187,16 @@ h4 {
 .noteHeading {
     margin-top: 25px;
 }
+
+.dueDate {
+    margin-bottom: 5px;
+}
+
+.changeDueDate {
+    font-size: 0.7rem;
+    margin-top: -20px;
+}
+
+.calender {
+    margin-left: 10px;
+}
