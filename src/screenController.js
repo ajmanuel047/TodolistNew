@@ -77,9 +77,10 @@ function eventController(){
           
           if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender'){
             if(inputField.value !== ''){
-            // console.log(note)
+             console.log(note)
           // console.log(this.parentElement.querySelector('.newProjectName'))  
               if(projectName && document.querySelector('.projectName') && description && note){
+
                 if(document.querySelector('.todoInput')){
                   if(document.querySelector('.todoInput').value !== ''){
                     newProject(projectName, currentProjectName)
@@ -96,6 +97,9 @@ function eventController(){
                     let targetDiv = e.target.parentElement
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                     createTask()
+                    dateProjectWasCreated(projectName)
+                    addDate(projectName).getCreateButton()
+                    runCalenderButton()
                       if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
                         document.querySelector('.projectName').remove()
                         document.querySelector('.projectNameInput').remove()
@@ -114,7 +118,9 @@ function eventController(){
                   //document.querySelector('.descriptionInput').remove()
                   createNote(this.parentElement.querySelector('.newProjectName').textContent).getDisplayNote()
                   document.querySelector('.noteHeading').style.marginTop = '15px'
-
+                  dateProjectWasCreated(projectName)
+                  addDate(projectName).getCreateButton()
+                  runCalenderButton()
                   if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
                   document.querySelector('.projectName').remove()
                   document.querySelector('.projectNameInput').remove()
@@ -148,10 +154,10 @@ function eventController(){
           //   }  
           // }
         })
-        
-        dateProjectWasCreated(projectName)
-        addDate(projectName).getCreateButton()
-        runCalenderButton()
+        console.log(this.parentElement)
+        // dateProjectWasCreated(projectName)
+        // addDate(projectName).getCreateButton()
+        // runCalenderButton()
         
         // console.log(dateController())
         runEditButton()
@@ -962,7 +968,7 @@ function createTask(currentProjectName, newProjectNameDiv){
       if(!document.querySelector('.errorMessage')){ 
         // console.log('message')   
         this.parentElement.parentElement.querySelector('.todoInput').after(errorMessage())
-        document.querySelector('.errorMessage').style.marginTop = '-12px'
+        document.querySelector('.errorMessage').style.marginTop = '3px'
         //   this.after(document.querySelector('.todoInput'), errorMessage())
         setTimeout(() => {
           document.querySelector('.errorMessage').remove()
