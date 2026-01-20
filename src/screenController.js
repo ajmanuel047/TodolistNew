@@ -141,125 +141,23 @@ function eventController(){
             }   
           } 
         }
-
- 
-          // else if(document.querySelector('.descriptionInput')){
-          //   console.log('checking')
-          //     if(!document.querySelector('.errorMessage')){
-          //      this.parentElement.parentElement.querySelector('.descriptionInput').after(errorMessage())
-          //      this.parentElement.querySelector('.errorMessage').style.marginTop = '3px'
-          //      setTimeout(() => {
-          //      document.querySelector('.errorMessage').remove()
-          //      }, 2000) 
-          //   }  
-          // }
         })
-        console.log(this.parentElement)
-        // dateProjectWasCreated(projectName)
-        // addDate(projectName).getCreateButton()
-        // runCalenderButton()
-        
-        // console.log(dateController())
         runEditButton()
         runEditDescription(projectName)
-        runEditNote(projectName)
-        // console.log(this)
-// runTodoEditButton()
-        // document.querySelector('.projectName').remove()
-        // document.querySelector('.projectNameInput').remove()
-//         let projectName = userInput().getUserInput(); 
-//         let description = userInput().getProjectDescription()
-//         console.log(description)
-//         // console.log(projectName)
-//        // console.log(this.parentElement.querySelector('.todoInput'))
-
-//        if(projectName){
-//         if(!this.parentElement.querySelector('.todoInput')){
-//       //    console.log('null check 1')
-//           newProject(projectName, currentProjectName)
-//           document.querySelector('.projectName').remove()
-//           document.querySelector('.projectNameInput').remove()
-//           document.querySelector('.submitProject').remove()
-//         }
-//         else if(this.parentElement.querySelector('.todoInput').value !== ''){   
-//           // console.log('null check 2')
-//           newProject(projectName, currentProjectName)
-//          //  console.log(this.parentElement.querySelector('.newProjectName').textContent)
-//           createTodoButton()                     
-//           let targetDiv = e.target.parentElement
-//           submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
-        
-//           createTask()
-//           // console.log('runnning')
-//           document.querySelector('.projectName').remove()
-//           document.querySelector('.projectNameInput').remove()
-//           document.querySelector('.submitProject').remove()
-//         }
-//         else if(this.parentElement.querySelector('.todoInput').value == ''){
-//           console.log('todo is empty and project name not')
-//           if(!document.querySelector('.errorMessage')){
-//               this.parentElement.querySelector('.todoInput').after(errorMessage())
-//               setTimeout(() => {
-//               document.querySelector('.errorMessage').remove()
-//               }, 2000)  
-//           }
-//         }
-//        }
-//      else if(!projectName){          
-//           console.log('check')
-//           if(!document.querySelector('.errorMessage')){
-//               this.parentElement.parentElement.querySelector('.projectNameInput').after(errorMessage())
-//               this.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
-//               setTimeout(() => {
-//               document.querySelector('.errorMessage').remove()
-//               }, 2000) 
-//           }             
-//       } 
-// runEditButton()
-// runTodoEditButton()
-//          if(document.querySelector('.descriptionInput').value !== ''){
-//           console.log('description')
-//           createDescription(projectName).getDescriptionInput()
-//           createDescription(projectName).getDisplayDescription()
-
-//           runEditDescription(projectName)
-//         }
- 
-// // console.log(projectName)
-// // console.log(document.querySelector('.descriptionInput')){}
-// // if(document.querySelector('.descriptionInput').value == ''){
-  
-// // }
-// // createDescription(projectName).getDescriptionInput()
-// // createDescription(projectName).getDisplayDescription()
-
-// // runEditDescription(projectName)
+        runEditNote(projectName)        
       })      
   }
 runCreateTaskButton()
-
 }
 
   const runCreateTaskButton = function(){
         let currentContainer = document.querySelector('.projectContainer')
         const currentTodo = document.querySelectorAll('.createNewTodo')
         const todoInput = document.querySelector('.todoInput')
-        
-        
-        // if(document.querySelector('.createNewTodo')){
-        //   document.querySelector('.createNewTodo').addEventListener('click', function(){
-        //     document.body.style.backgroundColor = 'purple'
-        //   })
-        // }
        const taskCreator = createTask()
 
         currentTodo.forEach((button) => {  
-          // if(!button.dataset.listenerAdded){
-          //   button.addEventListener('click', createTask().getInputAndButton())
-          //   button.dataset.listenerAdded = 'true'
-          // }
-          button.onclick = createTask().getInputAndButton()
-          
+          button.onclick = createTask().getInputAndButton()          
         })  
         
   }
@@ -288,18 +186,10 @@ const runEditButton = function(){
   let previousValue = null
   currentEditButton.forEach((button) => {
     button.onclick = function(){
-      // document.body.style.backgroundColor = 'blue'
-      // console.log(this)
       const currentProjectName = this.parentElement.firstChild
-      // console.log(this.parentElement)
-      // console.log(currentProjectName)
       currentProjectName.setAttribute('contenteditable', true)
       currentProjectName.classList.add('editContent')
       currentProjectName.style.cursor = 'pointer'
-      // if(button.textContent == 'Edit'){
-      //   currentProjectName.setAttribute('contenteditable', true)
-      //   button.textContent = 'Save'
-      // }
       if(button.textContent == 'Save'){
          button.textContent = 'Edit'
          currentProjectName.setAttribute('contenteditable', false)
@@ -598,45 +488,7 @@ function displayDueDate(targetDiv){
     const calenders = document.querySelectorAll('.calender')
   // console.log(calenders)
   calenders.forEach((calender) => {
-    // calender.addEventListener('click', function(){
-    //   // document.body.style.backgroundColor = 'blue'
-    //   targetDiv.querySelector('.dueDateButton').textContent = 'Save Date'
-    // })
-
     createSaveDateButton(calender, targetDiv)
-
-
-
-
-
-    // calender.addEventListener('blur', function(){
-    //   // console.log('check')
-    //   const calenderValues = calender.value
-    //   // console.log(calenderValues)
-    //   const projectName = targetDiv.parentElement.parentElement.querySelector('.newProjectName').textContent
-    //   // document.body.style.backgroundColor = 'green'
-    //   dateController(projectName, calenderValues)
-    //   let dueDate = null
-    //   let projects = allProjects().getProjects()
-    //   for(let i = 0; i < projects.length; i++){
-    //     if(projectName == projects[i]['projectName']){
-    //       dueDate = projects[i]['dueDate']
-    //     }
-    //   }
-    //   // console.log(targetDiv)
-    //   if(!targetDiv.querySelector('.dueDate')){
-    //     const dueDateElement = document.createElement('p')
-    //     dueDateElement.classList.add('dueDate')
-    //     dueDateElement.textContent = `Due Date is ${dueDate}`
-    //     targetDiv.appendChild(dueDateElement)
-    //   }else{
-    //     targetDiv.querySelector('.dueDate').textContent = `Due Date is ${dueDate}`
-    //   }
-
-    //   targetDiv.querySelector('button').remove()
-    //   targetDiv.querySelector('.calender').remove()
-    //   changeDate(targetDiv)
-    // })
   })
 }
 
@@ -709,18 +561,7 @@ console.log(this.parentElement.parentElement.querySelector('.calender'))
      targetDiv.querySelector('button').remove()
       changeDate(targetDiv)
       }
-
-    
-      // console.log('check')
-      
-      // console.log(calenderValues)
-
-      // console.log(targetDiv)
-
-
-
-
-    })
+     })
   })
 }
   const getCurrentProjectName = () => currentProjectName
@@ -815,15 +656,6 @@ function createTodoButton (){
     eventController().runTodoEditButton()
     // console.log(allProjects().getProjects())
   })
-//   currentTodoContainer.forEach((currentTodo) => {
-//   // console.log(currentTodo)
-  
-//   const editTodoButton = document.createElement('button')
-//   editTodoButton.textContent = 'Edit'
-//   editTodoButton.classList.add('editTodoButton')
-//   currentTodo.after(currentTodo, editTodoButton)
-
-// })
 }
 
 let count = -1
@@ -1055,14 +887,6 @@ function newProject(projectName, currentProjectName){
 
 
 function createDescription (projectName){ 
- // console.log(userInput().getProjectDescription())
- // console.log(projectName)
-  // if(userInput().getProjectDescription() == undefined){
-  //   // console.log('yes')
-  // }
-  // else{
-  //   // console.log('no')
-  // }
   function descriptionInput () {
     // console.log(document.querySelector('.descriptionInput'))
      const description = userInput().getProjectDescription()
@@ -1078,12 +902,7 @@ function createDescription (projectName){
   function displayDescription (){
    // console.log(projects)
     let projects = allProjects().getProjects()
-    // console.log(projects)
-    // console.log(projectName)
-    // console.log(document.querySelector('.descriptionInput'))
-//     if(document.querySelector('.descriptionInput')){
-// console.log('yes')
-//     }
+
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == projectName){
         // console.log(projects[i]['description'])
@@ -1375,39 +1194,7 @@ function displayUpdateMessage(targetDiv){
    dateUpdated.remove()
   }, 1000)
 }
- 
- // content editable not working well after using click here to add todo to any project
-// bug i previously fixed is back. edit of todo not properly working
-// it is not showing in the projects
-// after save button is clicked the todo should not be editable until the
-// todo button is clicked again
-// the saved message is displaying only in the last todo and the current one
-
-// work on submit button when todo field is empty. It should not submit
-// or something in that nature when the todo field is empty
-// solved previous issue but an existing problem that was there
-// before has been revealed. when i press the edit button when there
-// is more than one todoitem, it highlights the two to edit.
-// the issue as always should be from the loop where i got the currentTodo
-// start from there
-
-// NEWEST 
-// Two new bugs
 /*
-1. Creating two new projects with just one todo each is ok
-when i create a second todo for the second it adds to both the first 
-and the second and so on
-2. When i create a project with its todo before i create a second project
-withs its own todo its ok. But after doing this if i am to add a new 
-todo to the previous project wahala arises
-
-I am trying to get the current project name in display todo so i can
-solve 2 above which was partially solved when i solved 1 but now when
-i add the new task it goes to the last project and i think it has 
-something to do with my targeting so i am trying to get the current 
-project name so like always i can use it to target the right project
-being clicked
-
 I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
 MY HEAD FIRST. IT HAS ALWAYS BEEN THE MOST EFFICIENT WAY I HAVE USED TO
 SOLVE PROBLEMS. THINK OF THE SOLUTION IN YOUR HEAD FIRST AND THEN CREATE
