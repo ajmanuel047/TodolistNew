@@ -307,7 +307,7 @@ const runEditButton = function(){
          this.parentElement.appendChild(saveCompletedisplay)
          setTimeout(() => {
            saveCompletedisplay.remove()
-         }, 1000)
+         }, 2000)
          createNewProjects(previousValue, currentProjectName.textContent)
          for(let i = 0; i < projects.length; i++){
              if(projects[i]['projectName'] == currentProjectName.textContent){
@@ -581,7 +581,7 @@ const runCalenderButton = function(projectName){
    
     button.onclick = function(e){
       const targetDiv = e.target.parentElement
-      // console.log(targetDiv)
+      console.log(targetDiv.parentElement.parentElement.querySelector('.newProjectName'))
       addDate(targetDiv).getDisplayCalender()
       runCalender(targetDiv)
     }
@@ -597,21 +597,11 @@ function displayDueDate(targetDiv){
     //   targetDiv.querySelector('.dueDateButton').textContent = 'Save Date'
     // })
 
-    calender.addEventListener('click', function(){
-      const saveDueDateButton = document.createElement('button')
-      saveDueDateButton.classList.add('saveNewDate')
-      saveDueDateButton.textContent = 'Save New Date'
-      if(targetDiv.querySelector('.dueDateButton')){
-        targetDiv.querySelector('.dueDateButton').after(saveDueDateButton)
-        targetDiv.querySelector('.dueDateButton').remove()
-      }
+    createSaveDateButton(calender, targetDiv)
 
-      // targetDiv.querySelector('button').classList.add('saveNewDate')
-      // targetDiv.querySelector
-      // console.log(targetDiv)
-      runSaveDueDate(targetDiv)
-      console.log(calender.value)
-    })
+
+
+
 
     // calender.addEventListener('blur', function(){
     //   // console.log('check')
@@ -651,10 +641,14 @@ function changeDate(targetDiv){
       targetDiv.appendChild(changeDueDate)
 
       const changeDateButtons = document.querySelectorAll('.changeDueDate')
+
       changeDateButtons.forEach((button) => {
         button.onclick = function(){
-        // document.body.style.backgroundColor = 'orange'
-        addDate(targetDiv).getDisplayCalender()
+        const currentDiv = this.parentElement
+        console.log(currentDiv)
+        console.log(targetDiv)
+        // document.body.style.backgroundColor = 'purple'
+        addDate(currentDiv).getDisplayCalender()
         displayDueDate(targetDiv)
         }
       })
@@ -665,42 +659,59 @@ const runCalender = function(targetDiv){
   
 }
 
-const runSaveDueDate = function(targetDiv){
+const runSaveDueDate = function(){
   const saveNewDateButtons = document.querySelectorAll('.saveNewDate')
   const calenders = document.querySelectorAll('.calender')
   
   saveNewDateButtons.forEach((button) => {
     button.addEventListener('click', function(){
       document.body.style.backgroundColor = 'orange'
+    //  console.log(this.parentElement)
+    const targetDiv = this.parentElement
+      if(this.parentElement){
+        console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
       const calenderValues = this.parentElement.querySelector('.calender').value
-
-    
-      // console.log('check')
-      
-      // console.log(calenderValues)
-      const projectName = targetDiv.parentElement.parentElement.querySelector('.newProjectName').textContent
+      const projectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
       // document.body.style.backgroundColor = 'green'
+      console.log(projectName)
       dateController(projectName, calenderValues)
       let dueDate = null
       let projects = allProjects().getProjects()
+      // console.log(targetDiv)
+      // console.log(console.log(this.parentElement))
       for(let i = 0; i < projects.length; i++){
         if(projectName == projects[i]['projectName']){
           dueDate = projects[i]['dueDate']
         }
       }
-      // console.log(targetDiv)
       if(!targetDiv.querySelector('.dueDate')){
         const dueDateElement = document.createElement('p')
         dueDateElement.classList.add('dueDate')
         dueDateElement.textContent = `Due Date is ${dueDate}`
         targetDiv.appendChild(dueDateElement)
+        console.log('check1')
+        console.log(targetDiv)
       }else{
         targetDiv.querySelector('.dueDate').textContent = `Due Date is ${dueDate}`
+        displayUpdateMessage(targetDiv)
+        console.log('check')
+        console.log(targetDiv)
+      }
+console.log(this.parentElement.parentElement.querySelector('.calender'))
+      
+      this.parentElement.parentElement.querySelector('.calender').remove()
+     targetDiv.querySelector('button').remove()
+      changeDate(targetDiv)
       }
 
-      targetDiv.querySelector('button').remove()
-      targetDiv.querySelector('.calender').remove()
-      changeDate(targetDiv)
+    
+      // console.log('check')
+      
+      // console.log(calenderValues)
+
+      // console.log(targetDiv)
+
+
 
 
     })
@@ -724,7 +735,7 @@ const runSaveDueDate = function(targetDiv){
           runEditNote,
           runCalenderButton,
           runCalender,
-          // runSaveDueDate
+          runSaveDueDate
          }
 }
 
@@ -1115,7 +1126,7 @@ function createNote (projectName){
   function displayNote (){
    // console.log(projects)
     let projects = allProjects().getProjects()
-     console.log(projects)
+  //   console.log(projects)
     // console.log(projectName)
     // console.log(document.querySelector('.descriptionInput'))
 //     if(document.querySelector('.descriptionInput')){
@@ -1264,7 +1275,7 @@ function submitTodo () {
  }
 
  function dateProjectWasCreated(projectName){
- console.log(projectName)
+// console.log(projectName)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
@@ -1272,7 +1283,7 @@ function submitTodo () {
       let projects = allProjects().getProjects()
       for (let i = 0; i < projects.length; i++) {
         if (projects[i]['projectName'] == projectName) {
-          console.log(projects[i]['dateCreated'])
+       //   console.log(projects[i]['dateCreated'])
           currentDate.textContent = `Created ${projects[i]['dateCreated']}`
       //    console.log(projects)
         }
@@ -1298,7 +1309,7 @@ function submitTodo () {
   }
 
   function displayCalender(){
-    console.log(targetDiv)
+    console.log(targetDiv.parentElement.parentElement.querySelector('.newProjectName'))
     // document.body.style.backgroundColor = 'orange'
     // console.log('test')
     
@@ -1307,6 +1318,7 @@ function submitTodo () {
     calender.setAttribute('type', 'date')
     if(!targetDiv.querySelector('.calender')){
         targetDiv.appendChild(calender) 
+            console.log(targetDiv)
     }
     
   }
@@ -1319,6 +1331,44 @@ function submitTodo () {
     getDisplayCalender
  }
  }
+
+function createSaveDateButton(calender, targetDiv){
+calender.addEventListener('click', function(){           
+    const saveDueDateButton = document.createElement('button')
+    saveDueDateButton.classList.add('saveNewDate')
+    saveDueDateButton.textContent = 'Save New Date'
+    console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+    if(targetDiv.querySelector('.dueDateButton')){
+      targetDiv.querySelector('.dueDateButton').after(saveDueDateButton)
+      targetDiv.querySelector('.dueDateButton').remove()
+    }else if(!targetDiv.querySelector('.saveNewDate')){
+      console.log(this.parentElement)
+      console.log(targetDiv)
+      this.parentElement.querySelector('.changeDueDate').before(saveDueDateButton)
+      this.parentElement.querySelector('.changeDueDate').remove()
+      
+    }
+  
+
+
+  // targetDiv.querySelector('button').classList.add('saveNewDate')
+  // targetDiv.querySelector
+  // console.log(targetDiv)
+ eventController().runSaveDueDate()
+  // console.log(calender.value)
+})
+}
+
+function displayUpdateMessage(targetDiv){
+  const dateUpdated = document.createElement('p')
+  dateUpdated.classList.add('dateUpdated')
+  dateUpdated.textContent = 'Date Updated'
+  console.log(targetDiv)
+  targetDiv.querySelector('.dueDate').appendChild(dateUpdated)
+  setTimeout(() => {
+   dateUpdated.remove()
+  }, 1000)
+}
  
  // content editable not working well after using click here to add todo to any project
 // bug i previously fixed is back. edit of todo not properly working

@@ -194,10 +194,22 @@ h4 {
 }
 
 .changeDueDate {
-    font-size: 0.7rem;
+    /* font-size: 0.7rem; */
     margin-top: -20px;
 }
 
 .calender {
     margin-left: 10px;
+}
+
+.dateUpdated {
+    background-color: rgb(170, 235, 170);
+    color: rgb(5, 155, 214);
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-align: center;
+    width: 80px;
+    position: relative;
+    left: 200px;
+    top: -27px;
 }

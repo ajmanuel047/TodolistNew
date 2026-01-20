@@ -119,7 +119,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 }
 
 function dateController(currentProjectName, calenderValues){
-       console.log(calenderValues)
+      //  console.log(calenderValues)
        console.log(currentProjectName)
       //  console.log(projects[0]['Project Name'])
     for(let i = 0; i < projects.length; i++){
@@ -128,7 +128,7 @@ function dateController(currentProjectName, calenderValues){
             projects[i]['dueDate'] = formatDate(calenderValues).dueDate()
         }
     }
-     console.log(projects)
+   //  console.log(projects)
     
 }
 
