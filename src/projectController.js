@@ -4,7 +4,7 @@ import { createProject } from "./createNewProject"
 import { formatDate } from "./dateformatter"
 let projects = [
       {
-     'projectName': 'a',
+     'projectName': 'church',
      'todo' : [{'title' : 'Wake up early', 'Description' : 'So I can prepare for service'},
               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
     }
@@ -126,7 +126,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 
 function dateController(currentProjectName, calenderValues){
       //  console.log(calenderValues)
-       console.log(currentProjectName)
+      //  console.log(currentProjectName)
       //  console.log(projects[0]['Project Name'])
     for(let i = 0; i < projects.length; i++){
         if(projects[i]['projectName'] == currentProjectName){

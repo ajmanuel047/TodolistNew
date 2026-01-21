@@ -79,11 +79,11 @@ function eventController(){
           return arr.projectName
         })        
         if(!projectArray.includes(projectName)){
-          console.log('yes')
+          // console.log('yes')
             inputFields.forEach((inputField) => {          
             if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender'){
               if(inputField.value !== ''){
-              console.log(note)
+              // console.log(note)
             // console.log(this.parentElement.querySelector('.newProjectName'))  
                 if(projectName && document.querySelector('.projectName') && description && note){
 
@@ -155,7 +155,7 @@ function eventController(){
                 if(this.parentElement.querySelector('.projectErrorMessage2')){
                    this.parentElement.querySelector('.projectErrorMessage2').remove()
                 }    
-                
+
                 const projectErrorMessage = document.createElement('p')
                 projectErrorMessage.classList.add('projectErrorMessage')
                 projectErrorMessage.textContent = 'Project Already Exist'
@@ -408,14 +408,15 @@ const runtodoSubmitButton = function (){
   todoSubmitButton.onclick = submitTodo
 }
 
-const runEditDescription = function (projectName) {
+const runEditDescription = function () {
  // console.log(projectName)
   const editDescriptionButton = document.querySelectorAll('.editDescription')
   let previousDescription;
-  // console.log(this)
+  
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function () {
+      let projectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
  //     console.log(this.parentElement.querySelector('.description'))
       editDescription()
       const currentDescription = this.parentElement.querySelector('.description')
@@ -444,6 +445,9 @@ const runEditDescription = function (projectName) {
         for(let i = 0; i < projects.length; i++){
              if(projects[i]['projectName'] == projectName){
                 currentDescription.textContent = projects[i]['description']
+                console.log(projectName)
+                console.log(projects[i]['description'])
+                console.log(projects[i]['projectName'])
              }
          }         
       }
