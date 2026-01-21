@@ -126,12 +126,18 @@ h4 {
     margin-top: 27px;
 }
 
-.errorMessage, .selectProjectErrorMessage {
+.errorMessage, .selectProjectErrorMessage{
     color: red;
     font-size: 0.6rem;
-    font-style: italic;
+    /* font-style: italic; */
     margin-top: -10px;
     position: absolute;
+}
+
+.projectErrorMessage, .projectErrorMessage2 {
+    color: red;
+    font-size: 0.8rem;
+    /* font-style: italic; */
 }
 
 .saveChanges {

@@ -2,7 +2,13 @@
 import { createEmptyProject } from "./createNewProject"
 import { createProject } from "./createNewProject"
 import { formatDate } from "./dateformatter"
-let projects = []
+let projects = [
+      {
+     'projectName': 'a',
+     'todo' : [{'title' : 'Wake up early', 'Description' : 'So I can prepare for service'},
+              {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
+    }
+]
 
 function createNewProjects(value, value2){
     const newProject = createProject(value).newProject()
