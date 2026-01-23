@@ -85,7 +85,7 @@ function eventController(){
               if(inputField.value !== ''){
               // console.log(note)
             // console.log(this.parentElement.querySelector('.newProjectName'))  
-                if(projectName && document.querySelector('.projectName') && description && note){
+                if(projectName && document.querySelector('.projectName')){
 
                   if(document.querySelector('.todoInput')){
                     if(document.querySelector('.todoInput').value !== ''){
@@ -103,9 +103,9 @@ function eventController(){
                       let targetDiv = e.target.parentElement
                       submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                       createTask()
-                      dateProjectWasCreated(projectName)
-                      addDate(projectName).getCreateButton()
-                      runCalenderButton()
+                      // dateProjectWasCreated(projectName)
+                      // addDate(projectName).getCreateButton()
+                      // runCalenderButton()
                         if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
                           document.querySelector('.projectName').remove()
                           document.querySelector('.projectNameInput').remove()
@@ -123,10 +123,13 @@ function eventController(){
                     createNote(this.parentElement.querySelector('.newProjectName').textContent).getNoteInput()
                     //document.querySelector('.descriptionInput').remove()
                     createNote(this.parentElement.querySelector('.newProjectName').textContent).getDisplayNote()
-                    document.querySelector('.noteHeading').style.marginTop = '15px'
-                    dateProjectWasCreated(projectName)
-                    addDate(projectName).getCreateButton()
-                    runCalenderButton()
+                  //  document.querySelector('.noteHeading').style.marginTop = '15px'
+                    // dateProjectWasCreated(projectName)
+                    // addDate(projectName).getCreateButton()
+                    // runCalenderButton()
+                    console.log(allProjects().getProjects())
+                    document.querySelector('.projectNameInput').remove()
+                    document.querySelector('.submitProject').remove()
                     if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
                     document.querySelector('.projectName').remove()
                     document.querySelector('.projectNameInput').remove()
@@ -735,9 +738,9 @@ function createNewProjectContainer(){
       projectNameInput.classList.add('projectNameInput');
       newProjectContainer.appendChild(projectNameInput);
 
-      const dateDiv = document.createElement('dateDiv')
-      dateDiv.classList.add('dateDiv')
-      newProjectContainer.appendChild(dateDiv)
+      // const dateDiv = document.createElement('dateDiv')
+      // dateDiv.classList.add('dateDiv')
+      // newProjectContainer.appendChild(dateDiv)
 
       const todoDiv = document.createElement('div');
       todoDiv.classList.add('todoDiv');
@@ -755,35 +758,35 @@ function createNewProjectContainer(){
       const createNewTodo = document.createElement('button');
       createNewTodo.classList.add('createNewTodo')
       createNewTodo.classList.add(`${taskbuttonNumber().getNewCount()}`)
-      createNewTodo.textContent = 'New Task';
+      createNewTodo.textContent = 'Add Todo';
       todoTitleDiv.appendChild(createNewTodo);
 
-      const descriptionDiv = document.createElement('div')
-      descriptionDiv.classList.add('descriptionDiv')
-      newProjectContainer.appendChild(descriptionDiv)
+      // const descriptionDiv = document.createElement('div')
+      // descriptionDiv.classList.add('descriptionDiv')
+      // newProjectContainer.appendChild(descriptionDiv)
 
-      const descriptionHeading = document.createElement('h3')
-      descriptionHeading.classList.add('descriptionHeading')
-      descriptionHeading.textContent = 'Describe Your Project'
-      descriptionDiv.appendChild(descriptionHeading)
+      // const descriptionHeading = document.createElement('h3')
+      // descriptionHeading.classList.add('descriptionHeading')
+      // descriptionHeading.textContent = 'Describe Your Project'
+      // descriptionDiv.appendChild(descriptionHeading)
 
-      const descriptionInput = document.createElement('input')
-      descriptionInput.classList.add('descriptionInput')
-      descriptionInput.placeholder = 'Describe Your Project'
-      descriptionDiv.appendChild(descriptionInput)
+      // const descriptionInput = document.createElement('input')
+      // descriptionInput.classList.add('descriptionInput')
+      // descriptionInput.placeholder = 'Describe Your Project'
+      // descriptionDiv.appendChild(descriptionInput)
 
-      const noteDiv = document.createElement('div')
-      noteDiv.classList.add('noteDiv')
-      newProjectContainer.appendChild(noteDiv)
+      // const noteDiv = document.createElement('div')
+      // noteDiv.classList.add('noteDiv')
+      // newProjectContainer.appendChild(noteDiv)
 
-      const noteHeading = document.createElement('h3')
-      noteHeading.classList.add('noteHeading')
-      noteHeading.textContent = 'Add Notes On Project Below'
-      noteDiv.appendChild(noteHeading)
+      // const noteHeading = document.createElement('h3')
+      // noteHeading.classList.add('noteHeading')
+      // noteHeading.textContent = 'Add Notes On Project Below'
+      // noteDiv.appendChild(noteHeading)
 
-      const noteInput = document.createElement('input')
-      noteInput.classList.add('noteInput')
-      noteDiv.appendChild(noteInput)      
+      // const noteInput = document.createElement('input')
+      // noteInput.classList.add('noteInput')
+      // noteDiv.appendChild(noteInput)      
 
       const submitProject = document.createElement('button')
       submitProject.classList.add('submitProject');
