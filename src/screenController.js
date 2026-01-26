@@ -113,7 +113,7 @@ function eventController(){
                   console.log(todo[0])
                     createDescription(projectName, todo[0]).getDescriptionInput()
                     //document.querySelector('.descriptionInput').remove()
-                  //    createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDisplayDescription()
+                    createDescription(projectName, todo[0]).getDisplayDescription()
                    //   createTodoButton()        
                       // console.log(createNote().getNoteInput())
                 //      createNote(this.parentElement.querySelector('.newProjectName').textContent).getNoteInput()
@@ -1006,19 +1006,22 @@ function createDescription (projectName, todo){
   function displayDescription (){
    // console.log(projects)
     let projects = allProjects().getProjects()
+    let description = document.createElement('p')
+    description.classList.add('description')
+    let descriptionHeading = document.querySelectorAll('.descriptionHeading')
+  
+    let editDescription = document.createElement('button')
+    editDescription.classList.add('editDescription')
+    editDescription.textContent = 'Edit'
 
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == projectName){
-        // console.log(projects[i]['description'])
-        let description = document.createElement('p')
-        description.classList.add('description')
-        description.textContent = projects[i]['description']
-        let descriptionHeading = document.querySelectorAll('.descriptionHeading')
-       
-        let editDescription = document.createElement('button')
-        editDescription.classList.add('editDescription')
-        editDescription.textContent = 'Edit'
-        
+        for(let j = 0; j < projects[i]['todos'].length; j++){
+          if(projects[i]['todos'][j]['title'] == todo){
+            description.textContent = projects[i]['todos'][j]['description']
+            document.querySelector('.descriptionInput').remove()
+          }
+        }        
         descriptionHeading.forEach((div) => {
           div.appendChild(description)
           div.appendChild(editDescription)
