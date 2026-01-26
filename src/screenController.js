@@ -727,6 +727,34 @@ function createTodoButton (){
   })
 }
 
+function createTodoDescription(currentDiv){
+  const currentProjectName = document.querySelectorAll('.newProjectName')
+  const projects = allProjects().getProjects()
+  console.log('checking')
+  // console.log(targetDiv.querySelector('.todoDivContent'))
+  // for(let i = 0; i < projects.length; i++){
+  //   if(projects[i]['projectName'] == currentProjectName.textContent){
+  //     console.log(currentProjectName.textContent)
+  // console.log(targetDiv)
+      // let currentDiv = targetDiv.querySelector('.todoDivContent')
+      const descriptionDiv = document.createElement('div')
+      descriptionDiv.classList.add('descriptionDiv')
+      currentDiv.after(descriptionDiv)
+
+      const descriptionHeading = document.createElement('h3')
+      descriptionHeading.classList.add('descriptionHeading')
+      descriptionHeading.textContent = 'Describe Task'
+      descriptionDiv.appendChild(descriptionHeading)
+
+      const descriptionInput = document.createElement('input')
+      descriptionInput.classList.add('descriptionInput')
+      descriptionInput.placeholder = 'Describe Your Project'
+      descriptionDiv.appendChild(descriptionInput)
+  //   }
+  // }
+
+}
+
 let count = -1
 function createNewProjectContainer(){
 
@@ -786,6 +814,8 @@ function createNewProjectContainer(){
       createNewTodo.textContent = 'Add Todo';
       todoTitleDiv.appendChild(createNewTodo);
 
+
+
       // const descriptionDiv = document.createElement('div')
       // descriptionDiv.classList.add('descriptionDiv')
       // newProjectContainer.appendChild(descriptionDiv)
@@ -820,6 +850,7 @@ function createNewProjectContainer(){
       eventController().runSubmitProject()
       // eventController().runCreateTaskButton()
       // eventController().submitTask()
+
 }
 
 function displayProject(){
@@ -844,7 +875,7 @@ function createTask(currentProjectName, newProjectNameDiv){
     }, "500")
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
-  //  console.log('test')
+    const targetDiv = this.parentElement.parentElement.parentElement
     const todoDivContent = document.createElement('div')
     todoDivContent.classList.add('todoDivContent')
     const containers = document.querySelectorAll('.newProjectContainer')
@@ -860,8 +891,8 @@ function createTask(currentProjectName, newProjectNameDiv){
     })
 
         this.parentElement.parentElement.appendChild(todoDivContent)
-        this.parentElement.parentElement.appendChild(todoInput)
-   //     console.log(todoDivContent)
+        todoDivContent.appendChild(todoInput)
+        createTodoDescription(todoInput)
     } 
     else{
     //  console.log('no')
@@ -906,6 +937,8 @@ function displayTodo (targetDiv){
         // console.log(projects)
       }
       createTodoButton()
+      // console.log(targetDiv)
+      // createTodoDescription(targetDiv)
     }
   }
 }
