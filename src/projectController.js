@@ -138,10 +138,15 @@ function dateController(currentProjectName, calenderValues){
     
 }
 
- function addDescriptionToProject (projectName, description) {
+ function addDescriptionToProject (projectName, description, todo) {
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['projectName'] == projectName){
-        projects[i]['description'] = description
+      for(let j = 0; j < projects[i]['todos'].length; j++){
+        if(!projects[i]['todos'][j].hasOwnProperty('description')){
+           projects[i]['todos'][j].description = description
+          console.log(projects)
+        }
+      }
      }
    }
  }

@@ -109,8 +109,9 @@ function eventController(){
                         createTask()
                         document.querySelector('.submitProject').remove()
                     }
-                  
-                      //    createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDescriptionInput()
+                  console.log(description)
+                  console.log(todo[0])
+                    createDescription(projectName, todo[0]).getDescriptionInput()
                     //document.querySelector('.descriptionInput').remove()
                   //    createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDisplayDescription()
                    //   createTodoButton()        
@@ -168,6 +169,7 @@ function eventController(){
           else if(inputField.value == ''){            
                 if(!document.querySelector('.errorMessage')){
                 inputField.after(errorMessage())
+                console.log(this.parentElement)
                 this.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
                 setTimeout(() => {
                 document.querySelector('.errorMessage').remove()
@@ -988,13 +990,13 @@ function newProject(projectName, currentProjectName){
 }
 
 
-function createDescription (projectName){ 
+function createDescription (projectName, todo){ 
   function descriptionInput () {
     // console.log(document.querySelector('.descriptionInput'))
      const description = userInput().getProjectDescription()
     //  console.log(description)
     // console.log(document.querySelector('.descriptionInput'))
-     addDescriptionToProject(projectName, description)
+     addDescriptionToProject(projectName, description, todo)
     //  document.querySelector('.descriptionInput').remove()
     // console.log(projectName)
     // console.log('description') 
