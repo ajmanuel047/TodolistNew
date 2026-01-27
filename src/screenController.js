@@ -712,17 +712,18 @@ function createTodoButton (){
   const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
   const currentTodoDivContent = document.querySelectorAll('.todoDivContent')
   
+  const editTodoButton = document.createElement('button')
+  editTodoButton.textContent = 'Edit'
+  editTodoButton.classList.add('editTodoButton')
   currentTodoDivContent.forEach((todoDivContent) => {
   //  console.log(todoDivContent)
-    if(todoDivContent.lastChild){
+  console.log('checsgsg')
+    // if(todoDivContent.lastChild){
       //  console.log(todoDivContent.lastChild)
-      if(todoDivContent.lastChild.className == 'todo'){
+      if(todoDivContent.firstChild.className == 'todo'){
         //  console.log(todoDivContent.lastChild)
-        const editTodoButton = document.createElement('button')
-        editTodoButton.textContent = 'Edit'
-        editTodoButton.classList.add('editTodoButton')
-        todoDivContent.appendChild(editTodoButton)
-      }
+        todoDivContent.firstChild.after(editTodoButton)
+      // }
     }
     eventController().runTodoEditButton()
     // console.log(allProjects().getProjects())
@@ -932,7 +933,8 @@ function displayTodo (targetDiv){
           todo.classList.add('todo') 
           let containers = targetDiv.querySelectorAll('.todoDivContent')
           containers.forEach((currentContainer) => {
-          currentContainer.appendChild(todo)
+              targetDiv.querySelector('.descriptionDiv').before(todo)
+           console.log(targetDiv.querySelector('.descriptionDiv'))
           })
         
         // console.log(currentContainer)
