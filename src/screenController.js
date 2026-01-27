@@ -253,7 +253,9 @@ const runEditButton = function(){
   let previousValue = null
   currentEditButton.forEach((button) => {
     button.onclick = function(){
-      const currentProjectName = this.parentElement.firstChild
+      document.body.style.backgroundColor = 'orange'
+      const currentProjectName = this.parentElement.querySelector('.newProjectName')
+      console.log(currentProjectName)
       currentProjectName.setAttribute('contenteditable', true)
       currentProjectName.classList.add('editContent')
       currentProjectName.style.cursor = 'pointer'
