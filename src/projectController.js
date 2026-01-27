@@ -144,7 +144,7 @@ function dateController(currentProjectName, calenderValues){
       for(let j = 0; j < projects[i]['todos'].length; j++){
         if(!projects[i]['todos'][j].hasOwnProperty('description')){
            projects[i]['todos'][j].description = description
-          console.log(projects)
+          // console.log(projects)
         }
       }
      }

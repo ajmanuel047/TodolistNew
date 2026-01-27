@@ -85,12 +85,12 @@ function eventController(){
               if(inputField.value !== ''){
               // console.log(note)
             // console.log(this.parentElement.querySelector('.newProjectName'))  
-            console.log(projectName)
+            // console.log(projectName)
             //console.log(document.querySelector('.todoInput'))
                 if(projectName && document.querySelector('.projectNameInput') && !document.querySelector('.todoInput')){
                     newProject(projectName, currentProjectName)
-                    console.log('test')
-                    console.log(allProjects().getProjects())
+                    // console.log('test')
+                    // console.log(allProjects().getProjects())
                     document.querySelector('.projectNameInput').remove()
                     let targetDiv = e.target.parentElement
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
@@ -98,19 +98,19 @@ function eventController(){
                     document.querySelector('.submitProject').remove()
                   }
                   else if(projectName && document.querySelector('.todoInput')){
-                    console.log('cjeck')
+                    // console.log('cjeck')
                     if(document.querySelector('.todoInput').value !== ''){
                         newProject(projectName, currentProjectName)
-                        console.log('test2')
-                        console.log(allProjects().getProjects())
+                        // console.log('test2')
+                        // console.log(allProjects().getProjects())
                         document.querySelector('.projectNameInput').remove()
                         let targetDiv = e.target.parentElement
                         submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                         createTask()
                         document.querySelector('.submitProject').remove()
                     }
-                  console.log(description)
-                  console.log(todo[0])
+                  // console.log(description)
+                  // console.log(todo[0])
                     createDescription(projectName, todo[0]).getDescriptionInput()
                     //document.querySelector('.descriptionInput').remove()
                     createDescription(projectName, todo[0]).getDisplayDescription()
@@ -313,10 +313,12 @@ const runTodoEditButton = function(){
       // document.body.style.backgroundColor = 'purple'
       
       let arr = [].slice.call(this.parentElement.children)
-      let currentProjectName = this.parentElement.parentElement.parentElement.firstChild.firstChild.textContent 
+      let currentProjectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
         // console.log(e.target)
        if(buttons.textContent == 'Save'){
         // console.log(currentTodo)
+        console.log('na')
+        console.log(currentProjectName)
          buttons.textContent = 'Edit'
          currentTodo.setAttribute('contenteditable', false)
          currentTodo.classList.remove('editContent')
@@ -326,8 +328,8 @@ const runTodoEditButton = function(){
          saveCompletedisplay.classList.add('saved')
         //  adjust the saveCompletedisplay because it not moving when the text
         //  is longer
-         this.parentElement.appendChild(saveCompletedisplay)
-       //  console.log(this.parentElement)
+         this.parentElement.parentElement.parentElement.querySelector('.todoDivTitle').appendChild(saveCompletedisplay)
+        console.log(this.parentElement.parentElement)
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
@@ -719,7 +721,7 @@ function createTodoButton (){
   editTodoButton.classList.add('editTodoButton')
   currentTodoDivContent.forEach((todoDivContent) => {
   //  console.log(todoDivContent)
-  console.log('checsgsg')
+  // console.log('checsgsg')
     // if(todoDivContent.lastChild){
       //  console.log(todoDivContent.lastChild)
       if(todoDivContent.firstChild.className == 'todo'){
@@ -735,7 +737,7 @@ function createTodoButton (){
 function createTodoDescription(currentDiv){
   const currentProjectName = document.querySelectorAll('.newProjectName')
   const projects = allProjects().getProjects()
-  console.log('checking')
+  // console.log('checking')
   // console.log(targetDiv.querySelector('.todoDivContent'))
   // for(let i = 0; i < projects.length; i++){
   //   if(projects[i]['projectName'] == currentProjectName.textContent){
@@ -936,7 +938,7 @@ function displayTodo (targetDiv){
           let containers = targetDiv.querySelectorAll('.todoDivContent')
           containers.forEach((currentContainer) => {
               targetDiv.querySelector('.descriptionDiv').before(todo)
-           console.log(targetDiv.querySelector('.descriptionDiv'))
+          //  console.log(targetDiv.querySelector('.descriptionDiv'))
           })
         
         // console.log(currentContainer)

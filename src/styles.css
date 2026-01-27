@@ -61,12 +61,13 @@ h3 {
     text-align: center;
     width: 45px;
     height: 15px;
-    display: flex;
+    display: inline;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     position: relative;
-    bottom: 59px;
-    left: 60px;
+    bottom: -40px;
+    left: -130px;
 }
 .createNewTodo {
     margin-left: 60px;
