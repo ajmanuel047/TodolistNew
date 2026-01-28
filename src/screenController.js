@@ -460,6 +460,7 @@ const runEditDescription = function () {
       currentDescription.style.cursor = 'pointer'
 
       if(editButton.textContent == 'Save'){
+        console.log('check')
          editButton.textContent = 'Edit'
          currentDescription.setAttribute('contenteditable', false)
          currentDescription.classList.remove('editContent')
@@ -467,9 +468,12 @@ const runEditDescription = function () {
          const saveCompletedisplay = document.createElement('p')
          saveCompletedisplay.textContent = 'Saved'
          saveCompletedisplay.classList.add('saved')
+         
+
          // adjust the saveCompletedisplay because it not moving when the text
          // is longer
-         this.parentElement.appendChild(saveCompletedisplay)
+         console.log(this.parentElement.parentElement)
+         this.parentElement.parentElement.querySelector('.descriptionContentDiv').appendChild(saveCompletedisplay)
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
@@ -753,10 +757,16 @@ function createTodoDescription(currentDiv){
       descriptionHeading.textContent = 'Describe Task'
       descriptionDiv.appendChild(descriptionHeading)
 
+      const descriptionContentDiv = document.createElement('div')
+      descriptionContentDiv.classList.add('descriptionContentDiv')
+      descriptionDiv.appendChild(descriptionContentDiv)
+
       const descriptionInput = document.createElement('input')
       descriptionInput.classList.add('descriptionInput')
       descriptionInput.placeholder = 'Describe Your Project'
       descriptionDiv.appendChild(descriptionInput)
+
+
   //   }
   // }
 
@@ -1014,7 +1024,7 @@ function createDescription (projectName, todo){
     let projects = allProjects().getProjects()
     let description = document.createElement('p')
     description.classList.add('description')
-    let descriptionHeading = document.querySelectorAll('.descriptionHeading')
+    let descriptionContentDiv = document.querySelectorAll('.descriptionContentDiv')
   
     let editDescription = document.createElement('button')
     editDescription.classList.add('editDescription')
@@ -1028,9 +1038,9 @@ function createDescription (projectName, todo){
             document.querySelector('.descriptionInput').remove()
           }
         }        
-        descriptionHeading.forEach((div) => {
+        descriptionContentDiv.forEach((div) => {
           div.appendChild(description)
-          div.appendChild(editDescription)
+          div.after(editDescription)
         })
       }
     }

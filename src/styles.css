@@ -169,6 +169,8 @@ h4 {
     margin-top: 2px;
     margin-bottom: 0px;
     font-weight: normal;    
+    font-size: 1.5rem;
+    width: 200px;
 }
 
 .descriptionDiv, .noteDiv {
@@ -176,6 +178,25 @@ h4 {
     /* background-color: orange; */
     word-break: break-all;
     /* word-wrap: break-word; */
+}
+
+.descriptionContentDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* justify-items: center; */
+    /* background-color: blue; */
+    width: 300px;
+}
+
+.descriptionContentDiv .saved {
+    /* background-color: red; */
+    /* display: inline; */
+    position: relative;
+    top: 0px;
+    left: -10px;
+    /* margin-right: 150px; */
+    width: 60px;
 }
 
 .note {
