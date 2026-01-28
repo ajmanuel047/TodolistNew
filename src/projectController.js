@@ -139,12 +139,16 @@ function dateController(currentProjectName, calenderValues){
 }
 
  function addDescriptionToProject (projectName, description, todo) {
+  console.log(description)
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['projectName'] == projectName){
       for(let j = 0; j < projects[i]['todos'].length; j++){
         if(!projects[i]['todos'][j].hasOwnProperty('description')){
            projects[i]['todos'][j].description = description
           // console.log(projects)
+        }else if(projects[i]['todos'][j].hasOwnProperty('description')){
+          console.log('yes it does')
+          projects[i]['todos'][j].description = description
         }
       }
      }

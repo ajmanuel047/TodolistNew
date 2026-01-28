@@ -450,7 +450,8 @@ const runEditDescription = function () {
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function () {
-      let projectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+      console.log(this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+      let projectName = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
  //     console.log(this.parentElement.querySelector('.description'))
       editDescription()
       const currentDescription = this.parentElement.querySelector('.description')
@@ -472,20 +473,19 @@ const runEditDescription = function () {
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-        console.log(currentDescription.textContent)
-        console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-         addDescriptionToProject(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentDescription.textContent)
+        // console.log(currentDescription.textContent)
+        // console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+         addDescriptionToProject(projectName, currentDescription.textContent)
          console.log(allProjects().getProjects())
         for(let i = 0; i < projects.length; i++){
              if(projects[i]['projectName'] == projectName){
                 currentDescription.textContent = projects[i]['description']
-                console.log(projectName)
-                console.log(projects[i]['description'])
-                console.log(projects[i]['projectName'])
-             }
+              for(let j = 0; j < projects[i]['todos'].length; j++){
+                  currentDescription.textContent= projects[i]['todos'][j]['description'] 
+              }
+            }
          }         
       }
-
       currentDescription.addEventListener('focus', function(e){
         document.body.style.backgroundColor = 'skyblue'
         editButton.textContent = 'Save'
