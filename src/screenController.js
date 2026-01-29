@@ -722,7 +722,7 @@ function userInput(){
 function createTodoButton (targetDiv){
   const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
  // const currentTodoDivContent = document.querySelectorAll('.todoDivContent')
- console.log(targetDiv) 
+//  console.log(targetDiv) 
  const currentTodoDivContent = targetDiv.querySelectorAll('.todoDivContent')
   const editTodoButton = document.createElement('button')
   editTodoButton.textContent = 'Edit'
@@ -949,16 +949,15 @@ function displayTodo (targetDiv){
           todo.classList.add('todo') 
           let containers = targetDiv.querySelectorAll('.todoDivContent')
           containers.forEach((currentContainer) => {
-              currentContainer.querySelector('.descriptionDiv').before(todo)
+            currentContainer.querySelector('.descriptionDiv').before(todo)
           //  console.log(targetDiv.querySelector('.descriptionDiv'))
-           const lineBreak = document.createElement('hr')
-           lineBreak.classList.add('lineBreak')
-           targetDiv.querySelector('.todoDiv').appendChild(lineBreak)
-        })
-        
+          })        
         // console.log(currentContainer)
         // console.log(projects)
       }
+      const lineBreak = document.createElement('hr')
+      lineBreak.classList.add('lineBreak')
+      targetDiv.querySelector('.todoDiv').appendChild(lineBreak)
       createTodoButton(targetDiv)
       // console.log(targetDiv)
       // createTodoDescription(targetDiv)
