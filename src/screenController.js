@@ -114,7 +114,9 @@ function eventController(){
                     createDescription(projectName, todo[0]).getDescriptionInput()
                     //document.querySelector('.descriptionInput').remove()
                     createDescription(projectName, todo[0]).getDisplayDescription()
-                   //   createTodoButton()        
+                   
+                  
+                    //   createTodoButton()        
                       // console.log(createNote().getNoteInput())
                 //      createNote(this.parentElement.querySelector('.newProjectName').textContent).getNoteInput()
                     //document.querySelector('.descriptionInput').remove()
@@ -752,7 +754,7 @@ function createTodoDescription(currentDiv){
       descriptionDiv.classList.add('descriptionDiv')
       currentDiv.after(descriptionDiv)
 
-      const descriptionHeading = document.createElement('h3')
+      const descriptionHeading = document.createElement('h5')
       descriptionHeading.classList.add('descriptionHeading')
       descriptionHeading.textContent = 'Describe Task'
       descriptionDiv.appendChild(descriptionHeading)
@@ -892,6 +894,7 @@ function createTask(currentProjectName, newProjectNameDiv){
     }, "500")
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
+    todoInput.placeholder = 'New Todo'
     const targetDiv = this.parentElement.parentElement.parentElement
     const todoDivContent = document.createElement('div')
     todoDivContent.classList.add('todoDivContent')
@@ -949,7 +952,10 @@ function displayTodo (targetDiv){
           containers.forEach((currentContainer) => {
               targetDiv.querySelector('.descriptionDiv').before(todo)
           //  console.log(targetDiv.querySelector('.descriptionDiv'))
-          })
+           const lineBreak = document.createElement('hr')
+           lineBreak.classList.add('linebreak')
+           document.querySelector('.newProjectContainer').appendChild(lineBreak)
+        })
         
         // console.log(currentContainer)
         // console.log(projects)

@@ -14,6 +14,7 @@ body {
 
 .projectName {
     margin-bottom: 5px;
+    /* background-color: orange; */
 }
 
 .todoInput {
@@ -36,6 +37,13 @@ h3 {
     /* background-color: blue; */
     display: inline-block;
     font-size: 1.5rem;
+    
+}
+
+.newProjectName {
+    font-size: 1.6rem;
+    margin-top: 7px;
+    /* background-color: orange;   */
     
 }
 
@@ -65,9 +73,9 @@ h3 {
     /* display: flex;
     align-items: center;
     justify-content: center; */
-    position: relative;
+    /* position: relative;
     bottom: -40px;
-    left: -130px;
+    left: -130px; */
 }
 .createNewTodo {
     margin-left: 60px;
@@ -117,10 +125,6 @@ h4 {
 
 .editNote {
     font-size: 0.7rem;
-}
-
-.newProjectName {
-     /* margin-bottom: -3px; */
 }
 
 .todoInput {
@@ -240,4 +244,13 @@ h4 {
     position: relative;
     left: 200px;
     top: -27px;
+}
+
+.linebreak {
+    height: 2px;
+    background-color: orange;
+    border: none;
+    width: 310px;
+    margin-left: 0px;
+    margin-top: 20px;
 }
