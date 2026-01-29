@@ -146,7 +146,7 @@ h4 {
 }
 
 .saveChanges {
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .selectProject {
@@ -246,7 +246,7 @@ h4 {
     top: -27px;
 }
 
-.linebreak {
+.lineBreak {
     height: 2px;
     background-color: orange;
     border: none;

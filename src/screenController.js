@@ -405,7 +405,8 @@ const runSaveChanges = function(){
            const currentTodo = arr[arr.length - 1]
            const currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
            createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
-           // console.log(this.parentElement.querySelector('.todoDiv').lastChild)
+          //  console.log(this.parentElement.querySelector('.todoDiv').lastChild)
+          //  console.log(allProjects().getProjects())
            createTask(currentProjectName).displayTodo(targetDiv)
           //  createTask().getInputAndButton()
            todoInput.remove()           
@@ -718,26 +719,22 @@ function userInput(){
 }
 
         
-function createTodoButton (){
+function createTodoButton (targetDiv){
   const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
-  const currentTodoDivContent = document.querySelectorAll('.todoDivContent')
-  
+ // const currentTodoDivContent = document.querySelectorAll('.todoDivContent')
+ console.log(targetDiv) 
+ const currentTodoDivContent = targetDiv.querySelectorAll('.todoDivContent')
   const editTodoButton = document.createElement('button')
   editTodoButton.textContent = 'Edit'
   editTodoButton.classList.add('editTodoButton')
-  currentTodoDivContent.forEach((todoDivContent) => {
-  //  console.log(todoDivContent)
-  // console.log('checsgsg')
-    // if(todoDivContent.lastChild){
-      //  console.log(todoDivContent.lastChild)
-      if(todoDivContent.firstChild.className == 'todo'){
-        //  console.log(todoDivContent.lastChild)
-        todoDivContent.firstChild.after(editTodoButton)
-      // }
-    }
+      // console.log(currentTodoDivContent.querySelector('.todo'))
+      currentTodoDivContent.forEach((container) => {
+        if(!container.querySelector('.editTodoButton')){
+           container.querySelector('.todo').after(editTodoButton)
+        }
+      })
     eventController().runTodoEditButton()
     // console.log(allProjects().getProjects())
-  })
 }
 
 function createTodoDescription(currentDiv){
@@ -901,6 +898,7 @@ function createTask(currentProjectName, newProjectNameDiv){
     const containers = document.querySelectorAll('.newProjectContainer')
     containers.forEach((container) => {
        let currentContainer = this.parentElement.parentElement.parentElement
+      //  console.log(currentContainer.lastChild)
        if(currentContainer.lastChild.className !== 'submitProject' && currentContainer.lastChild.className !== 'saveChanges'){
           const saveButton = document.createElement('button');
           saveButton.textContent = 'Save Changes'  
@@ -932,6 +930,7 @@ function createTask(currentProjectName, newProjectNameDiv){
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
  // console.log(targetDiv)
+ console.log(projects)
   for(let i = 0; i < projects.length; i++){   
   // console.log(projects[i]['projectName'].toLowerCase())      
  //  console.log(targetDiv.querySelector('.newProjectName').textContent.toLowerCase())      
@@ -950,17 +949,17 @@ function displayTodo (targetDiv){
           todo.classList.add('todo') 
           let containers = targetDiv.querySelectorAll('.todoDivContent')
           containers.forEach((currentContainer) => {
-              targetDiv.querySelector('.descriptionDiv').before(todo)
+              currentContainer.querySelector('.descriptionDiv').before(todo)
           //  console.log(targetDiv.querySelector('.descriptionDiv'))
            const lineBreak = document.createElement('hr')
-           lineBreak.classList.add('linebreak')
-           document.querySelector('.newProjectContainer').appendChild(lineBreak)
+           lineBreak.classList.add('lineBreak')
+           targetDiv.querySelector('.todoDiv').appendChild(lineBreak)
         })
         
         // console.log(currentContainer)
         // console.log(projects)
       }
-      createTodoButton()
+      createTodoButton(targetDiv)
       // console.log(targetDiv)
       // createTodoDescription(targetDiv)
     }
