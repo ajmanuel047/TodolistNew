@@ -73,6 +73,7 @@ function eventController(){
         let note = userInput().getNoteInput()
         let todo = userInput().getTaskNameInput()
         let inputFields = document.querySelectorAll('input')
+        let targetDiv = null
         // console.log(inputFields)
 
         let projectArray = projects.map((arr) => {
@@ -92,7 +93,7 @@ function eventController(){
                     // console.log('test')
                     // console.log(allProjects().getProjects())
                     document.querySelector('.projectNameInput').remove()
-                    let targetDiv = e.target.parentElement
+                    targetDiv = e.target.parentElement
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                     createTask()
                     document.querySelector('.submitProject').remove()
@@ -104,17 +105,20 @@ function eventController(){
                         // console.log('test2')
                         // console.log(allProjects().getProjects())
                         document.querySelector('.projectNameInput').remove()
-                        let targetDiv = e.target.parentElement
+                        targetDiv = e.target.parentElement
                         submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                         createTask()
                         document.querySelector('.submitProject').remove()
                     }
                   // console.log(description)
-                  // console.log(todo[0])
+                  console.log(targetDiv)
                     createDescription(projectName, todo[0]).getDescriptionInput()
                     //document.querySelector('.descriptionInput').remove()
                     createDescription(projectName, todo[0]).getDisplayDescription()
-                   
+                    // createDate(targetDiv).getDateDiv()
+                    // createDate().getDateProjectWasCreated(projectName)
+                    // addDate(projectName).getCreateButton()
+                    // runCalenderButton()
                   
                     //   createTodoButton()        
                       // console.log(createNote().getNoteInput())
@@ -821,10 +825,6 @@ function createNewProjectContainer(){
       projectNameInput.classList.add('projectNameInput');
       newProjectContainer.appendChild(projectNameInput);
 
-      // const dateDiv = document.createElement('dateDiv')
-      // dateDiv.classList.add('dateDiv')
-      // newProjectContainer.appendChild(dateDiv)
-
       const todoDiv = document.createElement('div');
       todoDiv.classList.add('todoDiv');
       newProjectContainer.appendChild(todoDiv);
@@ -925,6 +925,7 @@ function createTask(currentProjectName, newProjectNameDiv){
         this.parentElement.parentElement.appendChild(todoDivContent)
         todoDivContent.appendChild(todoInput)
         createTodoDescription(todoInput)
+        createDate(targetDiv).getDateDiv()
     } 
     else{
     //  console.log('no')
@@ -1240,8 +1241,20 @@ function submitTodo () {
 
  }
 
+function createDate (targetDiv){
+  console.log(targetDiv)
+  function createDateDiv (){
+    const dateDiv = document.createElement('dateDiv')
+    dateDiv.classList.add('dateDiv')
+    const todoDivContents = targetDiv.querySelectorAll('.todoDivContent')
+    todoDivContents.forEach((todoDivContainer) => {
+    todoDivContainer.appendChild(dateDiv)
+    })    
+  }
+
  function dateProjectWasCreated(projectName){
 // console.log(projectName)
+
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
@@ -1254,8 +1267,35 @@ function submitTodo () {
       //    console.log(projects)
         }
       }
-      document.querySelector('.projectContainer').lastChild.querySelector('.dateDiv').appendChild(currentDate)
+      //document.querySelector('.projectContainer').lastChild.querySelector('.dateDiv').appendChild(currentDate)
  }
+
+ const getDateDiv = () => createDateDiv()
+ const getDateProjectWasCreated = () => dateProjectWasCreated()
+
+ return {
+  getDateDiv,
+  getDateProjectWasCreated
+ }
+}
+
+//  function dateProjectWasCreated(projectName){
+// // console.log(projectName)
+
+//       const currentDate = document.createElement('p')
+//       currentDate.classList.add('currentDate')
+//       let calenderValues;
+//       dateController(projectName)
+//       let projects = allProjects().getProjects()
+//       for (let i = 0; i < projects.length; i++) {
+//         if (projects[i]['projectName'] == projectName) {
+//        //   console.log(projects[i]['dateCreated'])
+//           currentDate.textContent = `Created ${projects[i]['dateCreated']}`
+//       //    console.log(projects)
+//         }
+//       }
+//       document.querySelector('.projectContainer').lastChild.querySelector('.dateDiv').appendChild(currentDate)
+//  }
 
  function addDate(targetDiv){
   
