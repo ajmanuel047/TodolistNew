@@ -411,10 +411,17 @@ const runSaveChanges = function(){
           //  createTask().getInputAndButton()
            todoInput.remove()           
            this.remove()
-           
-        }
+           console.log(currentProjectName)
+           console.log(currentTodo)
+           createDescription(currentProjectName, currentTodo).getDescriptionInput()
+           console.log(allProjects().getProjects())
+           //   //document.querySelector('.descriptionInput').remove()
+           createDescription(currentProjectName, currentTodo).getDisplayDescription()
+           console.log(allProjects().getProjects())
+           eventController().runEditDescription()
+          }
       }
-      })
+       })
 
       
     }
@@ -453,9 +460,10 @@ const runEditDescription = function () {
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function () {
-      console.log(this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-      let projectName = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
- //     console.log(this.parentElement.querySelector('.description'))
+      document.body.style.backgroundColor = 'orange'
+      let currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
+      let projectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+      console.log(this.parentElement.parentElement.parentElement.parentElement)
       editDescription()
       const currentDescription = this.parentElement.querySelector('.description')
       currentDescription.setAttribute('contenteditable', true)
@@ -463,7 +471,7 @@ const runEditDescription = function () {
       currentDescription.style.cursor = 'pointer'
 
       if(editButton.textContent == 'Save'){
-        console.log('check')
+        // console.log('check')
          editButton.textContent = 'Edit'
          currentDescription.setAttribute('contenteditable', false)
          currentDescription.classList.remove('editContent')
@@ -475,20 +483,26 @@ const runEditDescription = function () {
 
          // adjust the saveCompletedisplay because it not moving when the text
          // is longer
-         console.log(this.parentElement.parentElement)
+        //  console.log(this.parentElement.parentElement)
          this.parentElement.parentElement.querySelector('.descriptionContentDiv').appendChild(saveCompletedisplay)
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
         // console.log(currentDescription.textContent)
         // console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-         addDescriptionToProject(projectName, currentDescription.textContent)
-         console.log(allProjects().getProjects())
-        for(let i = 0; i < projects.length; i++){
-             if(projects[i]['projectName'] == projectName){
-                currentDescription.textContent = projects[i]['description']
-              for(let j = 0; j < projects[i]['todos'].length; j++){
-                  currentDescription.textContent= projects[i]['todos'][j]['description'] 
+         addDescriptionToProject(projectName, currentDescription.textContent, currentTodo)
+        //  console.log(allProjects().getProjects().length)
+        for(let i = 0; i < allProjects().getProjects().length; i++){
+             if(allProjects().getProjects()[i]['projectName'] == projectName){
+              // console.log(projectName)
+                // console.log(allProjects().getProjects()[i]['todos'])
+                currentDescription.textContent = allProjects().getProjects()[i]['description']
+              for(let j = 0; j < allProjects().getProjects()[i]['todos'].length; j++){
+                if(projects[i]['todos'][j]['title'] == currentTodo){
+                 console.log(allProjects().getProjects())
+                  currentDescription.textContent= allProjects().getProjects()[i]['todos'][j]['description'] 
+                }
+                  
               }
             }
          }         
