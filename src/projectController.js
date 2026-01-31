@@ -124,14 +124,19 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 
 }
 
-function dateController(currentProjectName, calenderValues){
-      //  console.log(calenderValues)
+function dateController(currentProjectName, calenderValues, todo){
+     console.log(todo)
       //  console.log(currentProjectName)
       //  console.log(projects[0]['Project Name'])
     for(let i = 0; i < projects.length; i++){
         if(projects[i]['projectName'] == currentProjectName){
-            projects[i]['dateCreated'] = formatDate().getDate()
-            projects[i]['dueDate'] = formatDate(calenderValues).dueDate()
+          for(let j = 0; j < projects[i]['todos'].length; j++){
+              if(projects[i]['todos'][j]['title'] == todo){
+                  projects[i]['todos'][j].dateCreated = formatDate().getDate()
+                  projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
+              }
+          }
+           
         }
     }
    //  console.log(projects)
@@ -146,7 +151,7 @@ function dateController(currentProjectName, calenderValues){
       for(let j = 0; j < projects[i]['todos'].length; j++){
         // console.log(projects[i]['todos'][j]['title'] == todo)
           if(projects[i]['todos'][j]['title'] == todo){
-            projects[i]['todos'][j].description = description
+             projects[i]['todos'][j].description = description
           }
          
         

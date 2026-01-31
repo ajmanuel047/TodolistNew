@@ -117,6 +117,7 @@ function eventController(){
                     createDescription(projectName, todo[0]).getDisplayDescription()
                     // createDate(targetDiv).getDateDiv()
                     createDate(targetDiv, projectName).getDateProjectWasCreated()
+                    addDate(projectName).getCreateButton()
                     // addDate(projectName).getCreateButton()
                     // runCalenderButton()
                   
@@ -421,19 +422,21 @@ const runSaveChanges = function(){
            console.log(allProjects().getProjects())
            //   //document.querySelector('.descriptionInput').remove()
            createDescription(currentProjectName, currentTodo).getDisplayDescription()
-           console.log(allProjects().getProjects())
+           
            eventController().runEditDescription()
            console.log(targetDiv)
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
-            console.log('workkkk')
+            // console.log('workkkk')
             if(!container.querySelector('.currentDate')){
               createDate(container, currentProjectName).getDateProjectWasCreated()
+           console.log(allProjects().getProjects())
+              //  addDate(projectName).getCreateButton()
             }
              
            })
           
-          console.log('you stopped here')
+          // console.log('you stopped here')
           // for some reason description input may or maynot remove
           // i need to know why
           }
@@ -1257,7 +1260,7 @@ function submitTodo () {
 function createDate (targetDiv, projectName){
   console.log(targetDiv)
   function createDateDiv (){
-    const dateDiv = document.createElement('dateDiv')
+    const dateDiv = document.createElement('div')
     dateDiv.classList.add('dateDiv')
     const todoDivContents = targetDiv.querySelectorAll('.todoDivContent')
     todoDivContents.forEach((todoDivContainer) => {
@@ -1271,7 +1274,12 @@ console.log(targetDiv)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
-      dateController(projectName)
+      let todo = undefined
+      const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
+      todoDivContent.forEach((container) => {
+        todo = container.querySelector('.todo').textContent
+      })
+      dateController(projectName, calenderValues, todo)
       let projects = allProjects().getProjects()
       for (let i = 0; i < projects.length; i++) {
         if (projects[i]['projectName'] == projectName) {
@@ -1322,8 +1330,8 @@ console.log(targetDiv)
     addButton.textContent = 'Add Due Date'
     addButton.classList.add('dueDateButton')
   
-    document.querySelector('.projectContainer').lastChild.querySelector('.currentDate').after(dueDateDiv)
-    document.querySelector('.projectContainer').lastChild.querySelector('.dueDateDiv').appendChild(addButton)
+   // document.querySelector('.projectContainer').lastChild.querySelector('.currentDate').after(dueDateDiv)
+  //  document.querySelector('.projectContainer').lastChild.querySelector('.dueDateDiv').appendChild(addButton)
     
   }
 
