@@ -425,11 +425,12 @@ const runSaveChanges = function(){
            
            eventController().runEditDescription()
            console.log(targetDiv)
+           console.log(currentTodo)
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
             // console.log('workkkk')
             if(!container.querySelector('.currentDate')){
-              createDate(container, currentProjectName).getDateProjectWasCreated()
+              createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
            console.log(allProjects().getProjects())
               //  addDate(projectName).getCreateButton()
             }
@@ -1257,7 +1258,7 @@ function submitTodo () {
 
  }
 
-function createDate (targetDiv, projectName){
+function createDate (targetDiv, projectName, todo){
   console.log(targetDiv)
   function createDateDiv (){
     const dateDiv = document.createElement('div')
@@ -1274,7 +1275,6 @@ console.log(targetDiv)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
-      let todo = undefined
       const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
       todoDivContent.forEach((container) => {
         todo = container.querySelector('.todo').textContent
@@ -1283,8 +1283,13 @@ console.log(targetDiv)
       let projects = allProjects().getProjects()
       for (let i = 0; i < projects.length; i++) {
         if (projects[i]['projectName'] == projectName) {
+          for(let j = 0; j < projects[i]['todos'].length; j++){
+              if(projects[i]['todos'][j]['title'] == todo){
+                currentDate.textContent = `Created ${projects[i]['todos'][j].dueDate}`
+              }
+          }
        //   console.log(projects[i]['dateCreated'])
-          currentDate.textContent = `Created ${projects[i]['dateCreated']}`
+          
       //    console.log(projects)
         }
       }
