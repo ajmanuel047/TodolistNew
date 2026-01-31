@@ -117,9 +117,9 @@ function eventController(){
                     createDescription(projectName, todo[0]).getDisplayDescription()
                     // createDate(targetDiv).getDateDiv()
                     createDate(targetDiv, projectName).getDateProjectWasCreated()
-                    addDate(projectName).getCreateButton()
+                    addDate(targetDiv).getCreateButton()
                     // addDate(projectName).getCreateButton()
-                    // runCalenderButton()
+                     runCalenderButton()
                   
                     //   createTodoButton()        
                       // console.log(createNote().getNoteInput())
@@ -431,7 +431,9 @@ const runSaveChanges = function(){
             // console.log('workkkk')
             if(!container.querySelector('.currentDate')){
               createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
-           console.log(allProjects().getProjects())
+              addDate(targetDiv).getCreateButton()
+              console.log(allProjects().getProjects())
+              runCalenderButton()
               //  addDate(projectName).getCreateButton()
             }
              
@@ -593,6 +595,7 @@ const runCalenderButton = function(projectName){
     // button.onclick = addDate().getDisplayCalender()
    
     button.onclick = function(e){
+      document.body.style.backgroundColor = 'orange'
       const targetDiv = e.target.parentElement
       console.log(targetDiv.parentElement.parentElement.querySelector('.newProjectName'))
       addDate(targetDiv).getDisplayCalender()
@@ -1334,9 +1337,15 @@ console.log(targetDiv)
     const addButton = document.createElement('button')
     addButton.textContent = 'Add Due Date'
     addButton.classList.add('dueDateButton')
+    console.log(targetDiv)
   
+    const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
+    todoDivContent.forEach((container) => {
+      container.appendChild(dueDateDiv)
+      dueDateDiv.appendChild(addButton)
+    })
    // document.querySelector('.projectContainer').lastChild.querySelector('.currentDate').after(dueDateDiv)
-  //  document.querySelector('.projectContainer').lastChild.querySelector('.dueDateDiv').appendChild(addButton)
+   // document.querySelector('.projectContainer').lastChild.querySelector('.dueDateDiv').appendChild(addButton)
     
   }
 
