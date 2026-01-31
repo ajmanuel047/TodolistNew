@@ -116,7 +116,7 @@ function eventController(){
                     //document.querySelector('.descriptionInput').remove()
                     createDescription(projectName, todo[0]).getDisplayDescription()
                     // createDate(targetDiv).getDateDiv()
-                    // createDate().getDateProjectWasCreated(projectName)
+                    createDate(targetDiv, projectName).getDateProjectWasCreated()
                     // addDate(projectName).getCreateButton()
                     // runCalenderButton()
                   
@@ -423,6 +423,19 @@ const runSaveChanges = function(){
            createDescription(currentProjectName, currentTodo).getDisplayDescription()
            console.log(allProjects().getProjects())
            eventController().runEditDescription()
+           console.log(targetDiv)
+           const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
+           todoDivContent.forEach((container) => {
+            console.log('workkkk')
+            if(!container.querySelector('.currentDate')){
+              createDate(container, currentProjectName).getDateProjectWasCreated()
+            }
+             
+           })
+          
+          console.log('you stopped here')
+          // for some reason description input may or maynot remove
+          // i need to know why
           }
       }
        })
@@ -1241,7 +1254,7 @@ function submitTodo () {
 
  }
 
-function createDate (targetDiv){
+function createDate (targetDiv, projectName){
   console.log(targetDiv)
   function createDateDiv (){
     const dateDiv = document.createElement('dateDiv')
@@ -1252,9 +1265,9 @@ function createDate (targetDiv){
     })    
   }
 
- function dateProjectWasCreated(projectName){
-// console.log(projectName)
-
+ function dateProjectWasCreated(){
+console.log(projectName)
+console.log(targetDiv)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
@@ -1267,7 +1280,7 @@ function createDate (targetDiv){
       //    console.log(projects)
         }
       }
-      //document.querySelector('.projectContainer').lastChild.querySelector('.dateDiv').appendChild(currentDate)
+      targetDiv.querySelector('.dateDiv').appendChild(currentDate)
  }
 
  const getDateDiv = () => createDateDiv()
