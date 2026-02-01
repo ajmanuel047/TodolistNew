@@ -817,13 +817,37 @@ function createTodoDescription(currentDiv){
 
       const descriptionInput = document.createElement('input')
       descriptionInput.classList.add('descriptionInput')
-      descriptionInput.placeholder = 'Describe Your Project'
+      descriptionInput.placeholder = 'Describe Your Task'
       descriptionDiv.appendChild(descriptionInput)
 
 
   //   }
   // }
 
+}
+
+function createTodoNote(currentDiv){
+      const todoDivContent = currentDiv.querySelectorAll('.todoDivContent')
+      const noteDiv = document.createElement('div')
+      noteDiv.classList.add('noteDiv')
+        
+      todoDivContent.forEach((container) => {
+        container.querySelector('.descriptionDiv').after(noteDiv)
+      })
+
+      const noteHeading = document.createElement('h5')
+      noteHeading.classList.add('noteHeading')
+      noteHeading.textContent = 'Note'
+      noteDiv.appendChild(noteHeading)
+
+      const noteContentDiv = document.createElement('div')
+      noteContentDiv.classList.add('noteContentDiv')
+      noteDiv.appendChild(noteContentDiv)
+
+      const noteInput = document.createElement('input')
+      noteInput.classList.add('noteInput')
+      noteInput.placeholder = 'Note On Task'
+      noteDiv.appendChild(noteInput)
 }
 
 let count = -1
@@ -962,6 +986,7 @@ function createTask(currentProjectName, newProjectNameDiv){
         this.parentElement.parentElement.appendChild(todoDivContent)
         todoDivContent.appendChild(todoInput)
         createTodoDescription(todoInput)
+        createTodoNote(targetDiv)
         createDate(targetDiv).getDateDiv()
     } 
     else{
