@@ -116,6 +116,9 @@ function eventController(){
                     //document.querySelector('.descriptionInput').remove()
                     createDescription(projectName, todo[0]).getDisplayDescription()
                     // createDate(targetDiv).getDateDiv()
+                    console.log(userInput().getNoteInput())
+                    createNote(projectName, note, todo[0]).getNoteInput()
+                    createNote(projectName, note, todo[0]).getDisplayNote()
                     createDate(targetDiv, projectName).getDateProjectWasCreated()
                     addDate(targetDiv).getCreateButton()
                     // addDate(projectName).getCreateButton()
@@ -1144,38 +1147,42 @@ function editNote(){
   document.body.style.backgroundColor = 'blue'
 }
 
-function createNote (projectName){ 
+function createNote (projectName, note, todo){ 
 
   function noteInput () {
-     const note = userInput().getNoteInput()
+    //  const note = userInput().getNoteInput()
     //  console.log(note)
-     addNoteToProject(projectName, note)
+     addNoteToProject(projectName, note, todo)
   }
 
   function displayNote (){
    // console.log(projects)
     let projects = allProjects().getProjects()
-  //   console.log(projects)
-    // console.log(projectName)
-    // console.log(document.querySelector('.descriptionInput'))
-//     if(document.querySelector('.descriptionInput')){
-// console.log('yes')
-//     }
+    let note = document.createElement('p')
+    note.classList.add('note')
+    let noteContentDiv = document.querySelectorAll('.noteContentDiv')
+  
+    let editNote = document.createElement('button')
+    editNote.classList.add('editNote')
+    editNote.textContent = 'Edit'
+
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == projectName){
-        // console.log(projects[i]['description'])
-        let note = document.createElement('p')
-        note.classList.add('note')
-        note.textContent = projects[i]['projectNote']
-        let notesHeading = document.querySelectorAll('.noteHeading')
-       
-        let editNote = document.createElement('button')
-        editNote.classList.add('editNote')
-        editNote.textContent = 'Edit'
-        
-        notesHeading.forEach((div) => {
+        for(let j = 0; j < projects[i]['todos'].length; j++){
+          console.log(projectName)
+          console.log(projects[i]['todos'][j]['title'])
+          console.log(todo)
+          if(projects[i]['todos'][j]['title'] == todo){
+            console.log(projects[i]['todos'][j]['title'])
+            console.log(todo)
+            console.log(projects[i]['todos'][j]['projectNote'])
+            note.textContent = projects[i]['todos'][j]['projectNote']
+            document.querySelector('.noteInput').remove()
+          }
+        }        
+        noteContentDiv.forEach((div) => {
           div.appendChild(note)
-          div.appendChild(editNote)
+          div.after(editNote)
         })
       }
     }

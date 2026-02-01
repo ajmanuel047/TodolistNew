@@ -4,7 +4,7 @@ function createProject(name){
     'projectName' : null,
     'todos' : [],
     // 'description' : null,
-    'projectNote' : null,
+    // 'projectNote' : null,
     // 'Todo list' : [],
     // 'Date Created' : '',
     // 'dueDate' : '',

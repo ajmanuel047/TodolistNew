@@ -168,11 +168,19 @@ projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
    }
  }
  
- function addNoteToProject (projectName, note) {
-  // console.log(note)
+ function addNoteToProject (projectName, note, todo) {
+   console.log(note)
+   console.log(todo)
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['projectName'] == projectName){
-        projects[i]['projectNote'] = note
+      for(let j = 0; j < projects[i]['todos'].length; j++){
+        // console.log(projects[i]['todos'][j]['title'] == todo)
+          if(projects[i]['todos'][j]['title'] == todo){
+             projects[i]['todos'][j].projectNote = note
+          }
+         
+        
+      }
      }
    }
  }
