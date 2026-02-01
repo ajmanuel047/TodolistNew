@@ -32,6 +32,8 @@ function formatDate (calenderValues) {
     // console.log(dueYear)
     // console.log(dueMonth)
     // console.log(dueDay)
+    // console.log(formattedDate1)
+
     const result = add(new Date(formattedDate1), {
           years: dueYear - currentYear,
           months: dueMonth - currentMonth,
@@ -41,7 +43,7 @@ function formatDate (calenderValues) {
           // minutes: 9,
           // seconds: 30,
         })
-
+    // console.log(result)
     const getDate = () => formattedDate1
     const dueDate = () => result.toDateString()
     
