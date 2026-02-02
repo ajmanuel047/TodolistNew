@@ -431,12 +431,12 @@ const runSaveChanges = function(){
           //  console.log(targetDiv)
            targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
             // let note = null
-            console.log(container.querySelector('.note'))
-            console.log(currentTodo)
-            console.log(container.querySelector('.todo'))
+            // console.log(container.querySelector('.note'))
+            // console.log(currentTodo)
+            // console.log(container.querySelector('.todo'))
             if(container.querySelector('.todo').textContent == currentTodo){
             //  let note = container.querySelector('.note')
-             console.log(note)
+            //  console.log(note)
              createNote(currentProjectName, note, currentTodo).getNoteInput()
              createNote(currentProjectName, note, currentTodo).getDisplayNote()
             }
@@ -445,6 +445,9 @@ const runSaveChanges = function(){
            })
           
            eventController().runEditDescription()
+           console.log(currentProjectName)
+           eventController().runEditNote(currentProjectName)
+          //  console.log(allProjects().getProjects())
           //  console.log(targetDiv)
           //  console.log(currentTodo)
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
@@ -590,18 +593,22 @@ const runEditNote = function (projectName) {
            saveCompletedisplay.remove()
          }, 1000)
        // console.log(currentNote.textContent)
-       console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-       let currentTodo = this.parentElement.parentElement.parentElement.querySelector('.todo').textContent
+       //console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+       let currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
+        console.log(currentTodo)
        addNoteToProject(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent, currentTodo)
-         console.log(allProjects().getProjects())
+         
         for(let i = 0; i < allProjects().getProjects().length; i++){
+          // console.log(allProjects().getProjects()[i]['projectName'])
+          // console.log(projectName)
              if(allProjects().getProjects()[i]['projectName'] == projectName){
-              // console.log(projectName)
+                // console.log(projectName)
+                // console.log(allProjects().getProjects()[i]['projectName'])
                 // console.log(allProjects().getProjects()[i]['todos'])
-            //    currentNote.textContent = allProjects().getProjects()[i]['projectNote']
+                currentNote.textContent = allProjects().getProjects()[i]['projectNote']
               for(let j = 0; j < allProjects().getProjects()[i]['todos'].length; j++){
                 if(projects[i]['todos'][j]['title'] == currentTodo){
-                 console.log(allProjects().getProjects())
+                  // console.log(allProjects().getProjects())
                   currentNote.textContent= allProjects().getProjects()[i]['todos'][j]['projectNote'] 
                 }
                   
@@ -609,7 +616,7 @@ const runEditNote = function (projectName) {
             }
          }         
       }
-
+console.log(allProjects().getProjects())
       currentNote.addEventListener('focus', function(e){
         document.body.style.backgroundColor = 'skyblue'
         editButton.textContent = 'Save'
