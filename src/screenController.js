@@ -551,7 +551,7 @@ const runEditNote = function (projectName) {
     // console.log(this)
     editButton.onclick = function () {
  //     console.log(this.parentElement.querySelector('.description'))
-      editNote()
+    //  editNote()
       const currentNote = this.parentElement.querySelector('.note')
       currentNote.setAttribute('contenteditable', true)
       currentNote.classList.add('editContent')
@@ -571,14 +571,24 @@ const runEditNote = function (projectName) {
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-        console.log(currentNote.textContent)
-        console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-         addNoteToProject(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent)
+       // console.log(currentNote.textContent)
+       console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+       let currentTodo = this.parentElement.parentElement.parentElement.querySelector('.todo').textContent
+       addNoteToProject(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent, currentTodo)
          console.log(allProjects().getProjects())
-        for(let i = 0; i < projects.length; i++){
-             if(projects[i]['projectName'] == projectName){
-                currentNote.textContent = projects[i]['projectNote']
-             }
+        for(let i = 0; i < allProjects().getProjects().length; i++){
+             if(allProjects().getProjects()[i]['projectName'] == projectName){
+              // console.log(projectName)
+                // console.log(allProjects().getProjects()[i]['todos'])
+            //    currentNote.textContent = allProjects().getProjects()[i]['projectNote']
+              for(let j = 0; j < allProjects().getProjects()[i]['todos'].length; j++){
+                if(projects[i]['todos'][j]['title'] == currentTodo){
+                 console.log(allProjects().getProjects())
+                  currentNote.textContent= allProjects().getProjects()[i]['todos'][j]['projectNote'] 
+                }
+                  
+              }
+            }
          }         
       }
 
@@ -1143,9 +1153,9 @@ function editDescription (){
   // document.body.style.backgroundColor = 'orange'
 }
 
-function editNote(){
-  document.body.style.backgroundColor = 'blue'
-}
+// function editNote(){
+//   document.body.style.backgroundColor = 'blue'
+// }
 
 function createNote (projectName, note, todo){ 
 
