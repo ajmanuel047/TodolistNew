@@ -169,8 +169,8 @@ projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
  }
  
  function addNoteToProject (projectName, note, todo) {
-   console.log(note)
-   console.log(todo)
+  //  console.log(note)
+  //  console.log(todo)
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['projectName'] == projectName){
       for(let j = 0; j < projects[i]['todos'].length; j++){

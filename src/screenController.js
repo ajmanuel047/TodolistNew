@@ -9,6 +9,7 @@ import { addNoteToProject } from "./projectController";
 import { formatDate } from "./dateformatter"
 import { formatRFC7231 } from "date-fns"
 import { dateController } from "./projectController.js"
+import { ta } from "date-fns/locale";
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
@@ -116,7 +117,7 @@ function eventController(){
                     //document.querySelector('.descriptionInput').remove()
                     createDescription(projectName, todo[0]).getDisplayDescription()
                     // createDate(targetDiv).getDateDiv()
-                    console.log(userInput().getNoteInput())
+                 //   console.log(userInput().getNoteInput())
                     createNote(projectName, note, todo[0]).getNoteInput()
                     createNote(projectName, note, todo[0]).getDisplayNote()
                     createDate(targetDiv, projectName).getDateProjectWasCreated()
@@ -394,7 +395,8 @@ const runSaveChanges = function(){
         if(e.target.className == 'saveChanges'){
      //      console.log(typeof this.parentElement)
            let todoInput = this.parentElement.querySelector('.todoInput')
-          //  console.log(todoInput.value)
+           let note = userInput().getNoteInput()
+           //  console.log(todoInput.value)
           //  console.log(userInput().getTaskNameInput())
             let arr = []
             const taskInputs = document.querySelectorAll('.todoInput')  
@@ -408,10 +410,11 @@ const runSaveChanges = function(){
             taskInputs.forEach((inputs) => {
               arr.push(inputs.value)
             })  
-
-         
+          
+          
            const currentTodo = arr[arr.length - 1]
            const currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
+          //  const note = this.parentElement.querySelector('.note').textContent
            createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
           //  console.log(this.parentElement.querySelector('.todoDiv').lastChild)
           //  console.log(allProjects().getProjects())
@@ -419,23 +422,38 @@ const runSaveChanges = function(){
           //  createTask().getInputAndButton()
            todoInput.remove()           
            this.remove()
-           console.log(currentProjectName)
-           console.log(currentTodo)
+          //  console.log(currentProjectName)
+          //  console.log(currentTodo)
            createDescription(currentProjectName, currentTodo).getDescriptionInput()
-           console.log(allProjects().getProjects())
+          //  console.log(allProjects().getProjects())
            //   //document.querySelector('.descriptionInput').remove()
            createDescription(currentProjectName, currentTodo).getDisplayDescription()
-           
+          //  console.log(targetDiv)
+           targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
+            // let note = null
+            console.log(container.querySelector('.note'))
+            console.log(currentTodo)
+            console.log(container.querySelector('.todo'))
+            if(container.querySelector('.todo').textContent == currentTodo){
+            //  let note = container.querySelector('.note')
+             console.log(note)
+             createNote(currentProjectName, note, currentTodo).getNoteInput()
+             createNote(currentProjectName, note, currentTodo).getDisplayNote()
+            }
+            
+            // console.log(container)
+           })
+          
            eventController().runEditDescription()
-           console.log(targetDiv)
-           console.log(currentTodo)
+          //  console.log(targetDiv)
+          //  console.log(currentTodo)
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
             // console.log('workkkk')
             if(!container.querySelector('.currentDate')){
               createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
               addDate(targetDiv).getCreateButton()
-              console.log(allProjects().getProjects())
+              // console.log(allProjects().getProjects())
               runCalenderButton()
               //  addDate(projectName).getCreateButton()
             }
@@ -1175,17 +1193,11 @@ function createNote (projectName, note, todo){
     let editNote = document.createElement('button')
     editNote.classList.add('editNote')
     editNote.textContent = 'Edit'
-
+ 
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == projectName){
         for(let j = 0; j < projects[i]['todos'].length; j++){
-          console.log(projectName)
-          console.log(projects[i]['todos'][j]['title'])
-          console.log(todo)
           if(projects[i]['todos'][j]['title'] == todo){
-            console.log(projects[i]['todos'][j]['title'])
-            console.log(todo)
-            console.log(projects[i]['todos'][j]['projectNote'])
             note.textContent = projects[i]['todos'][j]['projectNote']
             document.querySelector('.noteInput').remove()
           }
