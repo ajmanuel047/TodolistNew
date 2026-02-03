@@ -115,11 +115,11 @@ function eventController(){
                   // console.log(targetDiv)
                     createDescription(projectName, todo[0]).getDescriptionInput()
                     //document.querySelector('.descriptionInput').remove()
-                    createDescription(projectName, todo[0]).getDisplayDescription()
+                    createDescription(projectName, todo[0], targetDiv).getDisplayDescription()
                     // createDate(targetDiv).getDateDiv()
                  //   console.log(userInput().getNoteInput())
                     createNote(projectName, note, todo[0]).getNoteInput()
-                    createNote(projectName, note, todo[0]).getDisplayNote()
+                    createNote(projectName, note, todo[0], targetDiv).getDisplayNote()
                     createDate(targetDiv, projectName).getDateProjectWasCreated()
                     addDate(targetDiv).getCreateButton()
                     // addDate(projectName).getCreateButton()
@@ -422,12 +422,12 @@ const runSaveChanges = function(){
           //  createTask().getInputAndButton()
            todoInput.remove()           
            this.remove()
-          //  console.log(currentProjectName)
-          //  console.log(currentTodo)
+           console.log(currentProjectName)
+           console.log(currentTodo)
            createDescription(currentProjectName, currentTodo).getDescriptionInput()
-          //  console.log(allProjects().getProjects())
+           console.log(allProjects().getProjects())
            //   //document.querySelector('.descriptionInput').remove()
-           createDescription(currentProjectName, currentTodo).getDisplayDescription()
+           createDescription(currentProjectName, currentTodo, targetDiv).getDisplayDescription()
           //  console.log(targetDiv)
            targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
             // let note = null
@@ -438,14 +438,14 @@ const runSaveChanges = function(){
             //  let note = container.querySelector('.note')
             //  console.log(note)
              createNote(currentProjectName, note, currentTodo).getNoteInput()
-             createNote(currentProjectName, note, currentTodo).getDisplayNote()
+             createNote(currentProjectName, note, currentTodo, targetDiv).getDisplayNote()
             }
             
             // console.log(container)
            })
           
            eventController().runEditDescription()
-           console.log(currentProjectName)
+          //  console.log(currentProjectName)
            eventController().runEditNote(currentProjectName)
           //  console.log(allProjects().getProjects())
           //  console.log(targetDiv)
@@ -1125,7 +1125,7 @@ function newProject(projectName, currentProjectName){
 }
 
 
-function createDescription (projectName, todo){ 
+function createDescription (projectName, todo, targetDiv){ 
   function descriptionInput () {
     // console.log(document.querySelector('.descriptionInput'))
      const description = userInput().getProjectDescription()
@@ -1143,12 +1143,14 @@ function createDescription (projectName, todo){
     let projects = allProjects().getProjects()
     let description = document.createElement('p')
     description.classList.add('description')
-    let descriptionContentDiv = document.querySelectorAll('.descriptionContentDiv')
-  
+    let descriptionContentDiv = targetDiv.querySelectorAll('.descriptionContentDiv')
+    console.log(this)
+    console.log(targetDiv)
     let editDescription = document.createElement('button')
     editDescription.classList.add('editDescription')
     editDescription.textContent = 'Edit'
 
+    // console.log(descriptionContentDiv)
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == projectName){
         for(let j = 0; j < projects[i]['todos'].length; j++){
@@ -1182,7 +1184,7 @@ function editDescription (){
 //   document.body.style.backgroundColor = 'blue'
 // }
 
-function createNote (projectName, note, todo){ 
+function createNote (projectName, note, todo, targetDiv){ 
 
   function noteInput () {
     //  const note = userInput().getNoteInput()
@@ -1195,7 +1197,7 @@ function createNote (projectName, note, todo){
     let projects = allProjects().getProjects()
     let note = document.createElement('p')
     note.classList.add('note')
-    let noteContentDiv = document.querySelectorAll('.noteContentDiv')
+    let noteContentDiv = targetDiv.querySelectorAll('.noteContentDiv')
   
     let editNote = document.createElement('button')
     editNote.classList.add('editNote')

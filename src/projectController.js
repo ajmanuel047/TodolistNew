@@ -147,7 +147,7 @@ projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
            
         }
     }
-    console.log(projects)
+    // console.log(projects)
     
 }
 
