@@ -868,7 +868,7 @@ function createTodoDescription(currentDiv){
   // for(let i = 0; i < projects.length; i++){
   //   if(projects[i]['projectName'] == currentProjectName.textContent){
   //     console.log(currentProjectName.textContent)
-  console.log(currentDiv)
+  // console.log(currentDiv)
       // let currentDiv = targetDiv.querySelector('.todoDivContent')
       const descriptionDiv = document.createElement('div')
       descriptionDiv.classList.add('descriptionDiv')
@@ -901,11 +901,15 @@ function createTodoDescription(currentDiv){
 }
 
 function createTodoNote(currentDiv){
+      console.log(currentDiv)
       const todoDivContent = currentDiv.querySelectorAll('.todoDivContent')
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
         
+       console.log(todoDivContent)
       todoDivContent.forEach((container) => {
+          console.log('yes')
+          console.log(container)
         container.querySelector('.descriptionDiv').after(noteDiv)
       })
 
@@ -1080,7 +1084,7 @@ function createTask(currentProjectName, newProjectNameDiv){
 
 function displayTodo (targetDiv){  
   const projects = allProjects().getProjects()
-  console.log(targetDiv)
+  // console.log(targetDiv)
 //  console.log(projects)
   for(let i = 0; i < projects.length; i++){   
   // console.log(projects[i]['projectName'].toLowerCase())      
@@ -1419,9 +1423,9 @@ function submitTodo () {
 
  function addMoreInfo (currentDiv) {
   console.log(this.parentElement)
-  document.body.style.backgroundColor = 'orange'
-  
+  document.body.style.backgroundColor = 'orange'  
   createTodoDescription(this.parentElement)
+  createTodoNote(this.parentElement.parentElement)
   this.parentElement.querySelector('.addMoreInfo').remove()
  }
 
