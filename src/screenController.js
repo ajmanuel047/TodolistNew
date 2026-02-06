@@ -1426,6 +1426,12 @@ function submitTodo () {
   document.body.style.backgroundColor = 'orange'  
   createTodoDescription(this.parentElement)
   createTodoNote(this.parentElement.parentElement)
+
+  const saveButton = document.createElement('button');
+  saveButton.textContent = 'Save Changes'  
+  saveButton.classList.add('saveChanges')          
+  this.parentElement.appendChild(saveButton)
+
   this.parentElement.querySelector('.addMoreInfo').remove()
  }
 
