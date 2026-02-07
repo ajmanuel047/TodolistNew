@@ -413,7 +413,7 @@ const runSaveChanges = function(){
           
            let currentProjectName = null
            const currentTodo = arr[arr.length - 1]
-           console.log(document.querySelector('.todoInput'))
+          //  console.log(document.querySelector('.todoInput'))
            if(document.querySelector('.todoInput')){
               currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
               createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
@@ -425,7 +425,7 @@ const runSaveChanges = function(){
             }else{
             currentProjectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
            }
-           console.log(currentProjectName)
+          //  console.log(currentProjectName)
            
           //  const note = this.parentElement.querySelector('.note').textContent
           //  createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
@@ -438,7 +438,7 @@ const runSaveChanges = function(){
           //  console.log(currentProjectName)
           //  console.log(currentTodo)
            createDescription(currentProjectName, currentTodo).getDescriptionInput()
-           console.log(allProjects().getProjects())
+          //  console.log(allProjects().getProjects())
            //   //document.querySelector('.descriptionInput').remove()
            createDescription(currentProjectName, currentTodo, targetDiv).getDisplayDescription()
           //  console.log(targetDiv)
@@ -450,18 +450,18 @@ const runSaveChanges = function(){
            }else {
             targetDiv = targetDiv.parentElement.parentElement
            }
-            console.log(targetDiv)
-           console.log(targetDiv.parentElement.parentElement)
-           console.log(e.target.parentElement.className)
+          //   console.log(targetDiv)
+          //  console.log(targetDiv.parentElement.parentElement)
+          //  console.log(e.target.parentElement.className)
            this.remove()
            targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
             // let note = null
             // console.log(container.querySelector('.note'))
-            console.log(currentTodo)
+            // console.log(currentTodo)
             // console.log(container.querySelector('.todo'))
             if(container.querySelector('.todo').textContent == currentTodo){
             //  let note = container.querySelector('.note')
-             console.log(note)
+            //  console.log(note)
              createNote(currentProjectName, note, currentTodo).getNoteInput()
              createNote(currentProjectName, note, currentTodo, targetDiv).getDisplayNote()
             }
@@ -476,17 +476,17 @@ const runSaveChanges = function(){
           //  console.log(targetDiv)
           //  console.log(currentTodo)
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
-          //  todoDivContent.forEach((container) => {
-          //   // console.log('workkkk')
-          //   if(!container.querySelector('.currentDate')){
-          //     createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
-          //     addDate(targetDiv).getCreateButton()
-          //     // console.log(allProjects().getProjects())
-          //     runCalenderButton()
-          //     //  addDate(projectName).getCreateButton()
-          //   }
+           todoDivContent.forEach((container) => {
+            // console.log('workkkk')
+            if(!container.querySelector('.currentDate')){
+              createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
+              addDate(targetDiv).getCreateButton()
+              // console.log(allProjects().getProjects())
+              runCalenderButton()
+              //  addDate(projectName).getCreateButton()
+            }
              
-          //  })
+           })
           
           // console.log('you stopped here')
           // for some reason description input may or maynot remove
@@ -926,15 +926,15 @@ function createTodoDescription(currentDiv){
 }
 
 function createTodoNote(currentDiv){
-      console.log(currentDiv)
+      // console.log(currentDiv)
       const todoDivContent = currentDiv.querySelectorAll('.todoDivContent')
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
         
-       console.log(todoDivContent)
+      //  console.log(todoDivContent)
       todoDivContent.forEach((container) => {
-          console.log('yes')
-          console.log(container)
+          // console.log('yes')
+          // console.log(container)
         container.querySelector('.descriptionDiv').after(noteDiv)
       })
 
@@ -1113,7 +1113,7 @@ function displayTodo (targetDiv){
 //  console.log(projects)
   for(let i = 0; i < projects.length; i++){   
   // console.log(projects[i]['projectName'].toLowerCase())      
-  console.log(targetDiv)      
+  // console.log(targetDiv)      
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
     //  console.log(projects[i]['projectName'])
       // console.log(targetDiv.querySelector('.newProjectName').textContent)
@@ -1368,7 +1368,7 @@ function submitTodo () {
       if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
         targetDiv = projectName.parentElement.parentElement
         // targetDiv.querySelector('.todoDiv').appendChild(todoDivContent)
-        console.log(targetDiv)
+        // console.log(targetDiv)
       }
     })
   //  console.log(targetDiv.querySelector('.todoDiv'))
@@ -1452,6 +1452,7 @@ function submitTodo () {
   createTodoDescription(this.parentElement)
   createTodoNote(this.parentElement.parentElement)
 
+  createDate(this.parentElement.parentElement).getDateDiv()
   const saveButton = document.createElement('button');
   saveButton.textContent = 'Save Changes'  
   saveButton.classList.add('saveChanges')          
@@ -1461,7 +1462,7 @@ function submitTodo () {
  }
 
 function createDate (targetDiv, projectName, todo){
-  // console.log(targetDiv)
+  console.log(targetDiv)
   function createDateDiv (){
     const dateDiv = document.createElement('div')
     dateDiv.classList.add('dateDiv')
@@ -1473,7 +1474,7 @@ function createDate (targetDiv, projectName, todo){
 
  function dateProjectWasCreated(){
 // console.log(projectName)
-// console.log(targetDiv)
+console.log(targetDiv)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
@@ -1492,7 +1493,7 @@ function createDate (targetDiv, projectName, todo){
           }
        //   console.log(projects[i]['dateCreated'])
           
-      //    console.log(projects)
+         console.log(projects)
         }
       }
       targetDiv.querySelector('.dateDiv').appendChild(currentDate)
