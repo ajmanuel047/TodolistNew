@@ -383,14 +383,14 @@ const runTodoEditButton = function(){
 }
 
 const runSaveChanges = function(){
-
+  // document.body.style.backgroundColor = 'orange'
     if(document.querySelector('.saveChanges')){
       const saveChanges = document.querySelectorAll('.saveChanges')
       const saveChangesButtons = document.querySelectorAll('.saveChanges')
       
       saveChangesButtons.forEach((button) => {
         button.onclick = function(e){
-        const targetDiv = e.target.parentElement
+        let targetDiv = e.target.parentElement
         document.body.style.backgroundColor = 'skyblue'
         if(e.target.className == 'saveChanges'){
      //      console.log(typeof this.parentElement)
@@ -411,32 +411,57 @@ const runSaveChanges = function(){
               arr.push(inputs.value)
             })  
           
-          
+           let currentProjectName = null
            const currentTodo = arr[arr.length - 1]
-           const currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
-          //  const note = this.parentElement.querySelector('.note').textContent
-           createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
-          //  console.log(this.parentElement.querySelector('.todoDiv').lastChild)
-          //  console.log(allProjects().getProjects())
-           createTask(currentProjectName).displayTodo(targetDiv)
-          //  createTask().getInputAndButton()
-           todoInput.remove()           
-           this.remove()
+           console.log(document.querySelector('.todoInput'))
+           if(document.querySelector('.todoInput')){
+              currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
+              createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
+              //  console.log(this.parentElement.querySelector('.todoDiv').lastChild)
+              //  console.log(allProjects().getProjects())
+              createTask(currentProjectName).displayTodo(targetDiv)
+              //  createTask().getInputAndButton()
+              todoInput.remove()    
+            }else{
+            currentProjectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+           }
            console.log(currentProjectName)
-           console.log(currentTodo)
+           
+          //  const note = this.parentElement.querySelector('.note').textContent
+          //  createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
+          // //  console.log(this.parentElement.querySelector('.todoDiv').lastChild)
+          // //  console.log(allProjects().getProjects())
+          //  createTask(currentProjectName).displayTodo(targetDiv)
+          // //  createTask().getInputAndButton()
+          //  todoInput.remove()           
+           
+          //  console.log(currentProjectName)
+          //  console.log(currentTodo)
            createDescription(currentProjectName, currentTodo).getDescriptionInput()
            console.log(allProjects().getProjects())
            //   //document.querySelector('.descriptionInput').remove()
            createDescription(currentProjectName, currentTodo, targetDiv).getDisplayDescription()
           //  console.log(targetDiv)
+          //  console.log(targetDiv.parentElement.parentElement)
+          //  console.log(e.target.parentElement.className)
+
+           if(e.target.parentElement.className == 'newProjectContainer'){
+            targetDiv = e.target.parentElement
+           }else {
+            targetDiv = targetDiv.parentElement.parentElement
+           }
+            console.log(targetDiv)
+           console.log(targetDiv.parentElement.parentElement)
+           console.log(e.target.parentElement.className)
+           this.remove()
            targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
             // let note = null
             // console.log(container.querySelector('.note'))
-            // console.log(currentTodo)
+            console.log(currentTodo)
             // console.log(container.querySelector('.todo'))
             if(container.querySelector('.todo').textContent == currentTodo){
             //  let note = container.querySelector('.note')
-            //  console.log(note)
+             console.log(note)
              createNote(currentProjectName, note, currentTodo).getNoteInput()
              createNote(currentProjectName, note, currentTodo, targetDiv).getDisplayNote()
             }
@@ -451,17 +476,17 @@ const runSaveChanges = function(){
           //  console.log(targetDiv)
           //  console.log(currentTodo)
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
-           todoDivContent.forEach((container) => {
-            // console.log('workkkk')
-            if(!container.querySelector('.currentDate')){
-              createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
-              addDate(targetDiv).getCreateButton()
-              // console.log(allProjects().getProjects())
-              runCalenderButton()
-              //  addDate(projectName).getCreateButton()
-            }
+          //  todoDivContent.forEach((container) => {
+          //   // console.log('workkkk')
+          //   if(!container.querySelector('.currentDate')){
+          //     createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
+          //     addDate(targetDiv).getCreateButton()
+          //     // console.log(allProjects().getProjects())
+          //     runCalenderButton()
+          //     //  addDate(projectName).getCreateButton()
+          //   }
              
-           })
+          //  })
           
           // console.log('you stopped here')
           // for some reason description input may or maynot remove
@@ -1088,7 +1113,7 @@ function displayTodo (targetDiv){
 //  console.log(projects)
   for(let i = 0; i < projects.length; i++){   
   // console.log(projects[i]['projectName'].toLowerCase())      
-  // console.log(targetDiv.querySelector('.newProjectName'))      
+  console.log(targetDiv)      
     if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
     //  console.log(projects[i]['projectName'])
       // console.log(targetDiv.querySelector('.newProjectName').textContent)
@@ -1423,7 +1448,7 @@ function submitTodo () {
 
  function addMoreInfo (currentDiv) {
   console.log(this.parentElement)
-  document.body.style.backgroundColor = 'orange'  
+  // document.body.style.backgroundColor = 'orange'  
   createTodoDescription(this.parentElement)
   createTodoNote(this.parentElement.parentElement)
 
@@ -1431,7 +1456,7 @@ function submitTodo () {
   saveButton.textContent = 'Save Changes'  
   saveButton.classList.add('saveChanges')          
   this.parentElement.appendChild(saveButton)
-
+  eventController().runSaveChanges()
   this.parentElement.querySelector('.addMoreInfo').remove()
  }
 
