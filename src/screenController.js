@@ -1355,94 +1355,100 @@ function submitTodo () {
   if(document.querySelector('.headerTodoInput').value && document.querySelector('.selectProject').value){
   //  document.body.style.backgroundColor = 'brown'
    // console.log(userInput().getHeaderTodoInput())
+   let currentProjects = allProjects().getProjects()
+  //  let projectsArray = currentProjects.map((arr) => {
+  //   return arr.projectName
+  //  })
+  //  console.log(projectsArray)
+  //  if(!projectsArray.includes(document.querySelector('.headerTodoInput').value)){
+  //   console.log('run')
+  //  }else{
+  //   console.log('don'/'t run')
+  //  }
     let selectedProject = document.querySelector('.selectProject').value
     let targetDiv;
     let projectNames = document.querySelectorAll('.newProjectName')
     // let todoDivContent = document.createElement('div')
     // todoDivContent.classList.add('todoDivContent')
     let todo = [userInput().getHeaderTodoInput()]
-    projectNames.forEach((projectName) => {
-  //    console.log(selectedProject)
-  //    console.log(projectName.textContent)
-      if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
-        targetDiv = projectName.parentElement.parentElement
-        // targetDiv.querySelector('.todoDiv').appendChild(todoDivContent)
-        // console.log(targetDiv)
+    let arr = []
+    for(let i = 0; i < currentProjects.length; i++){
+      if(currentProjects[i]['projectName'] == selectedProject){
+        console.log(currentProjects[i]['projectName'])
+        console.log(selectedProject)
+         for(let j = 0; j < currentProjects[i]['todos'].length; j++){
+          arr.push(currentProjects[i]['todos'][j]['title'])
+         }
       }
-    })
-  //  console.log(targetDiv.querySelector('.todoDiv'))
+      console.log('adding todo to a project after adding todo from header to same project creates an error')
+    }
 
-      createTodo(selectedProject, todo).createObject()
-      // createTask().getInputAndButton()
-      // console.log(targetDiv.querySelector('.todoInput'))
-      let projects = allProjects().getProjects()
-      // console.log(selectedProject)
-      for(let i = 0; i < projects.length; i++){
-        if(projects[i]['projectName'] == selectedProject){
-        for(let j = 0; j < projects[i]['todos'].length; j++){
-            if(projects[i]['todos'][j]['title'] == todo){
-              // console.log('yes')
-              // console.log(todo)
-              let currentTodo = document.createElement('h4')
-              currentTodo.classList.add('todo')
-              currentTodo.textContent = projects[i]['todos'][j]['title']
+      if(!arr.includes(userInput().getHeaderTodoInput())){
+          projectNames.forEach((projectName) => {
+          if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
+              targetDiv = projectName.parentElement.parentElement
+          }
+        })
 
-              // const editAndInfoDiv = document.createElement('div')
-              // editAndInfoDiv.classList.add('editAndInfoDiv')
+        createTodo(selectedProject, todo).createObject()
+        let projects = allProjects().getProjects()
+        for(let i = 0; i < projects.length; i++){
+          if(projects[i]['projectName'] == selectedProject){
+          for(let j = 0; j < projects[i]['todos'].length; j++){
+              if(projects[i]['todos'][j]['title'] == todo){
+                let currentTodo = document.createElement('h4')
+                currentTodo.classList.add('todo')
+                currentTodo.textContent = projects[i]['todos'][j]['title']
 
-              const editTodoButton = document.createElement('button')
-              editTodoButton.textContent = 'Edit'
-              editTodoButton.classList.add('editTodoButton')
+                const editTodoButton = document.createElement('button')
+                editTodoButton.textContent = 'Edit'
+                editTodoButton.classList.add('editTodoButton')
 
-              const moreInfoButton = document.createElement('button')
-              moreInfoButton.classList.add('addMoreInfo')
-              moreInfoButton.textContent = 'Add More Info'
+                const moreInfoButton = document.createElement('button')
+                moreInfoButton.classList.add('addMoreInfo')
+                moreInfoButton.textContent = 'Add More Info'
 
-              const todoDivContent = document.createElement('div')
-              todoDivContent.classList.add('todoDivContent')
-              targetDiv.querySelector('.todoDiv').appendChild(todoDivContent)
-              todoDivContent.appendChild(currentTodo)
-              todoDivContent.appendChild(editTodoButton)
-              todoDivContent.appendChild(moreInfoButton)
-              // editAndInfoDiv.appendChild(moreInfoButton)
-              // currentDate.textContent = `Created ${projects[i]['todos'][j].dateCreated}`
-              eventController().runTodoEditButton()
-              eventController().runAddMoreInfoButton(targetDiv)
-            }
+                const todoDivContent = document.createElement('div')
+                todoDivContent.classList.add('todoDivContent')
+                targetDiv.querySelector('.todoDiv').appendChild(todoDivContent)
+                todoDivContent.appendChild(currentTodo)
+                todoDivContent.appendChild(editTodoButton)
+                todoDivContent.appendChild(moreInfoButton)
+
+                eventController().runTodoEditButton()
+                eventController().runAddMoreInfoButton(targetDiv)
+              }
+          }
+          }
         }
-        }
+        document.querySelector('.headerTodoInput').value = ''
+    } 
+    else if(!document.querySelector('.selectProject').value){   
+    if(!document.querySelector('.selectProjectErrorMessage')){
+      const selectProjectErrorMessage = document.createElement('p')
+      selectProjectErrorMessage.textContent = 'Please Select And/Or Create A Project' 
+      selectProjectErrorMessage.classList.add('selectProjectErrorMessage')
+      document.querySelector('.selectProject').after(selectProjectErrorMessage)
+      document.querySelector('.selectProjectErrorMessage').style.marginTop = '-14px'  
+        setTimeout(() => {
+        document.querySelector('.selectProjectErrorMessage').remove()
+        }, 3000)  
       }
-      // createTask().displayTodo(targetDiv)
-    //  console.log(targetDiv)
-      document.querySelector('.headerTodoInput').value = ''
-    // createTask()
-    // create error messages
-    // ensure without project already existing this should not work
-    // and an error message should be displayed
-  } 
-  else if(!document.querySelector('.selectProject').value){   
-  if(!document.querySelector('.selectProjectErrorMessage')){
-     const selectProjectErrorMessage = document.createElement('p')
-     selectProjectErrorMessage.textContent = 'Please Select And/Or Create A Project' 
-     selectProjectErrorMessage.classList.add('selectProjectErrorMessage')
-     document.querySelector('.selectProject').after(selectProjectErrorMessage)
-     document.querySelector('.selectProjectErrorMessage').style.marginTop = '-14px'  
-      setTimeout(() => {
-       document.querySelector('.selectProjectErrorMessage').remove()
-       }, 3000)  
-     }
-   }
-  else if(!document.querySelector('.headerTodoInput').value){
-      if(!document.querySelector('.errorMessage')){
-        console.log('message')   
-      document.querySelector('.headerTodoInput').after(errorMessage())
-      document.querySelector('.errorMessage').style.marginTop = '7px'
-      setTimeout(() => {
-      document.querySelector('.errorMessage').remove()
-      }, 2000)  
+    }
+    else if(!document.querySelector('.headerTodoInput').value){
+          if(!document.querySelector('.errorMessage')){
+            console.log('message')   
+          document.querySelector('.headerTodoInput').after(errorMessage())
+          document.querySelector('.errorMessage').style.marginTop = '7px'
+          setTimeout(() => {
+          document.querySelector('.errorMessage').remove()
+          }, 2000)  
+    }
+      }
+      else{
+         console.log('dont run')
+      }
   }
-  }
-
  }
 
  function addMoreInfo (currentDiv) {
@@ -1461,7 +1467,7 @@ function submitTodo () {
  }
 
 function createDate (targetDiv, projectName, todo){
-  console.log(targetDiv)
+  // console.log(targetDiv)
   function createDateDiv (){
     const dateDiv = document.createElement('div')
     dateDiv.classList.add('dateDiv')
@@ -1473,7 +1479,7 @@ function createDate (targetDiv, projectName, todo){
 
  function dateProjectWasCreated(){
 // console.log(projectName)
-console.log(targetDiv)
+// console.log(targetDiv)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
@@ -1492,8 +1498,8 @@ console.log(targetDiv)
           }
        //   console.log(projects[i]['dateCreated'])
           
-         console.log(projects)
-         console.log('start from here. due date is not entering the right todo')
+        //  console.log(projects)
+        //  console.log('start from here. due date is not entering the right todo')
         }
       }
       targetDiv.querySelector('.dateDiv').appendChild(currentDate)
