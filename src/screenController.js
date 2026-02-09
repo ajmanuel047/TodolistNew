@@ -741,29 +741,28 @@ const runSaveDueDate = function(){
       // dateController(projectName, calenderValues)
       let dueDate = null
       let projects = allProjects().getProjects()
-      let todoDivConent = targetDiv.parentElement.parentElement.querySelectorAll('.todoDivContent')
-
-      todoDivConent.forEach((container) => {
+      let todo = targetDiv.parentElement.querySelector('.todo').textContent
+      console.log(targetDiv)
+      console.log(todo)
+      // todoDivConent.forEach((container) => {
         // console.log(container.querySelector('.todo').textContent)
-        let todo = container.querySelector('.todo').textContent
+        // let todo = container.querySelector('.todo').textContent
          dateController(projectName, calenderValues, todo)
       for(let i = 0; i < projects.length; i++){
         if(projectName == projects[i]['projectName']){
           for(let j = 0; j < projects[i]['todos'].length; j++){
             if(projects[i]['todos'][j]['title'] == todo){
+              console.log(todo)
+              // dateController(projectName, calenderValues, todo)
               dueDate = projects[i]['todos'][j].dueDate
             }
           }
 
         }
       }
-      })
-     
-      // for(let i = 0; i < projects.length; i++){
-      //   if(projectName == projects[i]['projectName']){
-      //     dueDate = projects[i]['dueDate']
-      //   }
-      // }
+      console.log(allProjects().getProjects())
+      // })
+ 
       if(!targetDiv.querySelector('.dueDate')){
         const dueDateElement = document.createElement('p')
         dueDateElement.classList.add('dueDate')
@@ -775,8 +774,8 @@ const runSaveDueDate = function(){
       }else{
         targetDiv.querySelector('.dueDate').textContent = `Due Date is ${dueDate}`
         displayUpdateMessage(targetDiv)
-        console.log('check')
-        // console.log(targetDiv)
+        // console.log('check')
+        // console.log(allProjects().getProjects())
       }
 // console.log(this.parentElement.parentElement.querySelector('.calender'))
       
@@ -1494,6 +1493,7 @@ console.log(targetDiv)
        //   console.log(projects[i]['dateCreated'])
           
          console.log(projects)
+         console.log('start from here. due date is not entering the right todo')
         }
       }
       targetDiv.querySelector('.dateDiv').appendChild(currentDate)

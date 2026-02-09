@@ -125,7 +125,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 }
 
 function dateController(currentProjectName, calenderValues, todo){
-    //  console.log(todo)
+     console.log(todo)
       //   console.log(currentProjectName)
       //  console.log(calenderValues)
       //  console.log(projects[0]['Project Name'])
