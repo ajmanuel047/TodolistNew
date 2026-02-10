@@ -1415,6 +1415,10 @@ function submitTodo () {
                 todoDivContent.appendChild(editTodoButton)
                 todoDivContent.appendChild(moreInfoButton)
 
+                const lineBreak = document.createElement('hr')
+                lineBreak.classList.add('lineBreak')
+                targetDiv.querySelector('.todoDiv').appendChild(lineBreak)
+                console.log(targetDiv)
                 eventController().runTodoEditButton()
                 eventController().runAddMoreInfoButton(targetDiv)
               }
