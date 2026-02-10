@@ -101,7 +101,7 @@ function eventController(){
                   }
                   else if(projectName && document.querySelector('.todoInput')){
                     // console.log('cjeck')
-                    if(document.querySelector('.todoInput').value !== ''){
+                    if(document.querySelector('.todoInput').value !== '' && document.querySelector('.descriptionInput').value !== '' && document.querySelector('.noteInput').value !== ''){
                         newProject(projectName, currentProjectName)
                         // console.log('test2')
                         // console.log(allProjects().getProjects())
@@ -110,7 +110,7 @@ function eventController(){
                         submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                         createTask()
                         document.querySelector('.submitProject').remove()
-                    }
+                    
                   // console.log(description)
                   // console.log(targetDiv)
                     createDescription(projectName, todo[0]).getDescriptionInput()
@@ -174,7 +174,7 @@ function eventController(){
                     // document.querySelector('.submitProject').remove()
                     // }
                   // }         
-
+                    }
               }          
             }
           else if(inputField.value == ''){            
