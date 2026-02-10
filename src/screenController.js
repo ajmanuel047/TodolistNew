@@ -1446,9 +1446,22 @@ function submitTodo () {
     }
       }
       else{
-         console.log('dont run')
-      }
-  }
+         
+         const errorMessage = document.createElement('p')
+         errorMessage.textContent = 'This Todo already exist for this project'
+         errorMessage.classList.add('errorMessage')
+
+         errorMessage.style.marginTop = '7px'
+
+         const headerAddToProjectDiv = document.querySelector('.headerAddToProjectDiv')
+         headerAddToProjectDiv.appendChild(errorMessage)
+
+        setTimeout(() => {
+        errorMessage.remove()
+        }, 3000)  
+
+        }
+    }
  }
 
  function addMoreInfo (currentDiv) {
