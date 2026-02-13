@@ -392,6 +392,7 @@ const runSaveChanges = function(){
         button.onclick = function(e){
         let targetDiv = e.target.parentElement
         document.body.style.backgroundColor = 'skyblue'
+        let projects = allProjects().getProjects()
         if(e.target.className == 'saveChanges'){
      //      console.log(typeof this.parentElement)
            let todoInput = this.parentElement.querySelector('.todoInput')
@@ -399,6 +400,7 @@ const runSaveChanges = function(){
            //  console.log(todoInput.value)
           //  console.log(userInput().getTaskNameInput())
             let arr = []
+            let newArr = []
             const taskInputs = document.querySelectorAll('.todoInput')  
             const todos = Array.from(document.querySelectorAll('.todo'))  
             // const currentTodo = this.parentElement.querySelector('.todo')
@@ -414,17 +416,36 @@ const runSaveChanges = function(){
            let currentProjectName = null
            const currentTodo = arr[arr.length - 1]
           //  console.log(document.querySelector('.todoInput'))
-           if(document.querySelector('.todoInput')){
-              currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
-              createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
-              //  console.log(this.parentElement.querySelector('.todoDiv').lastChild)
-              //  console.log(allProjects().getProjects())
-              createTask(currentProjectName).displayTodo(targetDiv)
-              //  createTask().getInputAndButton()
-              todoInput.remove()    
-            }else{
-            currentProjectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-           }
+
+          for(let i = 0; i < projects.length; i++){
+              if(projects[i]['projectName'] == this.parentElement.querySelector('.newProjectName').textContent){
+                console.log(this.parentElement.querySelector('.newProjectName').textContent)
+                for(let j = 0; j < projects[i]['todos'].length; j++){
+                     newArr.push(projects[i]['todos'][j]['title'])
+                  }
+                }
+          //    console.log('adding todo to a project after adding todo from header to same project creates an error')
+              }
+              console.log(newArr)
+          // if(!arr.includes(userInput().getHeaderTodoInput())){
+          //     projectNames.forEach((projectName) => {
+          //     if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
+          //         targetDiv = projectName.parentElement.parentElement
+          //   }
+          //   })
+          console.log(arr)
+          console.log(this)
+         if(!newArr.includes(arr[arr.length - 1])){
+            console.log('it does not')
+            if(document.querySelector('.todoInput')){
+            currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
+            createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
+            //  console.log(this.parentElement.querySelector('.todoDiv').lastChild)
+            //  console.log(allProjects().getProjects())
+            createTask(currentProjectName).displayTodo(targetDiv)
+            //  createTask().getInputAndButton()
+            todoInput.remove()    
+
           //  console.log(currentProjectName)
            
           //  const note = this.parentElement.querySelector('.note').textContent
@@ -443,13 +464,16 @@ const runSaveChanges = function(){
            createDescription(currentProjectName, currentTodo, targetDiv).getDisplayDescription()
           //  console.log(targetDiv)
           //  console.log(targetDiv.parentElement.parentElement)
-          //  console.log(e.target.parentElement.className)
+          //  
 
            if(e.target.parentElement.className == 'newProjectContainer'){
             targetDiv = e.target.parentElement
            }else {
             targetDiv = targetDiv.parentElement.parentElement
            }
+
+console.log(e.target.parentElement.className)
+
           //   console.log(targetDiv)
           //  console.log(targetDiv.parentElement.parentElement)
           //  console.log(e.target.parentElement.className)
@@ -467,8 +491,10 @@ const runSaveChanges = function(){
             }
             
             // console.log(container)
-           })
-          
+           })         
+            }else{
+            currentProjectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+           }          
            eventController().runEditDescription()
           //  console.log(currentProjectName)
            eventController().runEditNote(currentProjectName)
@@ -487,6 +513,15 @@ const runSaveChanges = function(){
             }
              
            })
+         }
+         else {
+          console.log(arr[arr.length - 1])
+            console.log('it does')
+            // console.log(this)
+            todoAlreadyExistMessage(this)
+         }
+
+
           
           // console.log('you stopped here')
           // for some reason description input may or maynot remove
@@ -541,9 +576,11 @@ const runUpdateDropDown = function () {
 }
 
 const runtodoSubmitButton = function (){
-  // console.log(targetDiv)
+  
   const todoSubmitButton = document.querySelector('.todoSubmitButton')
-  todoSubmitButton.onclick = submitTodo
+  todoSubmitButton.onclick = function (e){        
+    submitTodo(e.target)
+  }
 //  eventController().runAddMoreInfoButton()
 }
 
@@ -930,11 +967,11 @@ function createTodoNote(currentDiv){
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
         
-      //  console.log(todoDivContent)
+       console.log(todoDivContent)
       todoDivContent.forEach((container) => {
           // console.log('yes')
           // console.log(container)
-        container.querySelector('.descriptionDiv').after(noteDiv)
+        container.appendChild(noteDiv)
       })
 
       const noteHeading = document.createElement('h5')
@@ -1349,46 +1386,31 @@ function updateDropDown () {
 }
 
 
-function submitTodo () {  
-  // console.log(document.querySelector('.selectProject').value)
+function submitTodo (targetButton) {  
+  
 
   if(document.querySelector('.headerTodoInput').value && document.querySelector('.selectProject').value){
-  //  document.body.style.backgroundColor = 'brown'
-   // console.log(userInput().getHeaderTodoInput())
-   let currentProjects = allProjects().getProjects()
-  //  let projectsArray = currentProjects.map((arr) => {
-  //   return arr.projectName
-  //  })
-  //  console.log(projectsArray)
-  //  if(!projectsArray.includes(document.querySelector('.headerTodoInput').value)){
-  //   console.log('run')
-  //  }else{
-  //   console.log('don'/'t run')
-  //  }
+    let currentProjects = allProjects().getProjects()
     let selectedProject = document.querySelector('.selectProject').value
     let targetDiv;
     let projectNames = document.querySelectorAll('.newProjectName')
-    // let todoDivContent = document.createElement('div')
-    // todoDivContent.classList.add('todoDivContent')
     let todo = [userInput().getHeaderTodoInput()]
     let arr = []
     for(let i = 0; i < currentProjects.length; i++){
       if(currentProjects[i]['projectName'] == selectedProject){
-        console.log(currentProjects[i]['projectName'])
-        console.log(selectedProject)
-         for(let j = 0; j < currentProjects[i]['todos'].length; j++){
-          arr.push(currentProjects[i]['todos'][j]['title'])
-         }
-      }
-      console.log('adding todo to a project after adding todo from header to same project creates an error')
-    }
-
-      if(!arr.includes(userInput().getHeaderTodoInput())){
-          projectNames.forEach((projectName) => {
-          if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
-              targetDiv = projectName.parentElement.parentElement
+          for(let j = 0; j < currentProjects[i]['todos'].length; j++){
+              arr.push(currentProjects[i]['todos'][j]['title'])
           }
-        })
+        }
+      console.log('adding todo to a project after adding todo from header to same project creates an error')
+       }
+
+    if(!arr.includes(userInput().getHeaderTodoInput())){
+        projectNames.forEach((projectName) => {
+        if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
+            targetDiv = projectName.parentElement.parentElement
+      }
+      })
 
         createTodo(selectedProject, todo).createObject()
         let projects = allProjects().getProjects()
@@ -1418,16 +1440,21 @@ function submitTodo () {
                 const lineBreak = document.createElement('hr')
                 lineBreak.classList.add('lineBreak')
                 targetDiv.querySelector('.todoDiv').appendChild(lineBreak)
-                console.log(targetDiv)
+                
                 eventController().runTodoEditButton()
                 eventController().runAddMoreInfoButton(targetDiv)
-              }
+            }
           }
-          }
+       }
         }
         document.querySelector('.headerTodoInput').value = ''
-    } 
-    else if(!document.querySelector('.selectProject').value){   
+      } 
+      else{         
+        todoAlreadyExistMessage(targetButton)
+        }
+    }
+    else if(!document.querySelector('.selectProject').value){  
+      console.log('check') 
     if(!document.querySelector('.selectProjectErrorMessage')){
       const selectProjectErrorMessage = document.createElement('p')
       selectProjectErrorMessage.textContent = 'Please Select And/Or Create A Project' 
@@ -1449,23 +1476,6 @@ function submitTodo () {
           }, 2000)  
     }
       }
-      else{
-         
-         const errorMessage = document.createElement('p')
-         errorMessage.textContent = 'This Todo already exist for this project'
-         errorMessage.classList.add('errorMessage')
-
-         errorMessage.style.marginTop = '7px'
-
-         const headerAddToProjectDiv = document.querySelector('.headerAddToProjectDiv')
-         headerAddToProjectDiv.appendChild(errorMessage)
-
-        setTimeout(() => {
-        errorMessage.remove()
-        }, 3000)  
-
-        }
-    }
  }
 
  function addMoreInfo (currentDiv) {
@@ -1632,6 +1642,29 @@ function displayUpdateMessage(targetDiv){
   setTimeout(() => {
    dateUpdated.remove()
   }, 1000)
+}
+
+function todoAlreadyExistMessage(targetButton){
+  // console.log(targetButton)
+  // console.log(targetButton.className)
+  const errorMessage = document.createElement('p')
+  errorMessage.textContent = 'This Todo name already exist for this project'
+  errorMessage.classList.add('errorMessage')
+
+  errorMessage.style.marginTop = '7px'
+
+  if(targetButton.className == 'todoSubmitButton'){
+      const headerAddToProjectDiv = document.querySelector('.headerAddToProjectDiv')
+      headerAddToProjectDiv.appendChild(errorMessage)
+  }else if(targetButton.className == 'saveChanges'){
+      console.log(targetButton.parentElement.querySelector('.todoInput'))
+      targetButton.parentElement.querySelector('.todoInput').after(errorMessage)
+  }
+    
+
+  setTimeout(() => {
+  errorMessage.remove()
+  }, 3000) 
 }
 /*
 I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
