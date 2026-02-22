@@ -397,9 +397,9 @@ const runSaveChanges = function(){
      //      console.log(typeof this.parentElement)
            let todoInput = this.parentElement.querySelector('.todoInput')
            let note = userInput().getNoteInput()
-            console.log(this)
+         //   console.log(this)
             //console.log(todoInput)
-            console.log(this.parentElement)
+           // console.log(this.parentElement)
             //console.log(this.parentElement.querySelector('.newProjectName'))
             //console.log(this.parentElement.querySelector('.todoInput'))
             let arr = []
@@ -427,10 +427,10 @@ const runSaveChanges = function(){
               
             if(todoInput){
             if(projects[i]['projectName'] == this.parentElement.querySelector('.newProjectName').textContent){
-                console.log(this.parentElement.querySelector('.newProjectName').textContent)
+             //   console.log(this.parentElement.querySelector('.newProjectName').textContent)
                 for(let j = 0; j < projects[i]['todos'].length; j++){
                      newArr.push(projects[i]['todos'][j]['title'])
-                     console.log('check')
+             //        console.log('check')
                   }
                 }
           //    console.log('adding todo to a project after adding todo from header to same project creates an error')
@@ -449,12 +449,12 @@ const runSaveChanges = function(){
 
               // console.log(newArr)
 
-          console.log(arr)
-          console.log(this)
-          console.log(arr[arr.length - 1])
+          // console.log(arr)
+          // console.log(this)
+          // console.log(arr[arr.length - 1])
           // console.log(newArr)
          if(!newArr.includes(arr[arr.length - 1])){
-            console.log('it does not')
+         //   console.log('it does not')
             if(document.querySelector('.todoInput')){
             currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
             createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
@@ -469,7 +469,7 @@ const runSaveChanges = function(){
                   targetDiv = targetDiv.parentElement.parentElement
               }
 
-           console.log(e.target.parentElement.className)
+          //  console.log(e.target.parentElement.className)
            this.remove()
            targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
             if(container.querySelector('.todo').textContent == currentTodo){
@@ -491,7 +491,7 @@ const runSaveChanges = function(){
                   targetDiv = targetDiv.parentElement.parentElement
               }
 
-           console.log(e.target.parentElement.className)
+          //  console.log(e.target.parentElement.className)
            this.remove()
            targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
             if(container.querySelector('.todo').textContent == currentTodo){
@@ -516,8 +516,8 @@ const runSaveChanges = function(){
          }
          else {
           console.log(arr[arr.length - 1])
-            console.log('it does')
-            console.log(this)
+            // console.log('it does')
+            // console.log(this)
             todoAlreadyExistMessage(this)
          }
 
@@ -746,8 +746,8 @@ function changeDate(targetDiv){
       changeDateButtons.forEach((button) => {
         button.onclick = function(){
         const currentDiv = this.parentElement
-        console.log(currentDiv)
-        console.log(targetDiv)
+        // console.log(currentDiv)
+        // console.log(targetDiv)
         // document.body.style.backgroundColor = 'purple'
         addDate(currentDiv).getDisplayCalender()
         displayDueDate(targetDiv)
@@ -769,18 +769,19 @@ const runSaveDueDate = function(){
       document.body.style.backgroundColor = 'orange'
     //  console.log(this.parentElement)
     const targetDiv = this.parentElement
+    //console.log(targetDiv.parentElement.parentElement.querySelector('.todo').textContent)
       if(this.parentElement){
      // console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
       const calenderValues = this.parentElement.querySelector('.calender').value
-      const projectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-      // document.body.style.backgroundColor = 'green'
+      const projectName = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+      document.body.style.backgroundColor = 'green'
     //  console.log('run again')
       // dateController(projectName, calenderValues)
       let dueDate = null
       let projects = allProjects().getProjects()
-      let todo = targetDiv.parentElement.querySelector('.todo').textContent
-      console.log(targetDiv)
-      console.log(todo)
+      let todo = targetDiv.parentElement.parentElement.querySelector('.todo').textContent
+      // console.log(targetDiv)
+      // console.log(todo)
       // todoDivConent.forEach((container) => {
         // console.log(container.querySelector('.todo').textContent)
         // let todo = container.querySelector('.todo').textContent
@@ -789,7 +790,7 @@ const runSaveDueDate = function(){
         if(projectName == projects[i]['projectName']){
           for(let j = 0; j < projects[i]['todos'].length; j++){
             if(projects[i]['todos'][j]['title'] == todo){
-              console.log(todo)
+           //   console.log(todo)
               // dateController(projectName, calenderValues, todo)
               dueDate = projects[i]['todos'][j].dueDate
             }
@@ -967,7 +968,7 @@ function createTodoNote(currentDiv){
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
         
-       console.log(todoDivContent)
+      //  console.log(todoDivContent)
       todoDivContent.forEach((container) => {
           // console.log('yes')
           // console.log(container)
@@ -1149,7 +1150,7 @@ function displayTodo (targetDiv){
 //  console.log(projects)
   for(let i = 0; i < projects.length; i++){   
   // console.log(projects[i]['projectName'].toLowerCase())      
-  console.log(targetDiv.querySelector('.newProjectName'))      
+  // console.log(targetDiv.querySelector('.newProjectName'))      
   if(targetDiv.querySelector('.newProjectName')){
         if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
     //  console.log(projects[i]['projectName'])
@@ -1167,8 +1168,11 @@ function displayTodo (targetDiv){
           let containers = targetDiv.querySelectorAll('.todoDivContent')
           // console.log(targetDiv)
           containers.forEach((currentContainer) => {
-           // console.log(currentContainer.querySelector('.descriptionDiv'))
-            currentContainer.querySelector('.descriptionDiv').before(todo)
+         //   console.log(currentContainer.querySelector('.descriptionDiv'))
+            if(currentContainer.querySelector('.descriptionDiv')){
+               currentContainer.querySelector('.descriptionDiv').before(todo)
+            }
+            
           //  console.log(targetDiv.querySelector('.descriptionDiv'))
           })        
         // console.log(currentContainer)
@@ -1404,7 +1408,7 @@ function submitTodo (targetButton) {
               arr.push(currentProjects[i]['todos'][j]['title'])
           }
         }
-      console.log('adding todo to a project after adding todo from header to same project creates an error')
+    //  console.log('adding todo to a project after adding todo from header to same project creates an error')
        }
 
     if(!arr.includes(userInput().getHeaderTodoInput())){
@@ -1531,7 +1535,12 @@ function createDate (targetDiv, projectName, todo){
         //  console.log('start from here. due date is not entering the right todo')
         }
       }
-      targetDiv.querySelector('.dateDiv').appendChild(currentDate)
+      // console.log(targetDiv.querySelector('.dateDiv'))
+      // console.log(targetDiv)
+      if(targetDiv.querySelector('.dateDiv')){
+         targetDiv.querySelector('.dateDiv').appendChild(currentDate)
+      }
+      
  }
 
  const getDateDiv = () => createDateDiv()
@@ -1576,8 +1585,13 @@ function createDate (targetDiv, projectName, todo){
   
     const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
     todoDivContent.forEach((container) => {
-      container.appendChild(dueDateDiv)
-      dueDateDiv.appendChild(addButton)
+      // console.log('diving')
+      // console.log(container.children.length)
+      if(!container.querySelector('.dueDateDiv') && container.children.length > 3){
+         container.querySelector('.dateDiv').appendChild(dueDateDiv)
+         dueDateDiv.appendChild(addButton)
+      }
+
     })
    // document.querySelector('.projectContainer').lastChild.querySelector('.currentDate').after(dueDateDiv)
    // document.querySelector('.projectContainer').lastChild.querySelector('.dueDateDiv').appendChild(addButton)
@@ -1609,7 +1623,8 @@ function createDate (targetDiv, projectName, todo){
  }
 
 function createSaveDateButton(calender, targetDiv){
-calender.addEventListener('click', function(){           
+  calender.onclick = function(){
+    document.body.style.backgroundColor = 'blue'
     const saveDueDateButton = document.createElement('button')
     saveDueDateButton.classList.add('saveNewDate')
     saveDueDateButton.textContent = 'Save New Date'
@@ -1618,21 +1633,15 @@ calender.addEventListener('click', function(){
       targetDiv.querySelector('.dueDateButton').after(saveDueDateButton)
       targetDiv.querySelector('.dueDateButton').remove()
     }else if(!targetDiv.querySelector('.saveNewDate')){
-      console.log(this.parentElement)
-      console.log(targetDiv)
-      this.parentElement.querySelector('.changeDueDate').before(saveDueDateButton)
-      this.parentElement.querySelector('.changeDueDate').remove()
-      
+      console.log(this.parentElement.querySelector('.changeDueDate'))
+      if(this.parentElement.querySelector('.changeDueDate')){
+          this.parentElement.querySelector('.changeDueDate').before(saveDueDateButton)
+          this.parentElement.querySelector('.changeDueDate').remove()
+      }      
     }
-  
-
-
-  // targetDiv.querySelector('button').classList.add('saveNewDate')
-  // targetDiv.querySelector
-  // console.log(targetDiv)
- eventController().runSaveDueDate()
+      eventController().runSaveDueDate()
   // console.log(calender.value)
-})
+  }
 }
 
 function displayUpdateMessage(targetDiv){
