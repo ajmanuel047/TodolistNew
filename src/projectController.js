@@ -188,6 +188,17 @@ projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
   //  console.log(projects)
  }
 
+ function deleteProject(currentProjectName){
+  console.log(currentProjectName)
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['projectName'] == currentProjectName){
+      console.log('yes')
+      projects.splice(i, 1)
+      console.log(projects)
+    }
+  }
+ }
+
 
 function allProjects(value){
   
@@ -203,7 +214,8 @@ export {
         createTodo,
         dateController,
         addDescriptionToProject,
-        addNoteToProject
+        addNoteToProject,
+        deleteProject
       }
 
 

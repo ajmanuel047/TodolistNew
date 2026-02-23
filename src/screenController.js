@@ -10,6 +10,7 @@ import { formatDate } from "./dateformatter"
 import { formatRFC7231 } from "date-fns"
 import { dateController } from "./projectController.js"
 import { ta } from "date-fns/locale";
+import { deleteProject } from "./projectController";
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
@@ -838,9 +839,9 @@ const runDeleteProject = function (targetDiv){
   deleteButtons.forEach((button) => {
     button.onclick = function (){
       document.body.style.backgroundColor = 'red'
-      // const currentProject = this.parentElement.parentElement.parentElement
-      // const currentProjectName = currentProject.querySelector('.newProjectName')
-      // deleteProject(currentProjectName)
+      const currentProject = this.parentElement.parentElement.parentElement
+      const currentProjectName = currentProject.querySelector('.newProjectName').textContent
+      deleteProject(currentProjectName)
     }
   })
 }
