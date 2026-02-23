@@ -223,6 +223,7 @@ function eventController(){
         runEditButton()
         runEditDescription(projectName)
         runEditNote(projectName)        
+        runDeleteProject()
       })      
   }
 runCreateTaskButton()
@@ -266,7 +267,7 @@ const runEditButton = function(){
     button.onclick = function(){
       document.body.style.backgroundColor = 'orange'
       const currentProjectName = this.parentElement.querySelector('.newProjectName')
-      console.log(currentProjectName)
+      // console.log(currentProjectName)
       currentProjectName.setAttribute('contenteditable', true)
       currentProjectName.classList.add('editContent')
       currentProjectName.style.cursor = 'pointer'
@@ -718,7 +719,7 @@ const runCalenderButton = function(projectName){
     // button.onclick = addDate().getDisplayCalender()
    
     button.onclick = function(e){
-      document.body.style.backgroundColor = 'orange'
+      // document.body.style.backgroundColor = 'orange'
       const targetDiv = e.target.parentElement
  //     console.log(targetDiv.parentElement.parentElement.querySelector('.newProjectName'))
       addDate(targetDiv).getDisplayCalender()
@@ -766,7 +767,7 @@ const runSaveDueDate = function(){
   
   saveNewDateButtons.forEach((button) => {
     button.addEventListener('click', function(){
-      document.body.style.backgroundColor = 'orange'
+      // document.body.style.backgroundColor = 'orange'
     //  console.log(this.parentElement)
     const targetDiv = this.parentElement
     //console.log(targetDiv.parentElement.parentElement.querySelector('.todo').textContent)
@@ -774,7 +775,7 @@ const runSaveDueDate = function(){
      // console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
       const calenderValues = this.parentElement.querySelector('.calender').value
       const projectName = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-      document.body.style.backgroundColor = 'green'
+      // document.body.style.backgroundColor = 'green'
     //  console.log('run again')
       // dateController(projectName, calenderValues)
       let dueDate = null
@@ -830,6 +831,19 @@ const runAddMoreInfoButton = function (){
   moreInforButton.onclick = addMoreInfo
   
 }
+
+const runDeleteProject = function (targetDiv){
+ 
+  const deleteButtons = document.querySelectorAll('.deleteProject')
+  deleteButtons.forEach((button) => {
+    button.onclick = function (){
+      document.body.style.backgroundColor = 'red'
+      // const currentProject = this.parentElement.parentElement.parentElement
+      // const currentProjectName = currentProject.querySelector('.newProjectName')
+      // deleteProject(currentProjectName)
+    }
+  })
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -849,7 +863,8 @@ const runAddMoreInfoButton = function (){
           runCalenderButton,
           runCalender,
           runSaveDueDate,
-          runAddMoreInfoButton
+          runAddMoreInfoButton,
+          runDeleteProject
          }
 }
 
@@ -1223,13 +1238,22 @@ function newProject(projectName, currentProjectName){
   let newProjectName = document.createElement('h2')
   newProjectName.classList.add('newProjectName')
   newProjectName.textContent = currentProjectName 
+
+  const titleContainerButtonsDiv = document.createElement('div')
+  titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
       
   const editProjectNameButton = document.createElement('button')
   editProjectNameButton.textContent = 'Edit'
-  editProjectNameButton.classList.add('editProjectName')        
+  editProjectNameButton.classList.add('editProjectName')     
+  
+  const deleteProjectButton = document.createElement('button')
+  deleteProjectButton.classList.add('deleteProject')
+  deleteProjectButton.textContent = 'Delete Project'
 
   currentContainer.firstChild.appendChild(newProjectName)
-  currentContainer.firstChild.appendChild(editProjectNameButton)
+  currentContainer.firstChild.appendChild(titleContainerButtonsDiv)
+  titleContainerButtonsDiv.appendChild(editProjectNameButton)
+  titleContainerButtonsDiv.appendChild(deleteProjectButton)
 
 }
 
@@ -1624,7 +1648,7 @@ function createDate (targetDiv, projectName, todo){
 
 function createSaveDateButton(calender, targetDiv){
   calender.onclick = function(){
-    document.body.style.backgroundColor = 'blue'
+    // document.body.style.backgroundColor = 'blue'
     const saveDueDateButton = document.createElement('button')
     saveDueDateButton.classList.add('saveNewDate')
     saveDueDateButton.textContent = 'Save New Date'
@@ -1633,7 +1657,7 @@ function createSaveDateButton(calender, targetDiv){
       targetDiv.querySelector('.dueDateButton').after(saveDueDateButton)
       targetDiv.querySelector('.dueDateButton').remove()
     }else if(!targetDiv.querySelector('.saveNewDate')){
-      console.log(this.parentElement.querySelector('.changeDueDate'))
+    //  console.log(this.parentElement.querySelector('.changeDueDate'))
       if(this.parentElement.querySelector('.changeDueDate')){
           this.parentElement.querySelector('.changeDueDate').before(saveDueDateButton)
           this.parentElement.querySelector('.changeDueDate').remove()

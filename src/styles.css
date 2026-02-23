@@ -286,3 +286,8 @@ h4 {
     /* margin-left: 3px; */
     /* height: 10px; */
 }
+
+.titleContainerButtonsDiv {
+    display: flex;
+    gap: 5px;
+}
