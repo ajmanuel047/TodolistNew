@@ -842,6 +842,7 @@ const runDeleteProject = function (targetDiv){
       const currentProject = this.parentElement.parentElement.parentElement
       const currentProjectName = currentProject.querySelector('.newProjectName').textContent
       deleteProject(currentProjectName)
+      currentProject.remove()
     }
   })
 }
