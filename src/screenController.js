@@ -573,7 +573,7 @@ const runAddTodo = function (){
 
 const runUpdateDropDown = function () {
   const selectProject = document.querySelector('.selectProject')
-  selectProject.onclick = updateDropDown
+  selectProject.onclick = updateDropDown().addProject
 
 }
 
@@ -838,11 +838,12 @@ const runDeleteProject = function (targetDiv){
   const deleteButtons = document.querySelectorAll('.deleteProject')
   deleteButtons.forEach((button) => {
     button.onclick = function (){
-      document.body.style.backgroundColor = 'red'
+      // document.body.style.backgroundColor = 'red'
       const currentProject = this.parentElement.parentElement.parentElement
       const currentProjectName = currentProject.querySelector('.newProjectName').textContent
       deleteProject(currentProjectName)
       currentProject.remove()
+      updateDropDown(currentProjectName).removeProject()
     }
   })
 }
@@ -1392,8 +1393,12 @@ function createTodoInputAndButton (){
   headerTodoDiv.appendChild(todoSubmitButton)
 }
 
-function updateDropDown () {
-  // document.body.style.backgroundColor = 'purple'
+function updateDropDown (projectName) {
+  document.body.style.backgroundColor = 'purple'
+
+
+  function addProject(){
+
   const selectProject = document.querySelector('.selectProject')
   let arr = []
   for(let i = 0; i < selectProject.options.length; i++){
@@ -1403,17 +1408,37 @@ function updateDropDown () {
     }
   }
   const projects = allProjects().getProjects()
-//console.log(projects)
+  // console.log(arr)
 
-  for(let i = 0; i < projects.length; i++){
-  //  console.log(projects[i]['projectName'])
-    if(!arr.includes(projects[i]['projectName'])){
-       const options = document.createElement('option')
-       options.textContent = `${projects[i]['projectName']}`
-       options.value = `${projects[i]['projectName']}`
-       selectProject.add(options)
-    //   console.log(selectProject)
+    for(let i = 0; i < projects.length; i++){
+      console.log(projects)
+    //  console.log(projects[i]['projectName'])
+      if(!arr.includes(projects[i]['projectName'])){
+        const options = document.createElement('option')
+        options.textContent = `${projects[i]['projectName']}`
+        options.value = `${projects[i]['projectName']}`
+        selectProject.add(options)
+        // console.log(arr)
+        //  console.log(selectProject)
+      }
     }
+  }
+
+  function removeProject(){
+    // console.log(projectName)
+    const selectProject = document.querySelector('.selectProject')
+    for(let i = 0; i < selectProject.options.length; i++){
+      if(selectProject[i].value == projectName){
+        console.log(selectProject[i].value)
+        console.log(i)
+        selectProject.remove(i)
+      }      
+    }    
+  }
+
+  return {
+    addProject,
+    removeProject
   }
 }
 
