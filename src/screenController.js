@@ -267,8 +267,9 @@ const runEditButton = function(){
   currentEditButton.forEach((button) => {
     button.onclick = function(){
       document.body.style.backgroundColor = 'orange'
-      const currentProjectName = this.parentElement.querySelector('.newProjectName')
-      // console.log(currentProjectName)
+      const currentProjectName = this.parentElement.parentElement.querySelector('.newProjectName')
+      console.log(currentProjectName)
+      console.log(this.parentElement.parentElement)
       currentProjectName.setAttribute('contenteditable', true)
       currentProjectName.classList.add('editContent')
       currentProjectName.style.cursor = 'pointer'
@@ -324,10 +325,11 @@ const runTodoEditButton = function(){
       editTodoButtons.forEach((buttons) => {
       buttons.onclick = function(e){
       // document.body.style.backgroundColor = 'purple'
-      
-      let arr = [].slice.call(this.parentElement.children)
-      let currentProjectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-        // console.log(e.target)
+      console.log(this.parentElement.parentElement.children)
+      let arr = [].slice.call(this.parentElement.parentElement.children)
+      console.log(arr)
+      let currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+   
        if(buttons.textContent == 'Save'){
         // console.log(currentTodo)
         console.log('na')
@@ -362,10 +364,11 @@ const runTodoEditButton = function(){
       } 
       else if(buttons.textContent == 'Edit'){
       for(let i = 0; i < arr.length; i++){
-        // console.log(arr[i].className)
+        console.log(arr[i].className)
         if(arr[i].className == 'todo'){
-          previousTodo = this.parentElement.children[i].textContent
-          currentTodo = this.parentElement.children[i]
+          console.log(this)
+          previousTodo = this.parentElement.parentElement.children[i].textContent
+          currentTodo = this.parentElement.parentElement.children[i]
           // console.log(currentTodo)
           currentTodo.setAttribute('contenteditable', true)
           // currentTodo.style.backgroundColor = 'orange'
@@ -930,10 +933,14 @@ function createTodoButton (targetDiv){
   const editTodoButton = document.createElement('button')
   editTodoButton.textContent = 'Edit'
   editTodoButton.classList.add('editTodoButton')
+  const taskButtonsDiv = document.createElement('div')
+  taskButtonsDiv.classList.add('taskButtonsDiv')
+
       // console.log(currentTodoDivContent.querySelector('.todo'))
       currentTodoDivContent.forEach((container) => {
         if(!container.querySelector('.editTodoButton')){
-           container.querySelector('.todo').after(editTodoButton)
+           container.querySelector('.todo').after(taskButtonsDiv)
+           taskButtonsDiv.appendChild(editTodoButton)
         }
       })
     eventController().runTodoEditButton()
@@ -1394,11 +1401,8 @@ function createTodoInputAndButton (){
 }
 
 function updateDropDown (projectName) {
-  document.body.style.backgroundColor = 'purple'
-
-
+  
   function addProject(){
-
   const selectProject = document.querySelector('.selectProject')
   let arr = []
   for(let i = 0; i < selectProject.options.length; i++){
