@@ -115,7 +115,7 @@ h4 {
 }
 
 .editTodoButton {
-    margin-top: -22px;
+    /* margin-top: -22px; */
 }
 
 .editTodoButton, .editProjectName {
@@ -267,7 +267,7 @@ h4 {
 }
 
 .editAndInfoDiv .editTodoButton {
-    display: inline;
+    /* display: inline; */
      /* height: 16px; */
     /* flex: 1; */
     /* justify-content: center; */
@@ -287,7 +287,11 @@ h4 {
     /* height: 10px; */
 }
 
-.titleContainerButtonsDiv {
+.titleContainerButtonsDiv, .taskButtonsDiv {
     display: flex;
     gap: 5px;
+}
+
+.taskButtonsDiv {
+    margin-top: -28px;
 }

@@ -192,14 +192,23 @@ projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
   console.log(currentProjectName)
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['projectName'] == currentProjectName){
-      console.log('yes')
-      projects.splice(i, 1)
-      console.log(projects)
+        projects.splice(i, 1)        
     }
   }
  }
 
-
+function removeTaskFromArray(projectName, todo){
+  console.log(projectName, todo)
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['projectName'] == projectName){
+      for(let j = 0; j < projects[i]['todos'].length; j++){
+        if(projects[i]['todos'][j]['title'] == todo){
+            projects[i]['todos'].splice(j, 1)
+        }
+      }
+    }
+  }
+}
 function allProjects(value){
   
   const getProjects = () => projects
@@ -215,7 +224,8 @@ export {
         dateController,
         addDescriptionToProject,
         addNoteToProject,
-        deleteProject
+        deleteProject,
+        removeTaskFromArray
       }
 
 

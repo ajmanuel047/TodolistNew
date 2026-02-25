@@ -11,6 +11,7 @@ import { formatRFC7231 } from "date-fns"
 import { dateController } from "./projectController.js"
 import { ta } from "date-fns/locale";
 import { deleteProject } from "./projectController";
+import { removeTaskFromArray } from "./projectController";
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
@@ -225,6 +226,7 @@ function eventController(){
         runEditDescription(projectName)
         runEditNote(projectName)        
         runDeleteProject()
+        runDeleteTask()
       })      
   }
 runCreateTaskButton()
@@ -850,6 +852,13 @@ const runDeleteProject = function (targetDiv){
     }
   })
 }
+
+const runDeleteTask = function(){
+  const deleteButtons = document.querySelectorAll('.deleteTask')
+  deleteButtons.forEach((button) => {
+    button.onclick = deleteTask
+  })
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -870,7 +879,8 @@ const runDeleteProject = function (targetDiv){
           runCalender,
           runSaveDueDate,
           runAddMoreInfoButton,
-          runDeleteProject
+          runDeleteProject,
+          runDeleteTask
          }
 }
 
@@ -929,18 +939,24 @@ function createTodoButton (targetDiv){
   const currentTodoContainer = document.querySelector('.projectContainer').lastChild.querySelectorAll('.todo')
  // const currentTodoDivContent = document.querySelectorAll('.todoDivContent')
 //  console.log(targetDiv) 
- const currentTodoDivContent = targetDiv.querySelectorAll('.todoDivContent')
+  const currentTodoDivContent = targetDiv.querySelectorAll('.todoDivContent')
+  const taskButtonsDiv = document.createElement('div')
+  taskButtonsDiv.classList.add('taskButtonsDiv')
+
   const editTodoButton = document.createElement('button')
   editTodoButton.textContent = 'Edit'
   editTodoButton.classList.add('editTodoButton')
-  const taskButtonsDiv = document.createElement('div')
-  taskButtonsDiv.classList.add('taskButtonsDiv')
+
+  const deleteTask = document.createElement('button')
+  deleteTask.textContent = 'Delete Task'
+  deleteTask.classList.add('deleteTask')
 
       // console.log(currentTodoDivContent.querySelector('.todo'))
       currentTodoDivContent.forEach((container) => {
         if(!container.querySelector('.editTodoButton')){
            container.querySelector('.todo').after(taskButtonsDiv)
            taskButtonsDiv.appendChild(editTodoButton)
+           taskButtonsDiv.appendChild(deleteTask)
         }
       })
     eventController().runTodoEditButton()
@@ -1731,6 +1747,13 @@ function todoAlreadyExistMessage(targetButton){
   setTimeout(() => {
   errorMessage.remove()
   }, 3000) 
+}
+
+function deleteTask(){
+  document.body.style.backgroundColor = 'orange'
+  const currentContainer = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+  const currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
+  removeTaskFromArray(currentContainer, currentTodo)
 }
 /*
 I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
