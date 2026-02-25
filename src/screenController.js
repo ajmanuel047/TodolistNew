@@ -509,6 +509,7 @@ const runSaveChanges = function(){
           }          
            eventController().runEditDescription()
            eventController().runEditNote(currentProjectName)
+           eventController().runDeleteTask()
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
             if(!container.querySelector('.currentDate')){
@@ -1221,7 +1222,7 @@ function displayTodo (targetDiv){
       }
       const lineBreak = document.createElement('hr')
       lineBreak.classList.add('lineBreak')
-      targetDiv.querySelector('.todoDiv').appendChild(lineBreak)
+      targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
       createTodoButton(targetDiv)
       // console.log(targetDiv)
       // createTodoDescription(targetDiv)
@@ -1750,10 +1751,11 @@ function todoAlreadyExistMessage(targetButton){
 }
 
 function deleteTask(){
-  document.body.style.backgroundColor = 'orange'
+  // document.body.style.backgroundColor = 'orange'
   const currentContainer = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-  const currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
-  removeTaskFromArray(currentContainer, currentTodo)
+  const currentTodo = this.parentElement.parentElement.querySelector('.todo')
+  removeTaskFromArray(currentContainer, currentTodo.textContent)
+  currentTodo.parentElement.remove()
 }
 /*
 I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
