@@ -1,7 +1,7 @@
 // index.js
 import "./styles.css"
 // import { createNewProject } from "./projectController";
-import { allProjects } from "./projectController";
+import { allProjects, projectPriorityController } from "./projectController";
 import { createNewProjects } from "./projectController";
 import { createTodo } from "./projectController";
 import { addDescriptionToProject } from "./projectController";
@@ -227,6 +227,7 @@ function eventController(){
         runEditNote(projectName)        
         runDeleteProject()
         runDeleteTask()
+        runAddTaskPriority()
       })      
   }
 runCreateTaskButton()
@@ -510,6 +511,7 @@ const runSaveChanges = function(){
            eventController().runEditDescription()
            eventController().runEditNote(currentProjectName)
            eventController().runDeleteTask()
+           eventController().runAddTaskPriority()
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
             if(!container.querySelector('.currentDate')){
@@ -860,6 +862,13 @@ const runDeleteTask = function(){
     button.onclick = deleteTask
   })
 }
+
+const runAddTaskPriority = function(){
+  const taskPriorityButtons = document.querySelectorAll('.priorityButton')
+  taskPriorityButtons.forEach((button) => {
+    button.onclick = addTaskPriority
+  })
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -881,7 +890,8 @@ const runDeleteTask = function(){
           runSaveDueDate,
           runAddMoreInfoButton,
           runDeleteProject,
-          runDeleteTask
+          runDeleteTask,
+          runAddTaskPriority
          }
 }
 
@@ -952,12 +962,17 @@ function createTodoButton (targetDiv){
   deleteTask.textContent = 'Delete Task'
   deleteTask.classList.add('deleteTask')
 
+  const taskPriority = document.createElement('button')
+  taskPriority.textContent = 'Priority'
+  taskPriority.classList.add('priorityButton')
+
       // console.log(currentTodoDivContent.querySelector('.todo'))
       currentTodoDivContent.forEach((container) => {
         if(!container.querySelector('.editTodoButton')){
-           container.querySelector('.todo').after(taskButtonsDiv)
+           container.querySelector('.priority').after(taskButtonsDiv)
            taskButtonsDiv.appendChild(editTodoButton)
            taskButtonsDiv.appendChild(deleteTask)
+           taskButtonsDiv.appendChild(taskPriority)
         }
       })
     eventController().runTodoEditButton()
@@ -1200,6 +1215,9 @@ function displayTodo (targetDiv){
       let currentTask = projects[i]['todos']
       // console.log(currentTask[currentTask.length - 1])
       const todo = document.createElement('h4')
+      const taskPriority = document.createElement('p')
+      taskPriority.textContent = 'Task Priority : '
+      taskPriority.classList.add('priority')
      // console.log(currentTask)
         for(let j = 0; j < currentTask.length; j++){
      //   console.log(targetDiv)
@@ -1213,7 +1231,10 @@ function displayTodo (targetDiv){
          //   console.log(currentContainer.querySelector('.descriptionDiv'))
             if(currentContainer.querySelector('.descriptionDiv')){
                currentContainer.querySelector('.descriptionDiv').before(todo)
-            }
+              //  console.log(currentContainer.querySelector('.todo'))
+              //  console.log(currentContainer.querySelector('.taskButtonsDiv'))
+               currentContainer.querySelector('.todo').after(taskPriority)
+              }
             
           //  console.log(targetDiv.querySelector('.descriptionDiv'))
           })        
@@ -1448,13 +1469,15 @@ function updateDropDown (projectName) {
   function removeProject(){
     // console.log(projectName)
     const selectProject = document.querySelector('.selectProject')
-    for(let i = 0; i < selectProject.options.length; i++){
-      if(selectProject[i].value == projectName){
-        console.log(selectProject[i].value)
-        console.log(i)
-        selectProject.remove(i)
-      }      
-    }    
+    if(selectProject){
+      for(let i = 0; i < selectProject.options.length; i++){
+        if(selectProject[i].value == projectName){
+          console.log(selectProject[i].value)
+          console.log(i)
+          selectProject.remove(i)
+        }      
+      } 
+    }
   }
 
   return {
@@ -1756,6 +1779,14 @@ function deleteTask(){
   const currentTodo = this.parentElement.parentElement.querySelector('.todo')
   removeTaskFromArray(currentContainer, currentTodo.textContent)
   currentTodo.parentElement.remove()
+}
+
+function addTaskPriority(){
+  document.body.style.backgroundColor = 'blue'
+  const currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+  const todo = this.parentElement.parentElement.querySelector('.todo').textContent
+  projectPriorityController(currentProjectName, todo)
+
 }
 /*
 I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN

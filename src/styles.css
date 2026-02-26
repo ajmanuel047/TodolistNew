@@ -293,5 +293,9 @@ h4 {
 }
 
 .taskButtonsDiv {
-    margin-top: -28px;
+    /* margin-top: -28px; */
+}
+
+.priority {
+ margin-top: -25px;   
 }

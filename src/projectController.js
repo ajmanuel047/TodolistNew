@@ -2,6 +2,7 @@
 import { createEmptyProject } from "./createNewProject"
 import { createProject } from "./createNewProject"
 import { formatDate } from "./dateformatter"
+import { projectImportance } from "./projectPriority"
 let projects = [
       {
      'projectName': 'church',
@@ -209,6 +210,32 @@ function removeTaskFromArray(projectName, todo){
     }
   }
 }
+
+function projectPriorityController(currentProjectName, todo){
+   
+    // console.log(currentProjectName, todo)
+    for(let i = 0; i < projects.length; i++){
+        if(projects[i]['projectName'] == currentProjectName){
+          for(let j = 0; j < projects[i]['todos'].length; j++){
+            if(projects[i]['todos'][j]['title'] == todo){
+              // console.log(currentProjectName, todo)
+              // projects[i]['todos'][j].taskPriority = ''
+              let currentProjectPriority = projects[i]['todos'][j]['taskPriority']
+             
+              // console.log(projects)
+              let newProjectPriority = projectImportance(currentProjectPriority).currentValue()
+              console.log(newProjectPriority)
+              projects[i]['todos'][j].taskPriority = newProjectPriority
+              console.log(projects)
+              // console.log(projects[i]['Priority'] )
+              // console.log(currentProjectName)
+            }
+
+          }
+        }
+    }
+}
+
 function allProjects(value){
   
   const getProjects = () => projects
@@ -225,7 +252,8 @@ export {
         addDescriptionToProject,
         addNoteToProject,
         deleteProject,
-        removeTaskFromArray
+        removeTaskFromArray,
+        projectPriorityController
       }
 
 
