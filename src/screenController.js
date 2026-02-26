@@ -966,6 +966,10 @@ function createTodoButton (targetDiv){
   taskPriority.textContent = 'Priority'
   taskPriority.classList.add('priorityButton')
 
+  const taskStatusButton = document.createElement('button')
+  taskStatusButton.textContent = 'Task Status'
+  taskStatusButton.classList.add = 'taskStatusButton'
+
       // console.log(currentTodoDivContent.querySelector('.todo'))
       currentTodoDivContent.forEach((container) => {
         if(!container.querySelector('.editTodoButton')){
@@ -973,6 +977,7 @@ function createTodoButton (targetDiv){
            taskButtonsDiv.appendChild(editTodoButton)
            taskButtonsDiv.appendChild(deleteTask)
            taskButtonsDiv.appendChild(taskPriority)
+           taskButtonsDiv.appendChild(taskStatusButton)
         }
       })
     eventController().runTodoEditButton()
