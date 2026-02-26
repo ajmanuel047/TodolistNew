@@ -1783,9 +1783,22 @@ function deleteTask(){
 
 function addTaskPriority(){
   document.body.style.backgroundColor = 'blue'
+  const projects = allProjects().getProjects()
   const currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
   const todo = this.parentElement.parentElement.querySelector('.todo').textContent
+  const taskPriority = this.parentElement.parentElement.querySelector('.priority')
+  console.log(taskPriority)
   projectPriorityController(currentProjectName, todo)
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['projectName'] == currentProjectName){
+        for(let j = 0; j < projects[i]['todos'].length; j++ ){
+          if(projects[i]['todos'][j]['title'] == todo){
+            // console.log(projects[i]['todos'][j]['taskPriority'])
+            taskPriority.textContent = `Task Priority : ${projects[i]['todos'][j]['taskPriority']}`
+          }
+       }
+    }
+  }
 
 }
 /*

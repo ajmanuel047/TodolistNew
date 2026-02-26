@@ -224,9 +224,9 @@ function projectPriorityController(currentProjectName, todo){
              
               // console.log(projects)
               let newProjectPriority = projectImportance(currentProjectPriority).currentValue()
-              console.log(newProjectPriority)
+              // console.log(newProjectPriority)
               projects[i]['todos'][j].taskPriority = newProjectPriority
-              console.log(projects)
+              // console.log(projects)
               // console.log(projects[i]['Priority'] )
               // console.log(currentProjectName)
             }
