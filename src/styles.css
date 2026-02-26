@@ -299,3 +299,15 @@ h4 {
 .priority {
  margin-top: -25px;   
 }
+
+.high {
+  color : yellow
+}
+
+.low {
+  color: green;
+}
+
+.extreme {
+  color : red
+}

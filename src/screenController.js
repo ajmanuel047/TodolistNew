@@ -1782,7 +1782,7 @@ function deleteTask(){
 }
 
 function addTaskPriority(){
-  document.body.style.backgroundColor = 'blue'
+  // document.body.style.backgroundColor = 'blue'
   const projects = allProjects().getProjects()
   const currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
   const todo = this.parentElement.parentElement.querySelector('.todo').textContent
@@ -1795,6 +1795,19 @@ function addTaskPriority(){
           if(projects[i]['todos'][j]['title'] == todo){
             // console.log(projects[i]['todos'][j]['taskPriority'])
             taskPriority.textContent = `Task Priority : ${projects[i]['todos'][j]['taskPriority']}`
+             if(taskPriority.textContent == 'Task Priority : High'){
+              taskPriority.classList.add('high')
+              taskPriority.classList.remove('low')
+              taskPriority.classList.remove('extreme')
+            }else if(taskPriority.textContent == 'Task Priority : Low'){
+              taskPriority.classList.add('low')
+              taskPriority.classList.remove('extreme')
+              taskPriority.classList.remove('high')
+            }else if(taskPriority.classList.add('extreme')){
+              taskPriority.classList.add('extreme')
+              taskPriority.classList.remove('low')
+              taskPriority.classList.remove('high')
+            }
           }
        }
     }
