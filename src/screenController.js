@@ -126,7 +126,7 @@ function eventController(){
                     addDate(targetDiv).getCreateButton()
                     // addDate(projectName).getCreateButton()
                      runCalenderButton()
-                  
+                     createCheckList(targetDiv).createContainer()
                     //   createTodoButton()        
                       // console.log(createNote().getNoteInput())
                 //      createNote(this.parentElement.querySelector('.newProjectName').textContent).getNoteInput()
@@ -509,12 +509,13 @@ const runSaveChanges = function(){
             }
            })   
           }          
+          // console.log(targetDiv)
            eventController().runEditDescription()
            eventController().runEditNote(currentProjectName)
            eventController().runDeleteTask()
            eventController().runAddTaskPriority()
            eventController().runAddTaskStatus()
-
+           createCheckList(targetDiv).createContainer()
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
             if(!container.querySelector('.currentDate')){
@@ -879,6 +880,10 @@ const runAddTaskStatus = function(){
     button.onclick = addTaskStatus
   })
 }
+
+// const runCreateCheckList = function(){
+
+// }
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -1036,7 +1041,7 @@ function createTodoDescription(currentDiv){
 }
 
 function createTodoNote(currentDiv){
-      // console.log(currentDiv)
+      console.log(currentDiv)
       const todoDivContent = currentDiv.querySelectorAll('.todoDivContent')
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
@@ -1844,8 +1849,33 @@ function addTaskStatus(){
   } else {
       this.parentElement.parentElement.querySelector('.statusText').remove()
   }
+}
+
+function createCheckList(targetDiv){
+
+  function createContainer(){
+    // document.body.style.backgroundColor = 'orange'
+    const currentContainer = targetDiv.querySelectorAll('.todoDivContent')
+    const checkListContainer = document.createElement('div')
+    checkListContainer.classList.add('checkListContainer')
+    const checkListHeading = document.createElement('p')          
+    checkListHeading.textContent = 'Create Project Checklist'
+
+    currentContainer.forEach((todoDivContainer) => {
+      todoDivContainer.querySelector('.lineBreak').before(checkListContainer)
+    })
+
+    checkListContainer.appendChild(checkListHeading)
+    console.log(targetDiv)
+
+    // console.log(projectName)
+    // console.log(todo)
+  }
 
 
+  return {
+    createContainer,
+  }
 }
 /*
 I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
