@@ -228,6 +228,7 @@ function eventController(){
         runDeleteProject()
         runDeleteTask()
         runAddTaskPriority()
+        runAddTaskStatus()
       })      
   }
 runCreateTaskButton()
@@ -512,6 +513,8 @@ const runSaveChanges = function(){
            eventController().runEditNote(currentProjectName)
            eventController().runDeleteTask()
            eventController().runAddTaskPriority()
+           eventController().runAddTaskStatus()
+
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
             if(!container.querySelector('.currentDate')){
@@ -869,6 +872,13 @@ const runAddTaskPriority = function(){
     button.onclick = addTaskPriority
   })
 }
+
+const runAddTaskStatus = function(){
+  const taskStatusButton = document.querySelectorAll('.taskStatusButton')
+  taskStatusButton.forEach((button) => {
+    button.onclick = addTaskStatus
+  })
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -891,7 +901,8 @@ const runAddTaskPriority = function(){
           runAddMoreInfoButton,
           runDeleteProject,
           runDeleteTask,
-          runAddTaskPriority
+          runAddTaskPriority,
+          runAddTaskStatus
          }
 }
 
@@ -968,7 +979,7 @@ function createTodoButton (targetDiv){
 
   const taskStatusButton = document.createElement('button')
   taskStatusButton.textContent = 'Task Status'
-  taskStatusButton.classList.add = 'taskStatusButton'
+  taskStatusButton.classList.add('taskStatusButton')
 
       // console.log(currentTodoDivContent.querySelector('.todo'))
       currentTodoDivContent.forEach((container) => {
@@ -1817,6 +1828,23 @@ function addTaskPriority(){
        }
     }
   }
+
+}
+
+function addTaskStatus(){
+  // document.body.style.backgroundColor = 'orange'
+  const todo = this.parentElement.parentElement.querySelector('.todo')
+  const priority = this.parentElement.parentElement.querySelector('.priority')
+  
+  if(!this.parentElement.parentElement.querySelector('.statusText')){
+      const statusText = document.createElement('p')
+      statusText.textContent = 'Completed'
+      statusText.classList.add('statusText')
+      todo.after(statusText)
+  } else {
+      this.parentElement.parentElement.querySelector('.statusText').remove()
+  }
+
 
 }
 /*

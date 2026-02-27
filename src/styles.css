@@ -297,7 +297,7 @@ h4 {
 }
 
 .priority {
- margin-top: -25px;   
+ margin-top: -20px;   
 }
 
 .high {
@@ -310,4 +310,16 @@ h4 {
 
 .extreme {
   color : red
+}
+
+.statusText {
+    position: relative;
+    top: -30px;
+    /* display: inline;
+    position: absolute; */
+    font-size: 0.7rem;
+    /* position: absolute;
+    top: 0px; */
+    margin-bottom: 0px;
+    color: green;
 }
