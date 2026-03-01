@@ -445,24 +445,7 @@ const runSaveChanges = function(){
                 }
           //    console.log('adding todo to a project after adding todo from header to same project creates an error')
               }
-              // else if(todoInput == null){
-              //    if(projects[i]['projectName'] == this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent){
-              //     console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-              //     for(let j = 0; j < projects[i]['todos'].length; j++){
-              //    console.log(newArr)
-              //       newArr.push(projects[i]['todos'][j]['title'])
-              //        console.log('checking')
-              //     }
-              //   }
-              // }
             }
-
-              // console.log(newArr)
-
-          // console.log(arr)
-          // console.log(this)
-          // console.log(arr[arr.length - 1])
-          // console.log(newArr)
          if(!newArr.includes(arr[arr.length - 1])){
          //   console.log('it does not')
             if(document.querySelector('.todoInput')){
@@ -536,12 +519,6 @@ const runSaveChanges = function(){
             // console.log(this)
             todoAlreadyExistMessage(this)
          }
-
-
-          
-          // console.log('you stopped here')
-          // for some reason description input may or maynot remove
-          // i need to know why
           }
       }
        })
@@ -1912,10 +1889,16 @@ function createCheckList(targetDiv, todo){
        addItemButton.classList.add('addItemButton')
        addItemButton.textContent = 'Add'
 
+       const saveButton = document.createElement('button');
+       saveButton.textContent = 'Save Checklist'  
+       saveButton.classList.add('saveChecklist') 
    
        checkListForm.appendChild(checkListInputDiv)
        checkListInputDiv.appendChild(checkListInput)
        checkListInputDiv.appendChild(addItemButton)
+       const currentContainer = this.parentElement.parentElement.parentElement.parentElement.parentElement
+       checkListForm.appendChild(saveButton)
+       this.parentElement.parentElement.querySelector('.addCheckListFormButton').remove()
     }
       // const checkListForm = document.createElement('form')
       //  checkListForm.classList.add(`checkListForm`)

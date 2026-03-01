@@ -341,8 +341,9 @@ h4 {
 .checkListInputDiv {
     display: flex;
     gap: 5px;
+    margin-top: -19px;
 }
 
-.addItemButton {
-   
+.saveChecklist {
+   margin-top: 10px;
 }
