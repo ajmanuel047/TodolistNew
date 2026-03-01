@@ -886,6 +886,9 @@ const runAddTaskStatus = function(){
 const runCreateCheckList = function(){
   const createCheckListButton = document.querySelectorAll('.addCheckListFormButton')
   createCheckListButton.forEach((button) => {
+    // console.log(this)
+    // console.log(todo)
+    // console.log(targetDiv)
     button.onclick = createCheckList().addCheckListForm
   })
 }
@@ -1856,10 +1859,11 @@ function addTaskStatus(){
   }
 }
 
-function createCheckList(targetDiv){
-
+function createCheckList(targetDiv, todo){
+  // let currentDiv = null
   function createContainer(){
     // document.body.style.backgroundColor = 'orange'
+    // currentDiv = targetDiv
     const currentContainer = targetDiv.querySelectorAll('.todoDivContent')
     const checkListContainer = document.createElement('div')
     checkListContainer.classList.add('checkListContainer')
@@ -1890,6 +1894,36 @@ function createCheckList(targetDiv){
 
   function addCheckListForm(){
     document.body.style.backgroundColor = 'pink'
+    const checkListContainer = this.parentElement.parentElement
+    // console.log(checkListContainer)
+
+    if(!checkListContainer.querySelector('.checkListForm')){
+       const checkListForm = document.createElement('form')
+       checkListForm.classList.add(`checkListForm`)
+       checkListContainer.appendChild(checkListForm)
+      //  console.log('check')
+       const checkListInputDiv = document.createElement('div')
+       checkListInputDiv.classList.add('checkListInputDiv')
+
+       const checkListInput = document.createElement('input')
+       checkListInput.classList.add('checkListInput')
+
+       const addItemButton = document.createElement('button')
+       addItemButton.classList.add('addItemButton')
+       addItemButton.textContent = 'Add'
+
+   
+       checkListForm.appendChild(checkListInputDiv)
+       checkListInputDiv.appendChild(checkListInput)
+       checkListInputDiv.appendChild(addItemButton)
+    }
+      // const checkListForm = document.createElement('form')
+      //  checkListForm.classList.add(`checkListForm`)
+      //  checkListContainer.appendChild(checkListForm)
+
+
+          // console.log(projects)
+
   }
 
   return {

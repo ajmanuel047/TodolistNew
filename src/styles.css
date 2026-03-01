@@ -8,7 +8,7 @@ body {
 }
 
 .newProjectContainer {
-    width: 400px;
+    width: 276px;
     /* background-color: orange; */
 }
 
@@ -190,7 +190,7 @@ h4 {
     /* justify-content: space-between; */
     /* justify-items: center; */
     /* background-color: blue; */
-    width: 276px;
+    /* width: 276px; */
     /* background-color: orange; */
 }
 
@@ -252,7 +252,7 @@ h4 {
     height: 2px;
     background-color: orange;
     border: none;
-    width: 310px;
+    /* width: 310px; */
     margin-left: 0px;
     margin-top: 20px;
 }
@@ -323,4 +323,26 @@ h4 {
     top: 0px; */
     margin-bottom: 0px;
     color: green;
+}
+
+.checkListHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+    /* background-color: orange; */
+    margin-bottom: 10px;
+}
+
+.addCheckListFormButton {
+    width:50px;
+    /* text-align: left; */
+}
+
+.checkListInputDiv {
+    display: flex;
+    gap: 5px;
+}
+
+.addItemButton {
+   
 }
