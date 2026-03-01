@@ -229,6 +229,7 @@ function eventController(){
         runDeleteTask()
         runAddTaskPriority()
         runAddTaskStatus()
+        runCreateCheckList()
       })      
   }
 runCreateTaskButton()
@@ -516,6 +517,7 @@ const runSaveChanges = function(){
            eventController().runAddTaskPriority()
            eventController().runAddTaskStatus()
            createCheckList(targetDiv).createContainer()
+           runCreateCheckList()
            const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
            todoDivContent.forEach((container) => {
             if(!container.querySelector('.currentDate')){
@@ -881,9 +883,12 @@ const runAddTaskStatus = function(){
   })
 }
 
-// const runCreateCheckList = function(){
-
-// }
+const runCreateCheckList = function(){
+  const createCheckListButton = document.querySelectorAll('.addCheckListFormButton')
+  createCheckListButton.forEach((button) => {
+    button.onclick = createCheckList().addCheckListForm
+  })
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -1858,14 +1863,24 @@ function createCheckList(targetDiv){
     const currentContainer = targetDiv.querySelectorAll('.todoDivContent')
     const checkListContainer = document.createElement('div')
     checkListContainer.classList.add('checkListContainer')
+
+    const checkListHeaderContainer = document.createElement('div')
+    checkListHeaderContainer.classList.add('checkListHeaderContainer')
+
     const checkListHeading = document.createElement('p')          
-    checkListHeading.textContent = 'Create Project Checklist'
+    checkListHeading.textContent = 'Todo Checklist'
+
+    const addCheckListFormButton = document.createElement('button')
+    addCheckListFormButton.classList.add('addCheckListFormButton')
+    addCheckListFormButton.textContent = 'Add'
 
     currentContainer.forEach((todoDivContainer) => {
       todoDivContainer.querySelector('.lineBreak').before(checkListContainer)
     })
 
-    checkListContainer.appendChild(checkListHeading)
+    checkListContainer.appendChild(checkListHeaderContainer)
+    checkListHeaderContainer.appendChild(checkListHeading)
+    checkListHeaderContainer.appendChild(addCheckListFormButton)
     console.log(targetDiv)
 
     // console.log(projectName)
@@ -1873,8 +1888,13 @@ function createCheckList(targetDiv){
   }
 
 
+  function addCheckListForm(){
+    document.body.style.backgroundColor = 'pink'
+  }
+
   return {
     createContainer,
+    addCheckListForm
   }
 }
 /*
