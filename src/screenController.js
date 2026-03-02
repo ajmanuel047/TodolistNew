@@ -866,7 +866,23 @@ const runCreateCheckList = function(){
     // console.log(this)
     // console.log(todo)
     // console.log(targetDiv)
-    button.onclick = createCheckList().addCheckListForm
+    button.onclick = function(){
+      const targetButton = this
+      createCheckList().addCheckListForm(targetButton)
+      runAddCheckItem()
+    }
+  })
+}
+
+const runAddCheckItem = function(){
+  
+  const addCheckItemButtons = document.querySelectorAll('.addItemButton')
+  addCheckItemButtons.forEach((currentButton) => {
+      currentButton.onclick = function(e){
+        const targetButton = this
+          createCheckList().addCheckItem(targetButton)
+          e.preventDefault()
+      }
   })
 }
   const getCurrentProjectName = () => currentProjectName
@@ -896,11 +912,13 @@ const runCreateCheckList = function(){
          }
 }
 
-function userInput(){
+function userInput(checkListInput){
+  // console.log(checkListInput)
   let projectNameInput;
   let headerTodoInput;
   let projectDescription;
   let note;
+  let checkInput;
   // let taskInput = null
   if(document.querySelector('.projectNameInput')){
     projectNameInput = document.querySelector('.projectNameInput').value
@@ -925,7 +943,9 @@ function userInput(){
     note = document.querySelector('.noteInput').value
     // console.log(note)
   }
- 
+ if(checkListInput){
+    checkInput = checkListInput.value
+ }
   
   
   const getUserInput = () => projectNameInput
@@ -933,6 +953,7 @@ function userInput(){
   const getHeaderTodoInput = () => headerTodoInput
   const getProjectDescription = () => projectDescription
   const getNoteInput = () => note
+  const getCheckInput = () => checkInput
   // const getTaskInput = () => taskInput
   // document.querySelector('.projectNameInput').value = ''
 
@@ -941,7 +962,8 @@ function userInput(){
     getTaskNameInput,
     getHeaderTodoInput,
     getProjectDescription,
-    getNoteInput 
+    getNoteInput,
+    getCheckInput 
     // getTaskInput 
   }
 }
@@ -1026,7 +1048,7 @@ function createTodoDescription(currentDiv){
 }
 
 function createTodoNote(currentDiv){
-      console.log(currentDiv)
+      // console.log(currentDiv)
       const todoDivContent = currentDiv.querySelectorAll('.todoDivContent')
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
@@ -1862,16 +1884,16 @@ function createCheckList(targetDiv, todo){
     checkListContainer.appendChild(checkListHeaderContainer)
     checkListHeaderContainer.appendChild(checkListHeading)
     checkListHeaderContainer.appendChild(addCheckListFormButton)
-    console.log(targetDiv)
+    // console.log(targetDiv)
 
     // console.log(projectName)
     // console.log(todo)
   }
 
 
-  function addCheckListForm(){
+  function addCheckListForm(targetButton){
     document.body.style.backgroundColor = 'pink'
-    const checkListContainer = this.parentElement.parentElement
+    const checkListContainer = targetButton.parentElement.parentElement
     // console.log(checkListContainer)
 
     if(!checkListContainer.querySelector('.checkListForm')){
@@ -1896,22 +1918,25 @@ function createCheckList(targetDiv, todo){
        checkListForm.appendChild(checkListInputDiv)
        checkListInputDiv.appendChild(checkListInput)
        checkListInputDiv.appendChild(addItemButton)
-       const currentContainer = this.parentElement.parentElement.parentElement.parentElement.parentElement
+       const currentContainer = targetButton.parentElement.parentElement.parentElement.parentElement.parentElement
        checkListForm.appendChild(saveButton)
-       this.parentElement.parentElement.querySelector('.addCheckListFormButton').remove()
-    }
-      // const checkListForm = document.createElement('form')
-      //  checkListForm.classList.add(`checkListForm`)
-      //  checkListContainer.appendChild(checkListForm)
-
-
+       targetButton.parentElement.parentElement.querySelector('.addCheckListFormButton').remove()
+       
+      }
           // console.log(projects)
+  }
 
+  function addCheckItem(targetButton){
+    document.body.style.backgroundColor = 'orange'
+    let checkInput = userInput(targetButton.parentElement.querySelector('.checkListInput')).getCheckInput()
+    targetButton.parentElement.querySelector('.checkListInput').value = ''
+    console.log(checkInput)
   }
 
   return {
     createContainer,
-    addCheckListForm
+    addCheckListForm,
+    addCheckItem
   }
 }
 /*
