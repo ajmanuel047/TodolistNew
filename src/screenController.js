@@ -1902,6 +1902,10 @@ function createCheckList(targetDiv, todo){
        checkListForm.classList.add(`checkListForm`)
        checkListContainer.appendChild(checkListForm)
       //  console.log('check')
+
+       const checkListDiv = document.createElement('div')
+       checkListDiv.classList.add('checkListDiv')
+
        const checkListInputDiv = document.createElement('div')
        checkListInputDiv.classList.add('checkListInputDiv')
 
@@ -1916,6 +1920,7 @@ function createCheckList(targetDiv, todo){
        saveButton.textContent = 'Save Checklist'  
        saveButton.classList.add('saveChecklist') 
    
+       checkListForm.appendChild(checkListDiv)
        checkListForm.appendChild(checkListInputDiv)
        checkListInputDiv.appendChild(checkListInput)
        checkListInputDiv.appendChild(addItemButton)
@@ -1928,7 +1933,7 @@ function createCheckList(targetDiv, todo){
   }
 
   function addCheckItem(targetButton){
-    document.body.style.backgroundColor = 'orange'
+    // document.body.style.backgroundColor = 'orange'
     let checkInput;
     if(targetButton.parentElement.querySelector('.checkListInput').value !== ''){
        checkInput = userInput(targetButton.parentElement.querySelector('.checkListInput')).getCheckInput()
@@ -1937,6 +1942,26 @@ function createCheckList(targetDiv, todo){
        const todo = targetButton.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
        const currentProjectName = targetButton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
        createTodoCheckList(currentProjectName, todo, checkInput)
+       let projects = allProjects().getProjects()
+       for(let i = 0; i < projects.length; i++){
+        if(projects[i]['projectName'] == currentProjectName){
+          for(let j = 0; j < projects[i]['todos'].length; j++){
+            if(projects[i]['todos'][j]['title'] == todo){
+              const value = projects[i]['todos'][j].checkList[projects[i]['todos'][j].checkList.length - 1]
+              const checkListItem = document.createElement('input')
+              checkListItem.setAttribute('type', 'checkbox')
+              const label = document.createElement('label')
+              label.textContent = value
+
+              const checkDiv = document.createElement('div')
+              checkDiv.classList.add('checkDiv')
+              targetButton.parentElement.parentElement.querySelector('.checkListDiv').appendChild(checkDiv)
+              checkDiv.appendChild(checkListItem)
+              checkDiv.appendChild(label)
+            }
+          }
+        }
+       }
       //  console.log(todo)
       }else{
         // if checklist input field is empty and you plan to submit 

@@ -342,8 +342,15 @@ h4 {
     display: flex;
     gap: 5px;
     margin-top: -19px;
+    /* margin-right: 10px; */
 }
 
 .saveChecklist {
    margin-top: 10px;
+}
+
+.checkListDiv {
+    /* background-color: orange; */
+    position: relative;
+    top: -23px;
 }
