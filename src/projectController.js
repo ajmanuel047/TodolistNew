@@ -236,6 +236,27 @@ function projectPriorityController(currentProjectName, todo){
     }
 }
 
+function createTodoCheckList(currentProjectName, todo, checkInput){
+  console.log(currentProjectName, todo, checkInput)
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['projectName'] == currentProjectName){
+        for(let j = 0; j < projects[i]['todos'].length; j++){
+          if(projects[i]['todos'][j]['title'] == todo){
+            if(!projects[i]['todos'][j]['checkList']){
+            console.log('no')
+            projects[i]['todos'][j]['checkList'] = []
+            projects[i]['todos'][j]['checkList'].push(checkInput)
+            
+          }else{
+            console.log('yes')
+            projects[i]['todos'][j]['checkList'].push(checkInput)
+          }
+        }
+      }
+    }
+  }
+  // console.log(projects)
+}
 function allProjects(value){
   
   const getProjects = () => projects
@@ -253,7 +274,8 @@ export {
         addNoteToProject,
         deleteProject,
         removeTaskFromArray,
-        projectPriorityController
+        projectPriorityController, 
+        createTodoCheckList
       }
 
 

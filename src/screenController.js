@@ -12,6 +12,7 @@ import { dateController } from "./projectController.js"
 import { ta } from "date-fns/locale";
 import { deleteProject } from "./projectController";
 import { removeTaskFromArray } from "./projectController";
+import { createTodoCheckList } from "./projectController";
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
@@ -1928,9 +1929,21 @@ function createCheckList(targetDiv, todo){
 
   function addCheckItem(targetButton){
     document.body.style.backgroundColor = 'orange'
-    let checkInput = userInput(targetButton.parentElement.querySelector('.checkListInput')).getCheckInput()
-    targetButton.parentElement.querySelector('.checkListInput').value = ''
-    console.log(checkInput)
+    let checkInput;
+    if(targetButton.parentElement.querySelector('.checkListInput').value !== ''){
+       checkInput = userInput(targetButton.parentElement.querySelector('.checkListInput')).getCheckInput()
+       targetButton.parentElement.querySelector('.checkListInput').value = ''
+       console.log(checkInput)
+       const todo = targetButton.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
+       const currentProjectName = targetButton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+       createTodoCheckList(currentProjectName, todo, checkInput)
+      //  console.log(todo)
+      }else{
+        // if checklist input field is empty and you plan to submit 
+        // second project, error message appears
+        // create an error message here if input is empty
+        console.log('nope')
+      }   
   }
 
   return {
