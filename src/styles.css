@@ -326,22 +326,28 @@ h4 {
 }
 
 .checkListHeaderContainer {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     /* gap: 10px; */
     /* background-color: orange; */
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.checkListForm {
+    margin-top: -10px;
 }
 
 .addCheckListFormButton {
     width:50px;
     /* text-align: left; */
+    margin-bottom: 0px;
+    
 }
 
 .checkListInputDiv {
     display: flex;
     gap: 5px;
-    margin-top: -19px;
+    margin-top: 0px;
     /* margin-right: 10px; */
 }
 
@@ -350,7 +356,23 @@ h4 {
 }
 
 .checkListDiv {
-    /* background-color: orange; */
-    position: relative;
-    top: -23px;
+    /* position: relative;
+    top: -23px; */
+    margin-top: 20px;
+}
+
+.addItemButton {
+    /* margin-top: 10px; */
+}
+
+.checkDiv {
+    /* margin-top: 10px; */
+    margin-left: -3px;
+    /* display: block; */
+}
+
+.checkDivAdjust {
+    margin-top: 30px;
+    margin-left: -3px;
+    background-color: aqua;
 }

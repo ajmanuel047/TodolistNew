@@ -404,7 +404,12 @@ const runSaveChanges = function(){
         let targetDiv = e.target.parentElement
         document.body.style.backgroundColor = 'skyblue'
         let projects = allProjects().getProjects()
-        if(e.target.className == 'saveChanges'){
+        if(e.target.classList == 'saveChanges' && e.target.parentElement.classList == 'checkListForm'){
+          console.log('it is checkList')
+          createCheckList().saveCheckList(targetDiv)
+          e.preventDefault()
+        }
+      else if (e.target.className == 'saveChanges'){
      //      console.log(typeof this.parentElement)
            let todoInput = this.parentElement.querySelector('.todoInput')
            let note = userInput().getNoteInput()
@@ -867,10 +872,13 @@ const runCreateCheckList = function(){
     // console.log(this)
     // console.log(todo)
     // console.log(targetDiv)
-    button.onclick = function(){
+    button.onclick = function(e){
       const targetButton = this
       createCheckList().addCheckListForm(targetButton)
       runAddCheckItem()
+      runSaveChanges()
+      console.log(e.target.classList)
+      console.log(targetButton)
     }
   })
 }
@@ -909,7 +917,8 @@ const runAddCheckItem = function(){
           runDeleteProject,
           runDeleteTask,
           runAddTaskPriority,
-          runAddTaskStatus
+          runAddTaskStatus,
+          runCreateCheckList
          }
 }
 
@@ -1871,7 +1880,8 @@ function createCheckList(targetDiv, todo){
     const checkListHeaderContainer = document.createElement('div')
     checkListHeaderContainer.classList.add('checkListHeaderContainer')
 
-    const checkListHeading = document.createElement('p')          
+    const checkListHeading = document.createElement('p') 
+    checkListHeading.classList.add('checkListHeading')         
     checkListHeading.textContent = 'Todo Checklist'
 
     const addCheckListFormButton = document.createElement('button')
@@ -1894,6 +1904,7 @@ function createCheckList(targetDiv, todo){
 
   function addCheckListForm(targetButton){
     document.body.style.backgroundColor = 'pink'
+    console.log(targetButton)
     const checkListContainer = targetButton.parentElement.parentElement
     // console.log(checkListContainer)
 
@@ -1918,7 +1929,7 @@ function createCheckList(targetDiv, todo){
 
        const saveButton = document.createElement('button');
        saveButton.textContent = 'Save Checklist'  
-       saveButton.classList.add('saveChecklist') 
+       saveButton.classList.add('saveChanges') 
    
        checkListForm.appendChild(checkListDiv)
        checkListForm.appendChild(checkListInputDiv)
@@ -1928,6 +1939,27 @@ function createCheckList(targetDiv, todo){
        checkListForm.appendChild(saveButton)
        targetButton.parentElement.parentElement.querySelector('.addCheckListFormButton').remove()
        
+      } else if(checkListContainer.querySelector('.checkListForm')){
+       const checkListInputDiv = document.createElement('div')
+       checkListInputDiv.classList.add('checkListInputDiv')
+
+       const checkListInput = document.createElement('input')
+       checkListInput.classList.add('checkListInput')
+
+       const addItemButton = document.createElement('button')
+       addItemButton.classList.add('addItemButton')
+       addItemButton.textContent = 'Add'
+
+       const saveButton = document.createElement('button');
+       saveButton.textContent = 'Save Checklist'  
+       saveButton.classList.add('saveChanges') 
+      // console.log(targetButton.parentElement.parentElement.querySelector('.checkListForm').appendChild(checkListInputDiv))
+       const checkListForm =   targetButton.parentElement.parentElement.querySelector('.checkListForm')
+       checkListForm.appendChild(checkListInputDiv)
+       checkListInputDiv.appendChild(checkListInput)
+       checkListInputDiv.appendChild(addItemButton)
+       checkListForm.appendChild(saveButton)
+       targetButton.parentElement.querySelector('.addCheckListFormButton').remove()
       }
           // console.log(projects)
   }
@@ -1971,10 +2003,28 @@ function createCheckList(targetDiv, todo){
       }   
   }
 
+  function saveCheckList(targetDiv){
+
+    const addCheckListFormButton = document.createElement('button')
+    addCheckListFormButton.classList.add('addCheckListFormButton')
+    addCheckListFormButton.textContent = 'Add'
+
+    const checkListHeading = targetDiv.parentElement.querySelector('.checkListHeading')
+    checkListHeading.after(addCheckListFormButton)
+    console.log(targetDiv)
+    targetDiv.querySelector('.saveChanges').remove()  
+    targetDiv.querySelector('.checkListInputDiv').remove()    
+    // targetDiv.querySelector('.checkDiv').classList.add('checkDivAdjust')
+    // targetDiv.querySelector('.checkDiv').classList.remove('checkDiv')
+    eventController().runCreateCheckList()
+   
+  }
+
   return {
     createContainer,
     addCheckListForm,
-    addCheckItem
+    addCheckItem,
+    saveCheckList
   }
 }
 /*
