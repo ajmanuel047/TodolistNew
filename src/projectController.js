@@ -5,7 +5,7 @@ import { formatDate } from "./dateformatter"
 import { projectImportance } from "./projectPriority"
 let projects = [
       {
-     'projectName': 'church',
+     'projectName': 'This Is A Sample Project',
      'todo' : [{'title' : 'Wake up early', 'Description' : 'So I can prepare for service'},
               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
     }

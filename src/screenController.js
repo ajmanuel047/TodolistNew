@@ -22,6 +22,7 @@ document.addEventListener('keydown', function(e){
 })
 
 
+
 const newProjectButton = (function(){
 
   const headerDiv = document.createElement('div')
@@ -48,6 +49,37 @@ const newProjectButton = (function(){
  // console.log(document.querySelector('.addTodo'))
   return { createNewProjectButton }
 })()
+
+function defaultProject(){
+      const projectContainer = document.createElement('div');
+      projectContainer.classList.add('projectContainer');
+      document.querySelector('.headerDiv').after(projectContainer);
+
+      const newProjectContainer = document.createElement('div');
+      newProjectContainer.classList.add('newProjectContainer');
+      document.querySelector('.projectContainer').appendChild(newProjectContainer);
+      
+      const titleContainer = document.createElement('div')
+      titleContainer.classList.add('titleContainer')
+      newProjectContainer.appendChild(titleContainer)
+
+      const projectName = document.createElement('h2');
+      projectName.classList.add('projectName');
+      projectName.textContent = 'Project Name';
+      titleContainer.appendChild(projectName);
+
+      let projects = allProjects().getProjects()
+      let currentProjectName = projects[0]['projectName']
+
+      let newProjectName = document.createElement('h2')
+      newProjectName.classList.add('newProjectName')
+      newProjectName.textContent = currentProjectName
+      
+      titleContainer.appendChild(newProjectName)
+      
+}
+
+defaultProject()
 
 function eventController(){
   let currentProjectName = null;
