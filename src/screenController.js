@@ -2008,6 +2008,16 @@ function createCheckList(targetDiv, todo){
         // second project, error message appears
         // create an error message here if input is empty
         console.log('nope')
+        if(!targetButton.parentElement.querySelector('.errorMessage')){
+           targetButton.parentElement.querySelector('.checkListInput').after(errorMessage())
+           targetButton.parentElement.querySelector('.errorMessage').style.marginTop = '23px'
+        //   this.after(document.querySelector('.todoInput'), errorMessage())
+          if(targetButton.parentElement.querySelector('.errorMessage')){
+             setTimeout(() => {
+               document.querySelector('.errorMessage').remove()
+            }, 2000)
+          }
+        }
       }   
   }
 
