@@ -877,8 +877,8 @@ const runCreateCheckList = function(){
       createCheckList().addCheckListForm(targetButton)
       runAddCheckItem()
       runSaveChanges()
-      console.log(e.target.classList)
-      console.log(targetButton)
+      // console.log(e.target.classList)
+      // console.log(targetButton)
     }
   })
 }
@@ -1927,16 +1927,16 @@ function createCheckList(targetDiv, todo){
        addItemButton.classList.add('addItemButton')
        addItemButton.textContent = 'Add'
 
-       const saveButton = document.createElement('button');
-       saveButton.textContent = 'Save Checklist'  
-       saveButton.classList.add('saveChanges') 
+      //  const saveButton = document.createElement('button');
+      //  saveButton.textContent = 'Save Checklist'  
+      //  saveButton.classList.add('saveChanges') 
    
        checkListForm.appendChild(checkListDiv)
        checkListForm.appendChild(checkListInputDiv)
        checkListInputDiv.appendChild(checkListInput)
        checkListInputDiv.appendChild(addItemButton)
        const currentContainer = targetButton.parentElement.parentElement.parentElement.parentElement.parentElement
-       checkListForm.appendChild(saveButton)
+      //  checkListForm.appendChild(saveButton)
        targetButton.parentElement.parentElement.querySelector('.addCheckListFormButton').remove()
        
       } else if(checkListContainer.querySelector('.checkListForm')){
@@ -1994,6 +1994,14 @@ function createCheckList(targetDiv, todo){
           }
         }
        }
+       if(!targetButton.parentElement.parentElement.parentElement.querySelector('.saveChanges')){
+        
+          const saveButton = document.createElement('button');
+          saveButton.textContent = 'Save Checklist'  
+          saveButton.classList.add('saveChanges') 
+          targetButton.parentElement.parentElement.appendChild(saveButton)
+          eventController().runSaveChanges()
+        }
       //  console.log(todo)
       }else{
         // if checklist input field is empty and you plan to submit 
