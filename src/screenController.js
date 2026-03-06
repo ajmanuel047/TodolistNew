@@ -86,12 +86,8 @@ function eventController(){
         if(!projectArray.includes(projectName)){
           // console.log('yes')
             inputFields.forEach((inputField) => {          
-            if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender'){
+            if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender' && inputField.className !== 'checkListInput'){
               if(inputField.value !== ''){
-              // console.log(note)
-            // console.log(this.parentElement.querySelector('.newProjectName'))  
-            // console.log(projectName)
-            //console.log(document.querySelector('.todoInput'))
                 if(projectName && document.querySelector('.projectNameInput') && !document.querySelector('.todoInput')){
                     newProject(projectName, currentProjectName)
                     // console.log('test')
@@ -128,55 +124,6 @@ function eventController(){
                     // addDate(projectName).getCreateButton()
                      runCalenderButton()
                      createCheckList(targetDiv).createContainer()
-                    //   createTodoButton()        
-                      // console.log(createNote().getNoteInput())
-                //      createNote(this.parentElement.querySelector('.newProjectName').textContent).getNoteInput()
-                    //document.querySelector('.descriptionInput').remove()
-                 //     createNote(this.parentElement.querySelector('.newProjectName').textContent).getDisplayNote()
-                    
-                   //   document.querySelector('.noteHeading').style.marginTop = '15px'
-                      // let targetDiv = e.target.parentElement
-                      // submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
-                      // createTask()
-                      // dateProjectWasCreated(projectName)
-                      // addDate(projectName).getCreateButton()
-                      // runCalenderButton()
-                        // if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
-                        //   document.querySelector('.projectName').remove()
-                        //   document.querySelector('.projectNameInput').remove()
-                        //   document.querySelector('.descriptionInput').remove()
-                        //   document.querySelector('.noteInput').remove()
-                        //   document.querySelector('.submitProject').remove()
-                        // }
-                    
-                  // }    
-                  //  else if(!document.querySelector('.todoInput')){
-                  // newProject(projectName, currentProjectName)
-                  // console.log('test')
-                  // console.log(allProjects().getProjects())
-                  // document.querySelector('.projectNameInput').remove()
-                  // document.querySelector('.submitProject').remove()
-                //    createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDescriptionInput()
-                  //document.querySelector('.descriptionInput').remove()
-              //      createDescription(this.parentElement.querySelector('.newProjectName').textContent).getDisplayDescription()
-              //      createNote(this.parentElement.querySelector('.newProjectName').textContent).getNoteInput()
-                    //document.querySelector('.descriptionInput').remove()
-              //      createNote(this.parentElement.querySelector('.newProjectName').textContent).getDisplayNote()
-                  //  document.querySelector('.noteHeading').style.marginTop = '15px'
-                    // dateProjectWasCreated(projectName)
-                    // addDate(projectName).getCreateButton()
-                    // runCalenderButton()
-                    // console.log(allProjects().getProjects())
-                    // document.querySelector('.projectNameInput').remove()
-                    // document.querySelector('.submitProject').remove()
-                    // if(document.querySelector('.descriptionInput') && document.querySelector('.projectName') && document.querySelector('.projectNameInput')){
-                    // document.querySelector('.projectName').remove()
-                    // document.querySelector('.projectNameInput').remove()
-                    // document.querySelector('.descriptionInput').remove()
-                    // document.querySelector('.noteInput').remove()
-                    // document.querySelector('.submitProject').remove()
-                    // }
-                  // }         
                     }
               }          
             }
