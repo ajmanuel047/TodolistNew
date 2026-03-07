@@ -88,7 +88,7 @@ function defaultProject(){
       deleteProject.classList.add('deleteProject')
       deleteProject.textContent = 'Delete Project'
 
-      newProjectContainer.appendChild(titleContainerButtonsDiv)
+      titleContainer.appendChild(titleContainerButtonsDiv)
       titleContainerButtonsDiv.appendChild(editProjectName)
       titleContainerButtonsDiv.appendChild(deleteProject)
 
@@ -115,6 +115,20 @@ function defaultProject(){
       todoDivTitle.appendChild(task)
       todoDivTitle.appendChild(addTodo)
 
+      const todoDivContent = document.createElement('div')
+      todoDivContent.classList.add('todoDivContent')
+
+      const todo = document.createElement('h4')
+      todo.classList.add('todo')
+      todo.textContent = projects[0]['todo'][0]['title']
+
+      const priority = document.createElement('p')
+      priority.classList.add('priority')
+      priority.textContent = 'Task Priority : '
+
+      todoDiv.appendChild(todoDivContent)
+      todoDivContent.appendChild(todo)
+      todoDivContent.appendChild(priority)
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
 }
