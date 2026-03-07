@@ -115,6 +115,8 @@ function defaultProject(){
       todoDivTitle.appendChild(task)
       todoDivTitle.appendChild(addTodo)
 
+      // eventController().runCreateTaskButton()
+      // eventController().runSaveChanges()
 }
 
 defaultProject()
@@ -460,8 +462,9 @@ const runSaveChanges = function(){
               
             if(todoInput){
             if(projects[i]['projectName'] == this.parentElement.querySelector('.newProjectName').textContent){
-             //   console.log(this.parentElement.querySelector('.newProjectName').textContent)
-                for(let j = 0; j < projects[i]['todos'].length; j++){
+           //   console.log(this.parentElement.querySelector('.newProjectName').textContent)
+               console.log(projects[i]['todos'])
+             for(let j = 0; j < projects[i]['todos'].length; j++){
                      newArr.push(projects[i]['todos'][j]['title'])
              //        console.log('check')
                   }
@@ -1191,7 +1194,7 @@ function createNewProjectContainer(){
       submitProject.textContent = 'Submit Project';      
       newProjectContainer.appendChild(submitProject);
       eventController().runSubmitProject()
-      // eventController().runCreateTaskButton()
+      
       // eventController().submitTask()
 
 }
