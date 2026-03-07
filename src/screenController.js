@@ -91,6 +91,10 @@ function defaultProject(){
       newProjectContainer.appendChild(titleContainerButtonsDiv)
       titleContainerButtonsDiv.appendChild(editProjectName)
       titleContainerButtonsDiv.appendChild(deleteProject)
+
+      eventController().runEditButton()
+      eventController().runDeleteProject()
+      console.log(projects)
       
       
 }
