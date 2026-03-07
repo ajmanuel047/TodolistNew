@@ -76,6 +76,22 @@ function defaultProject(){
       newProjectName.textContent = currentProjectName
       
       titleContainer.appendChild(newProjectName)
+
+      const titleContainerButtonsDiv = document.createElement('div')
+      titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+    
+      const editProjectName = document.createElement('button')
+      editProjectName.classList.add('editProjectName')
+      editProjectName.textContent = 'Edit'
+
+      const deleteProject = document.createElement('button')
+      deleteProject.classList.add('deleteProject')
+      deleteProject.textContent = 'Delete Project'
+
+      newProjectContainer.appendChild(titleContainerButtonsDiv)
+      titleContainerButtonsDiv.appendChild(editProjectName)
+      titleContainerButtonsDiv.appendChild(deleteProject)
+      
       
 }
 
