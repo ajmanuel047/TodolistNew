@@ -96,7 +96,25 @@ function defaultProject(){
       eventController().runDeleteProject()
       console.log(projects)
       
+      const todoDiv = document.createElement('div')
+      todoDiv.classList.add('todoDiv')
+
+      const todoDivTitle = document.createElement('div')
+      todoDivTitle.classList.add('todoDivTitle')
+
+      const task = document.createElement('h3')
+      task.classList.add('task')
+      task.textContent = 'Task'
+
+      const addTodo = document.createElement('button')
+      addTodo.classList.add('createNewTodo')
+      addTodo.textContent = 'Add Todo'
       
+      newProjectContainer.appendChild(todoDiv)
+      todoDiv.appendChild(todoDivTitle)
+      todoDivTitle.appendChild(task)
+      todoDivTitle.appendChild(addTodo)
+
 }
 
 defaultProject()

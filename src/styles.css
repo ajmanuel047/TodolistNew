@@ -291,6 +291,7 @@ h4 {
 .titleContainerButtonsDiv, .taskButtonsDiv {
     display: flex;
     gap: 5px;
+    margin-top: 10px;
 }
 
 .taskButtonsDiv {
