@@ -126,9 +126,38 @@ function defaultProject(){
       priority.classList.add('priority')
       priority.textContent = 'Task Priority : '
 
+      const taskButtonsDiv = document.createElement('div')
+      taskButtonsDiv.classList.add('taskButtonsDiv')
+
+      const editTodo = document.createElement('button')
+      editTodo.classList.add('editTodoButton')
+      editTodo.textContent = 'Edit'
+
+      const deleteTask = document.createElement('button')
+      deleteTask.classList.add('deleteTask')
+      deleteTask.textContent = 'Delete Task'
+
+      const priorityButton = document.createElement('button')
+      priorityButton.classList.add('priorityButton')
+      priorityButton.textContent = 'Priority'
+
+      const taskStatusButton = document.createElement('button')
+      taskStatusButton.classList.add('taskStatusButton')
+      taskStatusButton.textContent = 'Task Status'
+
+
+
+
       todoDiv.appendChild(todoDivContent)
       todoDivContent.appendChild(todo)
       todoDivContent.appendChild(priority)
+      todoDivContent.appendChild(taskButtonsDiv)
+      
+
+      taskButtonsDiv.appendChild(editTodo)
+      taskButtonsDiv.appendChild(deleteTask)
+      taskButtonsDiv.appendChild(priorityButton)
+      taskButtonsDiv.appendChild(taskStatusButton)
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
 }
