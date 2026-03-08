@@ -7,7 +7,7 @@ import { createTodo } from "./projectController";
 import { addDescriptionToProject } from "./projectController";
 import { addNoteToProject } from "./projectController";
 import { formatDate } from "./dateformatter"
-import { formatRFC7231 } from "date-fns"
+import { add, formatRFC7231 } from "date-fns"
 import { dateController } from "./projectController.js"
 import { ta } from "date-fns/locale";
 import { deleteProject } from "./projectController";
@@ -234,9 +234,71 @@ function defaultProject(){
       dueDateDiv.appendChild(dueDateButton)
 
       eventController().runCalenderButton()
-      
+
+      const checkListContainer = document.createElement('div')
+      checkListContainer.classList.add('checkListContainer')
+
+      const checkListHeaderContainer = document.createElement('div')
+      checkListHeaderContainer.classList.add('checkListHeaderContainer')
+
+      const checkListHeading = document.createElement('p')
+      checkListHeading.classList.add('checkListHeading')
+      checkListHeading.textContent = 'Todo CheckList'
+
+      const addCheckListFormButton = document.createElement('button')
+      addCheckListFormButton.classList.add('addCheckListFormButton')
+      addCheckListFormButton.textContent = 'Add'
+
+      todoDivContent.appendChild(checkListContainer)
+      checkListContainer.appendChild(checkListHeaderContainer)
+      checkListHeaderContainer.appendChild(checkListHeading)
+      checkListHeaderContainer.appendChild(addCheckListFormButton)
+
+      eventController().runCreateCheckList()
+
+      const checkListForm = document.createElement('form')
+      checkListForm.classList.add(`checkListForm`)
+      checkListContainer.appendChild(checkListForm)
+      //  console.log('check')
+
+      const checkListDiv = document.createElement('div')
+      checkListDiv.classList.add('checkListDiv')      
+
+      const checkDiv = document.createElement('div')
+      checkDiv.classList.add('checkDiv')    
+
+      const checkListItem = document.createElement('input')
+      checkListItem.setAttribute('type', 'checkbox')
+      checkListItem.classList.add('checkListItem')
+      const label = document.createElement('label')
+      label.textContent = projects[0]['todos'][0]['checkList'][0]
+      checkListItem.checked = true
+
+      const checkDiv2 = document.createElement('div')
+      checkDiv2.classList.add('checkDiv')
+
+      const checkListItem2 = document.createElement('input')
+      checkListItem2.setAttribute('type', 'checkbox')
+      checkListItem2.classList.add('checkListItem')
+      const label2 = document.createElement('label')
+      label2.textContent = projects[0]['todos'][0]['checkList'][1]
+      checkListItem2.checked = true
+
+      checkListForm.appendChild(checkListDiv)
+      checkListDiv.appendChild(checkDiv)
+   
+      checkDiv.appendChild(checkListItem)      
+      checkDiv.appendChild(label)
+
+      checkListDiv.appendChild(checkDiv2)
+      checkDiv2.appendChild(checkListItem2)  
+      checkDiv2.appendChild(label2) 
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
+      const lineBreak = document.createElement('hr')
+      lineBreak.classList.add('lineBreak')
+      todoDivContent.appendChild(lineBreak)
+      
 }
 
 defaultProject()
@@ -2110,7 +2172,7 @@ function createCheckList(targetDiv, todo){
     if(targetButton.parentElement.querySelector('.checkListInput').value !== ''){
        checkInput = userInput(targetButton.parentElement.querySelector('.checkListInput')).getCheckInput()
        targetButton.parentElement.querySelector('.checkListInput').value = ''
-       console.log(checkInput)
+      //  console.log(checkInput)
        const todo = targetButton.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
        const currentProjectName = targetButton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
        createTodoCheckList(currentProjectName, todo, checkInput)
@@ -2130,6 +2192,7 @@ function createCheckList(targetDiv, todo){
               targetButton.parentElement.parentElement.querySelector('.checkListDiv').appendChild(checkDiv)
               checkDiv.appendChild(checkListItem)
               checkDiv.appendChild(label)
+              console.log(allProjects().getProjects())
             }
           }
         }
@@ -2175,7 +2238,7 @@ function createCheckList(targetDiv, todo){
     // targetDiv.querySelector('.checkDiv').classList.add('checkDivAdjust')
     // targetDiv.querySelector('.checkDiv').classList.remove('checkDiv')
     eventController().runCreateCheckList()
-   
+   console.log(allProjects().getProjects())
   }
 
   return {
