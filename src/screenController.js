@@ -212,6 +212,7 @@ function defaultProject(){
       noteContentDiv.appendChild(note)
       noteDiv.appendChild(editNote)
 
+      eventController().runEditNote()
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
 }
