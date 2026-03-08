@@ -188,6 +188,30 @@ function defaultProject(){
 
       eventController().runEditDescription()
 
+      const noteDiv = document.createElement('div')
+      noteDiv.classList.add('noteDiv')
+
+      const noteHeading = document.createElement('h5')
+      noteHeading.classList.add('noteHeading')
+      noteHeading.textContent = 'Note'
+
+      const noteContentDiv = document.createElement('div')
+      noteContentDiv.classList.add('noteContentDiv')
+
+      const note = document.createElement('p')
+      note.classList.add('note')
+      note.textContent = projects[0]['todos'][0]['ProjectNote']
+
+      const editNote = document.createElement('button')
+      editNote.classList.add('editNote')
+      editNote.textContent = 'Edit'
+
+      todoDivContent.appendChild(noteDiv)
+      noteDiv.appendChild(noteHeading)
+      noteDiv.appendChild(noteContentDiv)
+      noteContentDiv.appendChild(note)
+      noteDiv.appendChild(editNote)
+
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
 }
