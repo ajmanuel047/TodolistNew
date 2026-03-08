@@ -6,7 +6,7 @@ import { projectImportance } from "./projectPriority"
 let projects = [
       {
      'projectName': 'This Is A Sample Project',
-     'todos' : [{'title' : 'Sample Todo 1', 'Description' : 'So I can prepare for service'},
+     'todos' : [{'title' : 'Sample Todo 1', 'Description' : 'Sample Description 1'},
               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
     }
 ]

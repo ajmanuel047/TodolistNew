@@ -146,8 +146,6 @@ function defaultProject(){
       taskStatusButton.textContent = 'Task Status'
 
 
-
-
       todoDiv.appendChild(todoDivContent)
       todoDivContent.appendChild(todo)
       todoDivContent.appendChild(priority)
@@ -163,6 +161,33 @@ function defaultProject(){
       eventController().runDeleteTask()
       eventController().runAddTaskPriority()
       eventController().runAddTaskStatus()
+
+      const descriptionDiv = document.createElement('div')
+      descriptionDiv.classList.add('descriptionDiv')
+
+      const descriptionHeading = document.createElement('h5')
+      descriptionHeading.classList.add('descriptionHeading')
+      descriptionHeading.textContent = 'Describe Task'
+
+      const descriptionContentDiv = document.createElement('div')
+      descriptionContentDiv.classList.add('descriptionContentDiv')
+
+      const description = document.createElement('p')
+      description.classList.add('description')
+      description.textContent = projects[0]['todos'][0]['Description']
+
+      const editDescription = document.createElement('button')
+      editDescription.classList.add('editDescription')
+      editDescription.textContent = 'Edit'
+
+      todoDivContent.appendChild(descriptionDiv)
+      descriptionDiv.appendChild(descriptionHeading)
+      descriptionDiv.appendChild(descriptionContentDiv)
+      descriptionContentDiv.appendChild(description)
+      descriptionDiv.appendChild(editDescription)
+
+      eventController().runEditDescription()
+
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
 }
