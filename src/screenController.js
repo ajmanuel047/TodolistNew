@@ -174,7 +174,7 @@ function defaultProject(){
 
       const description = document.createElement('p')
       description.classList.add('description')
-      description.textContent = projects[0]['todos'][0]['Description']
+      description.textContent = projects[0]['todos'][0]['description']
 
       const editDescription = document.createElement('button')
       editDescription.classList.add('editDescription')
@@ -200,7 +200,7 @@ function defaultProject(){
 
       const note = document.createElement('p')
       note.classList.add('note')
-      note.textContent = projects[0]['todos'][0]['ProjectNote']
+      note.textContent = projects[0]['todos'][0]['projectNote']
 
       const editNote = document.createElement('button')
       editNote.classList.add('editNote')
@@ -213,6 +213,28 @@ function defaultProject(){
       noteDiv.appendChild(editNote)
 
       eventController().runEditNote()
+
+      const dateDiv = document.createElement('div')
+      dateDiv.classList.add('dateDiv')
+
+      const currentDate = document.createElement('p')
+      currentDate.classList.add('currentDate')
+      currentDate.textContent = projects[0]['todos'][0]['dateCreated']
+      
+      const dueDateDiv = document.createElement('div')
+      dueDateDiv.classList.add('dueDateDiv')
+
+      const dueDateButton = document.createElement('button')
+      dueDateButton.classList.add('dueDateButton')
+      dueDateButton.textContent = 'Add Due Date'
+
+      todoDivContent.appendChild(dateDiv)
+      dateDiv.appendChild(currentDate)
+      dateDiv.appendChild(dueDateDiv)
+      dueDateDiv.appendChild(dueDateButton)
+
+      eventController().runCalenderButton()
+      
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
 }
