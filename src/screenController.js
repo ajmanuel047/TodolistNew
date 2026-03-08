@@ -120,7 +120,7 @@ function defaultProject(){
 
       const todo = document.createElement('h4')
       todo.classList.add('todo')
-      todo.textContent = projects[0]['todo'][0]['title']
+      todo.textContent = projects[0]['todos'][0]['title']
 
       const priority = document.createElement('p')
       priority.classList.add('priority')
@@ -158,6 +158,11 @@ function defaultProject(){
       taskButtonsDiv.appendChild(deleteTask)
       taskButtonsDiv.appendChild(priorityButton)
       taskButtonsDiv.appendChild(taskStatusButton)
+
+      eventController().runTodoEditButton()
+      eventController().runDeleteTask()
+      eventController().runAddTaskPriority()
+      eventController().runAddTaskStatus()
       // eventController().runCreateTaskButton()
       // eventController().runSaveChanges()
 }
@@ -393,15 +398,15 @@ const runTodoEditButton = function(){
       editTodoButtons.forEach((buttons) => {
       buttons.onclick = function(e){
       // document.body.style.backgroundColor = 'purple'
-      console.log(this.parentElement.parentElement.children)
+      // console.log(this.parentElement.parentElement.children)
       let arr = [].slice.call(this.parentElement.parentElement.children)
-      console.log(arr)
+      // console.log(arr)
       let currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
    
        if(buttons.textContent == 'Save'){
         // console.log(currentTodo)
-        console.log('na')
-        console.log(currentProjectName)
+        // console.log('na')
+        // console.log(currentProjectName)
          buttons.textContent = 'Edit'
          currentTodo.setAttribute('contenteditable', false)
          currentTodo.classList.remove('editContent')
@@ -412,7 +417,7 @@ const runTodoEditButton = function(){
         //  adjust the saveCompletedisplay because it not moving when the text
         //  is longer
          this.parentElement.parentElement.parentElement.querySelector('.todoDivTitle').appendChild(saveCompletedisplay)
-        console.log(this.parentElement.parentElement)
+        // console.log(this.parentElement.parentElement)
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
@@ -432,9 +437,9 @@ const runTodoEditButton = function(){
       } 
       else if(buttons.textContent == 'Edit'){
       for(let i = 0; i < arr.length; i++){
-        console.log(arr[i].className)
+        // console.log(arr[i].className)
         if(arr[i].className == 'todo'){
-          console.log(this)
+          // console.log(this)
           previousTodo = this.parentElement.parentElement.children[i].textContent
           currentTodo = this.parentElement.parentElement.children[i]
           // console.log(currentTodo)

@@ -6,7 +6,7 @@ import { projectImportance } from "./projectPriority"
 let projects = [
       {
      'projectName': 'This Is A Sample Project',
-     'todo' : [{'title' : 'Sample Todo 1', 'Description' : 'So I can prepare for service'},
+     'todos' : [{'title' : 'Sample Todo 1', 'Description' : 'So I can prepare for service'},
               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
     }
 ]
@@ -101,6 +101,7 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
     if(projects[i]['projectName'] == currentProjectName){
       // console.log(currentProjectName)
       // console.log(projects[i]['todos'])
+      console.log(projects[0]['todos'])
       for(let j = 0; j < projects[i]['todos'].length; j++){
         // console.log(projects[i]['todos'][j]['title'])
         // console.log('me')
