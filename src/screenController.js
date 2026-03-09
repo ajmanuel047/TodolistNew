@@ -301,7 +301,7 @@ function defaultProject(){
       
 }
 
-defaultProject()
+// defaultProject()
 
 function eventController(){
   let currentProjectName = null;
@@ -603,7 +603,7 @@ const runSaveChanges = function(){
       saveChangesButtons.forEach((button) => {
         button.onclick = function(e){
         let targetDiv = e.target.parentElement
-        document.body.style.backgroundColor = 'skyblue'
+       
         let projects = allProjects().getProjects()
         if(e.target.classList == 'saveChanges' && e.target.parentElement.classList == 'checkListForm'){
           console.log('it is checkList')
@@ -612,6 +612,7 @@ const runSaveChanges = function(){
         }
       else if (e.target.className == 'saveChanges'){
      //      console.log(typeof this.parentElement)
+      document.body.style.backgroundColor = 'skyblue'
            let todoInput = this.parentElement.querySelector('.todoInput')
            let note = userInput().getNoteInput()
          //   console.log(this)
@@ -701,7 +702,7 @@ const runSaveChanges = function(){
             }
            })   
           }          
-          // console.log(targetDiv)
+          console.log(targetDiv)
            eventController().runEditDescription()
            eventController().runEditNote(currentProjectName)
            eventController().runDeleteTask()
@@ -1222,36 +1223,33 @@ function createTodoButton (targetDiv){
 function createTodoDescription(currentDiv){
   const currentProjectName = document.querySelectorAll('.newProjectName')
   const projects = allProjects().getProjects()
-  // console.log('checking')
-  // console.log(targetDiv.querySelector('.todoDivContent'))
-  // for(let i = 0; i < projects.length; i++){
-  //   if(projects[i]['projectName'] == currentProjectName.textContent){
-  //     console.log(currentProjectName.textContent)
-  // console.log(currentDiv)
-      // let currentDiv = targetDiv.querySelector('.todoDivContent')
-      const descriptionDiv = document.createElement('div')
-      descriptionDiv.classList.add('descriptionDiv')
-      if(currentDiv.className == 'todoInput'){
-        currentDiv.after(descriptionDiv)
-      }else {
-        currentDiv.appendChild(descriptionDiv)
-      }
-      
 
-      const descriptionHeading = document.createElement('h5')
-      descriptionHeading.classList.add('descriptionHeading')
-      descriptionHeading.textContent = 'Describe Task'
-      descriptionDiv.appendChild(descriptionHeading)
+  const descriptionDiv = document.createElement('div')
+  descriptionDiv.classList.add('descriptionDiv')
+  if(currentDiv.className == 'todoInput'){
+    currentDiv.after(descriptionDiv)
+    // console.log(currentDiv)
+  }else {
+      // console.log(currentDiv)
+    currentDiv.querySelector('.lineBreak').before(descriptionDiv)
+    // console.log(currentDiv)
+  }
+  
 
-      const descriptionContentDiv = document.createElement('div')
-      descriptionContentDiv.classList.add('descriptionContentDiv')
-      descriptionDiv.appendChild(descriptionContentDiv)
-      
+  const descriptionHeading = document.createElement('h5')
+  descriptionHeading.classList.add('descriptionHeading')
+  descriptionHeading.textContent = 'Describe Task'
+  descriptionDiv.appendChild(descriptionHeading)
 
-      const descriptionInput = document.createElement('input')
-      descriptionInput.classList.add('descriptionInput')
-      descriptionInput.placeholder = 'Describe Your Task'
-      descriptionDiv.appendChild(descriptionInput)
+  const descriptionContentDiv = document.createElement('div')
+  descriptionContentDiv.classList.add('descriptionContentDiv')
+  descriptionDiv.appendChild(descriptionContentDiv)
+
+
+  const descriptionInput = document.createElement('input')
+  descriptionInput.classList.add('descriptionInput')
+  descriptionInput.placeholder = 'Describe Your Task'
+  descriptionDiv.appendChild(descriptionInput)
 
 
   //   }
@@ -1264,12 +1262,26 @@ function createTodoNote(currentDiv){
       const todoDivContent = currentDiv.querySelectorAll('.todoDivContent')
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
-        
+
+  //       if(currentDiv.className == 'todoInput'){
+  //   currentDiv.after(descriptionDiv)
+  //   console.log(currentDiv)
+  // }else {
+  //     console.log(currentDiv)
+  //   currentDiv.querySelector('.lineBreak').appendChild(descriptionDiv)
+  //   console.log(currentDiv)
+  // }
+        // console.log(currentDiv.className)
       //  console.log(todoDivContent)
       todoDivContent.forEach((container) => {
           // console.log('yes')
           // console.log(container)
-        container.appendChild(noteDiv)
+        if(container.querySelector('.lineBreak')){
+          container.querySelector('.lineBreak').before(noteDiv)
+        }else{
+          container.appendChild(noteDiv)       
+        }
+
       })
 
       const noteHeading = document.createElement('h5')
@@ -1693,7 +1705,7 @@ function updateDropDown (projectName) {
   // console.log(arr)
 
     for(let i = 0; i < projects.length; i++){
-      console.log(projects)
+      // console.log(projects)
     //  console.log(projects[i]['projectName'])
       if(!arr.includes(projects[i]['projectName'])){
         const options = document.createElement('option')
@@ -1780,8 +1792,8 @@ function submitTodo (targetButton) {
 
                 const lineBreak = document.createElement('hr')
                 lineBreak.classList.add('lineBreak')
-                targetDiv.querySelector('.todoDiv').appendChild(lineBreak)
-                
+                targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
+                console.log('checking')
                 eventController().runTodoEditButton()
                 eventController().runAddMoreInfoButton(targetDiv)
             }
@@ -1820,8 +1832,9 @@ function submitTodo (targetButton) {
  }
 
  function addMoreInfo (currentDiv) {
-  console.log(this.parentElement)
+  // console.log(this.parentElement)
   // document.body.style.backgroundColor = 'orange'  
+  // createTodoButton()
   createTodoDescription(this.parentElement)
   createTodoNote(this.parentElement.parentElement)
 
@@ -1829,9 +1842,12 @@ function submitTodo (targetButton) {
   const saveButton = document.createElement('button');
   saveButton.textContent = 'Save Changes'  
   saveButton.classList.add('saveChanges')          
-  this.parentElement.appendChild(saveButton)
+  this.parentElement.querySelector('.lineBreak').before(saveButton)
   eventController().runSaveChanges()
+  this.parentElement.querySelector('.editTodoButton').remove()
   this.parentElement.querySelector('.addMoreInfo').remove()
+
+  // this.parentElement.querySelector('.editTodoButton').remove()
  }
 
 function createDate (targetDiv, projectName, todo){
@@ -1841,7 +1857,11 @@ function createDate (targetDiv, projectName, todo){
     dateDiv.classList.add('dateDiv')
     const todoDivContents = targetDiv.querySelectorAll('.todoDivContent')
     todoDivContents.forEach((todoDivContainer) => {
-    todoDivContainer.appendChild(dateDiv)
+      if(todoDivContainer.querySelector('.lineBreak')){
+        todoDivContainer.querySelector('.lineBreak').before(dateDiv)
+      }else{
+        todoDivContainer.appendChild(dateDiv)
+      }    
     })    
   }
 
@@ -2090,8 +2110,14 @@ function createCheckList(targetDiv, todo){
     addCheckListFormButton.classList.add('addCheckListFormButton')
     addCheckListFormButton.textContent = 'Add'
 
+    // console.log(currentContainer)
     currentContainer.forEach((todoDivContainer) => {
-      todoDivContainer.querySelector('.lineBreak').before(checkListContainer)
+      // console.log(todoDivContainer.querySelector('.lineBreak'))
+      if(!todoDivContainer.querySelector('.checkListContainer')){
+        if(todoDivContainer.querySelector('.lineBreak')){
+          todoDivContainer.querySelector('.lineBreak').before(checkListContainer)
+        } 
+      }     
     })
 
     checkListContainer.appendChild(checkListHeaderContainer)
@@ -2106,7 +2132,7 @@ function createCheckList(targetDiv, todo){
 
   function addCheckListForm(targetButton){
     document.body.style.backgroundColor = 'pink'
-    console.log(targetButton)
+    // console.log(targetButton)
     const checkListContainer = targetButton.parentElement.parentElement
     // console.log(checkListContainer)
 
@@ -2256,4 +2282,11 @@ THAT SOLUTION INTO CODE. YOU NEED TO VISUALIZE IT BEFORE YOU START WRITING
 THE CODE. ALSO, THE BASICS OF CODING IS THAT YOU HAVE TO BREAK A COMPLEX
 PROBLEM INTO SMALLER PIECES OR PROBLEMS AND SOLVE THEM. BEFORE YOU KNOW
 IT YOU WILL HAVE GOTTEN THE OVERALL SOLUTION OF WHAT YOU ARE TRYING TO DO
+*/
+
+/* several scenerios i have not yet worked on
+1. when you add todo from headertodo and without saving you add another todo,
+it creates an issue when you click the addmoreinfo button for the first 
+and maybe the second
+2. i need to put date close to todo name
 */
