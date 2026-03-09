@@ -1092,6 +1092,7 @@ const runAddCheckItem = function(){
   addCheckItemButtons.forEach((currentButton) => {
       currentButton.onclick = function(e){
         const targetButton = this
+        console.log('check')
           createCheckList().addCheckItem(targetButton)
           e.preventDefault()
       }
@@ -2203,12 +2204,16 @@ function createCheckList(targetDiv, todo){
        const currentProjectName = targetButton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
        createTodoCheckList(currentProjectName, todo, checkInput)
        let projects = allProjects().getProjects()
+       let value;
        for(let i = 0; i < projects.length; i++){
         if(projects[i]['projectName'] == currentProjectName){
           for(let j = 0; j < projects[i]['todos'].length; j++){
             if(projects[i]['todos'][j]['title'] == todo){
-              const value = projects[i]['todos'][j].checkList[projects[i]['todos'][j].checkList.length - 1]
-              const checkListItem = document.createElement('input')
+              value = projects[i]['todos'][j].checkList[projects[i]['todos'][j].checkList.length - 1]
+
+            }
+          }
+                        const checkListItem = document.createElement('input')
               checkListItem.setAttribute('type', 'checkbox')
               const label = document.createElement('label')
               label.textContent = value
@@ -2219,8 +2224,6 @@ function createCheckList(targetDiv, todo){
               checkDiv.appendChild(checkListItem)
               checkDiv.appendChild(label)
               console.log(allProjects().getProjects())
-            }
-          }
         }
        }
        if(!targetButton.parentElement.parentElement.parentElement.querySelector('.saveChanges')){
