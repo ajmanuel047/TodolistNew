@@ -94,7 +94,7 @@ function defaultProject(){
 
       eventController().runEditButton()
       eventController().runDeleteProject()
-      console.log(projects)
+      // console.log(projects)
       
       const todoDiv = document.createElement('div')
       todoDiv.classList.add('todoDiv')
@@ -301,7 +301,7 @@ function defaultProject(){
       
 }
 
-// defaultProject()
+defaultProject()
 
 function eventController(){
   let currentProjectName = null;
@@ -611,7 +611,7 @@ const runSaveChanges = function(){
           e.preventDefault()
         }
       else if (e.target.className == 'saveChanges'){
-     //      console.log(typeof this.parentElement)
+          console.log(typeof this.parentElement)
       document.body.style.backgroundColor = 'skyblue'
            let todoInput = this.parentElement.querySelector('.todoInput')
            let note = userInput().getNoteInput()
@@ -699,10 +699,40 @@ const runSaveChanges = function(){
             if(container.querySelector('.todo').textContent == currentTodo){
              createNote(currentProjectName, note, currentTodo).getNoteInput()
              createNote(currentProjectName, note, currentTodo, targetDiv).getDisplayNote()
+          
+             const priority = document.createElement('p')
+             priority.classList.add('priority')
+             priority.textContent = 'Task Priority : '
+
+             const taskButtonsDiv = document.createElement('div')
+             taskButtonsDiv.classList.add('taskButtonsDiv')
+
+             const editTodo = document.createElement('button')
+             editTodo.classList.add('editTodoButton')
+             editTodo.textContent = 'Edit'
+
+             const deleteTask = document.createElement('button')
+             deleteTask.classList.add('deleteTask')
+             deleteTask.textContent = 'Delete Task'
+
+             const priorityButton = document.createElement('button')
+             priorityButton.classList.add('priorityButton')
+             priorityButton.textContent = 'Priority'
+
+             const taskStatusButton = document.createElement('button')
+             taskStatusButton.classList.add('taskStatusButton')
+             taskStatusButton.textContent = 'Task Status'
+
+             container.querySelector('.todo').after(priority)
+             priority.after(taskButtonsDiv)
+             taskButtonsDiv.appendChild(editTodo)
+             taskButtonsDiv.appendChild(deleteTask)
+             taskButtonsDiv.appendChild(priorityButton)
+             taskButtonsDiv.appendChild(taskStatusButton)
             }
            })   
           }          
-          console.log(targetDiv)
+          // console.log(targetDiv)
            eventController().runEditDescription()
            eventController().runEditNote(currentProjectName)
            eventController().runDeleteTask()
@@ -723,7 +753,7 @@ const runSaveChanges = function(){
            })
          }
          else {
-          console.log(arr[arr.length - 1])
+          // console.log(arr[arr.length - 1])
             // console.log('it does')
             // console.log(this)
             todoAlreadyExistMessage(this)
@@ -1794,7 +1824,7 @@ function submitTodo (targetButton) {
                 const lineBreak = document.createElement('hr')
                 lineBreak.classList.add('lineBreak')
                 targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
-                console.log('checking')
+                // console.log('checking')
                 eventController().runTodoEditButton()
                 eventController().runAddMoreInfoButton(targetDiv)
             }
@@ -1808,7 +1838,7 @@ function submitTodo (targetButton) {
         }
     }
     else if(!document.querySelector('.selectProject').value){  
-      console.log('check') 
+      // console.log('check') 
     if(!document.querySelector('.selectProjectErrorMessage')){
       const selectProjectErrorMessage = document.createElement('p')
       selectProjectErrorMessage.textContent = 'Please Select And/Or Create A Project' 
@@ -2223,7 +2253,7 @@ function createCheckList(targetDiv, todo){
               targetButton.parentElement.parentElement.querySelector('.checkListDiv').appendChild(checkDiv)
               checkDiv.appendChild(checkListItem)
               checkDiv.appendChild(label)
-              console.log(allProjects().getProjects())
+              // console.log(allProjects().getProjects())
         }
        }
        if(!targetButton.parentElement.parentElement.parentElement.querySelector('.saveChanges')){
@@ -2261,13 +2291,13 @@ function createCheckList(targetDiv, todo){
 
     const checkListHeading = targetDiv.parentElement.querySelector('.checkListHeading')
     checkListHeading.after(addCheckListFormButton)
-    console.log(targetDiv)
+    // console.log(targetDiv)
     targetDiv.querySelector('.saveChanges').remove()  
     targetDiv.querySelector('.checkListInputDiv').remove()    
     // targetDiv.querySelector('.checkDiv').classList.add('checkDivAdjust')
     // targetDiv.querySelector('.checkDiv').classList.remove('checkDiv')
     eventController().runCreateCheckList()
-   console.log(allProjects().getProjects())
+  //  console.log(allProjects().getProjects())
   }
 
   return {

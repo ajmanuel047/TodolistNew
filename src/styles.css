@@ -223,8 +223,8 @@ h4 {
 }
 
 .dueDate {
-    margin-top: -10px;
-    margin-bottom: 5px;
+    margin-top: -5px;
+    margin-bottom: 10px;
 }
 
 .changeDueDate {
@@ -317,7 +317,7 @@ h4 {
 
 .statusText {
     position: relative;
-    top: -30px;
+    top: -27px;
     /* display: inline;
     position: absolute; */
     font-size: 0.7rem;
