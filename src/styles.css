@@ -145,7 +145,7 @@ h4 {
     /* font-style: italic; */
 }
 
-.saveChanges {
+.saveChanges, .saveNewChanges {
     margin-top: 17px;
 }
 
@@ -378,3 +378,4 @@ h4 {
     margin-left: -3px;
     background-color: aqua;
 }
+

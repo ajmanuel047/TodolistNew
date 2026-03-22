@@ -89,32 +89,31 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
     })
       // console.log(projects)
  }
-
+  let newarr = []
  function editTodo(){
   //  console.log('test')
   // console.log(projects)
   //  console.log(currentTodo)
   //  console.log(currentProjectName)
    // console.log(currentTodo)
+  //  console.log('test')
+
   for(let i = 0; i < projects.length; i++){
+    
   // console.log(projects[i]['projectName'])
     if(projects[i]['projectName'] == currentProjectName){
-      // console.log(currentProjectName)
-      // console.log(projects[i]['todos'])
-      console.log(projects[0]['todos'])
+      console.log(projects[i])
       for(let j = 0; j < projects[i]['todos'].length; j++){
-        // console.log(projects[i]['todos'][j]['title'])
-        // console.log('me')
         if(projects[i]['todos'][j]['title'] == previousTodo){
-          // console.log(previousTodo)
-          // console.log(currentTodo)
           projects[i]['todos'][j]['title'] = currentTodo
-          
-        }
+          // return
+          // console.log('testing123')
+          console.log(projects)  
+        }       
       }
     }
   }
- // console.log(projects)
+//  console.log(projects)
  }
  
   const createObject = () => pushTodo()
@@ -128,8 +127,8 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 
 function dateController(currentProjectName, calenderValues, todo){
     //  console.log(todo)
-      //   console.log(currentProjectName)
-      //  console.log(calenderValues)
+    //     console.log(currentProjectName)
+    //    console.log(calenderValues)
       //  console.log(projects[0]['Project Name'])
     for(let i = 0; i < projects.length; i++){
         if(projects[i]['projectName'] == currentProjectName){
