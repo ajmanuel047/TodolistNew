@@ -1257,21 +1257,15 @@ function addTaskButtons(container, currentProjectName, todo, projectContainer){
     eventController().runCalenderButton()
     createCheckList(projectContainer).createContainer()
     // createCheckList(container).createContainer()
-    // eventController().runEditDescription()
-    // eventController().runEditNote(currentProjectName)
-    // eventController().runDeleteTask()
-    // eventController().runAddTaskPriority()
-    // eventController().runAddTaskStatus()
-    // eventController().runTodoEditButton()
-    // createCheckList(targetDiv).createContainer()
-    // eventController().runCreateCheckList()
 
-    // console.log('start from here')
-    /*
-    you trying to separate the saveChanges added by the header to
-    so start from changing the class name savechanges for the todo
-    added by header todo
-    */
+    eventController().runEditDescription()
+    eventController().runEditNote(currentProjectName)
+    eventController().runDeleteTask()
+    eventController().runAddTaskPriority()
+    eventController().runAddTaskStatus()
+    eventController().runTodoEditButton()
+    // createCheckList(targetDiv).createContainer()
+    eventController().runCreateCheckList()
 }
 
 
