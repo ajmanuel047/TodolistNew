@@ -379,3 +379,7 @@ h4 {
     background-color: aqua;
 }
 
+.todoDivContent_2 .errorMessage{
+    margin-top: 3px;
+    /* background-color: blue; */
+}

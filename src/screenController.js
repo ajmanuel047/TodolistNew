@@ -1163,16 +1163,41 @@ const saveTodoChangesAddedFromHeader = function(){
   newChangesButton.forEach((button) => {
     button.onclick = function(e){
       // document.body.style.backgroundColor = 'coral'
-      const container = e.target.parentElement
-      const todo = container.querySelector('.todo')
-      const projectContainer = e.target.parentElement.parentElement.parentElement
-      const currentProjectName = e.target.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-      let projects = allProjects().getProjects()
-      for(let i = 0; i < projects.length; i++){
-        if(projects[i]['projectName'] == currentProjectName){
-          // console.log('yes it is')
-          addTaskButtons(container, currentProjectName, todo.textContent, projectContainer)
-          e.target.remove()
+      if(userInput().getProjectDescription() !== '' && userInput().getNoteInput() !== ''){
+        // console.log(userInput().getProjectDescription())
+        // console.log(userInput().getNoteInput())
+        const container = e.target.parentElement
+        const todo = container.querySelector('.todo')
+        const projectContainer = e.target.parentElement.parentElement.parentElement
+        const currentProjectName = e.target.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+        let projects = allProjects().getProjects()
+        for(let i = 0; i < projects.length; i++){
+          if(projects[i]['projectName'] == currentProjectName){
+            // console.log('yes it is')
+            addTaskButtons(container, currentProjectName, todo.textContent, projectContainer)
+            e.target.remove()
+          }
+        }
+      }else{       
+        if(userInput().getProjectDescription() == ''){
+          // console.log('description empty')
+          // console.log(e.target.parentElement)
+          e.target.parentElement.classList.add('todoDivContent_2')
+         if(!e.target.parentElement.querySelector('.errorMessage')){
+           e.target.parentElement.querySelector('.descriptionDiv').appendChild(errorMessage())
+           setTimeout(() => {
+           e.target.parentElement.querySelector('.errorMessage').remove()
+           }, 2000)
+         }         
+        }else if(userInput().getNoteInput() == ''){
+          // console.log('note is empty')
+          if(!e.target.parentElement.querySelector('.errorMessage')){
+         //   e.target.parentElement.querySelector('.errorMessage').remove()
+            e.target.parentElement.querySelector('.noteDiv').appendChild(errorMessage())
+            setTimeout(() => {
+            e.target.parentElement.querySelector('.errorMessage').remove()
+            }, 2000)
+          } 
         }
       }
       
@@ -1987,7 +2012,7 @@ function submitTodo (targetButton) {
 
   createDate(currentDiv.parentElement.parentElement).getDateDiv()
   const saveButton = document.createElement('button');
-  saveButton.textContent = 'Save Changes'  
+  saveButton.textContent = 'Submit Changes'  
   saveButton.classList.add('saveNewChanges')          
   currentDiv.parentElement.querySelector('.lineBreak').before(saveButton)
   
@@ -2244,7 +2269,7 @@ function addTaskStatus(){
 
 function createCheckList(targetDiv, todo){
   // let currentDiv = null
-  console.log(targetDiv)
+  // console.log(targetDiv)
   function createContainer(){
     // document.body.style.backgroundColor = 'orange'
     // currentDiv = targetDiv
