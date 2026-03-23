@@ -344,7 +344,7 @@ function eventController(){
               if(inputField.value !== ''){
                 if(projectName && document.querySelector('.projectNameInput') && !document.querySelector('.todoInput')){
                     newProject(projectName, currentProjectName)
-                    // console.log('test')
+                    console.log('test')
                     // console.log(allProjects().getProjects())
                     document.querySelector('.projectNameInput').remove()
                     targetDiv = e.target.parentElement
@@ -354,33 +354,32 @@ function eventController(){
                   }
                   else if(projectName && document.querySelector('.todoInput')){
                     // console.log('cjeck')
+                    // console.log(e.target.parentElement)
                     if(document.querySelector('.todoInput').value !== '' && document.querySelector('.descriptionInput').value !== '' && document.querySelector('.noteInput').value !== ''){
                         newProject(projectName, currentProjectName)
                         // console.log('test2')
-                        // console.log(allProjects().getProjects())
+
                         document.querySelector('.projectNameInput').remove()
                         targetDiv = e.target.parentElement
                         submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                         createTask()
                         document.querySelector('.submitProject').remove()
-                    
-                  // console.log(description)
-                  // console.log(targetDiv)
-                    createDescription(projectName, todo[0]).getDescriptionInput()
-                    //document.querySelector('.descriptionInput').remove()
-                    createDescription(projectName, todo[0], targetDiv).getDisplayDescription()
-                    // createDate(targetDiv).getDateDiv()
-                 //   console.log(userInput().getNoteInput())
-                    createNote(projectName, note, todo[0]).getNoteInput()
-                    createNote(projectName, note, todo[0], targetDiv).getDisplayNote()
-                    createDate(targetDiv, projectName).getDateProjectWasCreated()
-                    addDate(targetDiv).getCreateButton()
-                    // addDate(projectName).getCreateButton()
-                     runCalenderButton()
-                     createCheckList(targetDiv).createContainer()
-                    }
-              }          
-            }
+
+                        createDescription(projectName, todo[0]).getDescriptionInput()
+                        //document.querySelector('.descriptionInput').remove()
+                        createDescription(projectName, todo[0], targetDiv).getDisplayDescription()
+                        // createDate(targetDiv).getDateDiv()
+                    //   console.log(userInput().getNoteInput())
+                        createNote(projectName, note, todo[0]).getNoteInput()
+                        createNote(projectName, note, todo[0], targetDiv).getDisplayNote()
+                        createDate(targetDiv, projectName).getDateProjectWasCreated()
+                        addDate(targetDiv).getCreateButton()
+                        // addDate(projectName).getCreateButton()
+                        runCalenderButton()
+                        createCheckList(targetDiv).createContainer()
+                      }
+                    }          
+                  }
           else if(inputField.value == ''){            
                 if(!document.querySelector('.errorMessage')){
                 inputField.after(errorMessage())
@@ -618,7 +617,8 @@ const runSaveChanges = function(){
           e.preventDefault()
         }
       else if (e.target.className == 'saveChanges'){
-          // console.log('check 2')
+          console.log('check 2')
+         // e.target.parentElement.querySelector('.todoDivTitle').querySelector('.lineBreak').remove()
       // document.body.style.backgroundColor = 'skyblue'
            let todoInput = this.parentElement.querySelector('.todoInput')
            let note = userInput().getNoteInput()
@@ -653,7 +653,7 @@ const runSaveChanges = function(){
             if(todoInput){
             if(projects[i]['projectName'] == this.parentElement.querySelector('.newProjectName').textContent){
            //   console.log(this.parentElement.querySelector('.newProjectName').textContent)
-               console.log(projects[i]['todos'])
+              //  console.log(projects[i]['todos'])
              for(let j = 0; j < projects[i]['todos'].length; j++){
                      newArr.push(projects[i]['todos'][j]['title'])
                     // console.log('check 6')
@@ -793,26 +793,6 @@ const runAddTodo = function (){
      //   document.body.style.backgroundColor = 'blue'
         document.querySelector('.addTodo').textContent = 'Use The Below To Add Todo To Any Project'
         createTodoInputAndButton()
-
-        // const headerTodoDiv = document.querySelector('.headerTodoDiv')
-        // const descriptionDiv = document.createElement('div')
-        // descriptionDiv.classList.add('descriptionDiv')
-        // headerTodoDiv.appendChild(descriptionDiv)
-
-        // const descriptionHeading = document.createElement('h5')
-        // descriptionHeading.classList.add('descriptionHeading')
-        // descriptionHeading.textContent = 'Describe Task'
-        // descriptionDiv.appendChild(descriptionHeading)
-
-        // const descriptionContentDiv = document.createElement('div')
-        // descriptionContentDiv.classList.add('descriptionContentDiv')
-        // descriptionDiv.appendChild(descriptionContentDiv)
-      
-       
-        // const descriptionInput = document.createElement('input')
-        // descriptionInput.classList.add('descriptionInput')
-        // descriptionInput.placeholder = 'Describe Your Task'
-        // descriptionDiv.appendChild(descriptionInput)
         
         eventController().runUpdateDropDown()
         eventController().runtodoSubmitButton()
@@ -1577,6 +1557,11 @@ function displayProject(){
 function createTask(currentProjectName, newProjectNameDiv){
    
   function createInputAndButton (){    
+    // console.log(this.parentElement.querySelector('.lineBreak'))
+    if(this.parentElement.querySelector('.lineBreak')){
+      this.parentElement.querySelector('.lineBreak').remove()
+    }
+
     if(!document.querySelector('.todoInput')){
    // document.body.style.backgroundColor = 'blue'
     setTimeout(() => {
