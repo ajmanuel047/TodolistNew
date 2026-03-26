@@ -2019,9 +2019,11 @@ function submitTodo (targetButton) {
  }
 
  function addMoreInfo (currentDiv) {
-// console.log(currentDiv.parentElement)
+console.log(currentDiv.parentElement)
   createTodoDescription(currentDiv.parentElement)
   createTodoNote(currentDiv.parentElement.parentElement)
+
+  currentDiv.parentElement.querySelector('.descriptionDiv').style.marginTop = '-10px'
 
   createDate(currentDiv.parentElement.parentElement).getDateDiv()
   const saveButton = document.createElement('button');
