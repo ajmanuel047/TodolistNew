@@ -532,8 +532,19 @@ const runTodoEditButton = function(){
       buttons.onclick = function(e){
       // document.body.style.backgroundColor = 'purple'
       // console.log(this.parentElement.parentElement.children)
+      console.log(this.parentElement.parentElement)
+      console.log(e.target.parentElement.parentElement)
+      console.log('start from here')
+      /*
+      first thing first is to try and delete existing taskbuttonsdiv
+      when a new one is created
+      */
+      // console.log(this.parentElement)
+      // console.log(this.parentElement.parentElement)
+      // console.log(this.parentElement.parentElement.children)
       let arr = [].slice.call(this.parentElement.parentElement.children)
       // console.log(arr)
+      
       let currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
    
        if(buttons.textContent == 'Save'){
@@ -575,8 +586,12 @@ const runTodoEditButton = function(){
          }         
       } 
       else if(buttons.textContent == 'Edit'){
+        // console.log('yes')
+        // console.log(arr)
       for(let i = 0; i < arr.length; i++){
         // console.log(arr[i].className)
+        
+        // console.log(this)
         if(arr[i].className == 'todo'){
           // console.log(this)
           previousTodo = this.parentElement.parentElement.children[i].textContent
@@ -811,6 +826,7 @@ const runtodoSubmitButton = function (){
   const todoSubmitButton = document.querySelector('.todoSubmitButton')
   todoSubmitButton.onclick = function (e){        
     submitTodo(e.target)
+    runTodoEditButton()
   }
 //  eventController().runAddMoreInfoButton()
 }
@@ -1063,7 +1079,7 @@ const runSaveDueDate = function(){
 const runAddMoreInfoButton = function (){
   const moreInfoButton = document.querySelector('.addMoreInfo')
   moreInfoButton.onclick = function(e){
-    let currentDiv = e.target
+    let currentDiv = e.target.parentElement
     addMoreInfo(currentDiv)
     
     eventController().runSaveChanges()
@@ -1154,7 +1170,12 @@ const saveTodoChangesAddedFromHeader = function(){
         for(let i = 0; i < projects.length; i++){
           if(projects[i]['projectName'] == currentProjectName){
             // console.log('yes it is')
-            addTaskButtons(container, currentProjectName, todo.textContent, projectContainer)
+            if(e.target.parentElement.querySelector('.taskButtonsDiv')){
+              e.target.parentElement.querySelector('.taskButtonsDiv').remove()
+              addTaskButtons(container, currentProjectName, todo.textContent, projectContainer)
+              e.target.parentElement.querySelector('.todo').style.marginBottom = '30px'
+              console.log(e.target.parentElement.querySelector('.todo'))
+            }            
             e.target.remove()
           }
         }
@@ -1932,6 +1953,10 @@ function submitTodo (targetButton) {
                 currentTodo.classList.add('todo')
                 currentTodo.textContent = projects[i]['todos'][j]['title']
 
+                currentTodo.style.marginBottom = '5px'
+                const taskButtonsDiv = document.createElement('div')
+                taskButtonsDiv.classList.add('taskButtonsDiv')
+
                 const editTodoButton = document.createElement('button')
                 editTodoButton.textContent = 'Edit'
                 editTodoButton.classList.add('editTodoButton')
@@ -1942,10 +1967,12 @@ function submitTodo (targetButton) {
 
                 const todoDivContent = document.createElement('div')
                 todoDivContent.classList.add('todoDivContent')
+
                 targetDiv.querySelector('.todoDiv').appendChild(todoDivContent)
                 todoDivContent.appendChild(currentTodo)
-                todoDivContent.appendChild(editTodoButton)
-                todoDivContent.appendChild(moreInfoButton)
+                todoDivContent.appendChild(taskButtonsDiv)
+                taskButtonsDiv.appendChild(editTodoButton)
+                taskButtonsDiv.appendChild(moreInfoButton)
 
                 const lineBreak = document.createElement('hr')
                 lineBreak.classList.add('lineBreak')
@@ -1953,6 +1980,7 @@ function submitTodo (targetButton) {
                 // console.log('checking')
                 
                 eventController().runAddMoreInfoButton(targetDiv)
+                
                 // console.log('check 3')
             }
           }

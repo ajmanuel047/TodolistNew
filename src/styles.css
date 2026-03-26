@@ -107,6 +107,8 @@ h3 {
 h4 {
     font-size: 1.5rem;
     margin-top: 10px;
+    /* height: 10px; */
+    /* margin-bottom: 10px; */
 }
 
 .task {
@@ -280,8 +282,8 @@ h4 {
 .addMoreInfo {
     font-size: 0.6rem;
     position: relative;
-    top: -19px;
-    left: 35px;
+    /* top: -19px; */
+    /* left: 35px; */
     margin-bottom: 0px;
     /* height: 21px; */
     /* margin-left: 3px; */
@@ -291,11 +293,11 @@ h4 {
 .titleContainerButtonsDiv, .taskButtonsDiv {
     display: flex;
     gap: 5px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .taskButtonsDiv {
-    /* margin-top: -28px; */
+    /* margin-top: 5px; */
     /* background-color: aqua; */
 }
 
@@ -382,4 +384,8 @@ h4 {
 .todoDivContent_2 .errorMessage{
     margin-top: 3px;
     /* background-color: blue; */
+}
+
+.todoDivContent {
+    /* background-color: orange; */
 }
