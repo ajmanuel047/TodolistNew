@@ -374,7 +374,7 @@ function eventController(){
                         createNote(projectName, note, todo[0], targetDiv).getDisplayNote()
                         createDate(targetDiv, projectName).getDateProjectWasCreated()
                         addDate(targetDiv).getCreateButton()
-                        // addDate(projectName).getCreateButton()
+                        // console.log('checklist check')
                         runCalenderButton()
                         createCheckList(targetDiv).createContainer()
                       }
@@ -627,7 +627,7 @@ const runSaveChanges = function(){
        
         let projects = allProjects().getProjects()
         if(e.target.classList == 'saveChanges' && e.target.parentElement.classList == 'checkListForm'){
-          console.log('it is checkList')
+          // console.log('it is checkList')
           createCheckList().saveCheckList(targetDiv)
           e.preventDefault()
         }
@@ -1147,7 +1147,7 @@ const runAddCheckItem = function(){
   addCheckItemButtons.forEach((currentButton) => {
       currentButton.onclick = function(e){
         const targetButton = this
-        console.log('check')
+        // console.log('check')
           createCheckList().addCheckItem(targetButton)
           e.preventDefault()
       }
@@ -2307,9 +2307,18 @@ function createCheckList(targetDiv, todo){
     currentContainer.forEach((todoDivContainer) => {
       // console.log(todoDivContainer.querySelector('.lineBreak'))
       if(!todoDivContainer.querySelector('.checkListContainer')){
+      // console.log('check if running')
         if(todoDivContainer.querySelector('.saveNewChanges')){
+        // console.log('confirm if running')
           todoDivContainer.querySelector('.saveNewChanges').before(checkListContainer)
-        } 
+          // console.log('start from here')
+          /*
+          no checklist adding when adding project. it adds only when todo
+          is added from header
+          */
+        } else{
+          todoDivContainer.querySelector('.lineBreak').before(checkListContainer)
+        }
       }     
     })
 
