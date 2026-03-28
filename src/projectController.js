@@ -190,7 +190,7 @@ projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
  }
 
  function deleteProject(currentProjectName){
-  console.log(currentProjectName)
+  // console.log(currentProjectName)
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['projectName'] == currentProjectName){
         projects.splice(i, 1)        
@@ -199,7 +199,7 @@ projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
  }
 
 function removeTaskFromArray(projectName, todo){
-  console.log(projectName, todo)
+  // console.log(projectName, todo)
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['projectName'] == projectName){
       for(let j = 0; j < projects[i]['todos'].length; j++){

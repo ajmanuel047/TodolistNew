@@ -334,9 +334,9 @@ function eventController(){
         let description = userInput().getProjectDescription()
         let note = userInput().getNoteInput()
         let todo = userInput().getTaskNameInput()
-        let inputFields = document.querySelectorAll('input')
+        let inputFields = e.target.parentElement.querySelectorAll('input')
         let targetDiv = null
-        // console.log(inputFields)
+        console.log(e.target.parentElement.querySelectorAll('input'))
 
         let projectArray = projects.map((arr) => {
           return arr.projectName
@@ -346,15 +346,16 @@ function eventController(){
             inputFields.forEach((inputField) => {          
             if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender' && inputField.className !== 'checkListInput'){
               if(inputField.value !== ''){
+                console.log('is field empty')
                 if(projectName && document.querySelector('.projectNameInput') && !document.querySelector('.todoInput')){
                     newProject(projectName, currentProjectName)
                     console.log('test')
                     // console.log(allProjects().getProjects())
-                    document.querySelector('.projectNameInput').remove()
+                    e.target.parentElement.querySelector('.projectNameInput').remove()
                     targetDiv = e.target.parentElement
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                     createTask()
-                    document.querySelector('.submitProject').remove()
+                    e.target.remove()
                   }
                   else if(projectName && document.querySelector('.todoInput')){
                     // console.log('cjeck')
@@ -362,35 +363,41 @@ function eventController(){
                     if(document.querySelector('.todoInput').value !== '' && document.querySelector('.descriptionInput').value !== '' && document.querySelector('.noteInput').value !== ''){
                         newProject(projectName, currentProjectName)
                         // console.log('test2')
-
-                        document.querySelector('.projectNameInput').remove()
+                    //    console.log(e.target)
+                    //    console.log(e.target.parentElement.querySelector('.projectNameInput'))
+                        e.target.parentElement.querySelector('.projectNameInput').remove()
                         targetDiv = e.target.parentElement
                         submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                         createTask()
-                        document.querySelector('.submitProject').remove()
+                       
 
                         createDescription(projectName, todo[0]).getDescriptionInput()
-                        //document.querySelector('.descriptionInput').remove()
-                        createDescription(projectName, todo[0], targetDiv).getDisplayDescription()
+                                              
+                        createDescription(projectName, todo[0], targetDiv, e).getDisplayDescription()
+                        e.target.parentElement.querySelector('.descriptionInput').remove()
+                        
                         createDate(targetDiv).getDateDiv()
                     //   console.log(userInput().getNoteInput())
                         createNote(projectName, note, todo[0]).getNoteInput()
                         createNote(projectName, note, todo[0], targetDiv).getDisplayNote()
+                        e.target.parentElement.querySelector('.noteInput').remove()
                         createDate(targetDiv, projectName, todo).getDateProjectWasCreated()
                         addDate(targetDiv).getCreateButton()
                         // console.log('checklist check')
                         runCalenderButton()
                         createCheckList(targetDiv).createContainer()
+                        e.target.remove()
                       }
                     }          
                   }
           else if(inputField.value == ''){            
                 if(!document.querySelector('.errorMessage')){
                 inputField.after(errorMessage())
-                console.log(this.parentElement)
-                this.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
+                // console.log(this.parentElement)
+                // console.log(e.target.parentElement.querySelector('.errorMessage'))
+                e.target.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
                 setTimeout(() => {
-                document.querySelector('.errorMessage').remove()
+                e.target.parentElement.querySelector('.errorMessage').remove()
                 }, 2000) 
               }   
             } 
@@ -1179,7 +1186,9 @@ const saveTodoChangesAddedFromHeader = function(){
               addTaskButtons(container, currentProjectName, todo.textContent, projectContainer)
               e.target.parentElement.querySelector('.todo').style.marginBottom = '30px'
              // console.log(e.target.parentElement.querySelector('.todo'))
-            }            
+            }       
+            e.target.parentElement.querySelector('.descriptionInput').remove()     
+            e.target.parentElement.querySelector('.noteInput').remove()     
             e.target.remove()
           }
         }
@@ -1527,36 +1536,7 @@ function createNewProjectContainer(){
       createNewTodo.classList.add('createNewTodo')
       createNewTodo.classList.add(`${taskbuttonNumber().getNewCount()}`)
       createNewTodo.textContent = 'Add Todo';
-      todoTitleDiv.appendChild(createNewTodo);
-
-
-
-      // const descriptionDiv = document.createElement('div')
-      // descriptionDiv.classList.add('descriptionDiv')
-      // newProjectContainer.appendChild(descriptionDiv)
-
-      // const descriptionHeading = document.createElement('h3')
-      // descriptionHeading.classList.add('descriptionHeading')
-      // descriptionHeading.textContent = 'Describe Your Project'
-      // descriptionDiv.appendChild(descriptionHeading)
-
-      // const descriptionInput = document.createElement('input')
-      // descriptionInput.classList.add('descriptionInput')
-      // descriptionInput.placeholder = 'Describe Your Project'
-      // descriptionDiv.appendChild(descriptionInput)
-
-      // const noteDiv = document.createElement('div')
-      // noteDiv.classList.add('noteDiv')
-      // newProjectContainer.appendChild(noteDiv)
-
-      // const noteHeading = document.createElement('h3')
-      // noteHeading.classList.add('noteHeading')
-      // noteHeading.textContent = 'Add Notes On Project Below'
-      // noteDiv.appendChild(noteHeading)
-
-      // const noteInput = document.createElement('input')
-      // noteInput.classList.add('noteInput')
-      // noteDiv.appendChild(noteInput)      
+      todoTitleDiv.appendChild(createNewTodo);   
 
       const submitProject = document.createElement('button')
       submitProject.classList.add('submitProject');
@@ -1743,19 +1723,11 @@ function newProject(projectName, currentProjectName){
 }
 
 
-function createDescription (projectName, todo, targetDiv){ 
-  // console.log(projectName)
-  // console.log(todo)
-  // console.log(targetDiv)
+function createDescription (projectName, todo, targetDiv, e){ 
+
   function descriptionInput () {
-    // console.log(document.querySelector('.descriptionInput'))
      const description = userInput().getProjectDescription()
-    //  console.log(description)
-    // console.log(document.querySelector('.descriptionInput'))
      addDescriptionToProject(projectName, description, todo)
-    //  document.querySelector('.descriptionInput').remove()
-    // console.log(projectName)
-    // console.log('description') 
 
   }
 
@@ -1779,7 +1751,8 @@ function createDescription (projectName, todo, targetDiv){
             description.textContent = projects[i]['todos'][j]['description']     
           }
         }        
-        document.querySelector('.descriptionInput').remove()
+       
+       
         descriptionContentDiv.forEach((div) => {
           div.appendChild(description)
           div.after(editDescription)
@@ -1831,7 +1804,7 @@ function createNote (projectName, note, todo, targetDiv){
             note.textContent = projects[i]['todos'][j]['projectNote']            
           }
         }   
-        document.querySelector('.noteInput').remove()     
+        // document.querySelector('.noteInput').remove()     
         noteContentDiv.forEach((div) => {
           div.appendChild(note)
           div.after(editNote)
