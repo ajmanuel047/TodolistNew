@@ -57,6 +57,7 @@ function defaultProject(){
 
       const newProjectContainer = document.createElement('div');
       newProjectContainer.classList.add('newProjectContainer');
+      newProjectContainer.classList.add('defaultProject');
       document.querySelector('.projectContainer').appendChild(newProjectContainer);
       
       const titleContainer = document.createElement('div')
@@ -122,6 +123,27 @@ function defaultProject(){
       todo.classList.add('todo')
       todo.textContent = projects[0]['todos'][0]['title']
 
+      const dateDiv = document.createElement('div')
+      dateDiv.classList.add('dateDiv')
+
+      const currentDate = document.createElement('p')
+      currentDate.classList.add('currentDate')
+      currentDate.textContent = projects[0]['todos'][0]['dateCreated']
+      
+      const dueDateDiv = document.createElement('div')
+      dueDateDiv.classList.add('dueDateDiv')
+
+      const dueDateButton = document.createElement('button')
+      dueDateButton.classList.add('dueDateButton')
+      dueDateButton.textContent = 'Add Due Date'
+
+     
+      dateDiv.appendChild(currentDate)
+      dateDiv.appendChild(dueDateDiv)
+      dueDateDiv.appendChild(dueDateButton)
+
+      eventController().runCalenderButton()
+
       const priority = document.createElement('p')
       priority.classList.add('priority')
       priority.textContent = 'Task Priority : '
@@ -131,11 +153,11 @@ function defaultProject(){
 
       const editTodo = document.createElement('button')
       editTodo.classList.add('editTodoButton')
-      editTodo.textContent = 'Edit'
+      editTodo.textContent = 'Edit Task'
 
       const deleteTask = document.createElement('button')
       deleteTask.classList.add('deleteTask')
-      deleteTask.textContent = 'Delete Task'
+      deleteTask.textContent = 'Delete'
 
       const priorityButton = document.createElement('button')
       priorityButton.classList.add('priorityButton')
@@ -148,8 +170,10 @@ function defaultProject(){
 
       todoDiv.appendChild(todoDivContent)
       todoDivContent.appendChild(todo)
+     
       todoDivContent.appendChild(priority)
       todoDivContent.appendChild(taskButtonsDiv)
+       todoDivContent.appendChild(dateDiv)
       
 
       taskButtonsDiv.appendChild(editTodo)
@@ -214,26 +238,6 @@ function defaultProject(){
 
       eventController().runEditNote()
 
-      const dateDiv = document.createElement('div')
-      dateDiv.classList.add('dateDiv')
-
-      const currentDate = document.createElement('p')
-      currentDate.classList.add('currentDate')
-      currentDate.textContent = projects[0]['todos'][0]['dateCreated']
-      
-      const dueDateDiv = document.createElement('div')
-      dueDateDiv.classList.add('dueDateDiv')
-
-      const dueDateButton = document.createElement('button')
-      dueDateButton.classList.add('dueDateButton')
-      dueDateButton.textContent = 'Add Due Date'
-
-      todoDivContent.appendChild(dateDiv)
-      dateDiv.appendChild(currentDate)
-      dateDiv.appendChild(dueDateDiv)
-      dueDateDiv.appendChild(dueDateButton)
-
-      eventController().runCalenderButton()
 
       const checkListContainer = document.createElement('div')
       checkListContainer.classList.add('checkListContainer')
@@ -368,11 +372,11 @@ function eventController(){
                         createDescription(projectName, todo[0]).getDescriptionInput()
                         //document.querySelector('.descriptionInput').remove()
                         createDescription(projectName, todo[0], targetDiv).getDisplayDescription()
-                        // createDate(targetDiv).getDateDiv()
+                        createDate(targetDiv).getDateDiv()
                     //   console.log(userInput().getNoteInput())
                         createNote(projectName, note, todo[0]).getNoteInput()
                         createNote(projectName, note, todo[0], targetDiv).getDisplayNote()
-                        createDate(targetDiv, projectName).getDateProjectWasCreated()
+                        createDate(targetDiv, projectName, todo).getDateProjectWasCreated()
                         addDate(targetDiv).getCreateButton()
                         // console.log('checklist check')
                         runCalenderButton()
@@ -732,7 +736,7 @@ const runSaveChanges = function(){
 
              const editTodo = document.createElement('button')
              editTodo.classList.add('editTodoButton')
-             editTodo.textContent = 'Edit'
+             editTodo.textContent = 'Edit Task'
 // console.log(targetDiv)
 //              const deleteTask = document.createElement('button')
 //              deleteTask.classList.add('deleteTask')
@@ -1174,7 +1178,7 @@ const saveTodoChangesAddedFromHeader = function(){
               e.target.parentElement.querySelector('.taskButtonsDiv').remove()
               addTaskButtons(container, currentProjectName, todo.textContent, projectContainer)
               e.target.parentElement.querySelector('.todo').style.marginBottom = '30px'
-              console.log(e.target.parentElement.querySelector('.todo'))
+             // console.log(e.target.parentElement.querySelector('.todo'))
             }            
             e.target.remove()
           }
@@ -1250,15 +1254,15 @@ function addTaskButtons(container, currentProjectName, todo, projectContainer){
 
     const editTodo = document.createElement('button')
     editTodo.classList.add('editTodoButton')
-    editTodo.textContent = 'Edit'
+    editTodo.textContent = 'Edit Task'
 
     const deleteTask = document.createElement('button')
     deleteTask.classList.add('deleteTask')
-    deleteTask.textContent = 'Delete Task'
+    deleteTask.textContent = 'Delete'
 
     const priorityButton = document.createElement('button')
     priorityButton.classList.add('priorityButton')
-    priorityButton.textContent = 'Priority'
+    priorityButton.textContent = 'Task Priority'
 
     const taskStatusButton = document.createElement('button')
     taskStatusButton.classList.add('taskStatusButton')
@@ -1490,6 +1494,7 @@ function createNewProjectContainer(){
       
       const newProjectContainer = document.createElement('div');
       newProjectContainer.classList.add('newProjectContainer');
+      newProjectContainer.classList.add('actualProject')
       document.querySelector('.projectContainer').appendChild(newProjectContainer);
       
       const titleContainer = document.createElement('div')
@@ -1611,7 +1616,7 @@ function createTask(currentProjectName, newProjectNameDiv){
         todoDivContent.appendChild(todoInput)
         createTodoDescription(todoInput)
         createTodoNote(targetDiv)
-        createDate(targetDiv).getDateDiv()
+        // createDate(targetDiv).getDateDiv()
     } 
     else{
     //  console.log('no')
@@ -1636,7 +1641,8 @@ function displayTodo (targetDiv){
   // console.log(projects[i]['projectName'].toLowerCase())      
   // console.log(targetDiv.querySelector('.newProjectName'))      
   if(targetDiv.querySelector('.newProjectName')){
-        if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
+    const projectName = targetDiv.querySelector('.newProjectName').textContent   
+    if(projects[i]['projectName'] == projectName){
     //  console.log(projects[i]['projectName'])
       // console.log(targetDiv.querySelector('.newProjectName').textContent)
       let currentTask = projects[i]['todos']
@@ -1655,12 +1661,16 @@ function displayTodo (targetDiv){
           let containers = targetDiv.querySelectorAll('.todoDivContent')
           // console.log(targetDiv)
           containers.forEach((currentContainer) => {
+            // console.log(currentContainer)
          //   console.log(currentContainer.querySelector('.descriptionDiv'))
             if(currentContainer.querySelector('.descriptionDiv')){
                currentContainer.querySelector('.descriptionDiv').before(todo)
               //  console.log(currentContainer.querySelector('.todo'))
               //  console.log(currentContainer.querySelector('.taskButtonsDiv'))
                currentContainer.querySelector('.todo').after(taskPriority)
+              // console.log(todo)
+            //   createDate(currentContainer, projectName, todo).getDateProjectWasCreated()
+                // addDate(currentContainer).getCreateButton()
               }
             
           //  console.log(targetDiv.querySelector('.descriptionDiv'))
@@ -1953,6 +1963,7 @@ function submitTodo (targetButton) {
                 currentTodo.classList.add('todo')
                 currentTodo.textContent = projects[i]['todos'][j]['title']
 
+                // console.log(currentTodo)
                 currentTodo.style.marginBottom = '5px'
                 const taskButtonsDiv = document.createElement('div')
                 taskButtonsDiv.classList.add('taskButtonsDiv')
@@ -2019,11 +2030,11 @@ function submitTodo (targetButton) {
  }
 
  function addMoreInfo (currentDiv) {
-console.log(currentDiv.parentElement)
+// console.log(currentDiv.parentElement)
   createTodoDescription(currentDiv.parentElement)
   createTodoNote(currentDiv.parentElement.parentElement)
 
-  currentDiv.parentElement.querySelector('.descriptionDiv').style.marginTop = '-10px'
+  currentDiv.parentElement.querySelector('.todo').style.marginBottom = '15px'
 
   createDate(currentDiv.parentElement.parentElement).getDateDiv()
   const saveButton = document.createElement('button');
@@ -2037,18 +2048,28 @@ console.log(currentDiv.parentElement)
   eventController().saveTodoChangesAddedFromHeader()
  }
 
-function createDate (targetDiv, projectName, todo){
-  // console.log(todo)
+function createDate(targetDiv, projectName, todo){
+  // console.log(targetDiv)
+  // let currentTodo = todo
   function createDateDiv (){
     const dateDiv = document.createElement('div')
     dateDiv.classList.add('dateDiv')
     const todoDivContents = targetDiv.querySelectorAll('.todoDivContent')
     todoDivContents.forEach((todoDivContainer) => {
-      if(todoDivContainer.querySelector('.lineBreak')){
-        todoDivContainer.querySelector('.lineBreak').before(dateDiv)
-      }else{
-        todoDivContainer.appendChild(dateDiv)
-      }    
+      // console.log(todo)
+      // console.log(todoDivContainer)
+      // console.log(todoDivContainer.querySelector('.todo'))
+      if(todoDivContainer.querySelector('.todo')){
+        // console.log(todoDivContainer.querySelector('.todo'))
+        todoDivContainer.querySelector('.taskButtonsDiv').after(dateDiv)
+     //   todoDivContainer.querySelector('.dateDiv').style.marginTop = '-20px'
+        todoDivContainer.querySelector('.dateDiv').style.marginBottom = '-10px'
+      }
+      // if(todoDivContainer.querySelector('.lineBreak')){
+      //   todoDivContainer.querySelector('.todo').after(dateDiv)
+      // }else{
+      //   todoDivContainer.appendChild(dateDiv)
+      // }    
     })    
   }
 
@@ -2063,6 +2084,7 @@ function createDate (targetDiv, projectName, todo){
         todo = container.querySelector('.todo').textContent
       })
       dateController(projectName, calenderValues, todo)
+      // console.log('date')
       let projects = allProjects().getProjects()
       for (let i = 0; i < projects.length; i++) {
         if (projects[i]['projectName'] == projectName) {

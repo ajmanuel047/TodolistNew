@@ -121,7 +121,7 @@ h4 {
 }
 
 .editTodoButton, .editProjectName {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     display: block;
 }
 
@@ -161,6 +161,11 @@ h4 {
     cursor: pointer;
     width:fit-content;
     /* background-color: orange; */
+}
+
+.descriptionDiv {
+    margin-top: -23px;
+    /* background-color: olive; */
 }
 
 .descriptionHeading, .notesHeading {
@@ -206,9 +211,10 @@ h4 {
     width: 60px;
 }
 
-.note {
+.descriptionDiv {
     /* width: fit-content; */
     /* white-space: initial; */
+    margin-bottom: -10px;
 }
 
 .noteInput {
@@ -224,18 +230,46 @@ h4 {
     margin-bottom: 10px;
 }
 
+.defaultProject .dateDiv {
+     margin-bottom: -16px;
+     margin-top: 15px;
+}
+
+.actualProject .dateDiv {
+    /* background-color: orange; */
+    /* margin-top: -16px; */
+}
+
+/* .defaultProject .todo {
+    background-color: orange;
+    
+} */
+
 .dueDate {
     margin-top: -5px;
     margin-bottom: 10px;
 }
 
+.dueDateButton, .changeDueDate, .calender, .saveNewDate {
+    /* background-color: orange; */
+    /* margin-top: -15px; */
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    position: relative;
+    top: -7px;
+    width: fit-content;
+}
+
 .changeDueDate {
     /* font-size: 0.7rem; */
-    margin-top: -20px;
+    margin-top: -18x;
 }
 
 .calender {
     margin-left: 10px;
+    height: 14.5px;
+    position: relative;
+    top: -7px;
 }
 
 .dateUpdated {
@@ -302,7 +336,7 @@ h4 {
 }
 
 .priority {
- margin-top: -20px;   
+ margin-top: -15px;   
 }
 
 .high {
@@ -317,7 +351,7 @@ h4 {
   color : red
 }
 
-.statusText {
+p.statusText {
     position: relative;
     top: -27px;
     /* display: inline;
@@ -325,7 +359,7 @@ h4 {
     font-size: 0.7rem;
     /* position: absolute;
     top: 0px; */
-    margin-bottom: 0px;
+    margin-bottom: -30px;
     color: green;
 }
 
