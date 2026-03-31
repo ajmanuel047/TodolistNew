@@ -163,11 +163,14 @@ h4 {
     /* background-color: orange; */
 }
 
-.descriptionDiv {
-    margin-top: -23px;
+.descriptionDiv{
+    margin-top: -10px;
     /* background-color: olive; */
 }
 
+.noteDiv {
+    margin-top: 29px;
+}
 .descriptionHeading, .notesHeading {
     margin-bottom: 10px;
 }

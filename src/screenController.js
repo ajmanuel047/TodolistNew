@@ -347,6 +347,7 @@ function eventController(){
             if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender' && inputField.className !== 'checkListInput'){
               if(inputField.value !== ''){
                 console.log('is field empty')
+                console.log(projectName)
                 if(projectName && document.querySelector('.projectNameInput') && !document.querySelector('.todoInput')){
                     newProject(projectName, currentProjectName)
                     console.log('test')
@@ -358,12 +359,15 @@ function eventController(){
                     e.target.remove()
                   }
                   else if(projectName && document.querySelector('.todoInput')){
-                    // console.log('cjeck')
+                    console.log('cjeck')
+                   let descriptionInput = e.target.parentElement.querySelector('.descriptionInput').value
+                   let noteInput = e.target.parentElement.querySelector('.noteInput').value
                     // console.log(e.target.parentElement)
-                    if(document.querySelector('.todoInput').value !== '' && document.querySelector('.descriptionInput').value !== '' && document.querySelector('.noteInput').value !== ''){
+                    if(document.querySelector('.todoInput').value !== '' && descriptionInput !== '' && noteInput !== ''){
                         newProject(projectName, currentProjectName)
-                        // console.log('test2')
-                    //    console.log(e.target)
+                        console.log('test2')
+                       console.log(e.target.parentElement.querySelector('.descriptionInput'))
+                       console.log(e.target.parentElement.querySelector('.noteInput'))
                     //    console.log(e.target.parentElement.querySelector('.projectNameInput'))
                         e.target.parentElement.querySelector('.projectNameInput').remove()
                         targetDiv = e.target.parentElement
@@ -395,7 +399,7 @@ function eventController(){
                 inputField.after(errorMessage())
                 // console.log(this.parentElement)
                 // console.log(e.target.parentElement.querySelector('.errorMessage'))
-                e.target.parentElement.querySelector('.errorMessage').style.marginTop = '7px'
+                e.target.parentElement.querySelector('.errorMessage').style.marginTop = '2px'
                 setTimeout(() => {
                 e.target.parentElement.querySelector('.errorMessage').remove()
                 }, 2000) 
