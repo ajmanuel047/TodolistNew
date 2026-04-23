@@ -372,8 +372,8 @@ function eventController(){
                     targetDiv = e.target.parentElement
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                     createTask()
-
-                    storeData(projectName).populateStorage()
+                    // console.log(todo)
+                    storeData(targetDiv).populateStorage()
                     // console.log(projectName)
                     console.log(allProjects().getProjects())
                     e.target.remove()
@@ -411,8 +411,8 @@ function eventController(){
                         // console.log('checklist check')
                         runCalenderButton()
                         createCheckList(targetDiv).createContainer()
-                      
-                        storeData(projectName).populateStorage()
+                      // console.log(todo)
+                        storeData(targetDiv).populateStorage()
                        // console.log(allProjects().getProjects())
                         e.target.remove()
                       }
@@ -2503,19 +2503,26 @@ function createCheckList(targetDiv, todo){
   }
 }
 
-function storeData (projectName){
-  
+function storeData (targetDiv){
+  let projects = allProjects().getProjects()
+  // console.log(projects)
   function populateStorage(){
-    console.log(projectName)
+    // console.log(targetDiv)
+     for(let i = 0; i < projects.length; i++){
+      if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
+        console.log(projects[i]['projectName'])
+        localStorage.setItem(`${projects[i]['projectName']}`, document.querySelector('.actualProject .projectName').textContent)
+      }
+     }
   // console.log(document.querySelector('.actualProject .projectName'))
-    localStorage.setItem(`${projectName}`, document.querySelector('.actualProject .projectName').textContent)
+ //   localStorage.setItem(`${projectName}`, document.querySelector('.actualProject .projectName').textContent)
     // console.log(targetDiv)
     // localStorage.setItem('bgcolor', 'orange')
     setStyles()
   }
 
   function setStyles(){
-    console.log(projectName)
+    console.log(targetDiv)
      const currentTitle = localStorage.getItem('projectTitle')
     // console.log(currentTitle)
     // console.log(document.querySelector('.actualProject'))
