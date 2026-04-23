@@ -22,6 +22,19 @@ document.addEventListener('keydown', function(e){
 })
 
 
+function storageCall(){
+  if(localStorage.getItem('projectTitle')){
+    // if(document.querySelector('.actualProject')){
+    // console.log('yes')
+    storeData().setStyles()
+  // }
+  
+  } else{
+    console.log('no data')
+  }
+}
+
+// storageCall()
 
 const newProjectButton = (function(){
 
@@ -49,6 +62,8 @@ const newProjectButton = (function(){
  // console.log(document.querySelector('.addTodo'))
   return { createNewProjectButton }
 })()
+
+
 
 function defaultProject(){
       const projectContainer = document.createElement('div');
@@ -306,6 +321,7 @@ function defaultProject(){
 }
 
 defaultProject()
+storageCall()
 
 function eventController(){
   let currentProjectName = null;
@@ -336,7 +352,7 @@ function eventController(){
         let todo = userInput().getTaskNameInput()
         let inputFields = e.target.parentElement.querySelectorAll('input')
         let targetDiv = null
-        console.log(e.target.parentElement.querySelectorAll('input'))
+      //  console.log(e.target.parentElement.querySelectorAll('input'))
 
         let projectArray = projects.map((arr) => {
           return arr.projectName
@@ -346,28 +362,33 @@ function eventController(){
             inputFields.forEach((inputField) => {          
             if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender' && inputField.className !== 'checkListInput'){
               if(inputField.value !== ''){
-                console.log('is field empty')
-                console.log(projectName)
+                // console.log('is field empty')
+                // console.log(projectName)
                 if(projectName && document.querySelector('.projectNameInput') && !document.querySelector('.todoInput')){
                     newProject(projectName, currentProjectName)
-                    console.log('test')
+           //         console.log('test')
                     // console.log(allProjects().getProjects())
                     e.target.parentElement.querySelector('.projectNameInput').remove()
                     targetDiv = e.target.parentElement
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                     createTask()
+
+                    storeData(projectName).populateStorage()
+                    // console.log(projectName)
+                    console.log(allProjects().getProjects())
                     e.target.remove()
                   }
                   else if(projectName && document.querySelector('.todoInput')){
-                    console.log('cjeck')
+                    console.log(projectName)
+                    console.log(allProjects().getProjects())
                    let descriptionInput = e.target.parentElement.querySelector('.descriptionInput').value
                    let noteInput = e.target.parentElement.querySelector('.noteInput').value
                     // console.log(e.target.parentElement)
                     if(document.querySelector('.todoInput').value !== '' && descriptionInput !== '' && noteInput !== ''){
                         newProject(projectName, currentProjectName)
-                        console.log('test2')
-                       console.log(e.target.parentElement.querySelector('.descriptionInput'))
-                       console.log(e.target.parentElement.querySelector('.noteInput'))
+                  //      console.log('test2')
+                    //   console.log(e.target.parentElement.querySelector('.descriptionInput'))
+                      // console.log(e.target.parentElement.querySelector('.noteInput'))
                     //    console.log(e.target.parentElement.querySelector('.projectNameInput'))
                         e.target.parentElement.querySelector('.projectNameInput').remove()
                         targetDiv = e.target.parentElement
@@ -390,6 +411,9 @@ function eventController(){
                         // console.log('checklist check')
                         runCalenderButton()
                         createCheckList(targetDiv).createContainer()
+                      
+                        storeData(projectName).populateStorage()
+                       // console.log(allProjects().getProjects())
                         e.target.remove()
                       }
                     }          
@@ -1487,6 +1511,7 @@ function createTodoNote(currentDiv){
 }
 
 let count = -1
+// let projectName = null
 function createNewProjectContainer(){
 
        function taskbuttonNumber(){
@@ -1518,7 +1543,7 @@ function createNewProjectContainer(){
       projectName.classList.add('projectName');
       projectName.textContent = 'Project Name';
       titleContainer.appendChild(projectName);
-
+      
       const projectNameInput = document.createElement('input');
       projectNameInput.classList.add('projectNameInput');
       newProjectContainer.appendChild(projectNameInput);
@@ -2477,6 +2502,70 @@ function createCheckList(targetDiv, todo){
     saveCheckList
   }
 }
+
+function storeData (projectName){
+  
+  function populateStorage(){
+    console.log(projectName)
+  // console.log(document.querySelector('.actualProject .projectName'))
+    localStorage.setItem(`${projectName}`, document.querySelector('.actualProject .projectName').textContent)
+    // console.log(targetDiv)
+    // localStorage.setItem('bgcolor', 'orange')
+    setStyles()
+  }
+
+  function setStyles(){
+    console.log(projectName)
+     const currentTitle = localStorage.getItem('projectTitle')
+    // console.log(currentTitle)
+    // console.log(document.querySelector('.actualProject'))
+     
+    // const currentColor = localStorage.getItem('bgcolor')
+   // document.body.style.backgroundColor = currentColor
+  
+   if(document.querySelector('.actualProject')){
+    document.querySelector('.actualProject .projectName').textContent = currentTitle
+   // console.log(document.querySelector('.actualProject .projectName').textContent)
+    document.querySelector('.actualProject').style.fontSize = '2.5rem'
+   
+   }
+   else{
+    const projectName = document.createElement('h2')
+    const titleContainer = document.createElement('div')
+    const newProjectContainer = document.createElement('div')
+    titleContainer.classList.add('titleContainer')
+    projectName.classList.add('projectName') 
+    newProjectContainer.classList.add('newProjectContainer')
+    newProjectContainer.classList.add('actualProject')
+    // console.log(document.querySelector('.projectContainer'))
+    document.querySelector('.projectContainer').appendChild(newProjectContainer)
+   // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
+    document.querySelector('.actualProject').appendChild(titleContainer)
+    titleContainer.appendChild(projectName)
+    document.querySelector('.actualProject .projectName').textContent = localStorage.getItem('projectTitle')
+    document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
+  } 
+ 
+  }
+
+  
+
+  return {
+    populateStorage,
+    setStyles
+  }
+
+// projectName.onchange = populateStorage
+}
+
+// window.addEventListener('storage', function(e){
+//   console.log(e)
+//   document.querySelector('.actualProject').textContent = e.projectName
+// })
+
+
+
+// populateStorage()
 /*
 I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
 MY HEAD FIRST. IT HAS ALWAYS BEEN THE MOST EFFICIENT WAY I HAVE USED TO
