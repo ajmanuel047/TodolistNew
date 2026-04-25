@@ -678,17 +678,11 @@ const runSaveChanges = function(){
       // document.body.style.backgroundColor = 'skyblue'
            let todoInput = this.parentElement.querySelector('.todoInput')
            let note = userInput().getNoteInput()
-         //   console.log(this)
-            //console.log(todoInput)
-           // console.log(this.parentElement)
-            //console.log(this.parentElement.querySelector('.newProjectName'))
-            //console.log(this.parentElement.querySelector('.todoInput'))
-            let arr = []
-            let newArr = []
-            const taskInputs = document.querySelectorAll('.todoInput')  
-            const todos = Array.from(document.querySelectorAll('.todo'))  
-            // const currentTodo = this.parentElement.querySelector('.todo')
-            // console.log(currentTodo)
+           let arr = []
+           let newArr = []
+           const taskInputs = document.querySelectorAll('.todoInput')  
+           const todos = Array.from(document.querySelectorAll('.todo'))  
+
             todos.forEach((todo) => {
               arr.push(todo.textContent)
             })
@@ -779,7 +773,7 @@ const runSaveChanges = function(){
              editTodo.classList.add('editTodoButton')
              editTodo.textContent = 'Edit Task'
 
-addTaskButtons(container, currentProjectName, targetDiv)
+             addTaskButtons(container, currentProjectName, targetDiv)
             }
            })   
           }          
@@ -801,11 +795,14 @@ addTaskButtons(container, currentProjectName, targetDiv)
               runCalenderButton()
               // eventController().runCreateCheckList()
               // runAddCheckItem()
-              console.log(container.parentElement.parentElement)
+            //  console.log(container.parentElement.parentElement)
               container.parentElement.querySelector('.descriptionInput').remove()
               container.parentElement.querySelector('.noteInput').remove()
               createCheckList(container.parentElement.parentElement).createContainer()
               eventController().runCreateCheckList()
+              console.log(allProjects().getProjects())
+              console.log(container.parentElement.parentElement)
+              storeData(container.parentElement.parentElement).populateStorage()
             }
              
            })
@@ -2515,7 +2512,7 @@ function storeData (targetDiv){
   let projects = allProjects().getProjects()
   // console.log(projects)
   function populateStorage(){
-    // console.log(targetDiv)
+    console.log(targetDiv)
      for(let i = 0; i < projects.length; i++){
       if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
         // console.log(projects[i]['projectName'])
