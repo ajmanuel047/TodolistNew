@@ -824,7 +824,7 @@ const runSaveChanges = function(){
 const runAddTodo = function (){
   const addTodo = document.querySelector('.addTodo')    
     
-    addTodo.onclick = function(){    
+    addTodo.onclick = function(e){    
       if(!document.querySelector('.selectProject')){
      //   document.body.style.backgroundColor = 'blue'
         document.querySelector('.addTodo').textContent = 'Use The Below To Add Todo To Any Project'
@@ -832,6 +832,7 @@ const runAddTodo = function (){
         
         eventController().runUpdateDropDown()
         eventController().runtodoSubmitButton()
+
       }    
     }
 }
@@ -848,6 +849,7 @@ const runtodoSubmitButton = function (){
   todoSubmitButton.onclick = function (e){        
     submitTodo(e.target)
     runTodoEditButton()
+    
   }
 //  eventController().runAddMoreInfoButton()
 }
@@ -1202,6 +1204,8 @@ const saveTodoChangesAddedFromHeader = function(){
             }       
             e.target.parentElement.querySelector('.descriptionInput').remove()     
             e.target.parentElement.querySelector('.noteInput').remove()     
+            // console.log(projectContainer)
+            storeData(projectContainer).populateStorage()
             e.target.remove()
           }
         }
@@ -1977,7 +1981,9 @@ function submitTodo (targetButton) {
                 lineBreak.classList.add('lineBreak')
                 targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
                 // console.log('checking')
-                
+                // console.log(targetButton.parentElement)
+                // console.log(targetDiv)
+                storeData(targetDiv).populateStorage()
                 eventController().runAddMoreInfoButton(targetDiv)
                 
                 // console.log('check 3')
