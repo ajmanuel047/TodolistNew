@@ -102,13 +102,13 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
     
   // console.log(projects[i]['projectName'])
     if(projects[i]['projectName'] == currentProjectName){
-      console.log(projects[i])
+      // console.log(projects[i])
       for(let j = 0; j < projects[i]['todos'].length; j++){
         if(projects[i]['todos'][j]['title'] == previousTodo){
           projects[i]['todos'][j]['title'] = currentTodo
           // return
           // console.log('testing123')
-          console.log(projects)  
+          // console.log(projects)  
         }       
       }
     }

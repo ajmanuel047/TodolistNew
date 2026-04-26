@@ -512,11 +512,11 @@ const runEditButton = function(){
   // console.log('me')
   let previousValue = null
   currentEditButton.forEach((button) => {
-    button.onclick = function(){
+    button.onclick = function(e){
       document.body.style.backgroundColor = 'orange'
-      const currentProjectName = this.parentElement.parentElement.querySelector('.newProjectName')
-      console.log(currentProjectName)
-      console.log(this.parentElement.parentElement)
+      let currentProjectName = this.parentElement.parentElement.querySelector('.newProjectName')
+      // console.log(currentProjectName)
+      // console.log(this.parentElement.parentElement)
       currentProjectName.setAttribute('contenteditable', true)
       currentProjectName.classList.add('editContent')
       currentProjectName.style.cursor = 'pointer'
@@ -530,6 +530,8 @@ const runEditButton = function(){
          saveCompletedisplay.classList.add('saved')
          // adjust the saveCompletedisplay because it not moving when the text
          // is longer
+         // console.log(e.target.parentElement.parentElement.parentElement)
+         storeData(e.target.parentElement.parentElement.parentElement).populateStorage()
          this.parentElement.appendChild(saveCompletedisplay)
          setTimeout(() => {
            saveCompletedisplay.remove()
@@ -542,17 +544,19 @@ const runEditButton = function(){
          }
          console.log(allProjects().getProjects())
       }
-      currentProjectName.addEventListener('focus', function(e){
-        document.body.style.backgroundColor = 'skyblue'
-        previousValue = this.textContent
-        // console.log(previousValue)
-        currentProjectName.setAttribute('contenteditable', true)
-        // i want you to add a smalled blue saved text so when it is
-        // saved it would appear
-        button.textContent = 'Save'
-        currentProjectName.style.cursor = 'auto'
 
-      })
+      else if(button.textContent == 'Edit'){
+          console.log(e.target.parentElement.parentElement.querySelector('.newProjectName'))
+          previousValue = e.target.parentElement.parentElement.querySelector('.newProjectName').textContent
+          currentProjectName = e.target.parentElement.parentElement.querySelector('.newProjectName')
+          currentProjectName.setAttribute('contenteditable', true)
+          currentProjectName.classList.add('editContent')
+          currentProjectName.style.cursor = 'pointer'
+          currentProjectName.addEventListener('focus', function(e){
+          button.textContent = 'Save'
+          currentProjectName.style.cursor = 'auto'
+          })
+     }
     }
   })
 
@@ -573,13 +577,9 @@ const runTodoEditButton = function(){
       buttons.onclick = function(e){
       // document.body.style.backgroundColor = 'purple'
       // console.log(this.parentElement.parentElement.children)
-      console.log(this.parentElement.parentElement)
-      console.log(e.target.parentElement.parentElement)
-      console.log('start from here')
-      /*
-      first thing first is to try and delete existing taskbuttonsdiv
-      when a new one is created
-      */
+      // console.log(this.parentElement.parentElement)
+      // console.log(e.target.parentElement.parentElement)
+    
       // console.log(this.parentElement)
       // console.log(this.parentElement.parentElement)
       // console.log(this.parentElement.parentElement.children)
@@ -606,8 +606,8 @@ const runTodoEditButton = function(){
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-        //  console.log(currentTodo.textContent)
-        //  console.log(previousTodo)
+         console.log(currentTodo.textContent)
+         console.log(previousTodo)
          createTodo(currentProjectName, arr, currentTodo.textContent, previousTodo).editTodo()
       //   console.log('check')
       //  console.log(allProjects().getProjects())
@@ -634,11 +634,11 @@ const runTodoEditButton = function(){
         
         // console.log(this)
         if(arr[i].className == 'todo'){
-          // console.log(this)
+        //  console.log(this.parentElement.parentElement.children)
           previousTodo = this.parentElement.parentElement.children[i].textContent
           currentTodo = this.parentElement.parentElement.children[i]
-          //  console.log(currentTodo)
-          //  console.log(previousTodo)
+           console.log(currentTodo)
+           console.log(previousTodo)
           currentTodo.setAttribute('contenteditable', true)
           // currentTodo.style.backgroundColor = 'orange'
           currentTodo.classList.add('editContent')
@@ -800,8 +800,8 @@ const runSaveChanges = function(){
               container.parentElement.querySelector('.noteInput').remove()
               createCheckList(container.parentElement.parentElement).createContainer()
               eventController().runCreateCheckList()
-              console.log(allProjects().getProjects())
-              console.log(container.parentElement.parentElement)
+              // console.log(allProjects().getProjects())
+              // console.log(container.parentElement.parentElement)
               storeData(container.parentElement.parentElement).populateStorage()
             }
              
@@ -2515,15 +2515,25 @@ function createCheckList(targetDiv, todo){
 }
 
 function storeData (targetDiv){
+  // console.log('start from here')
+  /*
+  storing data when project name is edited is not working.
+  maybe is where i call storedata in editing projectname
+  */
   let projects = allProjects().getProjects()
   // console.log(projects)
   function populateStorage(){
-    console.log(targetDiv)
+    // console.log(targetDiv)
      for(let i = 0; i < projects.length; i++){
+      // console.log(targetDiv)
+      // console.log(projects)
+      // console.log(projects[i]['projectName'])
+      // console.log(targetDiv.querySelector('.newProjectName').textContent)
       if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
         // console.log(projects[i]['projectName'])
         // console.log(projects[i]['todos'])
     //  console.log(JSON.stringify(projects[i]['todos']))
+   // console.log(projects[i]['projectName'])
         localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
       }
      }
