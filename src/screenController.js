@@ -23,7 +23,8 @@ document.addEventListener('keydown', function(e){
 
 
 function storageCall(){
-  if(localStorage.getItem('projectTitle')){
+  
+  if(localStorage.getItem('m')){
     // if(document.querySelector('.actualProject')){
     // console.log('yes')
     storeData().setStyles()
@@ -513,7 +514,7 @@ const runEditButton = function(){
   let previousValue = null
   currentEditButton.forEach((button) => {
     button.onclick = function(e){
-      document.body.style.backgroundColor = 'orange'
+      // document.body.style.backgroundColor = 'orange'
       let currentProjectName = this.parentElement.parentElement.querySelector('.newProjectName')
       // console.log(currentProjectName)
       // console.log(this.parentElement.parentElement)
@@ -648,7 +649,7 @@ const runTodoEditButton = function(){
           currentTodo.classList.add('editContent')
           currentTodo.style.cursor = 'pointer'
           currentTodo.addEventListener('focus', function(e){
-          document.body.style.backgroundColor = 'red'
+          // document.body.style.backgroundColor = 'red'
           buttons.textContent = 'Save'
           currentTodo.style.cursor = 'auto'
           })
@@ -807,6 +808,7 @@ const runSaveChanges = function(){
               // console.log(allProjects().getProjects())
               // console.log(container.parentElement.parentElement)
               storeData(container.parentElement.parentElement).populateStorage()
+              // console.log('check')
             }
              
            })
@@ -866,7 +868,7 @@ const runEditDescription = function () {
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function () {
-      document.body.style.backgroundColor = 'orange'
+      // document.body.style.backgroundColor = 'orange'
       let currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
       let projectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
       console.log(this.parentElement.parentElement.parentElement.parentElement)
@@ -2537,10 +2539,10 @@ function storeData (targetDiv){
       */
       // console.log(targetDiv)
       // console.log(projects)
-      // console.log(projects[i]['projectName'])
-      // console.log(targetDiv.querySelector('.newProjectName').textContent)
+     // console.log(projects[i]['projectName'])
+    //  console.log(targetDiv.querySelector('.newProjectName').textContent)
       if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
-      //  console.log(projects[i]['projectName'])
+     //  console.log(projects[i]['projectName'])
      //   console.log(targetDiv.querySelector('.newProjectName').textContent)
     //  console.log(JSON.stringify(projects[i]['todos']))
    // console.log(projects[i]['projectName'])
@@ -2583,7 +2585,9 @@ function storeData (targetDiv){
   function setStyles(){
  //   console.log(targetDiv)
      const currentTitle = localStorage.getItem('projectTitle')
-    // console.log(currentTitle)
+    console.log(currentTitle)
+  //  console.log(targetDiv.querySelector('.newProjectName').textContent)
+
     // console.log(document.querySelector('.actualProject'))
      
     // const currentColor = localStorage.getItem('bgcolor')
@@ -2596,7 +2600,11 @@ function storeData (targetDiv){
    
    }
    else{
+  //  console.log(targetDiv.querySelector('.newProjectName').textContent)
+  console.log(localStorage.length)  
+  for(let i = 0; i < localStorage.length; i++){
     const projectName = document.createElement('h2')
+    projectName.textContent = 'Project Name'
     const titleContainer = document.createElement('div')
     const newProjectContainer = document.createElement('div')
     titleContainer.classList.add('titleContainer')
@@ -2604,11 +2612,26 @@ function storeData (targetDiv){
     newProjectContainer.classList.add('newProjectContainer')
     newProjectContainer.classList.add('actualProject')
     // console.log(document.querySelector('.projectContainer'))
+    console.log(document.querySelector('.projectContainer'))
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
    // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
-    document.querySelector('.actualProject').appendChild(titleContainer)
-    titleContainer.appendChild(projectName)
-    document.querySelector('.actualProject .projectName').textContent = localStorage.getItem('projectTitle')
+   
+   const projectContainers = document.querySelectorAll('.newProjectContainer')
+   projectContainers.forEach((projectContainer) => {
+    if(!projectContainer.querySelector('.titleContainer')){
+      projectContainer.appendChild(titleContainer)
+      titleContainer.appendChild(projectName) 
+    }
+   })
+   
+//    if(document.querySelector('.newProjectContainer .titleContainer')){
+// document.querySelector('.actualProject').appendChild(titleContainer)
+// titleContainer.appendChild(projectName)   
+// } 
+   
+    
+  }   
+    // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
     document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
   } 
  
