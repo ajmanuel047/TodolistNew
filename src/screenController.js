@@ -531,7 +531,7 @@ const runEditButton = function(){
          // adjust the saveCompletedisplay because it not moving when the text
          // is longer
          // console.log(e.target.parentElement.parentElement.parentElement)
-         storeData(e.target.parentElement.parentElement.parentElement).populateStorage()
+         
          this.parentElement.appendChild(saveCompletedisplay)
          setTimeout(() => {
            saveCompletedisplay.remove()
@@ -540,13 +540,17 @@ const runEditButton = function(){
          for(let i = 0; i < projects.length; i++){
              if(projects[i]['projectName'] == currentProjectName.textContent){
                 currentProjectName.textContent = projects[i]['projectName']
-             }
+                
+              }
          }
-         console.log(allProjects().getProjects())
+         storeData(e.target.parentElement.parentElement.parentElement).populateStorage()
+         localStorage.removeItem(previousValue)
+        //  console.log(previousValue)
+         // console.log(allProjects().getProjects())
       }
 
       else if(button.textContent == 'Edit'){
-          console.log(e.target.parentElement.parentElement.querySelector('.newProjectName'))
+        //  console.log(e.target.parentElement.parentElement.querySelector('.newProjectName'))
           previousValue = e.target.parentElement.parentElement.querySelector('.newProjectName').textContent
           currentProjectName = e.target.parentElement.parentElement.querySelector('.newProjectName')
           currentProjectName.setAttribute('contenteditable', true)
@@ -606,8 +610,8 @@ const runTodoEditButton = function(){
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-         console.log(currentTodo.textContent)
-         console.log(previousTodo)
+        //  console.log(currentTodo.textContent)
+        //  console.log(previousTodo)
          createTodo(currentProjectName, arr, currentTodo.textContent, previousTodo).editTodo()
       //   console.log('check')
       //  console.log(allProjects().getProjects())
@@ -2525,18 +2529,50 @@ function storeData (targetDiv){
   function populateStorage(){
     // console.log(targetDiv)
      for(let i = 0; i < projects.length; i++){
+      // console.log('start from here')
+      /*
+      we are trying to replace key with new edit name starting
+      from project name so we are trying to see if we can loop
+      through localstorage
+      */
       // console.log(targetDiv)
       // console.log(projects)
       // console.log(projects[i]['projectName'])
       // console.log(targetDiv.querySelector('.newProjectName').textContent)
       if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
-        // console.log(projects[i]['projectName'])
-        // console.log(projects[i]['todos'])
+      //  console.log(projects[i]['projectName'])
+     //   console.log(targetDiv.querySelector('.newProjectName').textContent)
     //  console.log(JSON.stringify(projects[i]['todos']))
    // console.log(projects[i]['projectName'])
         localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
+        // console.log(localStorage.length)
+        // localStorage.key(0)
       }
-     }
+     } 
+
+    //  for(let i = 0; i < localStorage.length; i++){
+    // //  console.log(localStorage.key(i))
+    // //  console.log(projects[i]['projectName'])
+    //   if(localStorage.key(i) == targetDiv.querySelector('.newProjectName').textContent){
+    //     console.log(targetDiv.querySelector('.newProjectName').textContent)
+    //     console.log(localStorage.key(i))
+    //     let userData = JSON.parse(localStorage.getItem(targetDiv.querySelector('.newProjectName').textContent))
+    //    console.log(userData)
+    //    delete userData.description
+    //    localStorage.setItem(targetDiv.querySelector('.newProjectName').textContent, JSON.stringify(userData))
+    //    // localStorage.setItem(targetDiv.querySelector('.newProjectName').textContent, JSON.stringify(projects[i]['todos']))
+    //   }
+    //  }
+
+    //  Object.keys(localStorage).forEach(function(key){
+    //   console.log(localStorage.getItem(key))
+    //  })
+
+    //  console.log(Object.keys(localStorage))
+
+    //  for(const [key, value] of Object.entries(localStorage)){
+    //   console.log(key, value)
+    //  }
   // console.log(document.querySelector('.actualProject .projectName'))
  //   localStorage.setItem(`${projectName}`, document.querySelector('.actualProject .projectName').textContent)
     // console.log(targetDiv)
