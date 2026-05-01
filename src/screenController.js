@@ -2596,19 +2596,34 @@ function storeData (targetDiv){
    if(document.querySelector('.actualProject')){
     document.querySelector('.actualProject .projectName').textContent = currentTitle
    // console.log(document.querySelector('.actualProject .projectName').textContent)
-    document.querySelector('.actualProject').style.fontSize = '2.5rem'
+   // document.querySelector('.actualProject').style.fontSize = '2.5rem'
    
    }
    else{
   //  console.log(targetDiv.querySelector('.newProjectName').textContent)
   console.log(localStorage.length)  
-  for(let i = 0; i < localStorage.length; i++){
+  if(localStorage.length > 1){
+    let localStorageArray = Object.keys(localStorage)
+    console.log(localStorageArray)
+    console.log(Object.keys(localStorage))
+  // for(let i = 0; i < localStorage.length; i++){
+  //   localStorageArray[i] = localStorage.key(i)  
+  // } 
+
+  let sorrtedArray = localStorageArray.sort()
+  for(let i = 0; i < sorrtedArray.length; i++){
+
     const projectName = document.createElement('h2')
     projectName.textContent = 'Project Name'
+
     const titleContainer = document.createElement('div')
+
     const newProjectContainer = document.createElement('div')
+   
     titleContainer.classList.add('titleContainer')
+   
     projectName.classList.add('projectName') 
+   
     newProjectContainer.classList.add('newProjectContainer')
     newProjectContainer.classList.add('actualProject')
     // console.log(document.querySelector('.projectContainer'))
@@ -2616,21 +2631,21 @@ function storeData (targetDiv){
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
    // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
    
-   const projectContainers = document.querySelectorAll('.newProjectContainer')
-   projectContainers.forEach((projectContainer) => {
-    if(!projectContainer.querySelector('.titleContainer')){
-      projectContainer.appendChild(titleContainer)
-      titleContainer.appendChild(projectName) 
-    }
-   })
-   
-//    if(document.querySelector('.newProjectContainer .titleContainer')){
-// document.querySelector('.actualProject').appendChild(titleContainer)
-// titleContainer.appendChild(projectName)   
-// } 
-   
-    
-  }   
+    const newProjectName = document.createElement('h2')
+    newProjectName.classList.add('newProjectName')
+    newProjectName.textContent = localStorageArray[i]
+
+    const projectContainers = document.querySelectorAll('.newProjectContainer')
+    projectContainers.forEach((projectContainer) => {
+      if(!projectContainer.querySelector('.titleContainer')){
+        projectContainer.appendChild(titleContainer)
+        titleContainer.appendChild(projectName) 
+        titleContainer.appendChild(newProjectName)
+      }
+    }) 
+   }
+  }
+  
     // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
     document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
   } 
