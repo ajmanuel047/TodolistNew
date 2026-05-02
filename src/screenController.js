@@ -24,7 +24,7 @@ document.addEventListener('keydown', function(e){
 
 function storageCall(){
   
-  if(localStorage.getItem('m')){
+  if(localStorage.length > 0){
     // if(document.querySelector('.actualProject')){
     // console.log('yes')
     storeData().setStyles()
@@ -2585,7 +2585,7 @@ function storeData (targetDiv){
   function setStyles(){
  //   console.log(targetDiv)
      const currentTitle = localStorage.getItem('projectTitle')
-    console.log(currentTitle)
+ //   console.log(currentTitle)
   //  console.log(targetDiv.querySelector('.newProjectName').textContent)
 
     // console.log(document.querySelector('.actualProject'))
@@ -2601,39 +2601,50 @@ function storeData (targetDiv){
    }
    else{
   //  console.log(targetDiv.querySelector('.newProjectName').textContent)
-  console.log(localStorage.length)  
-  if(localStorage.length > 1){
-    let localStorageArray = Object.keys(localStorage)
-    console.log(localStorageArray)
-    console.log(Object.keys(localStorage))
-  // for(let i = 0; i < localStorage.length; i++){
-  //   localStorageArray[i] = localStorage.key(i)  
-  // } 
+  // console.log(localStorage.length)  
 
-  let sorrtedArray = localStorageArray.sort()
-  for(let i = 0; i < sorrtedArray.length; i++){
+// let projects = [
+//       {
+//      'projectName': 'This Is A Sample Project',
+//      'todos' : [{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'checkList' : ['Sample Check Item 1', 'Sample Check Item 2']},
+//               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
+//     }
+// ]
 
+let storedProject = []
+for(let i = 0; i < localStorage.length; i++){
+  let newProject = {}
+  newProject.projectName = localStorage.key(i)
+  newProject.todos = localStorage.getItem(localStorage.key(i))
+//  console.log(localStorage.getItem(localStorage.key(i)))
+  storedProject.push(newProject)
+}
+console.log(storedProject)
+// console.log(localStorage.key(0))
+
+for(let i = 0; i < storedProject.length; i++){
+ // console.log(storedProject[i]['projectName'])
     const projectName = document.createElement('h2')
     projectName.textContent = 'Project Name'
 
     const titleContainer = document.createElement('div')
 
     const newProjectContainer = document.createElement('div')
-   
+  
     titleContainer.classList.add('titleContainer')
-   
+  
     projectName.classList.add('projectName') 
-   
+    
     newProjectContainer.classList.add('newProjectContainer')
     newProjectContainer.classList.add('actualProject')
     // console.log(document.querySelector('.projectContainer'))
-    console.log(document.querySelector('.projectContainer'))
+  // console.log(document.querySelector('.projectContainer'))
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
-   // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
-   
+  // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
+  
     const newProjectName = document.createElement('h2')
     newProjectName.classList.add('newProjectName')
-    newProjectName.textContent = localStorageArray[i]
+    newProjectName.textContent = storedProject[i]['projectName']
 
     const projectContainers = document.querySelectorAll('.newProjectContainer')
     projectContainers.forEach((projectContainer) => {
@@ -2642,9 +2653,69 @@ function storeData (targetDiv){
         titleContainer.appendChild(projectName) 
         titleContainer.appendChild(newProjectName)
       }
-    }) 
-   }
+    })
   }
+
+ // if(localStorage.length > 0){
+  //  console.log('start from here')
+    /*
+    the goal is to display according to how they were before
+    page is refreshed.
+    To accomplish this you are going to create the array just
+    like how projects array is in projectController.
+    The idea is that so that you can be able to place the right
+    object or key/value from localstorage at the right place
+    just the way you have been doing using projectname and others
+    in your previous code. 
+    You will no longer sort as that won't work at all.
+    Find a way to arrange them into an array like projects array
+    and display according to how they are in the array.
+    By doing this, when you want to edit it should be easier
+    to do so by placing or overwriting it in the right index
+    in the new array
+    */
+    // let localStorageArray = Object.keys(localStorage)
+    // console.log(localStorageArray)
+    // console.log(Object.keys(localStorage))
+  // for(let i = 0; i < localStorage.length; i++){
+  //   localStorageArray[i] = localStorage.key(i)  
+  // } 
+
+  // let sorrtedArray = localStorageArray.sort()
+  // for(let i = 0; i < sorrtedArray.length; i++){
+
+  //   const projectName = document.createElement('h2')
+  //   projectName.textContent = 'Project Name'
+
+  //   const titleContainer = document.createElement('div')
+
+  //   const newProjectContainer = document.createElement('div')
+   
+  //   titleContainer.classList.add('titleContainer')
+   
+  //   projectName.classList.add('projectName') 
+   
+  //   newProjectContainer.classList.add('newProjectContainer')
+  //   newProjectContainer.classList.add('actualProject')
+  //   // console.log(document.querySelector('.projectContainer'))
+  //  // console.log(document.querySelector('.projectContainer'))
+  //   document.querySelector('.projectContainer').appendChild(newProjectContainer)
+  //  // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
+   
+  //   const newProjectName = document.createElement('h2')
+  //   newProjectName.classList.add('newProjectName')
+  //   newProjectName.textContent = localStorageArray[i]
+
+  //   const projectContainers = document.querySelectorAll('.newProjectContainer')
+  //   projectContainers.forEach((projectContainer) => {
+  //     if(!projectContainer.querySelector('.titleContainer')){
+  //       projectContainer.appendChild(titleContainer)
+  //       titleContainer.appendChild(projectName) 
+  //       titleContainer.appendChild(newProjectName)
+  //     }
+  //   }) 
+  //  }
+  //}
   
     // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
     document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
