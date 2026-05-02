@@ -2624,23 +2624,51 @@ console.log(storedProject)
 
 for(let i = 0; i < storedProject.length; i++){
  // console.log(storedProject[i]['projectName'])
-    const projectName = document.createElement('h2')
-    projectName.textContent = 'Project Name'
-
-    const titleContainer = document.createElement('div')
 
     const newProjectContainer = document.createElement('div')
-  
-    titleContainer.classList.add('titleContainer')
-  
-    projectName.classList.add('projectName') 
-    
     newProjectContainer.classList.add('newProjectContainer')
     newProjectContainer.classList.add('actualProject')
-    // console.log(document.querySelector('.projectContainer'))
-  // console.log(document.querySelector('.projectContainer'))
+
+    const projectName = document.createElement('h2')
+    projectName.textContent = 'Project Name'
+    projectName.classList.add('projectName') 
+    
+    const titleContainer = document.createElement('div')
+    titleContainer.classList.add('titleContainer')
+
+    const titleContainerButtonsDiv = document.createElement('div')
+    titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+
+    const editProjectName = document.createElement('button')
+    editProjectName.classList.add('editProjectName')
+    editProjectName.textContent = 'Edit'
+
+    const deleteProject = document.createElement('button')
+    deleteProject.classList.add('deleteProject')
+    deleteProject.textContent = 'Delete Project'
+
+    const todoDiv = document.createElement('div')
+    todoDiv.classList.add('todoDiv')
+
+    const todoDivTitle = document.createElement('div')
+    todoDivTitle.classList.add('todoDivTitle')
+
+    const task = document.createElement('h3')
+    task.classList.add('task')
+    task.textContent = 'Task'
+
+    const createNewTodoButton = document.createElement('button')
+    createNewTodoButton.classList.add('createNewTodo')
+    createNewTodoButton.textContent = 'Add Todo'
+
+    const todoDivContent = document.createElement('div')
+    todoDivContent.classList.add('todoDivContent')
+
+    const todo = document.createElement('h4')
+    todo.classList.add('todo')
+    // todo.textContent = projects[i]['todos']['title']
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
-  // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
+   console.log(typeof storedProject[i]['todos']) 
   
     const newProjectName = document.createElement('h2')
     newProjectName.classList.add('newProjectName')
@@ -2649,74 +2677,28 @@ for(let i = 0; i < storedProject.length; i++){
     const projectContainers = document.querySelectorAll('.newProjectContainer')
     projectContainers.forEach((projectContainer) => {
       if(!projectContainer.querySelector('.titleContainer')){
+        
         projectContainer.appendChild(titleContainer)
+        
         titleContainer.appendChild(projectName) 
         titleContainer.appendChild(newProjectName)
+        titleContainer.appendChild(titleContainerButtonsDiv)
+       
+        titleContainerButtonsDiv.appendChild(editProjectName)
+        titleContainerButtonsDiv.appendChild(deleteProject)
+        
+        projectContainer.appendChild(todoDiv)
+        
+        todoDiv.append(todoDivTitle)
+        todoDivTitle.append(task)
+        todoDivTitle.append(createNewTodoButton)
+        
+        projectContainer.appendChild(todoDivContent)
+
+        todoDivContent.appendChild(todo)
       }
     })
-  }
-
- // if(localStorage.length > 0){
-  //  console.log('start from here')
-    /*
-    the goal is to display according to how they were before
-    page is refreshed.
-    To accomplish this you are going to create the array just
-    like how projects array is in projectController.
-    The idea is that so that you can be able to place the right
-    object or key/value from localstorage at the right place
-    just the way you have been doing using projectname and others
-    in your previous code. 
-    You will no longer sort as that won't work at all.
-    Find a way to arrange them into an array like projects array
-    and display according to how they are in the array.
-    By doing this, when you want to edit it should be easier
-    to do so by placing or overwriting it in the right index
-    in the new array
-    */
-    // let localStorageArray = Object.keys(localStorage)
-    // console.log(localStorageArray)
-    // console.log(Object.keys(localStorage))
-  // for(let i = 0; i < localStorage.length; i++){
-  //   localStorageArray[i] = localStorage.key(i)  
-  // } 
-
-  // let sorrtedArray = localStorageArray.sort()
-  // for(let i = 0; i < sorrtedArray.length; i++){
-
-  //   const projectName = document.createElement('h2')
-  //   projectName.textContent = 'Project Name'
-
-  //   const titleContainer = document.createElement('div')
-
-  //   const newProjectContainer = document.createElement('div')
-   
-  //   titleContainer.classList.add('titleContainer')
-   
-  //   projectName.classList.add('projectName') 
-   
-  //   newProjectContainer.classList.add('newProjectContainer')
-  //   newProjectContainer.classList.add('actualProject')
-  //   // console.log(document.querySelector('.projectContainer'))
-  //  // console.log(document.querySelector('.projectContainer'))
-  //   document.querySelector('.projectContainer').appendChild(newProjectContainer)
-  //  // document.querySelector('.newProjectContainer .actualProject').classList.add('actualProject')
-   
-  //   const newProjectName = document.createElement('h2')
-  //   newProjectName.classList.add('newProjectName')
-  //   newProjectName.textContent = localStorageArray[i]
-
-  //   const projectContainers = document.querySelectorAll('.newProjectContainer')
-  //   projectContainers.forEach((projectContainer) => {
-  //     if(!projectContainer.querySelector('.titleContainer')){
-  //       projectContainer.appendChild(titleContainer)
-  //       titleContainer.appendChild(projectName) 
-  //       titleContainer.appendChild(newProjectName)
-  //     }
-  //   }) 
-  //  }
-  //}
-  
+  }  
     // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
     document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
   } 
