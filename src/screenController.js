@@ -2666,7 +2666,30 @@ for(let i = 0; i < storedProject.length; i++){
 
     const todo = document.createElement('h4')
     todo.classList.add('todo')
-    // todo.textContent = projects[i]['todos']['title']
+
+    const priority = document.createElement('p')
+    priority.classList.add('priority')
+    priority.textContent = 'Task Priority : '
+
+    const taskButtonsDiv = document.createElement('div')
+    taskButtonsDiv.classList.add('taskButtonsDiv')
+
+    const editTodoButton = document.createElement('button')
+    editTodoButton.classList.add('editTodoButton')
+    editTodoButton.textContent = 'Edit task'
+
+    const deleteTask = document.createElement('button')
+    deleteTask.classList.add('deleteTask')
+    deleteTask.textContent = 'Delete'
+
+    const priorityButton = document.createElement('button')
+    priorityButton.classList.add('priorityButton')
+    priorityButton.textContent = 'Priority'
+
+    const taskStatusButton = document.createElement('button')
+    taskStatusButton.classList.add('taskStatusButton')
+    taskStatusButton.textContent = 'Task Status'
+
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
    // console.log('start from here')
     // console.log(storedProject[i]['todos']) 
@@ -2704,11 +2727,15 @@ for(let i = 0; i < storedProject.length; i++){
         
         todoDiv.append(todoDivTitle)
         todoDivTitle.append(task)
-        todoDivTitle.append(createNewTodoButton)
-        
-        projectContainer.appendChild(todoDivContent)
-
+        todoDivTitle.append(createNewTodoButton)        
+        todoDiv.appendChild(todoDivContent)
         todoDivContent.appendChild(todo)
+        todoDivContent.appendChild(priority)
+        todoDivContent.appendChild(taskButtonsDiv)
+        taskButtonsDiv.appendChild(editTodoButton)
+        taskButtonsDiv.appendChild(deleteTask)
+        taskButtonsDiv.appendChild(priorityButton)
+        taskButtonsDiv.appendChild(taskStatusButton)
       }
     })
   }  
