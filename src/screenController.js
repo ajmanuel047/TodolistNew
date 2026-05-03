@@ -2668,8 +2668,21 @@ for(let i = 0; i < storedProject.length; i++){
     todo.classList.add('todo')
     // todo.textContent = projects[i]['todos']['title']
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
-   console.log(typeof storedProject[i]['todos']) 
-  
+   // console.log('start from here')
+    // console.log(storedProject[i]['todos']) 
+    let newArray = JSON.parse(storedProject[i]['todos'])
+    // console.log(newArray)
+    for(let j = 0; j < newArray.length; j++){
+      todo.textContent = newArray[j]['title']
+    }
+   // console.log(newArray[i]['title'])
+    /*
+    we are trying to access the titles in the todos and i
+    noticed that it is giving me typeof for storedProject[i]['todo]
+    as string. Figure that out
+    */
+
+
     const newProjectName = document.createElement('h2')
     newProjectName.classList.add('newProjectName')
     newProjectName.textContent = storedProject[i]['projectName']
