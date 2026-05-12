@@ -13,6 +13,7 @@ import { ta } from "date-fns/locale";
 import { deleteProject } from "./projectController";
 import { removeTaskFromArray } from "./projectController";
 import { createTodoCheckList } from "./projectController";
+import { updateCheckListStatus } from "./projectController";
 
 document.addEventListener('keydown', function(e){
   if(e.key == 'Enter'){
@@ -294,6 +295,9 @@ function defaultProject(){
       label.textContent = projects[0]['todos'][0]['checkList'][0]
       checkListItem.checked = true
 
+      // checkListItem.addEventListener('click', function(){
+      //   document.body.style.backgroundColor = 'blue'
+      // })
       const checkDiv2 = document.createElement('div')
       checkDiv2.classList.add('checkDiv')
 
@@ -418,6 +422,7 @@ function eventController(){
                         storeData(targetDiv).populateStorage()
                        // console.log(allProjects().getProjects())
                         e.target.remove()
+         //               console.log(allProjects().getProjects())
                       }
                     }          
                   }
@@ -1186,6 +1191,25 @@ const runAddCheckItem = function(){
   })
 }
 
+const runCheckListStatus = function(){
+  // console.log(currentProjectName)
+  // console.log(projectName)
+  const checkBoxes = document.querySelectorAll('.checkListItem')
+  checkBoxes.forEach((checkBox) => {
+    checkBox.onclick = function(e){
+      // console.log('checkBox')
+    const targetDiv = e.target.parentElement
+    const currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+    const currentTodo = targetDiv.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
+    // console.log(currentProjectName)
+    // console.log(currentTodo)
+    //   console.log(this.parentElement.querySelector('.checkItem'))
+      // console.log(targetDiv)
+    updateCheckListStatus(currentProjectName, currentTodo, targetDiv.querySelector('.checkItem').textContent)
+    createCheckList().checkListStatus(targetDiv)
+  }
+  })
+}
 const saveTodoChangesAddedFromHeader = function(){
   const newChangesButton = document.querySelectorAll('.saveNewChanges')
   newChangesButton.forEach((button) => {
@@ -1266,7 +1290,8 @@ const saveTodoChangesAddedFromHeader = function(){
           runAddTaskPriority,
           runAddTaskStatus,
           runCreateCheckList,          
-          saveTodoChangesAddedFromHeader
+          saveTodoChangesAddedFromHeader,
+          runCheckListStatus
          }
 }
 
@@ -2323,7 +2348,7 @@ function addTaskStatus(){
   }
 }
 
-function createCheckList(targetDiv, todo){
+function createCheckList(targetDiv, todo, e){
   // let currentDiv = null
   // console.log(targetDiv)
   function createContainer(){
@@ -2451,20 +2476,35 @@ function createCheckList(targetDiv, todo){
         if(projects[i]['projectName'] == currentProjectName){
           for(let j = 0; j < projects[i]['todos'].length; j++){
             if(projects[i]['todos'][j]['title'] == todo){
-              value = projects[i]['todos'][j].checkList[projects[i]['todos'][j].checkList.length - 1]
-
+              // console.log(projects[i]['todos'][j]['checkList'])
+              if(projects[i]['todos'][j]['checkList'].hasOwnProperty(`${checkInput}`)){
+   //             console.log(checkInput)
+                value = checkInput
+               
+              }
             }
           }
-                        const checkListItem = document.createElement('input')
+              const checkListItem = document.createElement('input')
               checkListItem.setAttribute('type', 'checkbox')
+              checkListItem.classList.add('checkListItem')
+
               const label = document.createElement('label')
+              label.classList.add('checkItem')
               label.textContent = value
+
+              const checkDivs = document.createElement('div')
+              checkDivs.classList.add('checkDivs')
 
               const checkDiv = document.createElement('div')
               checkDiv.classList.add('checkDiv')
+
               targetButton.parentElement.parentElement.querySelector('.checkListDiv').appendChild(checkDiv)
+              // checkDivs.appendChild(checkDiv)
               checkDiv.appendChild(checkListItem)
               checkDiv.appendChild(label)
+              eventController().runCheckListStatus()
+              // console.log(targetButton)
+    //       storeData().populateStorage()
               // console.log(allProjects().getProjects())
         }
        }
@@ -2512,15 +2552,24 @@ function createCheckList(targetDiv, todo){
   //  console.log(allProjects().getProjects())
   }
 
+  function checkListStatus(targetDiv){
+    // console.log('checkListStatus')
+    document.body.style.backgroundColor = 'blue'
+    // console.log(e)
+    console.log(targetDiv)
+  }
+
   return {
     createContainer,
     addCheckListForm,
     addCheckItem,
-    saveCheckList
+    saveCheckList,
+    checkListStatus
   }
 }
 
 function storeData (targetDiv){
+  console.log(targetDiv)
   // console.log('start from here')
   /*
   storing data when project name is edited is not working.
@@ -2690,6 +2739,64 @@ for(let i = 0; i < storedProject.length; i++){
     taskStatusButton.classList.add('taskStatusButton')
     taskStatusButton.textContent = 'Task Status'
 
+    const dateDiv = document.createElement('div')
+    dateDiv.classList.add('dateDiv')
+
+    const currentDate = document.createElement('p')
+    currentDate.classList.add ('currentDate')
+
+    const dueDateButton = document.createElement('button')
+    dueDateButton.classList.add('dueDateButton')
+    dueDateButton.textContent = 'Add Due Date'
+
+    const descriptionDiv = document.createElement('div')
+    descriptionDiv.classList.add('descriptionDiv')
+
+    const descriptionHeading = document.createElement('h5')
+    descriptionHeading.classList.add('descriptionHeading')
+    descriptionHeading.textContent = 'Describe Task'
+
+    const descriptionContentDiv = document.createElement('div')
+    descriptionContentDiv.classList.add('descriptionContentDiv')
+
+    const description = document.createElement('p')
+    description.classList.add('description')
+
+    const editDescription = document.createElement('button')
+    editDescription.classList.add('editDescription')
+    editDescription.textContent = 'Edit'
+
+    const noteDiv = document.createElement('div')
+    noteDiv.classList.add('noteDiv')
+
+    const noteHeading = document.createElement('h5')
+    noteHeading.classList.add('noteHeading')
+    noteHeading.textContent = 'Note'
+
+    const noteContentDiv = document.createElement('div')
+    noteContentDiv.classList.add('noteContentDiv')
+
+    const note = document.createElement('p')
+    note.classList.add('note')
+
+    const editNote = document.createElement('button')
+    editNote.classList.add('editNote')
+    editNote.textContent = 'Edit'
+
+    const checkListContainer = document.createElement('div')
+    checkListContainer.classList.add('checkListContainer')
+    
+    const checkListHeaderContainer = document.createElement('div')
+    checkListHeaderContainer.classList.add('checkListHeaderContainer')
+
+    const checkListHeading = document.createElement('p')
+    checkListHeading.classList.add('checkListHeading')
+    checkListHeading.textContent = 'Todo CheckList'
+
+    const addCheckListFormButton = document.createElement('button')
+    addCheckListFormButton.classList.add('addCheckListFormButton')
+    addCheckListFormButton.textContent = 'Add'
+
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
    // console.log('start from here')
     // console.log(storedProject[i]['todos']) 
@@ -2697,14 +2804,10 @@ for(let i = 0; i < storedProject.length; i++){
     // console.log(newArray)
     for(let j = 0; j < newArray.length; j++){
       todo.textContent = newArray[j]['title']
-    }
-   // console.log(newArray[i]['title'])
-    /*
-    we are trying to access the titles in the todos and i
-    noticed that it is giving me typeof for storedProject[i]['todo]
-    as string. Figure that out
-    */
-
+      currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
+      description.textContent = newArray[j]['description']
+      note.textContent = newArray[j]['projectNote']
+    } 
 
     const newProjectName = document.createElement('h2')
     newProjectName.classList.add('newProjectName')
@@ -2732,10 +2835,33 @@ for(let i = 0; i < storedProject.length; i++){
         todoDivContent.appendChild(todo)
         todoDivContent.appendChild(priority)
         todoDivContent.appendChild(taskButtonsDiv)
+
         taskButtonsDiv.appendChild(editTodoButton)
         taskButtonsDiv.appendChild(deleteTask)
         taskButtonsDiv.appendChild(priorityButton)
         taskButtonsDiv.appendChild(taskStatusButton)
+
+        todoDivContent.appendChild(dateDiv)
+        
+        dateDiv.appendChild(currentDate)
+        dateDiv.appendChild(dueDateButton)
+
+        todoDivContent.appendChild(descriptionDiv)
+        descriptionDiv.appendChild(descriptionHeading)
+        descriptionDiv.appendChild(descriptionContentDiv)
+        descriptionContentDiv.appendChild(description)
+        descriptionDiv.appendChild(editDescription)
+
+        todoDivContent.appendChild(noteDiv)
+        noteDiv.appendChild(noteHeading)
+        noteDiv.appendChild(noteContentDiv)
+        noteContentDiv.appendChild(note)
+        noteDiv.appendChild(editNote)
+
+        todoDivContent.appendChild(checkListContainer)
+        checkListContainer.appendChild(checkListHeaderContainer)
+        checkListHeaderContainer.appendChild(checkListHeading)
+        checkListHeaderContainer.appendChild(addCheckListFormButton)
       }
     })
   }  

@@ -244,18 +244,50 @@ function createTodoCheckList(currentProjectName, todo, checkInput){
           if(projects[i]['todos'][j]['title'] == todo){
             if(!projects[i]['todos'][j]['checkList']){
             // console.log('no')
-            projects[i]['todos'][j]['checkList'] = []
-            projects[i]['todos'][j]['checkList'].push(checkInput)
-            
+            projects[i]['todos'][j]['checkList'] = {}
+            projects[i]['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
+            // console.log(projects)
           }else{
             // console.log('yes')
-            projects[i]['todos'][j]['checkList'].push(checkInput)
+            projects[i]['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
+            // console.log(projects)
           }
         }
       }
     }
   }
   // console.log(projects)
+}
+
+function updateCheckListStatus(currentProjectName, currentTodo, targetDiv){
+// console.log('updateCheckListStatus')
+// console.log(currentProjectName)
+// console.log(currentTodo)
+for(let i = 0; i < projects.length; i++){
+  if(projects[i]['projectName'] == currentProjectName){
+    for(let j = 0; j < projects[i]['todos'].length; j++){
+      if(projects[i]['todos'][j]['title'] == currentTodo){
+       console.log(projects[i]['todos'][j]['checkList'])
+       for(let prop in projects[i]['todos'][j]['checkList']){
+        if(prop == targetDiv){         
+          if(projects[i]['todos'][j]['checkList'][prop] == 'Incomplete'){
+              projects[i]['todos'][j]['checkList'][prop] = 'Complete'
+           console.log(`${prop} : ${projects[i]['todos'][j]['checkList'][prop]}`)
+            } 
+          else{
+            projects[i]['todos'][j]['checkList'][prop] = 'Incomplete'
+            }          
+       }
+    }
+      }
+    }
+  }
+}
+  // we have to loop through the right project so we need
+  // projectname
+
+  // 
+
 }
 function allProjects(value){
   
@@ -275,7 +307,8 @@ export {
         deleteProject,
         removeTaskFromArray,
         projectPriorityController, 
-        createTodoCheckList
+        createTodoCheckList,
+        updateCheckListStatus
       }
 
 
