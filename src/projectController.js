@@ -267,18 +267,20 @@ for(let i = 0; i < projects.length; i++){
   if(projects[i]['projectName'] == currentProjectName){
     for(let j = 0; j < projects[i]['todos'].length; j++){
       if(projects[i]['todos'][j]['title'] == currentTodo){
-       console.log(projects[i]['todos'][j]['checkList'])
+     //  console.log(projects[i]['todos'][j]['checkList'])
        for(let prop in projects[i]['todos'][j]['checkList']){
         if(prop == targetDiv){         
           if(projects[i]['todos'][j]['checkList'][prop] == 'Incomplete'){
               projects[i]['todos'][j]['checkList'][prop] = 'Complete'
-           console.log(`${prop} : ${projects[i]['todos'][j]['checkList'][prop]}`)
-            } 
-          else{
+            } else{
             projects[i]['todos'][j]['checkList'][prop] = 'Incomplete'
+              // console.log('start here')
+              /*
+              next task is to update localstorage
+              */
             }          
-       }
-    }
+          }
+        }
       }
     }
   }

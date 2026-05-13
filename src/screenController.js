@@ -28,7 +28,7 @@ function storageCall(){
   if(localStorage.length > 0){
     // if(document.querySelector('.actualProject')){
     // console.log('yes')
-    storeData().setStyles()
+    // storeData().setStyles()
   // }
   
   } else{
@@ -681,6 +681,7 @@ const runSaveChanges = function(){
           // console.log('it is checkList')
           createCheckList().saveCheckList(targetDiv)
           e.preventDefault()
+          console.log('save checklist')
         }
       else if (e.target.className == 'saveChanges'){
      //     console.log('check 2')
@@ -1199,6 +1200,7 @@ const runCheckListStatus = function(){
     checkBox.onclick = function(e){
       // console.log('checkBox')
     const targetDiv = e.target.parentElement
+    const formDiv = targetDiv.parentElement.parentElement.parentElement
     const currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
     const currentTodo = targetDiv.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
     // console.log(currentProjectName)
@@ -1206,7 +1208,7 @@ const runCheckListStatus = function(){
     //   console.log(this.parentElement.querySelector('.checkItem'))
       // console.log(targetDiv)
     updateCheckListStatus(currentProjectName, currentTodo, targetDiv.querySelector('.checkItem').textContent)
-    createCheckList().checkListStatus(targetDiv)
+    createCheckList().checkListStatus(targetDiv, formDiv)
   }
   })
 }
@@ -2348,7 +2350,7 @@ function addTaskStatus(){
   }
 }
 
-function createCheckList(targetDiv, todo, e){
+function createCheckList(targetDiv, formDiv){
   // let currentDiv = null
   // console.log(targetDiv)
   function createContainer(){
@@ -2456,6 +2458,8 @@ function createCheckList(targetDiv, todo, e){
        checkListInputDiv.appendChild(addItemButton)
        checkListForm.appendChild(saveButton)
        targetButton.parentElement.querySelector('.addCheckListFormButton').remove()
+     
+       console.log(targetButton)
       }
           // console.log(projects)
   }
@@ -2521,7 +2525,7 @@ function createCheckList(targetDiv, todo, e){
         // if checklist input field is empty and you plan to submit 
         // second project, error message appears
         // create an error message here if input is empty
-        console.log('nope')
+      //  console.log('nope')
         if(!targetButton.parentElement.querySelector('.errorMessage')){
            targetButton.parentElement.querySelector('.checkListInput').after(errorMessage())
            targetButton.parentElement.querySelector('.errorMessage').style.marginTop = '23px'
@@ -2536,19 +2540,27 @@ function createCheckList(targetDiv, todo, e){
   }
 
   function saveCheckList(targetDiv){
+   
+   // console.log(targetDiv.parentElement.parentElement.parentElement.parentElement)
+   const checkListHeaderContainer = targetDiv.parentElement.querySelector('.checkListHeaderContainer')
+   
+   if(!checkListHeaderContainer.querySelector('.addCheckListFormButton')){
+      const addCheckListFormButton = document.createElement('button')
+      addCheckListFormButton.classList.add('addCheckListFormButton')
+      addCheckListFormButton.textContent = 'Add'
 
-    const addCheckListFormButton = document.createElement('button')
-    addCheckListFormButton.classList.add('addCheckListFormButton')
-    addCheckListFormButton.textContent = 'Add'
-
-    const checkListHeading = targetDiv.parentElement.querySelector('.checkListHeading')
-    checkListHeading.after(addCheckListFormButton)
+      checkListHeaderContainer.querySelector('.checkListHeading').after(addCheckListFormButton)
+    }    
     // console.log(targetDiv)
     targetDiv.querySelector('.saveChanges').remove()  
-    targetDiv.querySelector('.checkListInputDiv').remove()    
+    if(targetDiv.querySelector('.checkListInputDiv')){
+       targetDiv.querySelector('.checkListInputDiv').remove() 
+    }
+     
     // targetDiv.querySelector('.checkDiv').classList.add('checkDivAdjust')
     // targetDiv.querySelector('.checkDiv').classList.remove('checkDiv')
     eventController().runCreateCheckList()
+    storeData(targetDiv.parentElement.parentElement.parentElement.parentElement).populateStorage()
   //  console.log(allProjects().getProjects())
   }
 
@@ -2556,7 +2568,17 @@ function createCheckList(targetDiv, todo, e){
     // console.log('checkListStatus')
     document.body.style.backgroundColor = 'blue'
     // console.log(e)
-    console.log(targetDiv)
+    // console.log(targetDiv)
+    const targetButton = targetDiv.parentElement.parentElement
+    const checkListForm = targetButton.parentElement.parentElement.querySelector('.checkListForm')
+    
+    if(!checkListForm.querySelector('.saveChanges')){
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save Checklist'  
+        saveButton.classList.add('saveChanges') 
+        checkListForm.appendChild(saveButton)
+        eventController().runSaveChanges()
+    }
   }
 
   return {
@@ -2569,7 +2591,7 @@ function createCheckList(targetDiv, todo, e){
 }
 
 function storeData (targetDiv){
-  console.log(targetDiv)
+//  console.log(targetDiv)
   // console.log('start from here')
   /*
   storing data when project name is edited is not working.
@@ -2590,7 +2612,8 @@ function storeData (targetDiv){
       // console.log(projects)
      // console.log(projects[i]['projectName'])
     //  console.log(targetDiv.querySelector('.newProjectName').textContent)
-      if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
+//    console.log(targetDiv)  
+    if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
      //  console.log(projects[i]['projectName'])
      //   console.log(targetDiv.querySelector('.newProjectName').textContent)
     //  console.log(JSON.stringify(projects[i]['todos']))
