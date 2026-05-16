@@ -28,7 +28,7 @@ function storageCall(){
   if(localStorage.length > 0){
     // if(document.querySelector('.actualProject')){
     // console.log('yes')
-    // storeData().setStyles()
+    storeData().setStyles()
   // }
   
   } else{
@@ -2566,7 +2566,7 @@ function createCheckList(targetDiv, formDiv){
 
   function checkListStatus(targetDiv){
     // console.log('checkListStatus')
-    document.body.style.backgroundColor = 'blue'
+    document.body.style.backgroundColor = 'white'
     // console.log(e)
     // console.log(targetDiv)
     const targetButton = targetDiv.parentElement.parentElement
@@ -2684,6 +2684,8 @@ function storeData (targetDiv){
 // ]
 
 let storedProject = []
+ let arr = []
+  let titles = []
 for(let i = 0; i < localStorage.length; i++){
   let newProject = {}
   newProject.projectName = localStorage.key(i)
@@ -2691,11 +2693,12 @@ for(let i = 0; i < localStorage.length; i++){
 //  console.log(localStorage.getItem(localStorage.key(i)))
   storedProject.push(newProject)
 }
-console.log(storedProject)
+// console.log(storedProject)
 // console.log(localStorage.key(0))
-
+// console.log(JSON.parse(storedProject))
 for(let i = 0; i < storedProject.length; i++){
- // console.log(storedProject[i]['projectName'])
+// console.log(storedProject[i])
+ // console.log(i)
 
     const newProjectContainer = document.createElement('div')
     newProjectContainer.classList.add('newProjectContainer')
@@ -2733,127 +2736,252 @@ for(let i = 0; i < storedProject.length; i++){
     createNewTodoButton.classList.add('createNewTodo')
     createNewTodoButton.textContent = 'Add Todo'
 
-    const todoDivContent = document.createElement('div')
-    todoDivContent.classList.add('todoDivContent')
+    let newArray = JSON.parse(storedProject[i]['todos'])
+    //console.log(newArray)
+    // for(let j = 0; j < newArray.length; j++){
+    // //  console.log(j)
+    //   const todoDivContent = document.createElement('div')
+    //   todoDivContent.classList.add('todoDivContent')
+    //   console.log(todoDivContent)
+    // }
+    // const todoDivContent = document.createElement('div')
+    // todoDivContent.classList.add('todoDivContent')
 
-    const todo = document.createElement('h4')
-    todo.classList.add('todo')
+    // const todo = document.createElement('h4')
+    // todo.classList.add('todo')
 
-    const priority = document.createElement('p')
-    priority.classList.add('priority')
-    priority.textContent = 'Task Priority : '
+    // const priority = document.createElement('p')
+    // priority.classList.add('priority')
+    // priority.textContent = 'Task Priority : '
 
-    const taskButtonsDiv = document.createElement('div')
-    taskButtonsDiv.classList.add('taskButtonsDiv')
+    // const taskButtonsDiv = document.createElement('div')
+    // taskButtonsDiv.classList.add('taskButtonsDiv')
 
-    const editTodoButton = document.createElement('button')
-    editTodoButton.classList.add('editTodoButton')
-    editTodoButton.textContent = 'Edit task'
+    // const editTodoButton = document.createElement('button')
+    // editTodoButton.classList.add('editTodoButton')
+    // editTodoButton.textContent = 'Edit task'
 
-    const deleteTask = document.createElement('button')
-    deleteTask.classList.add('deleteTask')
-    deleteTask.textContent = 'Delete'
+    // const deleteTask = document.createElement('button')
+    // deleteTask.classList.add('deleteTask')
+    // deleteTask.textContent = 'Delete'
 
-    const priorityButton = document.createElement('button')
-    priorityButton.classList.add('priorityButton')
-    priorityButton.textContent = 'Priority'
+    // const priorityButton = document.createElement('button')
+    // priorityButton.classList.add('priorityButton')
+    // priorityButton.textContent = 'Priority'
 
-    const taskStatusButton = document.createElement('button')
-    taskStatusButton.classList.add('taskStatusButton')
-    taskStatusButton.textContent = 'Task Status'
+    // const taskStatusButton = document.createElement('button')
+    // taskStatusButton.classList.add('taskStatusButton')
+    // taskStatusButton.textContent = 'Task Status'
 
-    const dateDiv = document.createElement('div')
-    dateDiv.classList.add('dateDiv')
+    // const dateDiv = document.createElement('div')
+    // dateDiv.classList.add('dateDiv')
 
-    const currentDate = document.createElement('p')
-    currentDate.classList.add ('currentDate')
+    // const currentDate = document.createElement('p')
+    // currentDate.classList.add ('currentDate')
 
-    const dueDateButton = document.createElement('button')
-    dueDateButton.classList.add('dueDateButton')
-    dueDateButton.textContent = 'Add Due Date'
+    // const dueDateButton = document.createElement('button')
+    // dueDateButton.classList.add('dueDateButton')
+    // dueDateButton.textContent = 'Add Due Date'
 
-    const descriptionDiv = document.createElement('div')
-    descriptionDiv.classList.add('descriptionDiv')
+    // const descriptionDiv = document.createElement('div')
+    // descriptionDiv.classList.add('descriptionDiv')
 
-    const descriptionHeading = document.createElement('h5')
-    descriptionHeading.classList.add('descriptionHeading')
-    descriptionHeading.textContent = 'Describe Task'
+    // const descriptionHeading = document.createElement('h5')
+    // descriptionHeading.classList.add('descriptionHeading')
+    // descriptionHeading.textContent = 'Describe Task'
 
-    const descriptionContentDiv = document.createElement('div')
-    descriptionContentDiv.classList.add('descriptionContentDiv')
+    // const descriptionContentDiv = document.createElement('div')
+    // descriptionContentDiv.classList.add('descriptionContentDiv')
 
-    const description = document.createElement('p')
-    description.classList.add('description')
+    // const description = document.createElement('p')
+    // description.classList.add('description')
 
-    const editDescription = document.createElement('button')
-    editDescription.classList.add('editDescription')
-    editDescription.textContent = 'Edit'
+    // const editDescription = document.createElement('button')
+    // editDescription.classList.add('editDescription')
+    // editDescription.textContent = 'Edit'
 
-    const noteDiv = document.createElement('div')
-    noteDiv.classList.add('noteDiv')
+    // const noteDiv = document.createElement('div')
+    // noteDiv.classList.add('noteDiv')
 
-    const noteHeading = document.createElement('h5')
-    noteHeading.classList.add('noteHeading')
-    noteHeading.textContent = 'Note'
+    // const noteHeading = document.createElement('h5')
+    // noteHeading.classList.add('noteHeading')
+    // noteHeading.textContent = 'Note'
 
-    const noteContentDiv = document.createElement('div')
-    noteContentDiv.classList.add('noteContentDiv')
+    // const noteContentDiv = document.createElement('div')
+    // noteContentDiv.classList.add('noteContentDiv')
 
-    const note = document.createElement('p')
-    note.classList.add('note')
+    // const note = document.createElement('p')
+    // note.classList.add('note')
 
-    const editNote = document.createElement('button')
-    editNote.classList.add('editNote')
-    editNote.textContent = 'Edit'
+    // const editNote = document.createElement('button')
+    // editNote.classList.add('editNote')
+    // editNote.textContent = 'Edit'
 
-    const checkListContainer = document.createElement('div')
-    checkListContainer.classList.add('checkListContainer')
+    // const checkListContainer = document.createElement('div')
+    // checkListContainer.classList.add('checkListContainer')
     
-    const checkListHeaderContainer = document.createElement('div')
-    checkListHeaderContainer.classList.add('checkListHeaderContainer')
+    // const checkListHeaderContainer = document.createElement('div')
+    // checkListHeaderContainer.classList.add('checkListHeaderContainer')
 
-    const checkListHeading = document.createElement('p')
-    checkListHeading.classList.add('checkListHeading')
-    checkListHeading.textContent = 'Todo CheckList'
+    // const checkListHeading = document.createElement('p')
+    // checkListHeading.classList.add('checkListHeading')
+    // checkListHeading.textContent = 'Todo CheckList'
 
-    const addCheckListFormButton = document.createElement('button')
-    addCheckListFormButton.classList.add('addCheckListFormButton')
-    addCheckListFormButton.textContent = 'Add'
+    // const addCheckListFormButton = document.createElement('button')
+    // addCheckListFormButton.classList.add('addCheckListFormButton')
+    // addCheckListFormButton.textContent = 'Add'
 
+    // const checkListForm = document.createElement('form')
+    // checkListForm.classList.add('checkListForm')
+
+    // const checkListDiv = document.createElement('div')
+    // checkListDiv.classList.add('checkListDiv')
+
+    // const checkDiv = document.createElement('div')
+    // checkDiv.classList.add('checkDiv')
+
+    let checkObject = []
+   
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
    // console.log('start from here')
     // console.log(storedProject[i]['todos']) 
-    let newArray = JSON.parse(storedProject[i]['todos'])
+    // let newArray = JSON.parse(storedProject[i]['todos'])
     // console.log(newArray)
-    for(let j = 0; j < newArray.length; j++){
-      todo.textContent = newArray[j]['title']
-      currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
-      description.textContent = newArray[j]['description']
-      note.textContent = newArray[j]['projectNote']
-    } 
+    let newk = null
+
+    
+  //   arr.push(newArray)
+  //  console.log(newArray)
 
     const newProjectName = document.createElement('h2')
     newProjectName.classList.add('newProjectName')
     newProjectName.textContent = storedProject[i]['projectName']
-
-    const projectContainers = document.querySelectorAll('.newProjectContainer')
+    
+    const projectContainers = document.querySelectorAll('.actualProject')
+   // console.log(projectContainers)
     projectContainers.forEach((projectContainer) => {
-      if(!projectContainer.querySelector('.titleContainer')){
-        
-        projectContainer.appendChild(titleContainer)
-        
-        titleContainer.appendChild(projectName) 
-        titleContainer.appendChild(newProjectName)
-        titleContainer.appendChild(titleContainerButtonsDiv)
-       
-        titleContainerButtonsDiv.appendChild(editProjectName)
-        titleContainerButtonsDiv.appendChild(deleteProject)
-        
-        projectContainer.appendChild(todoDiv)
-        
-        todoDiv.append(todoDivTitle)
-        todoDivTitle.append(task)
-        todoDivTitle.append(createNewTodoButton)        
+    if(!projectContainer.querySelector('.titleContainer')){
+      
+      projectContainer.appendChild(titleContainer)
+      
+      titleContainer.appendChild(projectName) 
+      titleContainer.appendChild(newProjectName)
+      titleContainer.appendChild(titleContainerButtonsDiv)
+      
+      titleContainerButtonsDiv.appendChild(editProjectName)
+      titleContainerButtonsDiv.appendChild(deleteProject)
+      
+      projectContainer.appendChild(todoDiv)
+      
+      todoDiv.append(todoDivTitle)
+      todoDivTitle.append(task)
+      todoDivTitle.append(createNewTodoButton) 
+
+      for(let j = 0; j < newArray.length; j++){
+        console.log(newArray[j]['title'])
+        const todoDivContent = document.createElement('div')
+        todoDivContent.classList.add('todoDivContent')
+        // console.log(todoDivContent)
+        const todo = document.createElement('h4')
+        todo.classList.add('todo')
+        todo.textContent = newArray[j]['title']
+
+        const priority = document.createElement('p')
+        priority.classList.add('priority')
+        priority.textContent = 'Task Priority : '
+
+        const taskButtonsDiv = document.createElement('div')
+        taskButtonsDiv.classList.add('taskButtonsDiv')
+
+        const editTodoButton = document.createElement('button')
+        editTodoButton.classList.add('editTodoButton')
+        editTodoButton.textContent = 'Edit task'
+
+        const deleteTask = document.createElement('button')
+        deleteTask.classList.add('deleteTask')
+        deleteTask.textContent = 'Delete'
+
+        const priorityButton = document.createElement('button')
+        priorityButton.classList.add('priorityButton')
+        priorityButton.textContent = 'Priority'
+
+        const taskStatusButton = document.createElement('button')
+        taskStatusButton.classList.add('taskStatusButton')
+        taskStatusButton.textContent = 'Task Status'
+
+        const dateDiv = document.createElement('div')
+        dateDiv.classList.add('dateDiv')
+
+        const currentDate = document.createElement('p')
+        currentDate.classList.add ('currentDate')
+        currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
+
+        const dueDateButton = document.createElement('button')
+        dueDateButton.classList.add('dueDateButton')
+        dueDateButton.textContent = 'Add Due Date'
+
+        const descriptionDiv = document.createElement('div')
+        descriptionDiv.classList.add('descriptionDiv')
+
+        const descriptionHeading = document.createElement('h5')
+        descriptionHeading.classList.add('descriptionHeading')
+        descriptionHeading.textContent = 'Describe Task'
+
+        const descriptionContentDiv = document.createElement('div')
+        descriptionContentDiv.classList.add('descriptionContentDiv')
+
+        const description = document.createElement('p')
+        description.classList.add('description')
+        description.textContent = newArray[j]['description']
+
+        const editDescription = document.createElement('button')
+        editDescription.classList.add('editDescription')
+        editDescription.textContent = 'Edit'
+
+        const noteDiv = document.createElement('div')
+        noteDiv.classList.add('noteDiv')
+
+        const noteHeading = document.createElement('h5')
+        noteHeading.classList.add('noteHeading')
+        noteHeading.textContent = 'Note'
+
+        const noteContentDiv = document.createElement('div')
+        noteContentDiv.classList.add('noteContentDiv')
+
+        const note = document.createElement('p')
+        note.classList.add('note')
+        note.textContent = newArray[j]['projectNote']
+
+        const editNote = document.createElement('button')
+        editNote.classList.add('editNote')
+        editNote.textContent = 'Edit'
+
+        const checkListContainer = document.createElement('div')
+        checkListContainer.classList.add('checkListContainer')
+    
+        const checkListHeaderContainer = document.createElement('div')
+        checkListHeaderContainer.classList.add('checkListHeaderContainer')
+
+        const checkListHeading = document.createElement('p')
+        checkListHeading.classList.add('checkListHeading')
+        checkListHeading.textContent = 'Todo CheckList'
+
+        const addCheckListFormButton = document.createElement('button')
+        addCheckListFormButton.classList.add('addCheckListFormButton')
+        addCheckListFormButton.textContent = 'Add'
+
+        const checkListForm = document.createElement('form')
+        checkListForm.classList.add('checkListForm')
+
+        const checkListDiv = document.createElement('div')
+        checkListDiv.classList.add('checkListDiv')
+
+        const checkDiv = document.createElement('div')
+        checkDiv.classList.add('checkDiv')
+
+        const lineBreak = document.createElement('hr')
+        lineBreak.classList.add('lineBreak')        
+
         todoDiv.appendChild(todoDivContent)
         todoDivContent.appendChild(todo)
         todoDivContent.appendChild(priority)
@@ -2885,10 +3013,102 @@ for(let i = 0; i < storedProject.length; i++){
         checkListContainer.appendChild(checkListHeaderContainer)
         checkListHeaderContainer.appendChild(checkListHeading)
         checkListHeaderContainer.appendChild(addCheckListFormButton)
-      }
-    })
+        checkListContainer.appendChild(checkListForm)
+        checkListForm.appendChild(checkListDiv)
+        checkListDiv.appendChild(checkDiv)
+        todoDivContent.appendChild(lineBreak)
+    }
+
+    // const allTodoDivContents = document.querySelectorAll('.todoDivContent')
+    // allTodoDivContents.forEach((todoDivContent) => {
+    //   todoDivContent.appendChild(todo)
+    // })  
+  }
+  })
+
+    for(let j = 0; j < newArray.length; j++){
+     // console.log(newArray[j])
+      // todo.textContent = newArray[j]['title']
+     // currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
+     // description.textContent = newArray[j]['description']
+     // note.textContent = newArray[j]['projectNote']
+      // console.log(Object.values(newArray[j]['title']))
+      // console.log(newArray[i]['checkList'])
+      titles.push(newArray[j]['title'])
+      // checkObject.push(newArray[j]['checkList'])
+
+      // for(let m in newArray[j]){
+      //   // console.log(newArray[j]['checkList'][m])
+      //   // console.log(newArray[j]['checklist'][m])
+      // }
+      
+      // for(let k in newArray[j]['checkList']){
+      //   newk = k
+      //   let newObject = {}
+      //   newObject.title = newArray[j]['title']
+      //   newObject[k] = newArray[j]['checkList'][k]
+      //   // checkObject.push(newObject)
+      // }
+    } 
+    
+// console.log(titles)
+// console.log('start from here')
+/*
+start from here. you noticed that you had to put the variable 
+outside the loop when declaring it so it can give you all the
+values you need in the array in the object becaues if you declare
+it within the loop it would just give you the last values
+as loops always behave
+
+you are trying to solve todocontentdiv wahala before going 
+to checklist wahala
+*/
+    // for(let n = 0; n < newArray.length; n++){
+    //   console.log(newArray[n])
+    // }
+    // console.log(newk)
+
+    // console.log(checkObject)
+  
+
+        // todoDiv.appendChild(todoDivContent)
+        // todoDivContent.appendChild(todo)
+        // todoDivContent.appendChild(priority)
+        // todoDivContent.appendChild(taskButtonsDiv)
+
+        // taskButtonsDiv.appendChild(editTodoButton)
+        // taskButtonsDiv.appendChild(deleteTask)
+        // taskButtonsDiv.appendChild(priorityButton)
+        // taskButtonsDiv.appendChild(taskStatusButton)
+
+        // todoDivContent.appendChild(dateDiv)
+        
+        // dateDiv.appendChild(currentDate)
+        // dateDiv.appendChild(dueDateButton)
+
+        // todoDivContent.appendChild(descriptionDiv)
+        // descriptionDiv.appendChild(descriptionHeading)
+        // descriptionDiv.appendChild(descriptionContentDiv)
+        // descriptionContentDiv.appendChild(description)
+        // descriptionDiv.appendChild(editDescription)
+
+        // todoDivContent.appendChild(noteDiv)
+        // noteDiv.appendChild(noteHeading)
+        // noteDiv.appendChild(noteContentDiv)
+        // noteContentDiv.appendChild(note)
+        // noteDiv.appendChild(editNote)
+
+        // todoDivContent.appendChild(checkListContainer)
+        // checkListContainer.appendChild(checkListHeaderContainer)
+        // checkListHeaderContainer.appendChild(checkListHeading)
+        // checkListHeaderContainer.appendChild(addCheckListFormButton)
+        // checkListContainer.appendChild(checkListForm)
+        // checkListForm.appendChild(checkListDiv)
+        // checkListDiv.appendChild(checkDiv)
+      // }
+    // })
   }  
-    // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
+// console.log(arr)    // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
     document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
   } 
  
