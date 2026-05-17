@@ -2878,7 +2878,7 @@ for(let i = 0; i < storedProject.length; i++){
       todoDivTitle.append(createNewTodoButton) 
 
       for(let j = 0; j < newArray.length; j++){
-        console.log(newArray[j]['title'])
+        // console.log(newArray[j]['title'])
         const todoDivContent = document.createElement('div')
         todoDivContent.classList.add('todoDivContent')
         // console.log(todoDivContent)
@@ -2975,7 +2975,30 @@ for(let i = 0; i < storedProject.length; i++){
 
         const checkListDiv = document.createElement('div')
         checkListDiv.classList.add('checkListDiv')
-
+        
+        // console.log(newArray[j]['checkList'])
+        for(let prop in newArray[j]['checkList']){
+            const checkDiv = document.createElement('div')
+            checkDiv.classList.add('checkDiv')
+            
+            const checkListItem = document.createElement('input')
+            checkListItem.setAttribute('type', 'checkbox')
+            checkListItem.classList.add('checkListItem')
+            const label = document.createElement('label')
+            label.textContent = prop
+            
+            // console.log(newArray[j]['checkList'][prop])
+            if(newArray[j]['checkList'][prop] == 'Complete'){
+              checkListItem.checked = true
+              // console.log(newArray[j]['checkList'][prop])
+            }else if(newArray[j]['checkList'][prop] == 'Incomplete'){
+              checkListItem.checked = false
+              // console.log(newArray[j]['checkList'][prop])
+            }
+            checkListDiv.appendChild(checkDiv)
+            checkDiv.appendChild(checkListItem)
+            checkDiv.appendChild(label)
+        }
         const checkDiv = document.createElement('div')
         checkDiv.classList.add('checkDiv')
 
@@ -3015,7 +3038,7 @@ for(let i = 0; i < storedProject.length; i++){
         checkListHeaderContainer.appendChild(addCheckListFormButton)
         checkListContainer.appendChild(checkListForm)
         checkListForm.appendChild(checkListDiv)
-        checkListDiv.appendChild(checkDiv)
+        // checkListDiv.appendChild(checkDiv)
         todoDivContent.appendChild(lineBreak)
     }
 
