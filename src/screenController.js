@@ -25,16 +25,22 @@ document.addEventListener('keydown', function(e){
 
 function storageCall(){
   
-  if(localStorage.length > 0){
+  // function populateDOM (){
+    if(localStorage.length > 0){
     // if(document.querySelector('.actualProject')){
     // console.log('yes')
     storeData().setStyles()
   // }
   
-  } else{
+    } else{
     console.log('no data')
+     }
   }
-}
+// return {
+//   populateDOM
+// }
+  
+// }
 
 // storageCall()
 
@@ -378,7 +384,8 @@ function eventController(){
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                     createTask()
                     // console.log(todo)
-                    storeData(targetDiv).populateStorage()
+                    // console.log(projectName)
+                    storeData(projectName).populateStorage()
                     // console.log(projectName)
                   //  console.log(allProjects().getProjects())
                     e.target.remove()
@@ -419,7 +426,8 @@ function eventController(){
                       //  console.log(targetDiv)
                         createCheckList(targetDiv).createContainer()
                       // console.log(todo)
-                        storeData(targetDiv).populateStorage()
+                      // console.log(projectName)
+                        storeData(projectName).populateStorage()
                        // console.log(allProjects().getProjects())
                         e.target.remove()
          //               console.log(allProjects().getProjects())
@@ -519,7 +527,7 @@ const runEditButton = function(){
   let previousValue = null
   currentEditButton.forEach((button) => {
     button.onclick = function(e){
-      // document.body.style.backgroundColor = 'orange'
+      document.body.style.backgroundColor = 'orange'
       let currentProjectName = this.parentElement.parentElement.querySelector('.newProjectName')
       // console.log(currentProjectName)
       // console.log(this.parentElement.parentElement)
@@ -542,29 +550,46 @@ const runEditButton = function(){
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 2000)
+        //  console.log(previousValue)
+        //  console.log(currentProjectName.textContent)
          createNewProjects(previousValue, currentProjectName.textContent)
          for(let i = 0; i < projects.length; i++){
+          console.log(projects)
              if(projects[i]['projectName'] == currentProjectName.textContent){
                 currentProjectName.textContent = projects[i]['projectName']
-                
+                 
               }
          }
-         storeData(e.target.parentElement.parentElement.parentElement).populateStorage()
-         localStorage.removeItem(previousValue)
+         console.log('check')
+         storeData(currentProjectName.textContent).populateStorage()
+        //  console.log('start here')
+        //  console.log(allProjects().getProjects())
+         /*
+         when edit project name button is clicked and project
+         name edited, localstorage updates with the new name
+         but when you reload the page and do this again, for some
+         reason the project is deleted from localstorage so does
+         not appear on the dom when page is refresed
+         */
+          // console.log(previousValue)
+          // console.log(currentProjectName.textContent)
+          localStorage.removeItem(previousValue)
         //  console.log(previousValue)
          // console.log(allProjects().getProjects())
       }
 
       else if(button.textContent == 'Edit'){
-        //  console.log(e.target.parentElement.parentElement.querySelector('.newProjectName'))
+        //  console.log(e.target.parentElement.parentElement.querySelector('.newProjectName').textContent)
           previousValue = e.target.parentElement.parentElement.querySelector('.newProjectName').textContent
           currentProjectName = e.target.parentElement.parentElement.querySelector('.newProjectName')
           currentProjectName.setAttribute('contenteditable', true)
           currentProjectName.classList.add('editContent')
           currentProjectName.style.cursor = 'pointer'
+        //  console.log(currentProjectName)
           currentProjectName.addEventListener('focus', function(e){
           button.textContent = 'Save'
           currentProjectName.style.cursor = 'auto'
+          console.log(previousValue)
           })
      }
     }
@@ -684,7 +709,7 @@ const runSaveChanges = function(){
           console.log('save checklist')
         }
       else if (e.target.className == 'saveChanges'){
-     //     console.log('check 2')
+         console.log('check 2')
          // e.target.parentElement.querySelector('.todoDivTitle').querySelector('.lineBreak').remove()
       // document.body.style.backgroundColor = 'skyblue'
            let todoInput = this.parentElement.querySelector('.todoInput')
@@ -2590,67 +2615,44 @@ function createCheckList(targetDiv, formDiv){
   }
 }
 
-function storeData (targetDiv){
-//  console.log(targetDiv)
+function storeData (currentProjectName){
+//  console.log(currentProjectName)
   // console.log('start from here')
   /*
   storing data when project name is edited is not working.
   maybe is where i call storedata in editing projectname
   */
   let projects = allProjects().getProjects()
+  // console.log(projects.length)
   // console.log(projects)
   function populateStorage(){
     // console.log(targetDiv)
-     for(let i = 0; i < projects.length; i++){
-      // console.log('start from here')
-      /*
-      we are trying to replace key with new edit name starting
-      from project name so we are trying to see if we can loop
-      through localstorage
-      */
-      // console.log(targetDiv)
-      // console.log(projects)
-     // console.log(projects[i]['projectName'])
-    //  console.log(targetDiv.querySelector('.newProjectName').textContent)
-//    console.log(targetDiv)  
-    if(projects[i]['projectName'] == targetDiv.querySelector('.newProjectName').textContent){
-     //  console.log(projects[i]['projectName'])
-     //   console.log(targetDiv.querySelector('.newProjectName').textContent)
-    //  console.log(JSON.stringify(projects[i]['todos']))
-   // console.log(projects[i]['projectName'])
-        localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
-        // console.log(localStorage.length)
-        // localStorage.key(0)
+    // console.log(projects)
+     for(let i = 0; i < projects.length; i++){ 
+      if(projects[i]['projectName'] == currentProjectName){
+      //  console.log(projects[i]['projectName'])
+      //  console.log(projects[i]['todos'])
+      if(typeof projects[i]['todos'] == 'object'){
+         localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
+      }else if (typeof projects[i]['todos'] == 'string'){
+         localStorage.setItem(`${projects[i]['projectName']}`, projects[i]['todos'])
       }
-     } 
+          
+         // console.log(JSON.stringify(projects[i]['todos']))
+          console.log(typeof projects[i]['todos'])
 
-    //  for(let i = 0; i < localStorage.length; i++){
-    // //  console.log(localStorage.key(i))
-    // //  console.log(projects[i]['projectName'])
-    //   if(localStorage.key(i) == targetDiv.querySelector('.newProjectName').textContent){
-    //     console.log(targetDiv.querySelector('.newProjectName').textContent)
-    //     console.log(localStorage.key(i))
-    //     let userData = JSON.parse(localStorage.getItem(targetDiv.querySelector('.newProjectName').textContent))
-    //    console.log(userData)
-    //    delete userData.description
-    //    localStorage.setItem(targetDiv.querySelector('.newProjectName').textContent, JSON.stringify(userData))
-    //    // localStorage.setItem(targetDiv.querySelector('.newProjectName').textContent, JSON.stringify(projects[i]['todos']))
-    //   }
-    //  }
-
-    //  Object.keys(localStorage).forEach(function(key){
-    //   console.log(localStorage.getItem(key))
-    //  })
-
-    //  console.log(Object.keys(localStorage))
-
-    //  for(const [key, value] of Object.entries(localStorage)){
-    //   console.log(key, value)
-    //  }
-  // console.log(document.querySelector('.actualProject .projectName'))
- //   localStorage.setItem(`${projectName}`, document.querySelector('.actualProject .projectName').textContent)
-    // console.log(targetDiv)
-    // localStorage.setItem('bgcolor', 'orange')
+          // localStorage.key(0)
+          /*
+           from the console log you see above, it is clear that
+           the issue is that it is converting it into the string
+           before storing in storage which is normal but when the
+           page is refreshed and projectname edited the coversion 
+           does not work as planned. It is like it is converting a 
+           string that is already a string into another string
+            
+          */
+        }
+      } 
     setStyles()
   }
 
@@ -2682,14 +2684,17 @@ function storeData (targetDiv){
 //               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
 //     }
 // ]
-
+// console.log('retrieve from storage')
 let storedProject = []
  let arr = []
   let titles = []
 for(let i = 0; i < localStorage.length; i++){
+  console.log(i)
   let newProject = {}
   newProject.projectName = localStorage.key(i)
+  //  localStorage.removeItem(localStorage.key(i))
   newProject.todos = localStorage.getItem(localStorage.key(i))
+  console.log(localStorage.getItem(localStorage.key(i)))
 //  console.log(localStorage.getItem(localStorage.key(i)))
   storedProject.push(newProject)
 }
@@ -2737,110 +2742,9 @@ for(let i = 0; i < storedProject.length; i++){
     createNewTodoButton.textContent = 'Add Todo'
 
     let newArray = JSON.parse(storedProject[i]['todos'])
-    //console.log(newArray)
-    // for(let j = 0; j < newArray.length; j++){
-    // //  console.log(j)
-    //   const todoDivContent = document.createElement('div')
-    //   todoDivContent.classList.add('todoDivContent')
-    //   console.log(todoDivContent)
-    // }
-    // const todoDivContent = document.createElement('div')
-    // todoDivContent.classList.add('todoDivContent')
-
-    // const todo = document.createElement('h4')
-    // todo.classList.add('todo')
-
-    // const priority = document.createElement('p')
-    // priority.classList.add('priority')
-    // priority.textContent = 'Task Priority : '
-
-    // const taskButtonsDiv = document.createElement('div')
-    // taskButtonsDiv.classList.add('taskButtonsDiv')
-
-    // const editTodoButton = document.createElement('button')
-    // editTodoButton.classList.add('editTodoButton')
-    // editTodoButton.textContent = 'Edit task'
-
-    // const deleteTask = document.createElement('button')
-    // deleteTask.classList.add('deleteTask')
-    // deleteTask.textContent = 'Delete'
-
-    // const priorityButton = document.createElement('button')
-    // priorityButton.classList.add('priorityButton')
-    // priorityButton.textContent = 'Priority'
-
-    // const taskStatusButton = document.createElement('button')
-    // taskStatusButton.classList.add('taskStatusButton')
-    // taskStatusButton.textContent = 'Task Status'
-
-    // const dateDiv = document.createElement('div')
-    // dateDiv.classList.add('dateDiv')
-
-    // const currentDate = document.createElement('p')
-    // currentDate.classList.add ('currentDate')
-
-    // const dueDateButton = document.createElement('button')
-    // dueDateButton.classList.add('dueDateButton')
-    // dueDateButton.textContent = 'Add Due Date'
-
-    // const descriptionDiv = document.createElement('div')
-    // descriptionDiv.classList.add('descriptionDiv')
-
-    // const descriptionHeading = document.createElement('h5')
-    // descriptionHeading.classList.add('descriptionHeading')
-    // descriptionHeading.textContent = 'Describe Task'
-
-    // const descriptionContentDiv = document.createElement('div')
-    // descriptionContentDiv.classList.add('descriptionContentDiv')
-
-    // const description = document.createElement('p')
-    // description.classList.add('description')
-
-    // const editDescription = document.createElement('button')
-    // editDescription.classList.add('editDescription')
-    // editDescription.textContent = 'Edit'
-
-    // const noteDiv = document.createElement('div')
-    // noteDiv.classList.add('noteDiv')
-
-    // const noteHeading = document.createElement('h5')
-    // noteHeading.classList.add('noteHeading')
-    // noteHeading.textContent = 'Note'
-
-    // const noteContentDiv = document.createElement('div')
-    // noteContentDiv.classList.add('noteContentDiv')
-
-    // const note = document.createElement('p')
-    // note.classList.add('note')
-
-    // const editNote = document.createElement('button')
-    // editNote.classList.add('editNote')
-    // editNote.textContent = 'Edit'
-
-    // const checkListContainer = document.createElement('div')
-    // checkListContainer.classList.add('checkListContainer')
-    
-    // const checkListHeaderContainer = document.createElement('div')
-    // checkListHeaderContainer.classList.add('checkListHeaderContainer')
-
-    // const checkListHeading = document.createElement('p')
-    // checkListHeading.classList.add('checkListHeading')
-    // checkListHeading.textContent = 'Todo CheckList'
-
-    // const addCheckListFormButton = document.createElement('button')
-    // addCheckListFormButton.classList.add('addCheckListFormButton')
-    // addCheckListFormButton.textContent = 'Add'
-
-    // const checkListForm = document.createElement('form')
-    // checkListForm.classList.add('checkListForm')
-
-    // const checkListDiv = document.createElement('div')
-    // checkListDiv.classList.add('checkListDiv')
-
-    // const checkDiv = document.createElement('div')
-    // checkDiv.classList.add('checkDiv')
-
+    // console.log(newArray)
     let checkObject = []
+    // console.log(storedProject[i]['todos'])
    
     document.querySelector('.projectContainer').appendChild(newProjectContainer)
    // console.log('start from here')
@@ -2879,6 +2783,8 @@ for(let i = 0; i < storedProject.length; i++){
 
       for(let j = 0; j < newArray.length; j++){
         // console.log(newArray[j]['title'])
+       // console.log(j)
+        // console.log(newArray[j])
         const todoDivContent = document.createElement('div')
         todoDivContent.classList.add('todoDivContent')
         // console.log(todoDivContent)
@@ -3042,10 +2948,8 @@ for(let i = 0; i < storedProject.length; i++){
         todoDivContent.appendChild(lineBreak)
     }
 
-    // const allTodoDivContents = document.querySelectorAll('.todoDivContent')
-    // allTodoDivContents.forEach((todoDivContent) => {
-    //   todoDivContent.appendChild(todo)
-    // })  
+    eventController().runEditButton()
+ 
   }
   })
 
@@ -3146,6 +3050,10 @@ to checklist wahala
 
 // projectName.onchange = populateStorage
 }
+
+// export {
+//   storageCall
+// }
 
 // window.addEventListener('storage', function(e){
 //   console.log(e)

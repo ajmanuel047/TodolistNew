@@ -3,6 +3,8 @@ import { createEmptyProject } from "./createNewProject"
 import { createProject } from "./createNewProject"
 import { formatDate } from "./dateformatter"
 import { projectImportance } from "./projectPriority"
+// import { storageCall } from "./screenController"
+
 let projects = [
       {
      'projectName': 'This Is A Sample Project',
@@ -11,19 +13,56 @@ let projects = [
     }
 ]
 
+let storedProjects = []
+
+function callStorage(){
+  if(localStorage.length > 0 && projects.length < 2){
+    for(let i = 0; i < localStorage.length; i++){
+      let newProject = {}
+      newProject.projectName = localStorage.key(i)
+      //  localStorage.removeItem(localStorage.key(i))
+      newProject.todos = localStorage.getItem(localStorage.key(i))
+      //  console.log(localStorage.getItem(localStorage.key(i)))
+      storedProjects.push(newProject)
+      // console.log('yes')
+  }
+  projects.push(...storedProjects)
+  // console.log(projects)
+}
+}
+
+callStorage()
 function createNewProjects(value, value2){
+    // console.log(value, value2)
+    // console.log(localStorage.length)
     const newProject = createProject(value).newProject()
     projects.push(newProject)
+    // console.log(newProject)
+
+// console.log(projects)
     for(let i = 0; i < projects.length; i++){
-      if(projects[i]['projectName'] == null){
-         projects[i]['projectName'] = value
+      // console.log(projects[i]['projectName'])
+      if(projects[i]['projectName'] == null && value2 == undefined){
+        // console.log(value2) 
+        projects[i]['projectName'] = value
         // console.log(i)
       }else if(projects[i]['projectName'] == value){
+        // console.log('else ran')
         projects[i]['projectName'] = value2
         projects.splice(i + 1, 1)
       }
     }
+    
+    // console.log(JSON.parse(localStorage))
     // console.log(projects)
+    // console.log('start from here')
+    /*
+    the problem is that for some reason when you refresh the 
+    page, and edit projectname, the project name still shows
+    the old project name in all projects. It does not seem to
+    be reading the new project name when edited and saved.
+    You have to find out why this is happening
+    */
     // return { newProject }
 
 }
