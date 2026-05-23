@@ -481,7 +481,7 @@ function eventController(){
         runEditButton()
         runEditDescription(projectName)
         runEditNote(projectName)        
-        runDeleteProject()
+        runDeleteProject(projectName)
         runDeleteTask()
         runAddTaskPriority()
         runAddTaskStatus()
@@ -557,25 +557,11 @@ const runEditButton = function(){
           console.log(projects)
              if(projects[i]['projectName'] == currentProjectName.textContent){
                 currentProjectName.textContent = projects[i]['projectName']
-                 
-              }
+             }
          }
-         console.log('check')
+        //  console.log('check')
          storeData(currentProjectName.textContent).populateStorage()
-        //  console.log('start here')
-        //  console.log(allProjects().getProjects())
-         /*
-         when edit project name button is clicked and project
-         name edited, localstorage updates with the new name
-         but when you reload the page and do this again, for some
-         reason the project is deleted from localstorage so does
-         not appear on the dom when page is refresed
-         */
-          // console.log(previousValue)
-          // console.log(currentProjectName.textContent)
-          localStorage.removeItem(previousValue)
-        //  console.log(previousValue)
-         // console.log(allProjects().getProjects())
+         localStorage.removeItem(previousValue)
       }
 
       else if(button.textContent == 'Edit'){
@@ -1155,13 +1141,15 @@ const runDeleteProject = function (targetDiv){
  
   const deleteButtons = document.querySelectorAll('.deleteProject')
   deleteButtons.forEach((button) => {
-    button.onclick = function (){
+    button.onclick = function (e){
       // document.body.style.backgroundColor = 'red'
-      const currentProject = this.parentElement.parentElement.parentElement
+      const currentProject = e.target.parentElement.parentElement.parentElement
       const currentProjectName = currentProject.querySelector('.newProjectName').textContent
       deleteProject(currentProjectName)
       currentProject.remove()
       updateDropDown(currentProjectName).removeProject()
+      localStorage.removeItem(currentProjectName)
+      console.log(allProjects().getProjects())
     }
   })
 }
@@ -2689,12 +2677,12 @@ let storedProject = []
  let arr = []
   let titles = []
 for(let i = 0; i < localStorage.length; i++){
-  console.log(i)
+  // console.log(i)
   let newProject = {}
   newProject.projectName = localStorage.key(i)
   //  localStorage.removeItem(localStorage.key(i))
   newProject.todos = localStorage.getItem(localStorage.key(i))
-  console.log(localStorage.getItem(localStorage.key(i)))
+  // console.log(localStorage.getItem(localStorage.key(i)))
 //  console.log(localStorage.getItem(localStorage.key(i)))
   storedProject.push(newProject)
 }
@@ -2949,96 +2937,13 @@ for(let i = 0; i < storedProject.length; i++){
     }
 
     eventController().runEditButton()
- 
+    eventController().runDeleteProject()
   }
   })
-
-    for(let j = 0; j < newArray.length; j++){
-     // console.log(newArray[j])
-      // todo.textContent = newArray[j]['title']
-     // currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
-     // description.textContent = newArray[j]['description']
-     // note.textContent = newArray[j]['projectNote']
-      // console.log(Object.values(newArray[j]['title']))
-      // console.log(newArray[i]['checkList'])
-      titles.push(newArray[j]['title'])
-      // checkObject.push(newArray[j]['checkList'])
-
-      // for(let m in newArray[j]){
-      //   // console.log(newArray[j]['checkList'][m])
-      //   // console.log(newArray[j]['checklist'][m])
-      // }
-      
-      // for(let k in newArray[j]['checkList']){
-      //   newk = k
-      //   let newObject = {}
-      //   newObject.title = newArray[j]['title']
-      //   newObject[k] = newArray[j]['checkList'][k]
-      //   // checkObject.push(newObject)
-      // }
-    } 
-    
-// console.log(titles)
-// console.log('start from here')
-/*
-start from here. you noticed that you had to put the variable 
-outside the loop when declaring it so it can give you all the
-values you need in the array in the object becaues if you declare
-it within the loop it would just give you the last values
-as loops always behave
-
-you are trying to solve todocontentdiv wahala before going 
-to checklist wahala
-*/
-    // for(let n = 0; n < newArray.length; n++){
-    //   console.log(newArray[n])
-    // }
-    // console.log(newk)
-
-    // console.log(checkObject)
-  
-
-        // todoDiv.appendChild(todoDivContent)
-        // todoDivContent.appendChild(todo)
-        // todoDivContent.appendChild(priority)
-        // todoDivContent.appendChild(taskButtonsDiv)
-
-        // taskButtonsDiv.appendChild(editTodoButton)
-        // taskButtonsDiv.appendChild(deleteTask)
-        // taskButtonsDiv.appendChild(priorityButton)
-        // taskButtonsDiv.appendChild(taskStatusButton)
-
-        // todoDivContent.appendChild(dateDiv)
-        
-        // dateDiv.appendChild(currentDate)
-        // dateDiv.appendChild(dueDateButton)
-
-        // todoDivContent.appendChild(descriptionDiv)
-        // descriptionDiv.appendChild(descriptionHeading)
-        // descriptionDiv.appendChild(descriptionContentDiv)
-        // descriptionContentDiv.appendChild(description)
-        // descriptionDiv.appendChild(editDescription)
-
-        // todoDivContent.appendChild(noteDiv)
-        // noteDiv.appendChild(noteHeading)
-        // noteDiv.appendChild(noteContentDiv)
-        // noteContentDiv.appendChild(note)
-        // noteDiv.appendChild(editNote)
-
-        // todoDivContent.appendChild(checkListContainer)
-        // checkListContainer.appendChild(checkListHeaderContainer)
-        // checkListHeaderContainer.appendChild(checkListHeading)
-        // checkListHeaderContainer.appendChild(addCheckListFormButton)
-        // checkListContainer.appendChild(checkListForm)
-        // checkListForm.appendChild(checkListDiv)
-        // checkListDiv.appendChild(checkDiv)
-      // }
-    // })
   }  
 // console.log(arr)    // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
     document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
-  } 
- 
+  }  
   }
 
   
