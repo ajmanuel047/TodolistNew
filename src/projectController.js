@@ -97,8 +97,10 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
           const value = arr.split()[0]
           let newObject = {}
           newObject.title = value
+          // console.log(typeof obj)
+          // console.log(value)
           obj.todos.push(newObject)  
-          // console.log('this runs')
+          // console.log(projects)
           }
         }
         else{
@@ -107,9 +109,9 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
                 if(obj.projectName.toLowerCase() == currentProjectName.toLowerCase()){
                   let newObject = {}
                   newObject.title = `${arr[i]}`
-   //               console.log(`${arr[i]}`)
+                  // obj.todos.push(newObject)
                   obj.todos.push(newObject)     
-                  // console.log('it runs') 
+                  // console.log(projects) 
                 }
             }  
         }

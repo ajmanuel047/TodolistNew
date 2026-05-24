@@ -498,6 +498,7 @@ runCreateTaskButton()
        const taskCreator = createTask()
 
         currentTodo.forEach((button) => {  
+          document.body.style.backgroundColor = 'pink'
           button.onclick = createTask().getInputAndButton()          
         })  
         
@@ -678,54 +679,54 @@ const runTodoEditButton = function(){
 }
 
 const runSaveChanges = function(){
-  // document.body.style.backgroundColor = 'orange'
-    if(document.querySelector('.saveChanges')){
-      const saveChanges = document.querySelectorAll('.saveChanges')
-      const saveChangesButtons = document.querySelectorAll('.saveChanges')
+// document.body.style.backgroundColor = 'orange'
+  if(document.querySelector('.saveChanges')){
+    const saveChanges = document.querySelectorAll('.saveChanges')
+    const saveChangesButtons = document.querySelectorAll('.saveChanges')
+    
+    saveChangesButtons.forEach((button) => {
+      button.onclick = function(e){
+      let targetDiv = e.target.parentElement
       
-      saveChangesButtons.forEach((button) => {
-        button.onclick = function(e){
-        let targetDiv = e.target.parentElement
-       
-        let projects = allProjects().getProjects()
-        if(e.target.classList == 'saveChanges' && e.target.parentElement.classList == 'checkListForm'){
-          // console.log('it is checkList')
-          createCheckList().saveCheckList(targetDiv)
-          e.preventDefault()
-          console.log('save checklist')
-        }
-      else if (e.target.className == 'saveChanges'){
-         console.log('check 2')
-         // e.target.parentElement.querySelector('.todoDivTitle').querySelector('.lineBreak').remove()
-      // document.body.style.backgroundColor = 'skyblue'
-           let todoInput = this.parentElement.querySelector('.todoInput')
-           let note = userInput().getNoteInput()
-           let arr = []
-           let newArr = []
-           const taskInputs = document.querySelectorAll('.todoInput')  
-           const todos = Array.from(document.querySelectorAll('.todo'))  
+      let projects = allProjects().getProjects()
+      if(e.target.classList == 'saveChanges' && e.target.parentElement.classList == 'checkListForm'){
+        // console.log('it is checkList')
+        createCheckList().saveCheckList(targetDiv)
+        e.preventDefault()
+        console.log('save checklist')
+      }
+    else if (e.target.className == 'saveChanges'){
+        console.log('check 2')
+        // e.target.parentElement.querySelector('.todoDivTitle').querySelector('.lineBreak').remove()
+    // document.body.style.backgroundColor = 'skyblue'
+          let todoInput = this.parentElement.querySelector('.todoInput')
+          let note = userInput().getNoteInput()
+          let arr = []
+          let newArr = []
+          const taskInputs = document.querySelectorAll('.todoInput')  
+          const todos = Array.from(document.querySelectorAll('.todo'))  
 
-            todos.forEach((todo) => {
-              arr.push(todo.textContent)
-            })
+          todos.forEach((todo) => {
+            arr.push(todo.textContent)
+          })
 
-            taskInputs.forEach((inputs) => {
-              arr.push(inputs.value)
-            })  
-          
-           let currentProjectName = null
-           const currentTodo = arr[arr.length - 1]
-          //  console.log(document.querySelector('.todoInput'))
+          taskInputs.forEach((inputs) => {
+            arr.push(inputs.value)
+          })  
+        
+          let currentProjectName = null
+          const currentTodo = arr[arr.length - 1]
+        //  console.log(document.querySelector('.todoInput'))
 
-          for(let i = 0; i < projects.length; i++){
-            // console.log(this)
-            // console.log(this.parentElement.querySelector('.newProjectName'))
-            // console.log(this.parentElement.querySelector('.todoInput'))
-              
-            if(todoInput){
-            if(projects[i]['projectName'] == this.parentElement.querySelector('.newProjectName').textContent){
-           //   console.log(this.parentElement.querySelector('.newProjectName').textContent)
-              //  console.log(projects[i]['todos'])
+        for(let i = 0; i < projects.length; i++){
+          // console.log(this)
+          // console.log(this.parentElement.querySelector('.newProjectName'))
+          // console.log(this.parentElement.querySelector('.todoInput'))
+            
+          if(todoInput){
+          if(projects[i]['projectName'] == this.parentElement.querySelector('.newProjectName').textContent){
+          //   console.log(this.parentElement.querySelector('.newProjectName').textContent)
+            //  console.log(projects[i]['todos'])
              for(let j = 0; j < projects[i]['todos'].length; j++){
                      newArr.push(projects[i]['todos'][j]['title'])
                     // console.log('check 6')
@@ -794,7 +795,7 @@ const runSaveChanges = function(){
              const editTodo = document.createElement('button')
              editTodo.classList.add('editTodoButton')
              editTodo.textContent = 'Edit Task'
-
+             
              addTaskButtons(container, currentProjectName, targetDiv)
             }
            })   
@@ -824,7 +825,7 @@ const runSaveChanges = function(){
               eventController().runCreateCheckList()
               // console.log(allProjects().getProjects())
               // console.log(container.parentElement.parentElement)
-              storeData(container.parentElement.parentElement).populateStorage()
+              storeData(container.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
               // console.log('check')
             }
              
@@ -849,7 +850,7 @@ const runAddTodo = function (){
     
     addTodo.onclick = function(e){    
       if(!document.querySelector('.selectProject')){
-     //   document.body.style.backgroundColor = 'blue'
+      //  document.body.style.backgroundColor = 'blue'
         document.querySelector('.addTodo').textContent = 'Use The Below To Add Todo To Any Project'
         createTodoInputAndButton()
         
@@ -2296,7 +2297,7 @@ function todoAlreadyExistMessage(targetButton){
       const headerAddToProjectDiv = document.querySelector('.headerAddToProjectDiv')
       headerAddToProjectDiv.appendChild(errorMessage)
   }else if(targetButton.className == 'saveChanges'){
-      console.log(targetButton.parentElement.querySelector('.todoInput'))
+    //  console.log(targetButton.parentElement.querySelector('.todoInput'))
       targetButton.parentElement.querySelector('.todoInput').after(errorMessage)
   }
     
@@ -2573,7 +2574,7 @@ function createCheckList(targetDiv, formDiv){
     // targetDiv.querySelector('.checkDiv').classList.add('checkDivAdjust')
     // targetDiv.querySelector('.checkDiv').classList.remove('checkDiv')
     eventController().runCreateCheckList()
-    storeData(targetDiv.parentElement.parentElement.parentElement.parentElement).populateStorage()
+    storeData(targetDiv.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
   //  console.log(allProjects().getProjects())
   }
 
@@ -2604,7 +2605,7 @@ function createCheckList(targetDiv, formDiv){
 }
 
 function storeData (currentProjectName){
-//  console.log(currentProjectName)
+ console.log(currentProjectName)
   // console.log('start from here')
   /*
   storing data when project name is edited is not working.
@@ -2621,13 +2622,15 @@ function storeData (currentProjectName){
       //  console.log(projects[i]['projectName'])
       //  console.log(projects[i]['todos'])
       if(typeof projects[i]['todos'] == 'object'){
+        console.log(projects[i]['todos'])
          localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
       }else if (typeof projects[i]['todos'] == 'string'){
-         localStorage.setItem(`${projects[i]['projectName']}`, projects[i]['todos'])
+        console.log(projects[i]['todos'])
+        localStorage.setItem(`${projects[i]['projectName']}`, projects[i]['todos'])
       }
           
          // console.log(JSON.stringify(projects[i]['todos']))
-          console.log(typeof projects[i]['todos'])
+          // console.log(typeof projects[i]['todos'])
 
           // localStorage.key(0)
           /*
@@ -2938,6 +2941,7 @@ for(let i = 0; i < storedProject.length; i++){
 
     eventController().runEditButton()
     eventController().runDeleteProject()
+    eventController().runCreateTaskButton()
   }
   })
   }  
