@@ -21,13 +21,15 @@ function callStorage(){
       let newProject = {}
       newProject.projectName = localStorage.key(i)
       //  localStorage.removeItem(localStorage.key(i))
-      newProject.todos = localStorage.getItem(localStorage.key(i))
+      let val = localStorage.key(i)
+      // console.log(JSON.parse(val))
+      newProject.todos = JSON.parse(localStorage.getItem(localStorage.key(i)))
       //  console.log(localStorage.getItem(localStorage.key(i)))
       storedProjects.push(newProject)
       // console.log('yes')
   }
   projects.push(...storedProjects)
-  // console.log(projects)
+  console.log(projects)
 }
 }
 
@@ -81,26 +83,23 @@ function createNewProjects(value, value2){
 
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
  
-  // console.log(arr)
- // console.log(typeof arr)
+//   console.log(typeof arr)
+//  console.log(arr.split()[0])
 // console.log(currentProjectName)
+// console.log(previousTodo)
+// console.log(currentTodo)
 
   function pushTodo () { 
+    // console.log(projects)
     projects.forEach((obj) => {
- //      console.log(obj.projectName)
-        //  console.log(obj.todos)
-        //  console.log(typeof arr)
-          // console.log(arr)
-          // console.log(obj)
         if(typeof arr == 'string'){
           if(obj.projectName.toLowerCase() == currentProjectName.toLowerCase()){
-          const value = arr.split()[0]
+          // console.log(arr)
+          let value = arr.split()[0]
           let newObject = {}
           newObject.title = value
-          // console.log(typeof obj)
-          // console.log(value)
           obj.todos.push(newObject)  
-          // console.log(projects)
+          console.log(projects)
           }
         }
         else{

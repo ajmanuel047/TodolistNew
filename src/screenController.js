@@ -645,8 +645,11 @@ const runTodoEditButton = function(){
                     }
                   }
               }
-              //  console.log('check 5')  
-         }         
+               
+         }     
+         console.log('check 5')   
+         console.log(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+         storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()   
       } 
       else if(buttons.textContent == 'Edit'){
         // console.log('yes')
@@ -669,6 +672,7 @@ const runTodoEditButton = function(){
           // document.body.style.backgroundColor = 'red'
           buttons.textContent = 'Save'
           currentTodo.style.cursor = 'auto'
+          
           })
         }
       }
@@ -2605,7 +2609,7 @@ function createCheckList(targetDiv, formDiv){
 }
 
 function storeData (currentProjectName){
- console.log(currentProjectName)
+//  console.log(currentProjectName)
   // console.log('start from here')
   /*
   storing data when project name is edited is not working.
@@ -2622,7 +2626,7 @@ function storeData (currentProjectName){
       //  console.log(projects[i]['projectName'])
       //  console.log(projects[i]['todos'])
       if(typeof projects[i]['todos'] == 'object'){
-        console.log(projects[i]['todos'])
+        // console.log(projects[i]['todos'])
          localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
       }else if (typeof projects[i]['todos'] == 'string'){
         console.log(projects[i]['todos'])
@@ -2960,31 +2964,7 @@ for(let i = 0; i < storedProject.length; i++){
 // projectName.onchange = populateStorage
 }
 
-// export {
-//   storageCall
-// }
-
-// window.addEventListener('storage', function(e){
-//   console.log(e)
-//   document.querySelector('.actualProject').textContent = e.projectName
-// })
-
-
-
-// populateStorage()
-/*
-I THINK I AM FACING ISSUE BECAUSE I AM NOT THINKING OF THE SOLUTION IN
-MY HEAD FIRST. IT HAS ALWAYS BEEN THE MOST EFFICIENT WAY I HAVE USED TO
-SOLVE PROBLEMS. THINK OF THE SOLUTION IN YOUR HEAD FIRST AND THEN CREATE
-THAT SOLUTION INTO CODE. YOU NEED TO VISUALIZE IT BEFORE YOU START WRITING
-THE CODE. ALSO, THE BASICS OF CODING IS THAT YOU HAVE TO BREAK A COMPLEX
-PROBLEM INTO SMALLER PIECES OR PROBLEMS AND SOLVE THEM. BEFORE YOU KNOW
-IT YOU WILL HAVE GOTTEN THE OVERALL SOLUTION OF WHAT YOU ARE TRYING TO DO
-*/
-
-/* several scenerios i have not yet worked on
-1. when you add todo from headertodo and without saving you add another todo,
-it creates an issue when you click the addmoreinfo button for the first 
-and maybe the second
-2. i need to put date close to todo name
+/* bug to fix later. Ensure just one save for edit task is
+active at a time. When one is active you should not be able 
+to save another
 */
