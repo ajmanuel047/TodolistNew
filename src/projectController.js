@@ -19,18 +19,13 @@ function callStorage(){
   if(localStorage.length > 0 && projects.length < 2){
     for(let i = 0; i < localStorage.length; i++){
       let newProject = {}
-      newProject.projectName = localStorage.key(i)
-      //  localStorage.removeItem(localStorage.key(i))
-      let val = localStorage.key(i)
-      // console.log(JSON.parse(val))
+      newProject.projectName = localStorage.key(i)     
       newProject.todos = JSON.parse(localStorage.getItem(localStorage.key(i)))
-      //  console.log(localStorage.getItem(localStorage.key(i)))
-      storedProjects.push(newProject)
-      // console.log('yes')
-  }
+      storedProjects.push(newProject)      
+    }
   projects.push(...storedProjects)
   console.log(projects)
-}
+  }
 }
 
 callStorage()
@@ -54,19 +49,6 @@ function createNewProjects(value, value2){
         projects.splice(i + 1, 1)
       }
     }
-    
-    // console.log(JSON.parse(localStorage))
-    // console.log(projects)
-    // console.log('start from here')
-    /*
-    the problem is that for some reason when you refresh the 
-    page, and edit projectname, the project name still shows
-    the old project name in all projects. It does not seem to
-    be reading the new project name when edited and saved.
-    You have to find out why this is happening
-    */
-    // return { newProject }
-
 }
 
 // let projects = [
@@ -83,12 +65,6 @@ function createNewProjects(value, value2){
 
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
  
-//   console.log(typeof arr)
-//  console.log(arr.split()[0])
-// console.log(currentProjectName)
-// console.log(previousTodo)
-// console.log(currentTodo)
-
   function pushTodo () { 
     // console.log(projects)
     projects.forEach((obj) => {
@@ -114,46 +90,20 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
                 }
             }  
         }
-      // for(let i = 0; i < arr.length; i++){
-      //     if(obj.projectName == currentProjectName){
-      //       let newObject = {}
-      //       newObject.title = `${arr[i]}`
-      //       console.log(`${arr[i]}`)
-      //       obj.todos.push(newObject)      
-      //     }
-      // }    
-      // if(obj.projectName == currentProjectName){
-      //    console.log(obj.todos)
-      //    console.log(obj)
-      // }
-    })
-      // console.log(projects)
+    })  
  }
-  let newarr = []
+
  function editTodo(){
-  //  console.log('test')
-  // console.log(projects)
-  //  console.log(currentTodo)
-  //  console.log(currentProjectName)
-   // console.log(currentTodo)
-  //  console.log('test')
 
   for(let i = 0; i < projects.length; i++){
-    
-  // console.log(projects[i]['projectName'])
     if(projects[i]['projectName'] == currentProjectName){
-      // console.log(projects[i])
       for(let j = 0; j < projects[i]['todos'].length; j++){
         if(projects[i]['todos'][j]['title'] == previousTodo){
           projects[i]['todos'][j]['title'] = currentTodo
-          // return
-          // console.log('testing123')
-          // console.log(projects)  
         }       
       }
     }
   }
-//  console.log(projects)
  }
  
   const createObject = () => pushTodo()
@@ -166,30 +116,19 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 }
 
 function dateController(currentProjectName, calenderValues, todo){
-    //  console.log(todo)
-    //     console.log(currentProjectName)
-    //    console.log(calenderValues)
-      //  console.log(projects[0]['Project Name'])
-    for(let i = 0; i < projects.length; i++){
-        if(projects[i]['projectName'] == currentProjectName){
-          for(let j = 0; j < projects[i]['todos'].length; j++){
-              if(projects[i]['todos'][j]['title'] == todo){
-                if(calenderValues == undefined){
-                  // console.log('calender')
- projects[i]['todos'][j].dateCreated = formatDate().getDate()
-                }
-                else {
-                  // console.log('due date')
-projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
-                }
-                  
-              }
-          }
-           
-        }
-    }
-    // console.log(projects)
-    
+ for(let i = 0; i < projects.length; i++){
+     if(projects[i]['projectName'] == currentProjectName){
+       for(let j = 0; j < projects[i]['todos'].length; j++){
+         if(projects[i]['todos'][j]['title'] == todo){
+           if(calenderValues == undefined){
+                projects[i]['todos'][j].dateCreated = formatDate().getDate()
+           } else {
+                projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
+           }                  
+         }
+       }           
+     }
+  }   
 }
 
  function addDescriptionToProject (projectName, description, todo) {
@@ -252,28 +191,25 @@ function removeTaskFromArray(projectName, todo){
 }
 
 function projectPriorityController(currentProjectName, todo){
-   
-    // console.log(currentProjectName, todo)
+  function addPriorityToProject(){
     for(let i = 0; i < projects.length; i++){
-        if(projects[i]['projectName'] == currentProjectName){
-          for(let j = 0; j < projects[i]['todos'].length; j++){
-            if(projects[i]['todos'][j]['title'] == todo){
-              // console.log(currentProjectName, todo)
-              // projects[i]['todos'][j].taskPriority = ''
-              let currentProjectPriority = projects[i]['todos'][j]['taskPriority']
-             
-              // console.log(projects)
-              let newProjectPriority = projectImportance(currentProjectPriority).currentValue()
-              // console.log(newProjectPriority)
-              projects[i]['todos'][j].taskPriority = newProjectPriority
-              // console.log(projects)
-              // console.log(projects[i]['Priority'] )
-              // console.log(currentProjectName)
-            }
-
+      if(projects[i]['projectName'] == currentProjectName){
+        for(let j = 0; j < projects[i]['todos'].length; j++){
+          if(projects[i]['todos'][j]['title'] == todo){
+           let currentProjectPriority = projects[i]['todos'][j]['taskPriority']
+           let newProjectPriority = projectImportance(currentProjectPriority).currentValue()
+           projects[i]['todos'][j].taskPriority = newProjectPriority
           }
         }
+      }
     }
+  }
+
+  // console.log(projects)
+
+  return {
+    addPriorityToProject
+  }
 }
 
 function createTodoCheckList(currentProjectName, todo, checkInput){
@@ -300,9 +236,7 @@ function createTodoCheckList(currentProjectName, todo, checkInput){
 }
 
 function updateCheckListStatus(currentProjectName, currentTodo, targetDiv){
-// console.log('updateCheckListStatus')
-// console.log(currentProjectName)
-// console.log(currentTodo)
+
 for(let i = 0; i < projects.length; i++){
   if(projects[i]['projectName'] == currentProjectName){
     for(let j = 0; j < projects[i]['todos'].length; j++){

@@ -1162,7 +1162,9 @@ const runDeleteTask = function(){
 const runAddTaskPriority = function(){
   const taskPriorityButtons = document.querySelectorAll('.priorityButton')
   taskPriorityButtons.forEach((button) => {
-    button.onclick = addTaskPriority
+    button.onclick = function(e){
+      addTaskPriority(e)
+    }
   })
 }
 
@@ -2313,14 +2315,14 @@ function deleteTask(e){
   storeData(currentContainer).populateStorage()
 }
 
-function addTaskPriority(){
+function addTaskPriority(e){
   // document.body.style.backgroundColor = 'blue'
   const projects = allProjects().getProjects()
-  const currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-  const todo = this.parentElement.parentElement.querySelector('.todo').textContent
-  const taskPriority = this.parentElement.parentElement.querySelector('.priority')
+  const currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+  const todo = e.target.parentElement.parentElement.querySelector('.todo').textContent
+  const taskPriority = e.target.parentElement.parentElement.querySelector('.priority')
   console.log(taskPriority)
-  projectPriorityController(currentProjectName, todo)
+  projectPriorityController(currentProjectName, todo).addPriorityToProject()
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['projectName'] == currentProjectName){
         for(let j = 0; j < projects[i]['todos'].length; j++ ){
@@ -2344,7 +2346,7 @@ function addTaskPriority(){
        }
     }
   }
-
+storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
 }
 
 function addTaskStatus(){
