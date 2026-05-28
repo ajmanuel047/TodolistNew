@@ -751,6 +751,7 @@ const runSaveChanges = function(){
           console.log('check 3')
           //  console.log(e.target.parentElement.querySelector('.newProjectName').textContent)
           eventController().runDeleteTask()
+          eventController().runAddTaskPriority()
           storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
           e.target.remove()
 
@@ -1164,6 +1165,8 @@ const runAddTaskPriority = function(){
   taskPriorityButtons.forEach((button) => {
     button.onclick = function(e){
       addTaskPriority(e)
+      document.body.style.backgroundColor = 'blue'
+      console.log(allProjects().getProjects())
     }
   })
 }
@@ -2785,8 +2788,11 @@ for(let i = 0; i < storedProject.length; i++){
 
         const priority = document.createElement('p')
         priority.classList.add('priority')
-        priority.textContent = 'Task Priority : '
-
+        if(!newArray[j]['taskPriority']){
+          priority.textContent = 'Task Priority : '
+        }else{
+          priority.textContent = 'Task Priority : ' + `${newArray[j]['taskPriority']}`
+        }
         const taskButtonsDiv = document.createElement('div')
         taskButtonsDiv.classList.add('taskButtonsDiv')
 
@@ -2943,6 +2949,8 @@ for(let i = 0; i < storedProject.length; i++){
     eventController().runDeleteProject()
     eventController().runCreateTaskButton()
     eventController().runTodoEditButton()
+    eventController().runDeleteTask()
+    eventController().runAddTaskPriority()
   }
   })
   }  
