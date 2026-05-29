@@ -754,6 +754,7 @@ const runSaveChanges = function(){
           //  console.log(e.target.parentElement.querySelector('.newProjectName').textContent)
           eventController().runDeleteTask()
           eventController().runAddTaskPriority()
+          eventController().runAddTaskStatus()
           storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
           e.target.remove()
 
@@ -1176,11 +1177,11 @@ const runAddTaskPriority = function(){
 const runAddTaskStatus = function(){
   const taskStatusButton = document.querySelectorAll('.taskStatusButton')
   taskStatusButton.forEach((button) => {
-    button.onclick = function(e){
-      addTaskStatus(e)
+    button.onclick = function(e){      
       let currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
       let todo = e.target.parentElement.parentElement.querySelector('.todo').textContent
       updateTodoStatus(currentProjectName, todo)
+      addTaskStatus(currentProjectName, e)
     }
   })
 }
@@ -2359,7 +2360,7 @@ function addTaskPriority(e){
 storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
 }
 
-function addTaskStatus(e){
+function addTaskStatus(currentProjectName, e){
   // document.body.style.backgroundColor = 'orange'
   const todo = e.target.parentElement.parentElement.querySelector('.todo')
   const priority = e.target.parentElement.parentElement.querySelector('.priority')
@@ -2372,6 +2373,7 @@ function addTaskStatus(e){
   } else {
       e.target.parentElement.parentElement.querySelector('.statusText').remove()
   }
+  storeData(currentProjectName).populateStorage()
 }
 
 function createCheckList(targetDiv, formDiv){
@@ -2793,6 +2795,13 @@ for(let i = 0; i < storedProject.length; i++){
         todo.classList.add('todo')
         todo.textContent = newArray[j]['title']
 
+        const statusText = document.createElement('p')
+        statusText.classList.add('statusText')
+
+        // else{
+
+        // }        
+
         const priority = document.createElement('p')
         priority.classList.add('priority')
         if(!newArray[j]['taskPriority']){
@@ -2917,6 +2926,12 @@ for(let i = 0; i < storedProject.length; i++){
 
         todoDiv.appendChild(todoDivContent)
         todoDivContent.appendChild(todo)
+
+        if(newArray[j]['taskStatus'] == 'Completed'){
+          statusText.textContent = newArray[j]['taskStatus']
+          todoDivContent.appendChild(statusText)
+        }
+        
         todoDivContent.appendChild(priority)
         todoDivContent.appendChild(taskButtonsDiv)
 
