@@ -1065,64 +1065,45 @@ const runSaveDueDate = function(){
   const calenders = document.querySelectorAll('.calender')
   
   saveNewDateButtons.forEach((button) => {
-    button.addEventListener('click', function(){
-      // document.body.style.backgroundColor = 'orange'
-    //  console.log(this.parentElement)
-    const targetDiv = this.parentElement
-    //console.log(targetDiv.parentElement.parentElement.querySelector('.todo').textContent)
-      if(this.parentElement){
-     // console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-      const calenderValues = this.parentElement.querySelector('.calender').value
-      const projectName = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-      // document.body.style.backgroundColor = 'green'
-    //  console.log('run again')
-      // dateController(projectName, calenderValues)
-      let dueDate = null
-      let projects = allProjects().getProjects()
-      let todo = targetDiv.parentElement.parentElement.querySelector('.todo').textContent
-      // console.log(targetDiv)
-      // console.log(todo)
-      // todoDivConent.forEach((container) => {
-        // console.log(container.querySelector('.todo').textContent)
-        // let todo = container.querySelector('.todo').textContent
-         dateController(projectName, calenderValues, todo)
-      for(let i = 0; i < projects.length; i++){
-        if(projectName == projects[i]['projectName']){
-          for(let j = 0; j < projects[i]['todos'].length; j++){
-            if(projects[i]['todos'][j]['title'] == todo){
-           //   console.log(todo)
-              // dateController(projectName, calenderValues, todo)
-              dueDate = projects[i]['todos'][j].dueDate
-            }
-          }
+    button.addEventListener('click', function(e){
+      const targetDiv = e.target.parentElement    
+      if(e.target.parentElement){     
+        const calenderValues = e.target.parentElement.querySelector('.calender').value
+        const projectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+        let dueDate = null
+        let projects = allProjects().getProjects()
+        let todo = targetDiv.parentElement.parentElement.querySelector('.todo').textContent
+        dateController(projectName, calenderValues, todo)
+        
+        for(let i = 0; i < projects.length; i++){
+          if(projectName == projects[i]['projectName']){
+            for(let j = 0; j < projects[i]['todos'].length; j++){
+              if(projects[i]['todos'][j]['title'] == todo){
+                 dueDate = projects[i]['todos'][j].dueDate
+              }
+     }
 
-        }
-      }
-      console.log(allProjects().getProjects())
-      // })
- 
+   }
+            }
+    
       if(!targetDiv.querySelector('.dueDate')){
         const dueDateElement = document.createElement('p')
         dueDateElement.classList.add('dueDate')
         dueDateElement.textContent = `Due Date is ${dueDate}`
         targetDiv.appendChild(dueDateElement)
-        // console.log(allProjects().getProjects())
-      //  console.log('check1')
-        // console.log(targetDiv)
-      }else{
+      } else{
         targetDiv.querySelector('.dueDate').textContent = `Due Date is ${dueDate}`
         displayUpdateMessage(targetDiv)
-        // console.log('check')
-        // console.log(allProjects().getProjects())
-      }
-// console.log(this.parentElement.parentElement.querySelector('.calender'))
-      
-      this.parentElement.parentElement.querySelector('.calender').remove()
-     targetDiv.querySelector('button').remove()
+      }      
+      e.target.parentElement.parentElement.querySelector('.calender').remove()
       changeDate(targetDiv)
+         // targetDiv.querySelector('button').remove()
+      storeData(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+      e.target.remove()
       }
      })
   })
+
 }
 
 const runAddMoreInfoButton = function (){
