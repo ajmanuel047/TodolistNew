@@ -212,6 +212,28 @@ function projectPriorityController(currentProjectName, todo){
   }
 }
 
+function updateTodoStatus(currentProjectName, todo){  
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['projectName'] == currentProjectName){
+      for(let j = 0; j < projects[i]['todos'].length; j++){
+        if(projects[i]['todos'][j]['title'] == todo){          
+          if(!projects[i]['todos'][j]['taskStatus']){
+            projects[i]['todos'][j]['taskStatus'] = 'Completed'
+            console.log('completed')
+          }else if(projects[i]['todos'][j]['taskStatus'] && projects[i]['todos'][j]['taskStatus'] == 'Completed'){
+            projects[i]['todos'][j]['taskStatus'] = 'Incomplete'
+            console.log('Incomplete')
+          }else if(projects[i]['todos'][j]['taskStatus'] == 'Incomplete'){
+            projects[i]['todos'][j]['taskStatus'] = 'Completed'
+            console.log('completed again')
+          }
+        }
+      }
+    }
+  }
+  console.log(projects)
+}
+
 function createTodoCheckList(currentProjectName, todo, checkInput){
   // console.log(currentProjectName, todo, checkInput)
   for(let i = 0; i < projects.length; i++){
@@ -284,7 +306,8 @@ export {
         removeTaskFromArray,
         projectPriorityController, 
         createTodoCheckList,
-        updateCheckListStatus
+        updateCheckListStatus,
+        updateTodoStatus
       }
 
 
