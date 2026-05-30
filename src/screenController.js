@@ -755,6 +755,7 @@ const runSaveChanges = function(){
           eventController().runDeleteTask()
           eventController().runAddTaskPriority()
           eventController().runAddTaskStatus()
+          eventController().runEditDescription()
           storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
           e.target.remove()
 
@@ -884,13 +885,13 @@ const runEditDescription = function () {
   
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
-    editButton.onclick = function () {
+    editButton.onclick = function (e) {
       // document.body.style.backgroundColor = 'orange'
-      let currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
-      let projectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-      console.log(this.parentElement.parentElement.parentElement.parentElement)
+      let currentTodo = e.target.parentElement.parentElement.querySelector('.todo').textContent
+      let projectName = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+   //   console.log(e.target.parentElement.parentElement.parentElement.parentElement)
       editDescription()
-      const currentDescription = this.parentElement.querySelector('.description')
+      const currentDescription = e.target.parentElement.querySelector('.description')
       currentDescription.setAttribute('contenteditable', true)
       currentDescription.classList.add('editContent')
       currentDescription.style.cursor = 'pointer'
@@ -904,36 +905,26 @@ const runEditDescription = function () {
          const saveCompletedisplay = document.createElement('p')
          saveCompletedisplay.textContent = 'Saved'
          saveCompletedisplay.classList.add('saved')
-         
 
-         // adjust the saveCompletedisplay because it not moving when the text
-         // is longer
-        //  console.log(this.parentElement.parentElement)
-         this.parentElement.parentElement.querySelector('.descriptionContentDiv').appendChild(saveCompletedisplay)
+         e.target.parentElement.parentElement.querySelector('.descriptionContentDiv').appendChild(saveCompletedisplay)
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-        // console.log(currentDescription.textContent)
-        // console.log(this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+
          addDescriptionToProject(projectName, currentDescription.textContent, currentTodo)
-        //  console.log(allProjects().getProjects().length)
-        console.log(projectName)
-        console.log(currentDescription.textContent)
-        console.log(currentTodo)
         for(let i = 0; i < allProjects().getProjects().length; i++){
-             if(allProjects().getProjects()[i]['projectName'] == projectName){
-              // console.log(projectName)
-                // console.log(allProjects().getProjects()[i]['todos'])
-                currentDescription.textContent = allProjects().getProjects()[i]['description']
-              for(let j = 0; j < allProjects().getProjects()[i]['todos'].length; j++){
-                if(projects[i]['todos'][j]['title'] == currentTodo){
-                 console.log(allProjects().getProjects())
-                  currentDescription.textContent= allProjects().getProjects()[i]['todos'][j]['description'] 
-                }
-                  
-              }
+          if(allProjects().getProjects()[i]['projectName'] == projectName){
+            currentDescription.textContent = allProjects().getProjects()[i]['description']
+            for(let j = 0; j < allProjects().getProjects()[i]['todos'].length; j++){
+              if(projects[i]['todos'][j]['title'] == currentTodo){
+                console.log(allProjects().getProjects())
+                currentDescription.textContent= allProjects().getProjects()[i]['todos'][j]['description'] 
+              }                  
             }
-         }         
+          }
+        }    
+        console.log(e.target.parentElement.parentElement.parentElement.parentElement)     
+        storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
       }
       currentDescription.addEventListener('focus', function(e){
         // document.body.style.backgroundColor = 'skyblue'
@@ -2944,13 +2935,7 @@ for(let i = 0; i < storedProject.length; i++){
     eventController().runAddTaskPriority()
     eventController().runAddTaskStatus()
     eventController().runCalenderButton()
-    console.log('start from here')
-    /**
-     due date is null for some reason
-    */
-            
-        // eventController().runCalender()
-        //   eventController().runSaveDueDate()
+    eventController().runEditDescription()
   }
   })
   }  
