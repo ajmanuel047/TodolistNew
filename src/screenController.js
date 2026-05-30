@@ -2903,12 +2903,11 @@ for(let i = 0; i < storedProject.length; i++){
         todoDivContent.appendChild(dateDiv)
         
         if(newArray[j]['dueDate']){
-          console.log('it does')
           const dueDate = document.createElement('p')
           dueDate.classList.add('dueDate')
           dueDate.textContent = `Due Date is ${newArray[j]['dueDate']}`
           dueDateDiv.appendChild(dueDate)
-          console.log(this)
+          dueDateButton.textContent = 'Change Date'
         }
 
         dateDiv.appendChild(currentDate)
