@@ -1098,6 +1098,7 @@ const runSaveDueDate = function(){
       e.target.parentElement.parentElement.querySelector('.calender').remove()
       changeDate(targetDiv)
          // targetDiv.querySelector('button').remove()
+    //  console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement)
       storeData(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
       e.target.remove()
       }
@@ -2175,10 +2176,7 @@ function createDate(targetDiv, projectName, todo){
 //  }
 
  function addDate(targetDiv){
-  // console.log(targetDiv)
-  const dueDateDiv = null
-  function addDueDateButton(){
-    
+    function addDueDateButton(){    
     const dueDateDiv = document.createElement('div')
     dueDateDiv.classList.add('dueDateDiv')
 
@@ -2186,51 +2184,29 @@ function createDate(targetDiv, projectName, todo){
     addButton.textContent = 'Add Due Date'
     addButton.classList.add('dueDateButton')
     // console.log(targetDiv.parentElement)
-    const allProjectsDom = document.querySelectorAll('.newProjectContainer')
-    
-    const projects = allProjects().getProjects()
-    // for(let i = 0; i < projects.length; i++){
-    //   if(projects[i]['projectName'] == '')
-    // }
-    // console.log(projects)
-    // allProjectsDom.forEach((currentProject) => {
-    //   console.log(currentProject)
-    //   console.log(targetDiv)
-      
-    // })
-
     const todoDivsContent = targetDiv.parentElement.querySelectorAll('.todoDivContent')
     // console.log(todoDivContent)
     todoDivsContent.forEach((container) => {
-      // console.log(container)
-      // console.log(container.children.length)
-      // console.log(container.querySelector('.dueDateDiv'))
       if(!container.querySelector('.dueDateDiv') && container.children.length > 3){
       //  console.log(container.querySelector('.dateDiv'))
         container.querySelector('.dateDiv').appendChild(dueDateDiv)
          dueDateDiv.appendChild(addButton)
         //  console.log(allProjects().getProjects())
       }
-
     })
    // document.querySelector('.projectContainer').lastChild.querySelector('.currentDate').after(dueDateDiv)
    // document.querySelector('.projectContainer').lastChild.querySelector('.dueDateDiv').appendChild(addButton)
     
   }
 
-  function displayCalender(){
-   // console.log(targetDiv.parentElement.parentElement.querySelector('.newProjectName'))
-    // document.body.style.backgroundColor = 'orange'
-    // console.log('test')
-    
+  function displayCalender(){   
     const calender = document.createElement('input')
     calender.classList.add('calender')
     calender.setAttribute('type', 'date')
     if(!targetDiv.querySelector('.calender')){
         targetDiv.appendChild(calender) 
             // console.log(targetDiv)
-    }
-    
+    }    
   }
 
  const getCreateButton = () => addDueDateButton()
@@ -2816,6 +2792,9 @@ for(let i = 0; i < storedProject.length; i++){
         currentDate.classList.add ('currentDate')
         currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
 
+        const dueDateDiv = document.createElement('div')
+        dueDateDiv.classList.add('dueDateDiv')
+
         const dueDateButton = document.createElement('button')
         dueDateButton.classList.add('dueDateButton')
         dueDateButton.textContent = 'Add Due Date'
@@ -2923,8 +2902,18 @@ for(let i = 0; i < storedProject.length; i++){
 
         todoDivContent.appendChild(dateDiv)
         
+        if(newArray[j]['dueDate']){
+          console.log('it does')
+          const dueDate = document.createElement('p')
+          dueDate.classList.add('dueDate')
+          dueDate.textContent = `Due Date is ${newArray[j]['dueDate']}`
+          dueDateDiv.appendChild(dueDate)
+          console.log(this)
+        }
+
         dateDiv.appendChild(currentDate)
-        dateDiv.appendChild(dueDateButton)
+        dateDiv.appendChild(dueDateDiv)
+        dueDateDiv.appendChild(dueDateButton)
 
         todoDivContent.appendChild(descriptionDiv)
         descriptionDiv.appendChild(descriptionHeading)
@@ -2955,6 +2944,14 @@ for(let i = 0; i < storedProject.length; i++){
     eventController().runDeleteTask()
     eventController().runAddTaskPriority()
     eventController().runAddTaskStatus()
+    eventController().runCalenderButton()
+    console.log('start from here')
+    /**
+     due date is null for some reason
+    */
+            
+        // eventController().runCalender()
+        //   eventController().runSaveDueDate()
   }
   })
   }  
