@@ -236,10 +236,10 @@ function defaultProject(){
       descriptionDiv.appendChild(editDescription)
 
       eventController().runEditDescription()
-
+      
       const noteDiv = document.createElement('div')
       noteDiv.classList.add('noteDiv')
-
+      
       const noteHeading = document.createElement('h5')
       noteHeading.classList.add('noteHeading')
       noteHeading.textContent = 'Note'
@@ -686,7 +686,7 @@ const runTodoEditButton = function(){
 }
 
 const runSaveChanges = function(){
-// document.body.style.backgroundColor = 'orange'
+
   if(document.querySelector('.saveChanges')){
     const saveChanges = document.querySelectorAll('.saveChanges')
     const saveChangesButtons = document.querySelectorAll('.saveChanges')
@@ -702,7 +702,7 @@ const runSaveChanges = function(){
         e.preventDefault()
         console.log('save checklist')
       } else if (e.target.className == 'saveChanges'){
-          console.log('check 2')
+          // console.log('check 2')
 
          let todoInput = this.parentElement.querySelector('.todoInput')
          let note = userInput().getNoteInput()
@@ -734,7 +734,7 @@ const runSaveChanges = function(){
          if(!newArr.includes(arr[arr.length - 1])){
          //   console.log('it does not')
             if(document.querySelector('.todoInput')){
-             currentProjectName = this.parentElement.querySelector('.newProjectName').textContent
+             currentProjectName = e.target.parentElement.querySelector('.newProjectName').textContent
              createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
              createTask(currentProjectName).displayTodo(targetDiv)
              todoInput.remove()    
@@ -747,26 +747,30 @@ const runSaveChanges = function(){
                   targetDiv = targetDiv.parentElement.parentElement
               }
 
-          //  console.log(e.target.parentElement.className)
-          //  this.remove()
-          // console.log(e.target)
-          console.log('check 3')
+          // console.log('check 3')
+          // document.body.style.backgroundColor = 'skyblue'
           //  console.log(e.target.parentElement.querySelector('.newProjectName').textContent)
-          eventController().runDeleteTask()
-          eventController().runAddTaskPriority()
-          eventController().runAddTaskStatus()
-          eventController().runEditDescription()
+        //  const projectName = e.target.parentElement.querySelector('.newProjectName').textContent
+         
+        //  const button = e.target.parentElement.querySelector('.editNote')
+          runDeleteTask()
+          runAddTaskPriority()
+          runAddTaskStatus()
+          runEditDescription()
+          runEditNote()
           storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
           e.target.remove()
+          console.log('start from here')
 
           targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
           if(container.querySelector('.todo').textContent == currentTodo){
             createNote(currentProjectName, note, currentTodo).getNoteInput()
             createNote(currentProjectName, note, currentTodo, targetDiv).getDisplayNote()
+            runEditNote()
           }
           })         
           } else {
-              currentProjectName = this.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+              currentProjectName = e.target.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
               createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
               createTask(currentProjectName).displayTodo(targetDiv)
               // todoInput.remove()    
@@ -802,6 +806,7 @@ const runSaveChanges = function(){
              editTodo.textContent = 'Edit Task'
              
              addTaskButtons(container, currentProjectName, targetDiv)
+             
             }
            })   
           }          
@@ -882,7 +887,7 @@ const runEditDescription = function () {
  // console.log(projectName)
   const editDescriptionButton = document.querySelectorAll('.editDescription')
   let previousDescription;
-  
+  console.log(editDescriptionButton)
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function (e) {
@@ -936,10 +941,10 @@ const runEditDescription = function () {
 }
 
 const runEditNote = function (projectName) {
- // console.log(projectName)
+//  console.log('did it run')
   const editNoteButton = document.querySelectorAll('.editNote')
-  // let previousDescription;
-  // console.log(this)
+  
+  console.log(editNoteButton)
   editNoteButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function () {
@@ -961,6 +966,8 @@ const runEditNote = function (projectName) {
          // adjust the saveCompletedisplay because it not moving when the text
          // is longer
          this.parentElement.appendChild(saveCompletedisplay)
+         console.log(projectName)
+         storeData(projectName).populateStorage()
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
@@ -2565,7 +2572,7 @@ function createCheckList(targetDiv, formDiv){
 }
 
 function storeData (currentProjectName){
-//  console.log(currentProjectName)
+ console.log(currentProjectName)
   // console.log('start from here')
   /*
   storing data when project name is edited is not working.
@@ -2579,10 +2586,10 @@ function storeData (currentProjectName){
     // console.log(projects)
      for(let i = 0; i < projects.length; i++){ 
       if(projects[i]['projectName'] == currentProjectName){
-      //  console.log(projects[i]['projectName'])
+       console.log(projects[i]['projectName'])
       //  console.log(projects[i]['todos'])
       if(typeof projects[i]['todos'] == 'object'){
-        // console.log(projects[i]['todos'])
+        console.log(projects[i]['todos'])
          localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
       }else if (typeof projects[i]['todos'] == 'string'){
         console.log(projects[i]['todos'])
@@ -2936,6 +2943,7 @@ for(let i = 0; i < storedProject.length; i++){
     eventController().runAddTaskStatus()
     eventController().runCalenderButton()
     eventController().runEditDescription()
+    eventController().runEditNote()
   }
   })
   }  
