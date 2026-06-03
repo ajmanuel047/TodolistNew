@@ -1212,7 +1212,7 @@ const runCheckListStatus = function(){
     // console.log(currentProjectName)
     // console.log(currentTodo)
     //   console.log(this.parentElement.querySelector('.checkItem'))
-      // console.log(targetDiv)
+      console.log(e.target.querySelector('.checkItem'))
     updateCheckListStatus(currentProjectName, currentTodo, targetDiv.querySelector('.checkItem').textContent)
     createCheckList().checkListStatus(targetDiv, formDiv)
   }
@@ -2836,6 +2836,7 @@ for(let i = 0; i < storedProject.length; i++){
             checkListItem.setAttribute('type', 'checkbox')
             checkListItem.classList.add('checkListItem')
             const label = document.createElement('label')
+            label.classList.add('checkItem')
             label.textContent = prop
             
             // console.log(newArray[j]['checkList'][prop])
@@ -2918,6 +2919,8 @@ for(let i = 0; i < storedProject.length; i++){
     eventController().runCalenderButton()
     eventController().runEditDescription()
     eventController().runEditNote()
+    eventController().runCreateCheckList()
+    eventController().runCheckListStatus()
   }
   })
   }  
