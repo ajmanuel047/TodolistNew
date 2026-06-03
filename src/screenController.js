@@ -760,8 +760,7 @@ const runSaveChanges = function(){
           runEditNote()
           storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
           e.target.remove()
-          console.log('start from here')
-
+          
           targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
           if(container.querySelector('.todo').textContent == currentTodo){
             createNote(currentProjectName, note, currentTodo).getNoteInput()
@@ -887,7 +886,7 @@ const runEditDescription = function () {
  // console.log(projectName)
   const editDescriptionButton = document.querySelectorAll('.editDescription')
   let previousDescription;
-  console.log(editDescriptionButton)
+  // console.log(editDescriptionButton)
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function (e) {
@@ -944,10 +943,10 @@ const runEditNote = function (projectName) {
 //  console.log('did it run')
   const editNoteButton = document.querySelectorAll('.editNote')
   
-  console.log(editNoteButton)
+  // console.log(editNoteButton)
   editNoteButton.forEach((editButton) => {
     // console.log(this)
-    editButton.onclick = function () {
+    editButton.onclick = function (e) {
  //     console.log(this.parentElement.querySelector('.description'))
     //  editNote()
       const currentNote = this.parentElement.querySelector('.note')
@@ -966,7 +965,7 @@ const runEditNote = function (projectName) {
          // adjust the saveCompletedisplay because it not moving when the text
          // is longer
          this.parentElement.appendChild(saveCompletedisplay)
-         console.log(projectName)
+        //  console.log(projectName)
          storeData(projectName).populateStorage()
          setTimeout(() => {
            saveCompletedisplay.remove()
@@ -974,7 +973,7 @@ const runEditNote = function (projectName) {
        // console.log(currentNote.textContent)
        //console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
        let currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
-        console.log(currentTodo)
+        // console.log(currentTodo)
        addNoteToProject(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent, currentTodo)
          
         for(let i = 0; i < allProjects().getProjects().length; i++){
@@ -995,14 +994,17 @@ const runEditNote = function (projectName) {
             }
          }         
       }
-console.log(allProjects().getProjects())
+// console.log(allProjects().getProjects())
+// storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
       currentNote.addEventListener('focus', function(e){
         // document.body.style.backgroundColor = 'skyblue'
         editButton.textContent = 'Save'
         currentNote.style.cursor = 'auto'
       })
+      storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
     }
   })  
+  
 }
 
 const runCalenderButton = function(projectName){
@@ -2572,45 +2574,17 @@ function createCheckList(targetDiv, formDiv){
 }
 
 function storeData (currentProjectName){
- console.log(currentProjectName)
-  // console.log('start from here')
-  /*
-  storing data when project name is edited is not working.
-  maybe is where i call storedata in editing projectname
-  */
   let projects = allProjects().getProjects()
-  // console.log(projects.length)
-  // console.log(projects)
   function populateStorage(){
-    // console.log(targetDiv)
-    // console.log(projects)
-     for(let i = 0; i < projects.length; i++){ 
+    for(let i = 0; i < projects.length; i++){ 
       if(projects[i]['projectName'] == currentProjectName){
-       console.log(projects[i]['projectName'])
-      //  console.log(projects[i]['todos'])
-      if(typeof projects[i]['todos'] == 'object'){
-        console.log(projects[i]['todos'])
-         localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
-      }else if (typeof projects[i]['todos'] == 'string'){
-        console.log(projects[i]['todos'])
-        localStorage.setItem(`${projects[i]['projectName']}`, projects[i]['todos'])
-      }
-          
-         // console.log(JSON.stringify(projects[i]['todos']))
-          // console.log(typeof projects[i]['todos'])
-
-          // localStorage.key(0)
-          /*
-           from the console log you see above, it is clear that
-           the issue is that it is converting it into the string
-           before storing in storage which is normal but when the
-           page is refreshed and projectname edited the coversion 
-           does not work as planned. It is like it is converting a 
-           string that is already a string into another string
-            
-          */
+        if(typeof projects[i]['todos'] == 'object'){
+          localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
+        }else if (typeof projects[i]['todos'] == 'string'){
+          localStorage.setItem(`${projects[i]['projectName']}`, projects[i]['todos'])
         }
-      } 
+      }
+    } 
     setStyles()
   }
 
