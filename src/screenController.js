@@ -557,7 +557,7 @@ const runEditButton = function(){
         //  console.log(currentProjectName.textContent)
          createNewProjects(previousValue, currentProjectName.textContent)
          for(let i = 0; i < projects.length; i++){
-          console.log(projects)
+          // console.log(projects)
              if(projects[i]['projectName'] == currentProjectName.textContent){
                 currentProjectName.textContent = projects[i]['projectName']
              }
@@ -1120,18 +1120,23 @@ const runAddMoreInfoButton = function (){
 }
 
 const runDeleteProject = function (targetDiv){
- 
+  const projects = allProjects().getProjects()
   const deleteButtons = document.querySelectorAll('.deleteProject')
   deleteButtons.forEach((button) => {
-    button.onclick = function (e){
-      // document.body.style.backgroundColor = 'red'
+    button.onclick = function (e){      
       const currentProject = e.target.parentElement.parentElement.parentElement
       const currentProjectName = currentProject.querySelector('.newProjectName').textContent
       deleteProject(currentProjectName)
       currentProject.remove()
       updateDropDown(currentProjectName).removeProject()
-      localStorage.removeItem(currentProjectName)
-      console.log(allProjects().getProjects())
+      for(let i = 0; i < projects.length; i++){
+        if(projects[i]['project']){         
+         if(projects[i]['project']['projectName'] == currentProjectName){
+          const projectId = projects[i]['Project ID']
+          localStorage.removeItem(projectId)
+         }
+        }
+      }    
     }
   })
 }

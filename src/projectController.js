@@ -19,8 +19,8 @@ function callStorage(){
   if(localStorage.length > 0 && projects.length < 2){
     for(let i = 0; i < localStorage.length; i++){
       let newProject = {}
-      newProject.projectName = localStorage.key(i)     
-      newProject.todos = JSON.parse(localStorage.getItem(localStorage.key(i)))
+      newProject['Project ID'] = localStorage.key(i)     
+      newProject.project = JSON.parse(localStorage.getItem(localStorage.key(i)))
       storedProjects.push(newProject)      
     }
   projects.push(...storedProjects)
