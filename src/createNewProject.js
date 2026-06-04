@@ -1,6 +1,7 @@
 function createProject(name){
 
   let projects = {
+    // 'id' : null,
     'projectName' : null,
     'todos' : [],
     // 'description' : null,

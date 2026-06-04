@@ -42,7 +42,9 @@ function createNewProjects(value, value2){
       if(projects[i]['projectName'] == null && value2 == undefined){
         // console.log(value2) 
         projects[i]['projectName'] = value
-        // console.log(i)
+        // projects[i]['id'] = i
+        console.log(i)
+        console.log(projects)
       }else if(projects[i]['projectName'] == value){
         // console.log('else ran')
         projects[i]['projectName'] = value2

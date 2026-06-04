@@ -2579,7 +2579,7 @@ function storeData (currentProjectName){
     for(let i = 0; i < projects.length; i++){ 
       if(projects[i]['projectName'] == currentProjectName){
         if(typeof projects[i]['todos'] == 'object'){
-          localStorage.setItem(`${projects[i]['projectName']}`, JSON.stringify(projects[i]['todos']))
+           localStorage.setItem(`${i}`, JSON.stringify(projects[i]))
         }else if (typeof projects[i]['todos'] == 'string'){
           localStorage.setItem(`${projects[i]['projectName']}`, projects[i]['todos'])
         }
@@ -2589,268 +2589,226 @@ function storeData (currentProjectName){
   }
 
   function setStyles(){
- //   console.log(targetDiv)
      const currentTitle = localStorage.getItem('projectTitle')
- //   console.log(currentTitle)
-  //  console.log(targetDiv.querySelector('.newProjectName').textContent)
-
-    // console.log(document.querySelector('.actualProject'))
-     
+   
     // const currentColor = localStorage.getItem('bgcolor')
    // document.body.style.backgroundColor = currentColor
   
    if(document.querySelector('.actualProject')){
-    document.querySelector('.actualProject .projectName').textContent = currentTitle
-   // console.log(document.querySelector('.actualProject .projectName').textContent)
-   // document.querySelector('.actualProject').style.fontSize = '2.5rem'
-   
+    document.querySelector('.actualProject .projectName').textContent = currentTitle    
    }
-   else{
-  //  console.log(targetDiv.querySelector('.newProjectName').textContent)
-  // console.log(localStorage.length)  
+   else {
+    let storedProject = []
+    for(let i = 0; i < localStorage.length; i++){
+      let newProject = {}
+      newProject['Project ID'] = localStorage.key(i)
+      newProject.project = JSON.parse(localStorage.getItem(localStorage.key(i)))
+      storedProject.push(newProject)
+    }
 
-// let projects = [
-//       {
-//      'projectName': 'This Is A Sample Project',
-//      'todos' : [{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'checkList' : ['Sample Check Item 1', 'Sample Check Item 2']},
-//               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
-//     }
-// ]
-// console.log('retrieve from storage')
-let storedProject = []
- let arr = []
-  let titles = []
-for(let i = 0; i < localStorage.length; i++){
-  // console.log(i)
-  let newProject = {}
-  newProject.projectName = localStorage.key(i)
-  //  localStorage.removeItem(localStorage.key(i))
-  newProject.todos = localStorage.getItem(localStorage.key(i))
-  // console.log(localStorage.getItem(localStorage.key(i)))
-//  console.log(localStorage.getItem(localStorage.key(i)))
-  storedProject.push(newProject)
-}
-// console.log(storedProject)
-// console.log(localStorage.key(0))
-// console.log(JSON.parse(storedProject))
-for(let i = 0; i < storedProject.length; i++){
-// console.log(storedProject[i])
- // console.log(i)
+    const sortedProjects = storedProject.slice(0)
+    sortedProjects.sort(function(a,b){
+      return a['Project ID'] - b['Project ID']
+    })
 
-    const newProjectContainer = document.createElement('div')
-    newProjectContainer.classList.add('newProjectContainer')
-    newProjectContainer.classList.add('actualProject')
+    for(let i = 0; i < sortedProjects.length; i++){
 
-    const projectName = document.createElement('h2')
-    projectName.textContent = 'Project Name'
-    projectName.classList.add('projectName') 
+        const newProjectContainer = document.createElement('div')
+        newProjectContainer.classList.add('newProjectContainer')
+        newProjectContainer.classList.add('actualProject')
+
+        const projectName = document.createElement('h2')
+        projectName.textContent = 'Project Name'
+        projectName.classList.add('projectName') 
+        
+        const titleContainer = document.createElement('div')
+        titleContainer.classList.add('titleContainer')
+
+        const titleContainerButtonsDiv = document.createElement('div')
+        titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+
+        const editProjectName = document.createElement('button')
+        editProjectName.classList.add('editProjectName')
+        editProjectName.textContent = 'Edit'
+
+        const deleteProject = document.createElement('button')
+        deleteProject.classList.add('deleteProject')
+        deleteProject.textContent = 'Delete Project'
+
+        const todoDiv = document.createElement('div')
+        todoDiv.classList.add('todoDiv')
+
+        const todoDivTitle = document.createElement('div')
+        todoDivTitle.classList.add('todoDivTitle')
+
+        const task = document.createElement('h3')
+        task.classList.add('task')
+        task.textContent = 'Task'
+
+        const createNewTodoButton = document.createElement('button')
+        createNewTodoButton.classList.add('createNewTodo')
+        createNewTodoButton.textContent = 'Add Todo'
+
+        let newArray = sortedProjects[i]['project']['todos']
     
-    const titleContainer = document.createElement('div')
-    titleContainer.classList.add('titleContainer')
+        document.querySelector('.projectContainer').appendChild(newProjectContainer)
+        let newk = null
 
-    const titleContainerButtonsDiv = document.createElement('div')
-    titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+        const newProjectName = document.createElement('h2')
+        newProjectName.classList.add('newProjectName')
+        newProjectName.textContent = sortedProjects[i]['project']['projectName']
+      // console.log(storedProject[i]['project']['projectName'])
+        const projectContainers = document.querySelectorAll('.actualProject')
+      // console.log(projectContainers)
+        projectContainers.forEach((projectContainer) => {
+        if(!projectContainer.querySelector('.titleContainer')){
+          
+          projectContainer.appendChild(titleContainer)
+          
+          titleContainer.appendChild(projectName) 
+          titleContainer.appendChild(newProjectName)
+          titleContainer.appendChild(titleContainerButtonsDiv)
+          
+          titleContainerButtonsDiv.appendChild(editProjectName)
+          titleContainerButtonsDiv.appendChild(deleteProject)
+          
+          projectContainer.appendChild(todoDiv)
+          
+          todoDiv.append(todoDivTitle)
+          todoDivTitle.append(task)
+          todoDivTitle.append(createNewTodoButton) 
 
-    const editProjectName = document.createElement('button')
-    editProjectName.classList.add('editProjectName')
-    editProjectName.textContent = 'Edit'
+          for(let j = 0; j < newArray.length; j++){
+            const todoDivContent = document.createElement('div')
+            todoDivContent.classList.add('todoDivContent')
+            // console.log(todoDivContent)
+            const todo = document.createElement('h4')
+            todo.classList.add('todo')
+            todo.textContent = newArray[j]['title']
 
-    const deleteProject = document.createElement('button')
-    deleteProject.classList.add('deleteProject')
-    deleteProject.textContent = 'Delete Project'
+            const statusText = document.createElement('p')
+            statusText.classList.add('statusText')    
 
-    const todoDiv = document.createElement('div')
-    todoDiv.classList.add('todoDiv')
+            const priority = document.createElement('p')
+            priority.classList.add('priority')
+            if(!newArray[j]['taskPriority']){
+              priority.textContent = 'Task Priority : '
+            }else{
+              priority.textContent = 'Task Priority : ' + `${newArray[j]['taskPriority']}`
+            }
+            const taskButtonsDiv = document.createElement('div')
+            taskButtonsDiv.classList.add('taskButtonsDiv')
 
-    const todoDivTitle = document.createElement('div')
-    todoDivTitle.classList.add('todoDivTitle')
+            const editTodoButton = document.createElement('button')
+            editTodoButton.classList.add('editTodoButton')
+            editTodoButton.textContent = 'Edit task'
 
-    const task = document.createElement('h3')
-    task.classList.add('task')
-    task.textContent = 'Task'
+            const deleteTask = document.createElement('button')
+            deleteTask.classList.add('deleteTask')
+            deleteTask.textContent = 'Delete'
 
-    const createNewTodoButton = document.createElement('button')
-    createNewTodoButton.classList.add('createNewTodo')
-    createNewTodoButton.textContent = 'Add Todo'
+            const priorityButton = document.createElement('button')
+            priorityButton.classList.add('priorityButton')
+            priorityButton.textContent = 'Priority'
 
-    let newArray = JSON.parse(storedProject[i]['todos'])
-    // console.log(newArray)
-    let checkObject = []
-    // console.log(storedProject[i]['todos'])
-   
-    document.querySelector('.projectContainer').appendChild(newProjectContainer)
-   // console.log('start from here')
-    // console.log(storedProject[i]['todos']) 
-    // let newArray = JSON.parse(storedProject[i]['todos'])
-    // console.log(newArray)
-    let newk = null
+            const taskStatusButton = document.createElement('button')
+            taskStatusButton.classList.add('taskStatusButton')
+            taskStatusButton.textContent = 'Task Status'
 
-    
-  //   arr.push(newArray)
-  //  console.log(newArray)
+            const dateDiv = document.createElement('div')
+            dateDiv.classList.add('dateDiv')
 
-    const newProjectName = document.createElement('h2')
-    newProjectName.classList.add('newProjectName')
-    newProjectName.textContent = storedProject[i]['projectName']
-    
-    const projectContainers = document.querySelectorAll('.actualProject')
-   // console.log(projectContainers)
-    projectContainers.forEach((projectContainer) => {
-    if(!projectContainer.querySelector('.titleContainer')){
-      
-      projectContainer.appendChild(titleContainer)
-      
-      titleContainer.appendChild(projectName) 
-      titleContainer.appendChild(newProjectName)
-      titleContainer.appendChild(titleContainerButtonsDiv)
-      
-      titleContainerButtonsDiv.appendChild(editProjectName)
-      titleContainerButtonsDiv.appendChild(deleteProject)
-      
-      projectContainer.appendChild(todoDiv)
-      
-      todoDiv.append(todoDivTitle)
-      todoDivTitle.append(task)
-      todoDivTitle.append(createNewTodoButton) 
+            const currentDate = document.createElement('p')
+            currentDate.classList.add ('currentDate')
+            currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
 
-      for(let j = 0; j < newArray.length; j++){
-        // console.log(newArray[j]['title'])
-       // console.log(j)
-        // console.log(newArray[j])
-        const todoDivContent = document.createElement('div')
-        todoDivContent.classList.add('todoDivContent')
-        // console.log(todoDivContent)
-        const todo = document.createElement('h4')
-        todo.classList.add('todo')
-        todo.textContent = newArray[j]['title']
+            const dueDateDiv = document.createElement('div')
+            dueDateDiv.classList.add('dueDateDiv')
 
-        const statusText = document.createElement('p')
-        statusText.classList.add('statusText')
+            const dueDateButton = document.createElement('button')
+            dueDateButton.classList.add('dueDateButton')
+            dueDateButton.textContent = 'Add Due Date'
 
-        // else{
+            const descriptionDiv = document.createElement('div')
+            descriptionDiv.classList.add('descriptionDiv')
 
-        // }        
+            const descriptionHeading = document.createElement('h5')
+            descriptionHeading.classList.add('descriptionHeading')
+            descriptionHeading.textContent = 'Describe Task'
 
-        const priority = document.createElement('p')
-        priority.classList.add('priority')
-        if(!newArray[j]['taskPriority']){
-          priority.textContent = 'Task Priority : '
-        }else{
-          priority.textContent = 'Task Priority : ' + `${newArray[j]['taskPriority']}`
-        }
-        const taskButtonsDiv = document.createElement('div')
-        taskButtonsDiv.classList.add('taskButtonsDiv')
+            const descriptionContentDiv = document.createElement('div')
+            descriptionContentDiv.classList.add('descriptionContentDiv')
 
-        const editTodoButton = document.createElement('button')
-        editTodoButton.classList.add('editTodoButton')
-        editTodoButton.textContent = 'Edit task'
+            const description = document.createElement('p')
+            description.classList.add('description')
+            description.textContent = newArray[j]['description']
 
-        const deleteTask = document.createElement('button')
-        deleteTask.classList.add('deleteTask')
-        deleteTask.textContent = 'Delete'
+            const editDescription = document.createElement('button')
+            editDescription.classList.add('editDescription')
+            editDescription.textContent = 'Edit'
 
-        const priorityButton = document.createElement('button')
-        priorityButton.classList.add('priorityButton')
-        priorityButton.textContent = 'Priority'
+            const noteDiv = document.createElement('div')
+            noteDiv.classList.add('noteDiv')
 
-        const taskStatusButton = document.createElement('button')
-        taskStatusButton.classList.add('taskStatusButton')
-        taskStatusButton.textContent = 'Task Status'
+            const noteHeading = document.createElement('h5')
+            noteHeading.classList.add('noteHeading')
+            noteHeading.textContent = 'Note'
 
-        const dateDiv = document.createElement('div')
-        dateDiv.classList.add('dateDiv')
+            const noteContentDiv = document.createElement('div')
+            noteContentDiv.classList.add('noteContentDiv')
 
-        const currentDate = document.createElement('p')
-        currentDate.classList.add ('currentDate')
-        currentDate.textContent = `Created ${newArray[j]['dateCreated']}`
+            const note = document.createElement('p')
+            note.classList.add('note')
+            note.textContent = newArray[j]['projectNote']
 
-        const dueDateDiv = document.createElement('div')
-        dueDateDiv.classList.add('dueDateDiv')
+            const editNote = document.createElement('button')
+            editNote.classList.add('editNote')
+            editNote.textContent = 'Edit'
 
-        const dueDateButton = document.createElement('button')
-        dueDateButton.classList.add('dueDateButton')
-        dueDateButton.textContent = 'Add Due Date'
+            const checkListContainer = document.createElement('div')
+            checkListContainer.classList.add('checkListContainer')
+        
+            const checkListHeaderContainer = document.createElement('div')
+            checkListHeaderContainer.classList.add('checkListHeaderContainer')
 
-        const descriptionDiv = document.createElement('div')
-        descriptionDiv.classList.add('descriptionDiv')
+            const checkListHeading = document.createElement('p')
+            checkListHeading.classList.add('checkListHeading')
+            checkListHeading.textContent = 'Todo CheckList'
 
-        const descriptionHeading = document.createElement('h5')
-        descriptionHeading.classList.add('descriptionHeading')
-        descriptionHeading.textContent = 'Describe Task'
+            const addCheckListFormButton = document.createElement('button')
+            addCheckListFormButton.classList.add('addCheckListFormButton')
+            addCheckListFormButton.textContent = 'Add'
 
-        const descriptionContentDiv = document.createElement('div')
-        descriptionContentDiv.classList.add('descriptionContentDiv')
+            const checkListForm = document.createElement('form')
+            checkListForm.classList.add('checkListForm')
 
-        const description = document.createElement('p')
-        description.classList.add('description')
-        description.textContent = newArray[j]['description']
-
-        const editDescription = document.createElement('button')
-        editDescription.classList.add('editDescription')
-        editDescription.textContent = 'Edit'
-
-        const noteDiv = document.createElement('div')
-        noteDiv.classList.add('noteDiv')
-
-        const noteHeading = document.createElement('h5')
-        noteHeading.classList.add('noteHeading')
-        noteHeading.textContent = 'Note'
-
-        const noteContentDiv = document.createElement('div')
-        noteContentDiv.classList.add('noteContentDiv')
-
-        const note = document.createElement('p')
-        note.classList.add('note')
-        note.textContent = newArray[j]['projectNote']
-
-        const editNote = document.createElement('button')
-        editNote.classList.add('editNote')
-        editNote.textContent = 'Edit'
-
-        const checkListContainer = document.createElement('div')
-        checkListContainer.classList.add('checkListContainer')
-    
-        const checkListHeaderContainer = document.createElement('div')
-        checkListHeaderContainer.classList.add('checkListHeaderContainer')
-
-        const checkListHeading = document.createElement('p')
-        checkListHeading.classList.add('checkListHeading')
-        checkListHeading.textContent = 'Todo CheckList'
-
-        const addCheckListFormButton = document.createElement('button')
-        addCheckListFormButton.classList.add('addCheckListFormButton')
-        addCheckListFormButton.textContent = 'Add'
-
-        const checkListForm = document.createElement('form')
-        checkListForm.classList.add('checkListForm')
-
-        const checkListDiv = document.createElement('div')
-        checkListDiv.classList.add('checkListDiv')
+            const checkListDiv = document.createElement('div')
+            checkListDiv.classList.add('checkListDiv')
         
         // console.log(newArray[j]['checkList'])
-        for(let prop in newArray[j]['checkList']){
-            const checkDiv = document.createElement('div')
-            checkDiv.classList.add('checkDiv')
-            
-            const checkListItem = document.createElement('input')
-            checkListItem.setAttribute('type', 'checkbox')
-            checkListItem.classList.add('checkListItem')
-            const label = document.createElement('label')
-            label.classList.add('checkItem')
-            label.textContent = prop
-            
-            // console.log(newArray[j]['checkList'][prop])
-            if(newArray[j]['checkList'][prop] == 'Complete'){
-              checkListItem.checked = true
-              // console.log(newArray[j]['checkList'][prop])
-            }else if(newArray[j]['checkList'][prop] == 'Incomplete'){
-              checkListItem.checked = false
-              // console.log(newArray[j]['checkList'][prop])
+            for(let prop in newArray[j]['checkList']){
+                const checkDiv = document.createElement('div')
+                checkDiv.classList.add('checkDiv')
+                
+                const checkListItem = document.createElement('input')
+                checkListItem.setAttribute('type', 'checkbox')
+                checkListItem.classList.add('checkListItem')
+                const label = document.createElement('label')
+                label.classList.add('checkItem')
+                label.textContent = prop
+                
+                // console.log(newArray[j]['checkList'][prop])
+                if(newArray[j]['checkList'][prop] == 'Complete'){
+                  checkListItem.checked = true
+                  // console.log(newArray[j]['checkList'][prop])
+                }else if(newArray[j]['checkList'][prop] == 'Incomplete'){
+                  checkListItem.checked = false
+                  // console.log(newArray[j]['checkList'][prop])
+                }
+                checkListDiv.appendChild(checkDiv)
+                checkDiv.appendChild(checkListItem)
+                checkDiv.appendChild(label)
             }
-            checkListDiv.appendChild(checkDiv)
-            checkDiv.appendChild(checkListItem)
-            checkDiv.appendChild(label)
-        }
         const checkDiv = document.createElement('div')
         checkDiv.classList.add('checkDiv')
 
