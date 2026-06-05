@@ -95,7 +95,7 @@ function defaultProject(){
       titleContainer.appendChild(projectName);
 
       let projects = allProjects().getProjects()
-      let currentProjectName = projects[0]['projectName']
+      let currentProjectName = projects[0]['project']['projectName']
 
       let newProjectName = document.createElement('h2')
       newProjectName.classList.add('newProjectName')
@@ -143,17 +143,17 @@ function defaultProject(){
 
       const todoDivContent = document.createElement('div')
       todoDivContent.classList.add('todoDivContent')
-
+      
       const todo = document.createElement('h4')
       todo.classList.add('todo')
-      todo.textContent = projects[0]['todos'][0]['title']
+      todo.textContent = projects[0]['project']['todos'][0]['title']
 
       const dateDiv = document.createElement('div')
       dateDiv.classList.add('dateDiv')
 
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
-      currentDate.textContent = projects[0]['todos'][0]['dateCreated']
+      currentDate.textContent = projects[0]['project']['todos'][0]['dateCreated']
       
       const dueDateDiv = document.createElement('div')
       dueDateDiv.classList.add('dueDateDiv')
@@ -198,7 +198,7 @@ function defaultProject(){
      
       todoDivContent.appendChild(priority)
       todoDivContent.appendChild(taskButtonsDiv)
-       todoDivContent.appendChild(dateDiv)
+      todoDivContent.appendChild(dateDiv)
       
 
       taskButtonsDiv.appendChild(editTodo)
@@ -223,7 +223,7 @@ function defaultProject(){
 
       const description = document.createElement('p')
       description.classList.add('description')
-      description.textContent = projects[0]['todos'][0]['description']
+      description.textContent = projects[0]['project']['todos'][0]['description']
 
       const editDescription = document.createElement('button')
       editDescription.classList.add('editDescription')
@@ -249,7 +249,7 @@ function defaultProject(){
 
       const note = document.createElement('p')
       note.classList.add('note')
-      note.textContent = projects[0]['todos'][0]['projectNote']
+      note.textContent = projects[0]['project']['todos'][0]['projectNote']
 
       const editNote = document.createElement('button')
       editNote.classList.add('editNote')
@@ -300,7 +300,7 @@ function defaultProject(){
       checkListItem.setAttribute('type', 'checkbox')
       checkListItem.classList.add('checkListItem')
       const label = document.createElement('label')
-      label.textContent = projects[0]['todos'][0]['checkList'][0]
+      label.textContent = projects[0]['project']['todos'][0]['checkList'][0]
       checkListItem.checked = true
 
       // checkListItem.addEventListener('click', function(){
@@ -313,7 +313,7 @@ function defaultProject(){
       checkListItem2.setAttribute('type', 'checkbox')
       checkListItem2.classList.add('checkListItem')
       const label2 = document.createElement('label')
-      label2.textContent = projects[0]['todos'][0]['checkList'][1]
+      label2.textContent = projects[0]['project']['todos'][0]['checkList'][1]
       checkListItem2.checked = true
 
       checkListForm.appendChild(checkListDiv)
@@ -1930,15 +1930,19 @@ function updateDropDown (projectName) {
 
     for(let i = 0; i < projects.length; i++){
       // console.log(projects)
-    //  console.log(projects[i]['projectName'])
-      if(!arr.includes(projects[i]['projectName'])){
+     
+     if(projects[i]['project']){
+console.log(projects[i]['project']['projectName'])
+      if(!arr.includes(projects[i]['project']['projectName'])){
         const options = document.createElement('option')
-        options.textContent = `${projects[i]['projectName']}`
-        options.value = `${projects[i]['projectName']}`
+        options.textContent = `${projects[i]['project']['projectName']}`
+        options.value = `${projects[i]['project']['projectName']}`
         selectProject.add(options)
-        // console.log(arr)
+        console.log(arr)
         //  console.log(selectProject)
       }
+     }
+
     }
   }
 

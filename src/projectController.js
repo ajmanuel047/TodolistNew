@@ -7,9 +7,10 @@ import { projectImportance } from "./projectPriority"
 
 let projects = [
       {
-     'projectName': 'This Is A Sample Project',
-     'todos' : [{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'checkList' : ['Sample Check Item 1', 'Sample Check Item 2']},
-              {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
+        'project ID': '0',
+        'project': {'projectName':'This Is A Sample Project', 'todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'checkList' : ['Sample Check Item 1', 'Sample Check Item 2']},
+              {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]}
+   
     }
 ]
 
@@ -76,18 +77,19 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
           let value = arr.split()[0]
           let newObject = {}
           newObject.title = value
-          obj.todos.push(newObject)  
+          obj.project.todos.push(newObject)  
           console.log(projects)
           }
         }
         else{
-          // console.log(typeof arr)
+          console.log(arr)
           for(let i = 0; i < arr.length; i++){
-                if(obj.projectName.toLowerCase() == currentProjectName.toLowerCase()){
+            console.log(obj.project.projectName)   
+                if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
                   let newObject = {}
                   newObject.title = `${arr[i]}`
-                  // obj.todos.push(newObject)
-                  obj.todos.push(newObject)     
+                    console.log(obj.project.todos)               
+                    obj.project.todos.push(newObject)                   
                   // console.log(projects) 
                 }
             }  
