@@ -25,33 +25,38 @@ function callStorage(){
       storedProjects.push(newProject)      
     }
   projects.push(...storedProjects)
-  console.log(projects)
+  // console.log(projects)
   }
 }
-
+// console.log(projects)
 callStorage()
+// console.log(projects)
 function createNewProjects(value, value2){
     // console.log(value, value2)
     // console.log(localStorage.length)
-    const newProject = createProject(value).newProject()
+     
+    const newProject = {}
+    newProject['Project ID'] = localStorage.length + 1
+    newProject.project = createProject(value).newProject()
     projects.push(newProject)
     // console.log(newProject)
 
 // console.log(projects)
     for(let i = 0; i < projects.length; i++){
-      // console.log(projects[i]['projectName'])
-      if(projects[i]['projectName'] == null && value2 == undefined){
+      // console.log(projects[i])
+      if(projects[i]['project']['projectName'] == null && value2 == undefined){
         // console.log(value2) 
-        projects[i]['projectName'] = value
+        projects[i]['project']['projectName'] = value
         // projects[i]['id'] = i
-        console.log(i)
-        console.log(projects)
-      }else if(projects[i]['projectName'] == value){
+        // console.log(i)
+        // console.log(projects)
+      }else if(projects[i]['project']['projectName'] == value){
         // console.log('else ran')
-        projects[i]['projectName'] = value2
+        projects[i]['project']['projectName'] = value2
         projects.splice(i + 1, 1)
       }
     }
+   // console.log(projects)
 }
 
 // let projects = [
@@ -67,29 +72,38 @@ function createNewProjects(value, value2){
 //     }]
 
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
- 
+//  console.log(currentProjectName)
   function pushTodo () { 
     // console.log(projects)
     projects.forEach((obj) => {
         if(typeof arr == 'string'){
+          console.log(obj)
           if(obj.projectName.toLowerCase() == currentProjectName.toLowerCase()){
           // console.log(arr)
           let value = arr.split()[0]
           let newObject = {}
           newObject.title = value
           obj.project.todos.push(newObject)  
-          console.log(projects)
+          // console.log(projects)
           }
         }
         else{
-          console.log(arr)
+          // console.log(arr)
           for(let i = 0; i < arr.length; i++){
-            console.log(obj.project.projectName)   
+            //  console.log(obj.project.projectName)   
+            //  console.log(currentProjectName)   
                 if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
+                  // console.log(currentProjectName)
                   let newObject = {}
                   newObject.title = `${arr[i]}`
-                    console.log(obj.project.todos)               
-                    obj.project.todos.push(newObject)                   
+                    //  console.log(obj)               
+                    //  console.log(obj.todos)
+                    // console.log(obj.project.todos)       
+                    // if(obj.project.projectName.todos){
+                     // console.log(obj.project.projectName.todos)
+                      obj.project.todos.push(newObject)   
+                    // }        
+                                    
                   // console.log(projects) 
                 }
             }  
@@ -121,13 +135,13 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 
 function dateController(currentProjectName, calenderValues, todo){
  for(let i = 0; i < projects.length; i++){
-     if(projects[i]['projectName'] == currentProjectName){
-       for(let j = 0; j < projects[i]['todos'].length; j++){
-         if(projects[i]['todos'][j]['title'] == todo){
+     if(projects[i]['project']['projectName'] == currentProjectName){
+       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+         if(projects[i]['project']['todos'][j]['title'] == todo){
            if(calenderValues == undefined){
-                projects[i]['todos'][j].dateCreated = formatDate().getDate()
+                projects[i]['project']['todos'][j].dateCreated = formatDate().getDate()
            } else {
-                projects[i]['todos'][j].dueDate = formatDate(calenderValues).dueDate()
+                projects[i]['project']['todos'][j].dueDate = formatDate(calenderValues).dueDate()
            }                  
          }
        }           
@@ -139,14 +153,12 @@ function dateController(currentProjectName, calenderValues, todo){
   // console.log(description)
   // console.log(todo)
    for(let i = 0; i < projects.length; i++){
-     if(projects[i]['projectName'] == projectName){
-      for(let j = 0; j < projects[i]['todos'].length; j++){
+     if(projects[i]['project']['projectName'] == projectName){
+      for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         // console.log(projects[i]['todos'][j]['title'] == todo)
-          if(projects[i]['todos'][j]['title'] == todo){
-             projects[i]['todos'][j].description = description
-          }
-         
-        
+          if(projects[i]['project']['todos'][j]['title'] == todo){
+             projects[i]['project']['todos'][j].description = description
+          }       
       }
      }
    }
@@ -157,15 +169,12 @@ function dateController(currentProjectName, calenderValues, todo){
   //  console.log(todo)
   //  console.log(projectName)
    for(let i = 0; i < projects.length; i++){
-     if(projects[i]['projectName'] == projectName){
-      for(let j = 0; j < projects[i]['todos'].length; j++){
+     if(projects[i]['project']['projectName'] == projectName){
+      for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         // console.log(projects[i]['todos'][j]['title'] == todo)
-          if(projects[i]['todos'][j]['title'] == todo){
-             projects[i]['todos'][j].projectNote = note
-             
-          }
-         
-        
+        if(projects[i]['project']['todos'][j]['title'] == todo){
+            projects[i]['project']['todos'][j].projectNote = note
+        }       
       }
      }
    }
@@ -241,17 +250,17 @@ function updateTodoStatus(currentProjectName, todo){
 function createTodoCheckList(currentProjectName, todo, checkInput){
   // console.log(currentProjectName, todo, checkInput)
   for(let i = 0; i < projects.length; i++){
-    if(projects[i]['projectName'] == currentProjectName){
-        for(let j = 0; j < projects[i]['todos'].length; j++){
-          if(projects[i]['todos'][j]['title'] == todo){
-            if(!projects[i]['todos'][j]['checkList']){
+    if(projects[i]['project']['projectName'] == currentProjectName){
+        for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+          if(projects[i]['project']['todos'][j]['title'] == todo){
+            if(!projects[i]['project']['todos'][j]['checkList']){
             // console.log('no')
-            projects[i]['todos'][j]['checkList'] = {}
-            projects[i]['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
+            projects[i]['project']['todos'][j]['checkList'] = {}
+            projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
             // console.log(projects)
           }else{
             // console.log('yes')
-            projects[i]['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
+            projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
             // console.log(projects)
           }
         }
@@ -264,16 +273,16 @@ function createTodoCheckList(currentProjectName, todo, checkInput){
 function updateCheckListStatus(currentProjectName, currentTodo, targetDiv){
 
 for(let i = 0; i < projects.length; i++){
-  if(projects[i]['projectName'] == currentProjectName){
-    for(let j = 0; j < projects[i]['todos'].length; j++){
-      if(projects[i]['todos'][j]['title'] == currentTodo){
+  if(projects[i]['project']['projectName'] == currentProjectName){
+    for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+      if(projects[i]['project']['todos'][j]['title'] == currentTodo){
      //  console.log(projects[i]['todos'][j]['checkList'])
-       for(let prop in projects[i]['todos'][j]['checkList']){
+       for(let prop in projects[i]['project']['todos'][j]['checkList']){
         if(prop == targetDiv){         
-          if(projects[i]['todos'][j]['checkList'][prop] == 'Incomplete'){
-              projects[i]['todos'][j]['checkList'][prop] = 'Complete'
+          if(projects[i]['project']['todos'][j]['checkList'][prop] == 'Incomplete'){
+              projects[i]['project']['todos'][j]['checkList'][prop] = 'Complete'
             } else{
-            projects[i]['todos'][j]['checkList'][prop] = 'Incomplete'
+            projects[i]['project']['todos'][j]['checkList'][prop] = 'Incomplete'
               // console.log('start here')
               /*
               next task is to update localstorage
