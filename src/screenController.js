@@ -429,7 +429,7 @@ function eventController(){
                       //  console.log(targetDiv)
                         createCheckList(targetDiv).createContainer()
                       // console.log(todo)
-                        console.log(projectName)
+                        // console.log(projectName)
                         storeData(projectName).populateStorage()
                        // console.log(allProjects().getProjects())
                         e.target.remove()
@@ -579,7 +579,7 @@ const runEditButton = function(){
           currentProjectName.addEventListener('focus', function(e){
           button.textContent = 'Save'
           currentProjectName.style.cursor = 'auto'
-          console.log(previousValue)
+          // console.log(previousValue)
           })
      }
     }
@@ -653,7 +653,7 @@ const runTodoEditButton = function(){
          }     
        //  console.log('check 5')   
        //  console.log(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-         storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()   
+         storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage() 
       } 
       else if(e.target.className == 'editTodoButton'){
         // console.log('yes')
@@ -930,16 +930,16 @@ const runEditDescription = function () {
         for(let i = 0; i < allProjects().getProjects().length; i++){
           if(allProjects().getProjects()[i]['projectName'] == projectName){
             currentDescription.textContent = allProjects().getProjects()[i]['description']
-            for(let j = 0; j < allProjects().getProjects()[i]['todos'].length; j++){
-              if(projects[i]['todos'][j]['title'] == currentTodo){
+            for(let j = 0; j < allProjects().getProjects()[i]['project']['todos'].length; j++){
+              if(projects[i]['project']['todos'][j]['title'] == currentTodo){
                 console.log(allProjects().getProjects())
-                currentDescription.textContent= allProjects().getProjects()[i]['todos'][j]['description'] 
+                currentDescription.textContent= allProjects().getProjects()[i]['project']['todos'][j]['description'] 
               }                  
             }
           }
         }    
-        console.log(e.target.parentElement.parentElement.parentElement.parentElement)     
-        storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+       // console.log(e.target.parentElement.parentElement.parentElement.parentElement)     
+        storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
       }
       currentDescription.addEventListener('focus', function(e){
         // document.body.style.backgroundColor = 'skyblue'
@@ -990,15 +990,15 @@ const runEditNote = function (projectName) {
         for(let i = 0; i < allProjects().getProjects().length; i++){
           // console.log(allProjects().getProjects()[i]['projectName'])
           // console.log(projectName)
-             if(allProjects().getProjects()[i]['projectName'] == projectName){
+             if(allProjects().getProjects()[i]['project']['projectName'] == projectName){
                 // console.log(projectName)
                 // console.log(allProjects().getProjects()[i]['projectName'])
                 // console.log(allProjects().getProjects()[i]['todos'])
                 currentNote.textContent = allProjects().getProjects()[i]['projectNote']
-              for(let j = 0; j < allProjects().getProjects()[i]['todos'].length; j++){
-                if(projects[i]['todos'][j]['title'] == currentTodo){
+              for(let j = 0; j < allProjects().getProjects()[i]['project']['todos'].length; j++){
+                if(projects[i]['project']['todos'][j]['title'] == currentTodo){
                   // console.log(allProjects().getProjects())
-                  currentNote.textContent= allProjects().getProjects()[i]['todos'][j]['projectNote'] 
+                  currentNote.textContent= allProjects().getProjects()[i]['project']['todos'][j]['projectNote'] 
                 }
                   
               }
@@ -1012,7 +1012,7 @@ const runEditNote = function (projectName) {
         editButton.textContent = 'Save'
         currentNote.style.cursor = 'auto'
       })
-      storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+      storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
     }
   })  
   
@@ -1087,10 +1087,10 @@ const runSaveDueDate = function(){
         dateController(projectName, calenderValues, todo)
         
         for(let i = 0; i < projects.length; i++){
-          if(projectName == projects[i]['projectName']){
-            for(let j = 0; j < projects[i]['todos'].length; j++){
-              if(projects[i]['todos'][j]['title'] == todo){
-                 dueDate = projects[i]['todos'][j].dueDate
+          if(projectName == projects[i]['project']['projectName']){
+            for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+              if(projects[i]['project']['todos'][j]['title'] == todo){
+                 dueDate = projects[i]['project']['todos'][j].dueDate
               }
      }
 
@@ -1110,7 +1110,7 @@ const runSaveDueDate = function(){
       changeDate(targetDiv)
          // targetDiv.querySelector('button').remove()
     //  console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement)
-      storeData(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+      storeData(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
       e.target.remove()
       }
      })
@@ -2327,7 +2327,7 @@ function deleteTask(e){
   const currentTodo = e.target.parentElement.parentElement.querySelector('.todo')
   removeTaskFromArray(currentContainer, currentTodo.textContent)
   currentTodo.parentElement.remove()
-  storeData(currentContainer).populateStorage()
+  storeData(currentContainer).editStorage()
 }
 
 function addTaskPriority(e){
@@ -2339,11 +2339,11 @@ function addTaskPriority(e){
   console.log(taskPriority)
   projectPriorityController(currentProjectName, todo).addPriorityToProject()
   for(let i = 0; i < projects.length; i++){
-    if(projects[i]['projectName'] == currentProjectName){
-        for(let j = 0; j < projects[i]['todos'].length; j++ ){
-          if(projects[i]['todos'][j]['title'] == todo){
+    if(projects[i]['project']['projectName'] == currentProjectName){
+        for(let j = 0; j < projects[i]['project']['todos'].length; j++ ){
+          if(projects[i]['project']['todos'][j]['title'] == todo){
             // console.log(projects[i]['todos'][j]['taskPriority'])
-            taskPriority.textContent = `Task Priority : ${projects[i]['todos'][j]['taskPriority']}`
+            taskPriority.textContent = `Task Priority : ${projects[i]['project']['todos'][j]['taskPriority']}`
              if(taskPriority.textContent == 'Task Priority : High'){
               taskPriority.classList.add('high')
               taskPriority.classList.remove('low')
@@ -2361,7 +2361,7 @@ function addTaskPriority(e){
        }
     }
   }
-storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
 }
 
 function addTaskStatus(currentProjectName, e){
@@ -2377,7 +2377,7 @@ function addTaskStatus(currentProjectName, e){
   } else {
       e.target.parentElement.parentElement.querySelector('.statusText').remove()
   }
-  storeData(currentProjectName).populateStorage()
+  storeData(currentProjectName).editStorage()
 }
 
 function createCheckList(targetDiv, formDiv){
@@ -2592,7 +2592,7 @@ function createCheckList(targetDiv, formDiv){
     // targetDiv.querySelector('.checkDiv').classList.add('checkDivAdjust')
     // targetDiv.querySelector('.checkDiv').classList.remove('checkDiv')
     eventController().runCreateCheckList()
-    storeData(targetDiv.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+    storeData(targetDiv.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
   //  console.log(allProjects().getProjects())
   }
 
@@ -2653,7 +2653,7 @@ function storeData (currentProjectName){
         // if(typeof projects[i]['project']['todos'] == 'object'){
         // // console.log(i) 
         // console.log('check c') 
-          console.log(projects[i]) 
+          // console.log(projects[i]) 
           localStorage.setItem(`${projects[i]['Project ID']}`, JSON.stringify(projects[i]))
         
         // else if (typeof projects[i]['project']['todos'] == 'string'){

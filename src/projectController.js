@@ -49,7 +49,7 @@ function createNewProjects(value){
     newProject['Project ID'] = increment()
     newProject.project = createProject(value).newProject()
     projects.push(newProject)    
-    console.log(newProject)
+    // console.log(newProject)
 // console.log(projects)
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['project']['projectName'] == null){
@@ -61,16 +61,16 @@ function createNewProjects(value){
 }
 
 function editProject(value1, value2){
-  console.log(value1)
-  console.log(value2)
+  // console.log(value1)
+  // console.log(value2)
  for(let i = 0; i < projects.length; i++){
    if(projects[i]['project']['projectName'] == value1){
-        console.log('else ran')
+        // console.log('else ran')
     projects[i]['project']['projectName'] = value2
     projects.splice(i + 1, 1)
  }
  }
- console.log(projects)
+//  console.log(projects)
 }
 
 // let projects = [
@@ -88,7 +88,7 @@ function editProject(value1, value2){
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 //  console.log(currentProjectName)
   function pushTodo () { 
-    console.log(projects)
+    // console.log(projects)
     projects.forEach((obj) => {
         if(typeof arr == 'string'){
           console.log(obj)
@@ -221,12 +221,12 @@ function removeTaskFromArray(projectName, todo){
 function projectPriorityController(currentProjectName, todo){
   function addPriorityToProject(){
     for(let i = 0; i < projects.length; i++){
-      if(projects[i]['projectName'] == currentProjectName){
-        for(let j = 0; j < projects[i]['todos'].length; j++){
-          if(projects[i]['todos'][j]['title'] == todo){
-           let currentProjectPriority = projects[i]['todos'][j]['taskPriority']
+      if(projects[i]['project']['projectName'] == currentProjectName){
+        for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+          if(projects[i]['project']['todos'][j]['title'] == todo){
+           let currentProjectPriority = projects[i]['project']['todos'][j]['taskPriority']
            let newProjectPriority = projectImportance(currentProjectPriority).currentValue()
-           projects[i]['todos'][j].taskPriority = newProjectPriority
+           projects[i]['project']['todos'][j].taskPriority = newProjectPriority
           }
         }
       }
@@ -242,17 +242,17 @@ function projectPriorityController(currentProjectName, todo){
 
 function updateTodoStatus(currentProjectName, todo){  
   for(let i = 0; i < projects.length; i++){
-    if(projects[i]['projectName'] == currentProjectName){
-      for(let j = 0; j < projects[i]['todos'].length; j++){
-        if(projects[i]['todos'][j]['title'] == todo){          
-          if(!projects[i]['todos'][j]['taskStatus']){
-            projects[i]['todos'][j]['taskStatus'] = 'Completed'
+    if(projects[i]['project']['projectName'] == currentProjectName){
+      for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+        if(projects[i]['project']['todos'][j]['title'] == todo){          
+          if(!projects[i]['project']['todos'][j]['taskStatus']){
+            projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
             console.log('completed')
-          }else if(projects[i]['todos'][j]['taskStatus'] && projects[i]['todos'][j]['taskStatus'] == 'Completed'){
-            projects[i]['todos'][j]['taskStatus'] = 'Incomplete'
+          }else if(projects[i]['project']['todos'][j]['taskStatus'] && projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
+            projects[i]['project']['todos'][j]['taskStatus'] = 'Incomplete'
             console.log('Incomplete')
-          }else if(projects[i]['todos'][j]['taskStatus'] == 'Incomplete'){
-            projects[i]['todos'][j]['taskStatus'] = 'Completed'
+          }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Incomplete'){
+            projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
             console.log('completed again')
           }
         }
