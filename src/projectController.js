@@ -7,7 +7,7 @@ import { projectImportance } from "./projectPriority"
 
 let projects = [
       {
-        'project ID': '0',
+        'project ID': 0,
         'project': {'projectName':'This Is A Sample Project', 'todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'checkList' : ['Sample Check Item 1', 'Sample Check Item 2']},
               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]}
    
@@ -28,35 +28,49 @@ function callStorage(){
   // console.log(projects)
   }
 }
-// console.log(projects)
+
+let increment = (function idIncrement(value){
+  return function increaseValue(){
+    value += 1 
+    return value
+  }
+}(0))
+
 callStorage()
 // console.log(projects)
-function createNewProjects(value, value2){
+function createNewProjects(value){
     // console.log(value, value2)
     // console.log(localStorage.length)
-     
+    // console.log(increment())
+    
+    //  console.log(projects.length)
+    //  console.log(localStorage.length)
     const newProject = {}
-    newProject['Project ID'] = localStorage.length + 1
+    newProject['Project ID'] = increment()
     newProject.project = createProject(value).newProject()
-    projects.push(newProject)
-    // console.log(newProject)
-
+    projects.push(newProject)    
+    console.log(newProject)
 // console.log(projects)
     for(let i = 0; i < projects.length; i++){
-      // console.log(projects[i])
-      if(projects[i]['project']['projectName'] == null && value2 == undefined){
-        // console.log(value2) 
-        projects[i]['project']['projectName'] = value
-        // projects[i]['id'] = i
-        // console.log(i)
-        // console.log(projects)
-      }else if(projects[i]['project']['projectName'] == value){
-        // console.log('else ran')
-        projects[i]['project']['projectName'] = value2
-        projects.splice(i + 1, 1)
+      if(projects[i]['project']['projectName'] == null){
+        // console.log(value2)       
+        projects[i]['project']['projectName'] = value       
       }
     }
    // console.log(projects)
+}
+
+function editProject(value1, value2){
+  console.log(value1)
+  console.log(value2)
+ for(let i = 0; i < projects.length; i++){
+   if(projects[i]['project']['projectName'] == value1){
+        console.log('else ran')
+    projects[i]['project']['projectName'] = value2
+    projects.splice(i + 1, 1)
+ }
+ }
+ console.log(projects)
 }
 
 // let projects = [
@@ -74,11 +88,11 @@ function createNewProjects(value, value2){
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 //  console.log(currentProjectName)
   function pushTodo () { 
-    // console.log(projects)
+    console.log(projects)
     projects.forEach((obj) => {
         if(typeof arr == 'string'){
           console.log(obj)
-          if(obj.projectName.toLowerCase() == currentProjectName.toLowerCase()){
+          if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
           // console.log(arr)
           let value = arr.split()[0]
           let newObject = {}
@@ -114,10 +128,10 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
  function editTodo(){
 
   for(let i = 0; i < projects.length; i++){
-    if(projects[i]['projectName'] == currentProjectName){
-      for(let j = 0; j < projects[i]['todos'].length; j++){
-        if(projects[i]['todos'][j]['title'] == previousTodo){
-          projects[i]['todos'][j]['title'] = currentTodo
+    if(projects[i]['project']['projectName'] == currentProjectName){
+      for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+        if(projects[i]['project']['todos'][j]['title'] == previousTodo){
+          projects[i]['project']['todos'][j]['title'] = currentTodo
         }       
       }
     }
@@ -182,21 +196,22 @@ function dateController(currentProjectName, calenderValues, todo){
  }
 
  function deleteProject(currentProjectName){
-  // console.log(currentProjectName)
+  console.log('delete')
   for(let i = 0; i < projects.length; i++){
-    if(projects[i]['projectName'] == currentProjectName){
+    if(projects[i]['project']['projectName'] == currentProjectName){
         projects.splice(i, 1)        
     }
   }
+  console.log(projects)
  }
 
 function removeTaskFromArray(projectName, todo){
   // console.log(projectName, todo)
   for(let i = 0; i < projects.length; i++){
-    if(projects[i]['projectName'] == projectName){
-      for(let j = 0; j < projects[i]['todos'].length; j++){
-        if(projects[i]['todos'][j]['title'] == todo){
-            projects[i]['todos'].splice(j, 1)
+    if(projects[i]['project']['projectName'] == projectName){
+      for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+        if(projects[i]['project']['todos'][j]['title'] == todo){
+            projects[i]['project']['todos'].splice(j, 1)
         }
       }
     }
@@ -310,6 +325,7 @@ function allProjects(value){
 
 export { 
         createNewProjects, 
+        editProject,
         allProjects, 
         createTodo,
         dateController,

@@ -2,6 +2,7 @@
 import "./styles.css"
 // import { createNewProject } from "./projectController";
 import { allProjects, projectPriorityController } from "./projectController";
+import { editProject } from "./projectController";
 import { createNewProjects } from "./projectController";
 import { createTodo } from "./projectController";
 import { addDescriptionToProject } from "./projectController";
@@ -428,7 +429,7 @@ function eventController(){
                       //  console.log(targetDiv)
                         createCheckList(targetDiv).createContainer()
                       // console.log(todo)
-                   //   console.log(projectName)
+                        console.log(projectName)
                         storeData(projectName).populateStorage()
                        // console.log(allProjects().getProjects())
                         e.target.remove()
@@ -555,15 +556,15 @@ const runEditButton = function(){
          }, 2000)
         //  console.log(previousValue)
         //  console.log(currentProjectName.textContent)
-         createNewProjects(previousValue, currentProjectName.textContent)
+         editProject(previousValue, currentProjectName.textContent)
          for(let i = 0; i < projects.length; i++){
           // console.log(projects)
-             if(projects[i]['projectName'] == currentProjectName.textContent){
-                currentProjectName.textContent = projects[i]['projectName']
+             if(projects[i]['project']['projectName'] == currentProjectName.textContent){
+                currentProjectName.textContent = projects[i]['project']['projectName']
              }
          }
         //  console.log('check')
-         storeData(currentProjectName.textContent).populateStorage()
+         storeData(currentProjectName.textContent).editStorage()
          localStorage.removeItem(previousValue)
       }
 
@@ -638,10 +639,10 @@ const runTodoEditButton = function(){
       //  console.log(allProjects().getProjects())
       // console.log(projects)
          for(let i = 0; i < projects.length; i++){
-             if(projects[i]['projectName'] == currentProjectName){
-                for(let j = 0; j < projects[i]['todos'].length; j++ ){
-                    if(projects[i]['todos'][j]['title'] == currentTodo.textContent){
-                        let newTodo = projects[i]['todos'][j]['title']
+             if(projects[i]['project']['projectName'] == currentProjectName){
+                for(let j = 0; j < projects[i]['project']['todos'].length; j++ ){
+                    if(projects[i]['project']['todos'][j]['title'] == currentTodo.textContent){
+                        let newTodo = projects[i]['project']['todos'][j]['title']
             //            console.log(newTodo)
                         currentTodo.textContent = newTodo         
                                      
@@ -1136,9 +1137,7 @@ const runDeleteProject = function (targetDiv){
     button.onclick = function (e){      
       const currentProject = e.target.parentElement.parentElement.parentElement
       const currentProjectName = currentProject.querySelector('.newProjectName').textContent
-      deleteProject(currentProjectName)
-      currentProject.remove()
-      updateDropDown(currentProjectName).removeProject()
+
       for(let i = 0; i < projects.length; i++){
         if(projects[i]['project']){         
          if(projects[i]['project']['projectName'] == currentProjectName){
@@ -1146,7 +1145,10 @@ const runDeleteProject = function (targetDiv){
           localStorage.removeItem(projectId)
          }
         }
-      }    
+      } 
+      deleteProject(currentProjectName)
+      currentProject.remove()
+      updateDropDown(currentProjectName).removeProject()   
     }
   })
 }
@@ -2620,20 +2622,44 @@ function createCheckList(targetDiv, formDiv){
   }
 }
 
+let increment = (function idIncrement(value){
+  return function increaseValue(){
+    value += 1 
+    return value
+  }
+}(0))
+
 function storeData (currentProjectName){
   let projects = allProjects().getProjects()
   // console.log(projects)
   function populateStorage(){
-    for(let i = 0; i < projects.length; i++){ 
-      
+    for(let i = 0; i < projects.length; i++){       
       if(projects[i]['project']['projectName'] == currentProjectName){
         if(typeof projects[i]['project']['todos'] == 'object'){
-      //   console.log(currentProjectName) 
-          localStorage.setItem(`${i}`, JSON.stringify(projects[i]))
+        // console.log(i) 
+        // console.log('check a') 
+          localStorage.setItem(`${increment()}`, JSON.stringify(projects[i]))
         }else if (typeof projects[i]['project']['todos'] == 'string'){
-          console.log('check 2') 
+          // console.log('check b') 
           localStorage.setItem(`${projects[i]['project']['projectName']}`, projects[i]['project']['todos'])
         }
+      }
+    } 
+    setStyles()
+  }
+  function editStorage(){
+    for(let i = 0; i < projects.length; i++){       
+      if(projects[i]['project']['projectName'] == currentProjectName){
+        // if(typeof projects[i]['project']['todos'] == 'object'){
+        // // console.log(i) 
+        // console.log('check c') 
+          console.log(projects[i]) 
+          localStorage.setItem(`${projects[i]['Project ID']}`, JSON.stringify(projects[i]))
+        
+        // else if (typeof projects[i]['project']['todos'] == 'string'){
+        //   console.log('check d') 
+        //   localStorage.setItem(`${projects[i]['project']['projectName']}`, projects[i]['project']['todos'])
+        // }
       }
     } 
     setStyles()
@@ -2942,6 +2968,7 @@ function storeData (currentProjectName){
 
   return {
     populateStorage,
+    editStorage,
     setStyles
   }
 
