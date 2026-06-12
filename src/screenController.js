@@ -664,10 +664,11 @@ const runTodoEditButton = function(){
         // console.log(this)
         if(arr[i].className == 'todo'){
         //  console.log(this.parentElement.parentElement.children)
-          previousTodo = this.parentElement.parentElement.children[i].textContent
-          currentTodo = this.parentElement.parentElement.children[i]
-           console.log(currentTodo)
-           console.log(previousTodo)
+          previousTodo = e.target.parentElement.parentElement.children[i].textContent
+          currentTodo = e.target.parentElement.parentElement.children[i]
+         //  console.log(currentTodo)
+         //  console.log(e.target.parentElement.parentElement.children[i].textContent)
+         //  console.log(previousTodo)
           currentTodo.setAttribute('contenteditable', true)
           // currentTodo.style.backgroundColor = 'orange'
           currentTodo.classList.add('editContent')
@@ -678,6 +679,7 @@ const runTodoEditButton = function(){
           currentTodo.style.cursor = 'auto'
           
           })
+          console.log(allProjects().getProjects())
         }
       }
      }
@@ -1260,7 +1262,7 @@ const saveTodoChangesAddedFromHeader = function(){
             e.target.parentElement.querySelector('.descriptionInput').remove()     
             e.target.parentElement.querySelector('.noteInput').remove()     
             // console.log(projectContainer)
-            storeData(projectContainer).populateStorage()
+            storeData(projectContainer.querySelector('.newProjectName').textContent).editStorage()
             e.target.remove()
           }
         }
@@ -2060,7 +2062,7 @@ function submitTodo (targetButton) {
                 targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
                 // console.log('checking')
                 // console.log(targetButton.parentElement)
-                console.log(targetDiv)
+              //  console.log(targetDiv)
                 storeData(targetDiv.querySelector('.newProjectName').textContent).editStorage()
                 eventController().runAddMoreInfoButton(targetDiv)
                 
