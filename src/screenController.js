@@ -769,7 +769,7 @@ const runSaveChanges = function(){
           runAddTaskStatus()
           runEditDescription()
           runEditNote()
-          storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+          storeData(e.target.parentElement.querySelector('.newProjectName').textContent).editStorage()
           e.target.remove()
           
           targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
@@ -845,7 +845,7 @@ const runSaveChanges = function(){
               eventController().runCreateCheckList()
               // console.log(allProjects().getProjects())
               // console.log(container.parentElement.parentElement)
-              storeData(container.parentElement.parentElement.querySelector('.newProjectName').textContent).populateStorage()
+              storeData(container.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
               // console.log('check')
             }
              
@@ -1249,7 +1249,7 @@ const saveTodoChangesAddedFromHeader = function(){
         const currentProjectName = e.target.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
         let projects = allProjects().getProjects()
         for(let i = 0; i < projects.length; i++){
-          if(projects[i]['projectName'] == currentProjectName){
+          if(projects[i]['project']['projectName'] == currentProjectName){
             // console.log('yes it is')
             if(e.target.parentElement.querySelector('.taskButtonsDiv')){
               e.target.parentElement.querySelector('.taskButtonsDiv').remove()
@@ -1958,13 +1958,13 @@ function updateDropDown (projectName) {
       // console.log(projects)
      
      if(projects[i]['project']){
-console.log(projects[i]['project']['projectName'])
+// console.log(projects[i]['project']['projectName'])
       if(!arr.includes(projects[i]['project']['projectName'])){
         const options = document.createElement('option')
         options.textContent = `${projects[i]['project']['projectName']}`
         options.value = `${projects[i]['project']['projectName']}`
         selectProject.add(options)
-        console.log(arr)
+        // console.log(arr)
         //  console.log(selectProject)
       }
      }
@@ -1978,8 +1978,8 @@ console.log(projects[i]['project']['projectName'])
     if(selectProject){
       for(let i = 0; i < selectProject.options.length; i++){
         if(selectProject[i].value == projectName){
-          console.log(selectProject[i].value)
-          console.log(i)
+          // console.log(selectProject[i].value)
+          // console.log(i)
           selectProject.remove(i)
         }      
       } 
@@ -2003,6 +2003,7 @@ function submitTodo (targetButton) {
     let projectNames = document.querySelectorAll('.newProjectName')
     let todo = [userInput().getHeaderTodoInput()]
     let arr = []
+   // console.log(document.querySelector('.headerTodoInput').value)
     for(let i = 0; i < projects.length; i++){
       
       if(projects[i]['project']['projectName'] == selectedProject){
@@ -2013,23 +2014,24 @@ function submitTodo (targetButton) {
         }
     //  console.log('adding todo to a project after adding todo from header to same project creates an error')
        }
-console.log(arr)
+// console.log(arr)
     if(!arr.includes(userInput().getHeaderTodoInput())){
         projectNames.forEach((projectName) => {
         if(selectedProject.toLowerCase() == projectName.textContent.toLowerCase()){
             targetDiv = projectName.parentElement.parentElement
-      }
+   //         console.log(targetDiv)
+          }
       })
 
         createTodo(selectedProject, todo).createObject()
         let projects = allProjects().getProjects()
         for(let i = 0; i < projects.length; i++){
-          if(projects[i]['projectName'] == selectedProject){
-          for(let j = 0; j < projects[i]['todos'].length; j++){
-              if(projects[i]['todos'][j]['title'] == todo){
+          if(projects[i]['project']['projectName'] == selectedProject){
+          for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+              if(projects[i]['project']['todos'][j]['title'] == todo){
                 let currentTodo = document.createElement('h4')
                 currentTodo.classList.add('todo')
-                currentTodo.textContent = projects[i]['todos'][j]['title']
+                currentTodo.textContent = projects[i]['project']['todos'][j]['title']
 
                 // console.log(currentTodo)
                 currentTodo.style.marginBottom = '5px'
@@ -2058,8 +2060,8 @@ console.log(arr)
                 targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
                 // console.log('checking')
                 // console.log(targetButton.parentElement)
-                // console.log(targetDiv)
-                storeData(targetDiv).populateStorage()
+                console.log(targetDiv)
+                storeData(targetDiv.querySelector('.newProjectName').textContent).editStorage()
                 eventController().runAddMoreInfoButton(targetDiv)
                 
                 // console.log('check 3')
