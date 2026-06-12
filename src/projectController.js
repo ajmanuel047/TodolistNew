@@ -282,7 +282,7 @@ function createTodoCheckList(currentProjectName, todo, checkInput){
       }
     }
   }
-  // console.log(projects)
+  console.log(projects)
 }
 
 function updateCheckListStatus(currentProjectName, currentTodo, targetDiv){

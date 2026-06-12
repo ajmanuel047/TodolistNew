@@ -2683,7 +2683,10 @@ function storeData (currentProjectName){
     for(let i = 0; i < localStorage.length; i++){
       let newProject = {}
       newProject['Project ID'] = localStorage.key(i)
-      newProject.project = JSON.parse(localStorage.getItem(localStorage.key(i)))
+      newProject.project = {}
+      newProject.project['projectName'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['projectName']
+      newProject.project['todos'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['todos']
+      // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['projectName'])
       storedProject.push(newProject)
     }
 
@@ -2691,7 +2694,7 @@ function storeData (currentProjectName){
     sortedProjects.sort(function(a,b){
       return a['Project ID'] - b['Project ID']
     })
-
+    console.log(sortedProjects)
     for(let i = 0; i < sortedProjects.length; i++){
 
         const newProjectContainer = document.createElement('div')
@@ -2729,9 +2732,9 @@ function storeData (currentProjectName){
         const createNewTodoButton = document.createElement('button')
         createNewTodoButton.classList.add('createNewTodo')
         createNewTodoButton.textContent = 'Add Todo'
-
+        console.log(sortedProjects[i])
         let newArray = sortedProjects[i]['project']['todos']
-    
+        console.log(newArray)
         document.querySelector('.projectContainer').appendChild(newProjectContainer)
         let newk = null
 
