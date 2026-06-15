@@ -387,7 +387,7 @@ function eventController(){
                     submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
                     createTask()
                     // console.log(todo)
-                    console.log(projectName)
+                    // console.log(projectName)
                     storeData(projectName).populateStorage()
                     // console.log(projectName)
                   //  console.log(allProjects().getProjects())
@@ -481,6 +481,7 @@ function eventController(){
                 }, 3000)   
             } 
           }
+          // console.log(allProjects().getProjects())
         runEditButton()
         runEditDescription(projectName)
         runEditNote(projectName)        
@@ -563,7 +564,7 @@ const runEditButton = function(){
                 currentProjectName.textContent = projects[i]['project']['projectName']
              }
          }
-        //  console.log('check')
+         console.log('check')
          storeData(currentProjectName.textContent).editStorage()
          localStorage.removeItem(previousValue)
       }
@@ -1143,7 +1144,7 @@ const runDeleteProject = function (targetDiv){
       for(let i = 0; i < projects.length; i++){
         if(projects[i]['project']){         
          if(projects[i]['project']['projectName'] == currentProjectName){
-          const projectId = projects[i]['Project ID']
+          const projectId = projects[i]['project ID']
           localStorage.removeItem(projectId)
          }
         }
@@ -2627,15 +2628,20 @@ function createCheckList(targetDiv, formDiv){
 }
 
 let increment = (function idIncrement(value){
+  const projects = allProjects().getProjects()
+   console.log(allProjects().getProjects()[allProjects().getProjects().length - 1])
   return function increaseValue(){
     value += 1 
     return value
   }
-}(0))
-
+}(Number(allProjects().getProjects()[allProjects().getProjects().length - 1]['project ID'])))
+// console.log(Number(localStorage.key(localStorage.length - 1)))
 function storeData (currentProjectName){
   let projects = allProjects().getProjects()
   // console.log(projects)
+  // console.log(currentProjectName)
+  // console.log(projects[projects.length - 1]['project ID'])
+  // console.log(projects.length)
   function populateStorage(){
     for(let i = 0; i < projects.length; i++){       
       if(projects[i]['project']['projectName'] == currentProjectName){
@@ -2658,7 +2664,7 @@ function storeData (currentProjectName){
         // // console.log(i) 
         // console.log('check c') 
           // console.log(projects[i]) 
-          localStorage.setItem(`${projects[i]['Project ID']}`, JSON.stringify(projects[i]))
+          localStorage.setItem(`${projects[i]['project ID']}`, JSON.stringify(projects[i]))
         
         // else if (typeof projects[i]['project']['todos'] == 'string'){
         //   console.log('check d') 
@@ -2682,7 +2688,7 @@ function storeData (currentProjectName){
     let storedProject = []
     for(let i = 0; i < localStorage.length; i++){
       let newProject = {}
-      newProject['Project ID'] = localStorage.key(i)
+      newProject['project ID'] = localStorage.key(i)
       newProject.project = {}
       newProject.project['projectName'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['projectName']
       newProject.project['todos'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['todos']
@@ -2692,9 +2698,9 @@ function storeData (currentProjectName){
 
     const sortedProjects = storedProject.slice(0)
     sortedProjects.sort(function(a,b){
-      return a['Project ID'] - b['Project ID']
+      return a['project ID'] - b['project ID']
     })
-    console.log(sortedProjects)
+    // console.log(sortedProjects)
     for(let i = 0; i < sortedProjects.length; i++){
 
         const newProjectContainer = document.createElement('div')
@@ -2732,9 +2738,9 @@ function storeData (currentProjectName){
         const createNewTodoButton = document.createElement('button')
         createNewTodoButton.classList.add('createNewTodo')
         createNewTodoButton.textContent = 'Add Todo'
-        console.log(sortedProjects[i])
+        // console.log(sortedProjects[i])
         let newArray = sortedProjects[i]['project']['todos']
-        console.log(newArray)
+        // console.log(newArray)
         document.querySelector('.projectContainer').appendChild(newProjectContainer)
         let newk = null
 

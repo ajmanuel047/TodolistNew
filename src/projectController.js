@@ -20,80 +20,64 @@ function callStorage(){
   if(localStorage.length > 0 && projects.length < 2){
     for(let i = 0; i < localStorage.length; i++){
       let newProject = {}
-      newProject['Project ID'] = localStorage.key(i)     
-      newProject.project = JSON.parse(localStorage.getItem(localStorage.key(i)))
+      newProject['project ID'] = Number(localStorage.key(i))     
+      newProject.project = {}
+      newProject.project['projectName'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['projectName']
+      newProject.project['todos'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['todos']
       storedProjects.push(newProject)      
     }
+
+  storedProjects.sort(function(a,b){
+   return a['project ID'] - b['project ID']
+  })
+
   projects.push(...storedProjects)
   // console.log(projects)
   }
 }
 
-let increment = (function idIncrement(value){
+let increment = (function idIncrement(){
   return function increaseValue(){
-    value += 1 
+    let value = Number(projects[projects.length - 1]['project ID'])
+    value += 1  
     return value
   }
-}(0))
+}())
+
 
 callStorage()
-// console.log(projects)
+
 function createNewProjects(value){
-    // console.log(value, value2)
-    // console.log(localStorage.length)
-    // console.log(increment())
-    
-    //  console.log(projects.length)
-    //  console.log(localStorage.length)
-    const newProject = {}
-    newProject['Project ID'] = increment()
-    newProject.project = createProject(value).newProject()
-    projects.push(newProject)    
-    // console.log(newProject)
-// console.log(projects)
-    for(let i = 0; i < projects.length; i++){
-      if(projects[i]['project']['projectName'] == null){
-        // console.log(value2)       
-        projects[i]['project']['projectName'] = value       
-      }
+  const newProject = {}
+  newProject['project ID'] = increment()
+  newProject.project = createProject(value).newProject()
+  projects.push(newProject)    
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['project']['projectName'] == null){             
+      projects[i]['project']['projectName'] = value       
     }
-   // console.log(projects)
+  }   
 }
 
 function editProject(value1, value2){
-  // console.log(value1)
-  // console.log(value2)
  for(let i = 0; i < projects.length; i++){
    if(projects[i]['project']['projectName'] == value1){
         // console.log('else ran')
     projects[i]['project']['projectName'] = value2
     projects.splice(i + 1, 1)
+   }
  }
- }
-//  console.log(projects)
 }
 
-// let projects = [
-//     {
-//      'projectName': 'church',
-//      'todo' : [{'title' : 'Wake up early', 'Description' : 'So I can prepare for service'},
-//               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
-//     },
-//     {
-//      'projectName' : 'school',
-//      'todo' : [{'title' : 'study for exam', 'Description' : 'Spend 30mins studying'}, 
-//               {'title' : 'attend lectures', 'Description' : 'attend additional tutorial'}]    
-//     }]
-
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
-//  console.log(currentProjectName)
+
   function pushTodo () { 
     // console.log(projects)
     projects.forEach((obj) => {
         if(typeof arr == 'string'){
           console.log(obj)
           if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
-          // console.log(arr)
+          
           let value = arr.split()[0]
           let newObject = {}
           newObject.title = value
@@ -101,29 +85,17 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
           // console.log(projects)
           }
         }
-        else{
-          // console.log(arr)
-          for(let i = 0; i < arr.length; i++){
-            //  console.log(obj.project.projectName)   
-            //  console.log(currentProjectName)   
-                if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
-                  // console.log(currentProjectName)
+        else{          
+          for(let i = 0; i < arr.length; i++){  
+                if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){                
                   let newObject = {}
                   newObject.title = `${arr[i]}`
-                    //  console.log(obj)               
-                    //  console.log(obj.todos)
-                    // console.log(obj.project.todos)       
-                    // if(obj.project.projectName.todos){
-                     // console.log(obj.project.projectName.todos)
-                      obj.project.todos.push(newObject)   
-                    // }        
-                                    
-                  // console.log(projects) 
+                  obj.project.todos.push(newObject)   
                 }
-            }  
-        }
-    })  
- }
+             }  
+          }
+      })  
+   }
 
  function editTodo(){
 
