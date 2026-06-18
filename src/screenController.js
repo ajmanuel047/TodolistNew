@@ -53,10 +53,34 @@ const newProjectButton = (function(){
   headerDiv.classList.add('headerDiv')
   document.body.appendChild(headerDiv)
 
+  const newProjectButtonDiv = document.createElement('div')
+  newProjectButtonDiv.classList.add('newProjectButtonDiv')
+  headerDiv.appendChild(newProjectButtonDiv)
+
   const createNewProjectButton = document.createElement('button');
   createNewProjectButton.classList.add('newProjectButton');
-  createNewProjectButton.textContent = 'Create Project';
-  headerDiv.appendChild(createNewProjectButton)
+  createNewProjectButton.textContent = '+';
+  newProjectButtonDiv.appendChild(createNewProjectButton)
+
+  const newProject = document.createElement('p')
+  newProject.classList.add('addNewProject')
+  newProject.textContent = 'New Project'
+  newProjectButtonDiv.appendChild(newProject)
+
+  const projects = document.createElement('p')
+  projects.classList.add('allProjects')
+  projects.textContent = 'All Projects'
+  headerDiv.appendChild(projects)
+
+  const completedProjects = document.createElement('p')
+  completedProjects.classList.add('completedProjects')
+  completedProjects.textContent = 'Completed Projects'
+  headerDiv.appendChild(completedProjects)
+
+  const unCompletedProjects = document.createElement('p')
+  unCompletedProjects.classList.add('unCompletedProjects')
+  unCompletedProjects.textContent = 'UnCompleted Projects'
+  headerDiv.appendChild(unCompletedProjects)
 
   const headerAddToProjectDiv = document.createElement('div')
   headerAddToProjectDiv.classList.add('headerAddToProjectDiv')
@@ -64,7 +88,7 @@ const newProjectButton = (function(){
 
   const addTodo = document.createElement('p')
   addTodo.classList.add('addTodo')
-  addTodo.textContent = 'Click Here To Add Todo To Any Project'
+  addTodo.textContent = 'Add Todo To Project'
   headerAddToProjectDiv.appendChild(addTodo)
 
   eventController().createNewProject()
@@ -502,7 +526,7 @@ runCreateTaskButton()
        const taskCreator = createTask()
 
         currentTodo.forEach((button) => {  
-          document.body.style.backgroundColor = 'pink'
+          // document.body.style.backgroundColor = 'pink'
           button.onclick = createTask().getInputAndButton()          
         })  
         
