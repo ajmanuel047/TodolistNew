@@ -241,7 +241,7 @@ function defaultProject(){
 
       const descriptionHeading = document.createElement('h5')
       descriptionHeading.classList.add('descriptionHeading')
-      descriptionHeading.textContent = 'Describe Task'
+      descriptionHeading.textContent = ''
 
       const descriptionContentDiv = document.createElement('div')
       descriptionContentDiv.classList.add('descriptionContentDiv')
@@ -267,7 +267,7 @@ function defaultProject(){
       
       const noteHeading = document.createElement('h5')
       noteHeading.classList.add('noteHeading')
-      noteHeading.textContent = 'Note'
+      noteHeading.textContent = ''
 
       const noteContentDiv = document.createElement('div')
       noteContentDiv.classList.add('noteContentDiv')
@@ -1526,7 +1526,7 @@ function createTodoDescription(currentDiv){
 
   const descriptionHeading = document.createElement('h5')
   descriptionHeading.classList.add('descriptionHeading')
-  descriptionHeading.textContent = 'Describe Task'
+  descriptionHeading.textContent = ''
   descriptionDiv.appendChild(descriptionHeading)
 
   const descriptionContentDiv = document.createElement('div')
@@ -1574,7 +1574,7 @@ function createTodoNote(currentDiv){
 
       const noteHeading = document.createElement('h5')
       noteHeading.classList.add('noteHeading')
-      noteHeading.textContent = 'Note'
+      noteHeading.textContent = ''
       noteDiv.appendChild(noteHeading)
 
       const noteContentDiv = document.createElement('div')
@@ -1606,11 +1606,14 @@ function createNewProjectContainer(){
       
       
         // let currentContainer = document.querySelector('.projectContainer').lastChild;
-      
+      const projectInputDiv = document.createElement('div')
+      projectInputDiv.classList.add('projectInputDiv')
+      document.querySelector('.headerDiv').after(projectInputDiv);
+
       const newProjectContainer = document.createElement('div');
       newProjectContainer.classList.add('newProjectContainer');
       newProjectContainer.classList.add('actualProject')
-      document.querySelector('.projectContainer').appendChild(newProjectContainer);
+      document.querySelector('.projectInputDiv').appendChild(newProjectContainer);
       
       const titleContainer = document.createElement('div')
       titleContainer.classList.add('titleContainer')
@@ -1621,9 +1624,16 @@ function createNewProjectContainer(){
       projectName.textContent = 'Project Name';
       titleContainer.appendChild(projectName);
       
+      const cursor = document.createElement('div')
+      cursor.classList.add('cursor')
+      newProjectContainer.appendChild(cursor)
+
       const projectNameInput = document.createElement('input');
       projectNameInput.classList.add('projectNameInput');
-      newProjectContainer.appendChild(projectNameInput);
+      cursor.appendChild(projectNameInput);
+
+      const iElement = document.createElement('i')
+      cursor.appendChild(iElement)
 
       const todoDiv = document.createElement('div');
       todoDiv.classList.add('todoDiv');
@@ -1641,7 +1651,7 @@ function createNewProjectContainer(){
       const createNewTodo = document.createElement('button');
       createNewTodo.classList.add('createNewTodo')
       createNewTodo.classList.add(`${taskbuttonNumber().getNewCount()}`)
-      createNewTodo.textContent = 'Add Todo';
+      createNewTodo.textContent = '+';
       todoTitleDiv.appendChild(createNewTodo);   
 
       const submitProject = document.createElement('button')
@@ -1681,7 +1691,7 @@ function createTask(currentProjectName, newProjectNameDiv){
     }, "500")
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
-    todoInput.placeholder = 'New Todo'
+    todoInput.placeholder = 'New Task'
     const targetDiv = this.parentElement.parentElement.parentElement
     const todoDivContent = document.createElement('div')
     todoDivContent.classList.add('todoDivContent')
@@ -2848,7 +2858,7 @@ function storeData (currentProjectName){
 
             const descriptionHeading = document.createElement('h5')
             descriptionHeading.classList.add('descriptionHeading')
-            descriptionHeading.textContent = 'Describe Task'
+            descriptionHeading.textContent = ''
 
             const descriptionContentDiv = document.createElement('div')
             descriptionContentDiv.classList.add('descriptionContentDiv')
@@ -2866,7 +2876,7 @@ function storeData (currentProjectName){
 
             const noteHeading = document.createElement('h5')
             noteHeading.classList.add('noteHeading')
-            noteHeading.textContent = 'Note'
+            noteHeading.textContent = ''
 
             const noteContentDiv = document.createElement('div')
             noteContentDiv.classList.add('noteContentDiv')

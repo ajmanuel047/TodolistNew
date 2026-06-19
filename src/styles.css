@@ -18,7 +18,7 @@ body {
     justify-content: space-between;
     /* gap: 15px; */
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 50px;
 }
 
@@ -70,6 +70,7 @@ body {
     /* width: 90%;
     margin: auto; */
     /* background-color: rgb(0, 255, 106); */
+    
 }
 
 .projectName {
@@ -78,18 +79,25 @@ body {
 }
 
 .cursor {
+    background-color: orange;
+    
+}
+.cursor {
     position: relative;
+    width: 250px;
+    margin: auto;
 }
 
 .cursor i {
     position: absolute;
+    /* position: relative; */
     width: 1px;
     height: 80%;
     background-color: gray;
-    left: 5px;
+    left: 2px;
     top: 10%;
     animation-name: blink;
-    animation-duration: 800ms;
+    animation-duration: 1000ms;
     animation-iteration-count: infinite;
     opacity: 1;
 }
@@ -110,6 +118,93 @@ body {
 
 /* complete creation of blinking text above*/
 
+.projectInputDiv {
+    /* background-color: orange; */
+    text-align: center;
+    margin-top: -30px;
+    /* font-size: 1.2rem; */
+}
+
+.projectInputDiv .newProjectContainer {
+    /* background-color: orange; */
+    width: 80%;
+    margin: auto;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+.projectInputDiv .newProjectContainer .projectName {
+    /* background-color: orange;
+    text-align: center; */
+    font-size: 4rem;
+    margin-top: -10px;
+}
+
+.projectInputDiv .newProjectContainer .projectNameInput {
+    width: 250px;
+    height: 30px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    font-size: 1.5rem;
+    /* margin: auto; */
+    /* border-style: none; */
+}
+
+.projectInputDiv .newProjectContainer .todoDivContent input {
+    /* background-color: orange; */
+    width: 250px;
+    height: 30px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    font-size: 1.3rem;
+}
+.projectInputDiv .newProjectContainer input:focus {
+    background-color: rgb(250, 248, 248);
+    outline:none!important;
+}
+
+.projectInputDiv .createNewTodo {
+    border-radius: 50%;
+    border-style: none;
+    height: 70px;
+    width: 70px;
+    font-size: 3rem;
+    margin-left: 0px;
+    margin-top: -15px;
+    cursor: pointer;
+}
+
+.projectInputDiv .todoDivTitle {
+    /* background-color: orange; */
+    display: flex;
+    /* width: 300px; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.projectInputDiv .task {
+    font-size: 3rem;
+    margin-top: 25px;
+}
+
+.projectInputDiv .todoDiv {
+    /* background-color: orange; */
+    display: flex;
+    /* width: 300px; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.projectInputDiv .descriptionHeading {
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
 .todoInput {
     /* position: relative;
     top: -10px;
@@ -118,7 +213,9 @@ body {
 }
 
 .submitProject {
-    margin-top: 25px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 h2 {
