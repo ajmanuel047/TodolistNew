@@ -52,6 +52,19 @@ const newProjectButton = (function(){
   const headerDiv = document.createElement('div')
   headerDiv.classList.add('headerDiv')
   document.body.appendChild(headerDiv)
+  
+  const projectsBoxDiv = document.createElement('div')
+  projectsBoxDiv.classList.add('projectsBoxDiv')
+  document.body.appendChild(projectsBoxDiv)
+
+  const projectTitle = document.createElement('h2')
+  projectTitle.classList.add('projectTitle')
+  projectTitle.textContent = 'All Projects'
+  projectsBoxDiv.appendChild(projectTitle)
+
+  const projectsBox = document.createElement('div')
+  projectsBox.classList.add('projectsBox')
+  projectsBoxDiv.appendChild(projectsBox)
 
   const newProjectButtonDiv = document.createElement('div')
   newProjectButtonDiv.classList.add('newProjectButtonDiv')
@@ -92,6 +105,9 @@ const newProjectButton = (function(){
   headerAddToProjectDiv.appendChild(addTodo)
 
   eventController().createNewProject()
+  eventController().runAllProjectsClick()
+  eventController().runCompletedProjectsClick()
+  eventController().runUnCompletedProjectsClick()
   eventController().runAddTodo()
   
  // console.log(document.querySelector('.addTodo'))
@@ -103,7 +119,7 @@ const newProjectButton = (function(){
 function defaultProject(){
       const projectContainer = document.createElement('div');
       projectContainer.classList.add('projectContainer');
-      document.querySelector('.headerDiv').after(projectContainer);
+      document.querySelector('.projectsBoxDiv').after(projectContainer);
 
       const newProjectContainer = document.createElement('div');
       newProjectContainer.classList.add('newProjectContainer');
@@ -517,6 +533,30 @@ function eventController(){
       })      
   }
 runCreateTaskButton()
+}
+
+const runAllProjectsClick = function(){
+  const allProjectButton = document.querySelector('.allProjects')
+  allProjectButton.onclick = function(e){
+    document.body.style.backgroundColor = 'blue'
+    projectsBoxDivTitle(e.target.className)
+  }
+}
+
+const runCompletedProjectsClick = function(){
+  const completedProjectButton = document.querySelector('.completedProjects')
+  completedProjectButton.onclick = function(e){
+    document.body.style.backgroundColor = 'purple'
+    projectsBoxDivTitle(e.target.className)
+  }
+}
+
+const runUnCompletedProjectsClick = function(){
+  const UnCompletedProjectButton = document.querySelector('.unCompletedProjects')
+  UnCompletedProjectButton.onclick = function(e){
+    document.body.style.backgroundColor = 'gray'
+    projectsBoxDivTitle(e.target.className)
+  }
 }
 
   const runCreateTaskButton = function(){
@@ -1343,7 +1383,10 @@ const saveTodoChangesAddedFromHeader = function(){
           runAddTaskStatus,
           runCreateCheckList,          
           saveTodoChangesAddedFromHeader,
-          runCheckListStatus
+          runCheckListStatus,
+          runAllProjectsClick,
+          runUnCompletedProjectsClick,
+          runCompletedProjectsClick
          }
 }
 
@@ -2658,6 +2701,31 @@ function createCheckList(targetDiv, formDiv){
     addCheckItem,
     saveCheckList,
     checkListStatus
+  }
+}
+
+function projectsBoxDivTitle(button){
+  // console.log(button)
+  let className = button
+  if(className == 'allProjects'){
+    console.log('yes')
+    document.querySelector('.projectTitle').textContent = 'All Projects'
+    document.querySelector('.projectsBox').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
+  }else if(className == 'completedProjects'){
+    document.querySelector('.projectTitle').textContent = 'Completed Projects'
+        document.querySelector('.projectsBox').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
+  }else if(className == 'unCompletedProjects'){
+    document.querySelector('.projectTitle').textContent = 'UnCompleted Projects'
+        document.querySelector('.projectsBox').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
   }
 }
 
