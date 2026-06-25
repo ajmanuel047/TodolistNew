@@ -69,6 +69,7 @@ body {
 
 .projectsBoxDiv .projectTitle {
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .projectsBox {
@@ -78,10 +79,14 @@ body {
     
 }
 
-.projectContainer {
-    /* background-color: orange;
+.projectsBoxDiv {
+    margin-bottom: 47px;
+}
+
+.projectContainer {    
+    width: 80%;
     margin: auto;
-    width: 80%; */
+    background-color: aqua;
 }
 
 .newProjectContainer {

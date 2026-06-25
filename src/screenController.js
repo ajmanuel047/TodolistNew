@@ -374,8 +374,8 @@ function defaultProject(){
       
 }
 
-defaultProject()
-storageCall()
+// defaultProject()
+// storageCall()
 
 function eventController(){
   let currentProjectName = null;
@@ -424,7 +424,9 @@ function eventController(){
                     // console.log(allProjects().getProjects())
                     e.target.parentElement.querySelector('.projectNameInput').remove()
                     targetDiv = e.target.parentElement
-                    submitTask(this.parentElement.querySelector('.newProjectName').textContent, targetDiv)
+                    console.log(document.querySelector('h2.newProjectName').textContent)
+                    console.log(allProjects().getProjects())
+                    submitTask(document.querySelector('h2.newProjectName').textContent, targetDiv)
                     createTask()
                     // console.log(todo)
                     // console.log(projectName)
@@ -1711,7 +1713,8 @@ function displayProject(){
   if(!document.querySelector('.projectContainer')){
       const projectContainer = document.createElement('div');
       projectContainer.classList.add('projectContainer');
-      document.body.appendChild(projectContainer);
+      const projectsBoxDiv = document.querySelector('.projectsBoxDiv')
+      projectsBoxDiv.after(projectContainer);
       createNewProjectContainer();      
       // eventController()
   }else {
@@ -1868,7 +1871,7 @@ function newProject(projectName, currentProjectName){
     }
   }
     
-  let currentContainer = document.querySelector('.projectContainer').lastChild;
+  let currentContainer = document.querySelector('.projectContainer');
   let newProjectName = document.createElement('h2')
   newProjectName.classList.add('newProjectName')
   newProjectName.textContent = currentProjectName 
@@ -1884,7 +1887,7 @@ function newProject(projectName, currentProjectName){
   deleteProjectButton.classList.add('deleteProject')
   deleteProjectButton.textContent = 'Delete Project'
 
-  currentContainer.firstChild.appendChild(newProjectName)
+  currentContainer.appendChild(newProjectName)
   currentContainer.firstChild.appendChild(titleContainerButtonsDiv)
   titleContainerButtonsDiv.appendChild(editProjectNameButton)
   titleContainerButtonsDiv.appendChild(deleteProjectButton)
