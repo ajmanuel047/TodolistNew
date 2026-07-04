@@ -76,11 +76,24 @@ body {
     /* width: 800px; */
     height: 250px;
     background-color: orange;
-    
+    display: flex;
+    gap: 10px;
 }
 
 .projectsBoxDiv {
     margin-bottom: 47px;
+    
+}
+
+.projectsBoxItems {
+    background-color: rgb(230, 63, 63);
+    width: 270px;
+    height: 250px;
+    
+}
+
+.nameProject {
+    font-size: 1.4rem;
 }
 
 .projectContainer {    

@@ -575,9 +575,9 @@ runCreateTaskButton()
 
 const runAllProjectsClick = function(){
   const allProjectButton = document.querySelector('.allProjects')
-  allProjectButton.onclick = function(e){
-    document.body.style.backgroundColor = 'blue'
+  allProjectButton.onclick = function(e){    
     projectsBoxDivTitle(e.target.className)
+    displayAllProjects()
   }
 }
 
@@ -3153,6 +3153,29 @@ function addTodoBox (project) {
   createNewTodo.textContent = '+';
   todoBoxDiv.appendChild(createNewTodo)
   eventController().runCreateTaskButton()
+}
+
+function displayAllProjects (){
+  let projects = allProjects().getProjects()
+  console.log(projects)
+  document.body.style.backgroundColor = 'blue'
+  document.querySelector('.projectsBox').remove()
+  let projectsBox = document.createElement('div')
+  projectsBox.classList.add('projectsBox')
+  document.querySelector('.projectsBoxDiv').appendChild(projectsBox)
+
+  for(let i = 0; i < projects.length; i++){  
+    console.log(projects[projects.length - i - 1]['project']['projectName'])  
+    let projectName = projects[projects.length - i - 1]['project']['projectName']
+    let projectsBoxItems = document.createElement('div')
+    projectsBoxItems.classList.add('projectsBoxItems')
+
+    let nameProject = document.createElement('p')
+    nameProject.classList.add('nameProject')
+    nameProject.textContent = `Project : ${projectName}`
+    projectsBox.appendChild(projectsBoxItems)
+    projectsBoxItems.appendChild(nameProject)
+  }
 }
 
 /* bug to fix later. Ensure just one save for edit task is
