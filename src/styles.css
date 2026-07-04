@@ -92,9 +92,20 @@ body {
     
 }
 
-.nameProject, .dateCreatedContent {
+.nameProject, .dateCreatedContent, .priorityContent, .projectStatus, .dueDateContent, .projectBoxButtonsDiv {
     font-size: 1.4rem;
     margin-left: 10px;
+}
+
+.projectBoxButtonsDiv {
+    /* margin-left: 10px; */
+    display: flex;
+    gap: 6px;
+    /* background-color: orange; */
+}
+
+.projectBoxButtonsDiv .addMoreInfo,  .projectBoxButtonsDiv .viewTasks, .projectBoxButtonsDiv .deleteProject{
+    font-size: 0.85rem;
 }
 
 .projectContainer {    

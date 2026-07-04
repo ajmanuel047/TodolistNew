@@ -3176,17 +3176,51 @@ function displayAllProjects (){
     // console.log( projects[i]['project']['todos'])
     // dateController(projectName)
     // console.log(formatDate().getDate())
-    for(let j = 0; j < projects[i]['project']['todos']; j++){
-      console.log( projects[i]['project']['todos'][j].dateCreated)
-    }
-    let dateCreated = projects[projects.length - i - 1]['project']['dateCreated']
+    // for(let j = 0; j < projects[i]['project']['todos']; j++){
+    //   console.log( projects[i]['project']['todos'][j].dateCreated)
+    // }
+   // let dateCreated = projects[projects.length - i - 1]['project']['dateCreated']
     let dateCreatedContent = document.createElement('p')
     dateCreatedContent.classList.add('dateCreatedContent')
     dateCreatedContent.textContent = `Date Created : ${formatDate().getDate()}`
     
+    let dueDateContent = document.createElement('p')
+    dueDateContent.classList.add('dueDateContent')
+    dueDateContent.textContent = `Due Date : `
+
+    let priorityContent = document.createElement('p')
+    priorityContent.classList.add('priorityContent')
+    priorityContent.textContent = 'Priority : '
+
+    let projectStatus = document.createElement('p')
+    projectStatus.classList.add('projectStatus')
+    projectStatus.textContent = `Project Status : `
+
+    const projectBoxButtonsDiv = document.createElement('div')
+    projectBoxButtonsDiv.classList.add('projectBoxButtonsDiv')
+
+    const moreInfoButton = document.createElement('button')
+    moreInfoButton.classList.add('addMoreInfo')
+    moreInfoButton.textContent = 'Add More Info'
+
+    const viewTasksButton = document.createElement('button')
+    viewTasksButton.classList.add('viewTasks')
+    viewTasksButton.textContent = 'View Tasks'
+
+    const deleteProjectButton = document.createElement('button')
+    deleteProjectButton.classList.add('deleteProject')
+    deleteProjectButton.textContent = 'Delete Project'
+
     projectsBox.appendChild(projectsBoxItems)
     projectsBoxItems.appendChild(nameProject)
     projectsBoxItems.appendChild(dateCreatedContent)
+    projectsBoxItems.appendChild(dueDateContent)
+    projectsBoxItems.appendChild(priorityContent)
+    projectsBoxItems.appendChild(projectStatus)
+    projectsBoxItems.appendChild(projectBoxButtonsDiv)
+    projectBoxButtonsDiv.appendChild(moreInfoButton)
+    projectBoxButtonsDiv.appendChild(viewTasksButton)
+    projectBoxButtonsDiv.appendChild(deleteProjectButton)
   }
 }
 
