@@ -120,9 +120,11 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 }
 
 function dateController(currentProjectName, calenderValues, todo){
- for(let i = 0; i < projects.length; i++){
+  //console.log(currentProjectName)
+  for(let i = 0; i < projects.length; i++){
      if(projects[i]['project']['projectName'] == currentProjectName){
-       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+     // console.log(projects[i]['project']['projectName'] )  
+      for(let j = 0; j < projects[i]['project']['todos'].length; j++){
          if(projects[i]['project']['todos'][j]['title'] == todo){
            if(calenderValues == undefined){
                 projects[i]['project']['todos'][j].dateCreated = formatDate().getDate()

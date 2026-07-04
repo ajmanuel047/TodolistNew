@@ -92,8 +92,9 @@ body {
     
 }
 
-.nameProject {
+.nameProject, .dateCreatedContent {
     font-size: 1.4rem;
+    margin-left: 10px;
 }
 
 .projectContainer {    

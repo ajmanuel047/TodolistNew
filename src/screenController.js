@@ -3165,7 +3165,7 @@ function displayAllProjects (){
   document.querySelector('.projectsBoxDiv').appendChild(projectsBox)
 
   for(let i = 0; i < projects.length; i++){  
-    console.log(projects[projects.length - i - 1]['project']['projectName'])  
+   // console.log(projects[projects.length - i - 1]['project']['projectName'])  
     let projectName = projects[projects.length - i - 1]['project']['projectName']
     let projectsBoxItems = document.createElement('div')
     projectsBoxItems.classList.add('projectsBoxItems')
@@ -3173,8 +3173,20 @@ function displayAllProjects (){
     let nameProject = document.createElement('p')
     nameProject.classList.add('nameProject')
     nameProject.textContent = `Project : ${projectName}`
+    // console.log( projects[i]['project']['todos'])
+    // dateController(projectName)
+    // console.log(formatDate().getDate())
+    for(let j = 0; j < projects[i]['project']['todos']; j++){
+      console.log( projects[i]['project']['todos'][j].dateCreated)
+    }
+    let dateCreated = projects[projects.length - i - 1]['project']['dateCreated']
+    let dateCreatedContent = document.createElement('p')
+    dateCreatedContent.classList.add('dateCreatedContent')
+    dateCreatedContent.textContent = `Date Created : ${formatDate().getDate()}`
+    
     projectsBox.appendChild(projectsBoxItems)
     projectsBoxItems.appendChild(nameProject)
+    projectsBoxItems.appendChild(dateCreatedContent)
   }
 }
 
