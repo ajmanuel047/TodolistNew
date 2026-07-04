@@ -84,9 +84,9 @@ body {
 }
 
 .projectContainer {    
-    width: 80%;
+    /* width: 80%; */
     margin: auto;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .newProjectContainer {
@@ -297,12 +297,22 @@ h3 {
     /* background-color: blue; */
 }
 
-.todoDiv {
-   /* background-color: blue; */
-   /* margin-top: 20px; */
+.projectContainer .todoDiv {
+   background-color: blue;
+   margin-top: 20px;
+   display: flex;
+
    /* height: 70px; */
 }
 
+.taskDiv {
+    width: 60%;
+    background-color: aquamarine;
+}
+
+.currentTaskDiv {
+
+}
 .todoInput {
     position: relative;
     bottom: 14px;
@@ -362,6 +372,9 @@ h4 {
 
 .saveChanges, .saveNewChanges {
     margin-top: 17px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 2px;
 }
 
 .selectProject {
@@ -636,6 +649,30 @@ p.statusText {
     /* background-color: blue; */
 }
 
-.todoDivContent {
-    /* background-color: orange; */
+.todoBox {
+    background-color: rgb(230, 63, 63);
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.todoBox .createNewTodo {
+    background-color: skyblue;
+    border-radius: 50%;
+    border-style: none;
+    height: 70px;
+    width: 70px;
+    font-size: 40px;
+    cursor: pointer;
+    color: white;
+}
+
+.todoBox .todoInput, .todoBox .descriptionInput, .todoBox .noteInput   {
+    font-size: 1.17rem;
+    margin-left: 2px;
+}
+
+.saveChanges {
+
 }
