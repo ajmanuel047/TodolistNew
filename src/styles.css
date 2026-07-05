@@ -335,9 +335,6 @@ h3 {
     background-color: aquamarine;
 }
 
-.currentTaskDiv {
-
-}
 .todoInput {
     position: relative;
     bottom: 14px;
@@ -415,8 +412,12 @@ h4 {
 }
 
 .descriptionDiv{
-    margin-top: -23px;    
+    margin-top: 20px;    
     /* background-color: olive; */
+}
+
+.descriptionDiv .descriptionHeading {
+    font-size: 1.5rem;
 }
 
 .noteDiv {
@@ -674,6 +675,8 @@ p.statusText {
     /* background-color: blue; */
 }
 
+
+
 .todoBox {
     background-color: rgb(230, 63, 63);
     width: 200px;
@@ -698,6 +701,10 @@ p.statusText {
     margin-left: 2px;
 }
 
-.saveChanges {
-
+.currentTaskDiv {
+    background-color: rgb(129, 184, 59);
+    width: 40%;
+    height: 500px;
+    /* display: flex;
+    align-items: center; */
 }
