@@ -1583,19 +1583,27 @@ function createTodoButton (targetDiv){
   taskStatusButton.textContent = 'Task Status'
   taskStatusButton.classList.add('taskStatusButton')
 
-      // console.log(currentTodoDivContent)
-      currentTodoDivContent.forEach((container) => {
-        if(!container.querySelector('.editTodoButton')){
-          if(container.querySelector('.priority')){
-            container.querySelector('.priority').after(taskButtonsDiv)
-          }
+  // console.log(currentTodoDivContent)
+  // console.log(document.querySelector('.currentTaskDiv .priority'))
+  document.querySelector('.currentTaskDiv .priority').after(taskButtonsDiv)
+  taskButtonsDiv.appendChild(editTodoButton)
+  taskButtonsDiv.appendChild(deleteTask)
+  taskButtonsDiv.appendChild(taskPriority)
+  taskButtonsDiv.appendChild(taskStatusButton)
+  // old code start
+      // currentTodoDivContent.forEach((container) => {
+      //   if(!container.querySelector('.editTodoButton')){
+      //     if(container.querySelector('.priority')){
+      //       container.querySelector('.priority').after(taskButtonsDiv)
+      //     }
            
-           taskButtonsDiv.appendChild(editTodoButton)
-           taskButtonsDiv.appendChild(deleteTask)
-           taskButtonsDiv.appendChild(taskPriority)
-           taskButtonsDiv.appendChild(taskStatusButton)
-        }
-      })
+      //      taskButtonsDiv.appendChild(editTodoButton)
+      //      taskButtonsDiv.appendChild(deleteTask)
+      //      taskButtonsDiv.appendChild(taskPriority)
+      //      taskButtonsDiv.appendChild(taskStatusButton)
+      //   }
+      // })
+// old code end
     eventController().runTodoEditButton()
     // console.log(allProjects().getProjects())
 }
@@ -3192,7 +3200,7 @@ function addTodoBox (project) {
 function displayAllProjects (){
   let projects = allProjects().getProjects()
   console.log(projects)
-  document.body.style.backgroundColor = 'blue'
+  // document.body.style.backgroundColor = 'blue'
   document.querySelector('.projectsBox').remove()
   let projectsBox = document.createElement('div')
   projectsBox.classList.add('projectsBox')
