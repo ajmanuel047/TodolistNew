@@ -2049,14 +2049,24 @@ function createNote (projectName, note, todo, targetDiv){
     //  console.log(note)
      addNoteToProject(projectName, note, todo)
   }
-
+console.log(document.querySelector('.noteContentDiv'))
   function displayNote (){
    // console.log(projects)
     let projects = allProjects().getProjects()
     let note = document.createElement('p')
     note.classList.add('note')
-    let noteContentDiv = targetDiv.querySelectorAll('.noteContentDiv')
-  
+    let currentTaskDiv = document.querySelector('.currentTaskDiv')
+    
+    let noteDiv = document.createElement('div')
+    noteDiv.classList.add('noteDiv')
+
+    let noteHeading = document.createElement('div')
+    noteHeading.classList.add('noteHeading')
+    noteHeading.textContent = 'Note'
+    
+    let noteContentDiv = document.createElement('div')
+    noteContentDiv.classList.add('noteContentDiv')
+
     let editNote = document.createElement('button')
     editNote.classList.add('editNote')
     editNote.textContent = 'Edit'
@@ -2069,10 +2079,15 @@ function createNote (projectName, note, todo, targetDiv){
           }
         }   
         // document.querySelector('.noteInput').remove()     
-        noteContentDiv.forEach((div) => {
-          div.appendChild(note)
-          div.after(editNote)
-        })
+        // noteContentDiv.forEach((div) => {
+        //   div.appendChild(note)
+        //   div.after(editNote)
+        // })
+          currentTaskDiv.appendChild(noteDiv)
+          noteDiv.appendChild(noteHeading)
+          noteDiv.appendChild(noteContentDiv)
+          noteContentDiv.appendChild(note)
+          noteContentDiv.appendChild(editNote)
       }
     }
   }
