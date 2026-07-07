@@ -333,6 +333,7 @@ h3 {
 .taskDiv {
     width: 60%;
     background-color: aquamarine;
+    padding: 10px;
 }
 
 .todoInput {
@@ -412,19 +413,28 @@ h4 {
 }
 
 .descriptionDiv{
-    margin-top: 20px;    
+    margin-top: 10px;    
     /* background-color: olive; */
+}
+
+.currentTaskDiv .descriptionDiv {
+    margin-top: -35px;
+    /* background-color: orange; */
 }
 
 .descriptionDiv .descriptionHeading, .noteDiv .noteHeading {
     font-size: 1.5rem;
 }
 
+
+
 .noteDiv {
     margin-top: 20px;
 }
-.descriptionHeading, .notesHeading {
+.descriptionHeading, .noteHeading {
     margin-bottom: 10px;
+    font-weight: bold;
+    /* background-color: orange; */
 }
 
 .descriptionInput, .noteInput {
@@ -499,6 +509,11 @@ h4 {
     background-color: orange;
     
 } */
+
+.currentDate {
+    font-size: 1rem;
+    /* font-weight: 500; */
+}
 
 .dueDate {
     margin-top: -5px;
@@ -626,9 +641,23 @@ p.statusText {
     /* margin-bottom: 10px; */
 }
 
+.checkListContainer {
+    margin-top: -14px;
+}
+
+.checkListContainer .checkListHeading {
+    font-size: 1.4rem;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
 .checkListForm {
     margin-top: -10px;
 }
+
+/* .checkListInputDiv {
+    margin-top: 0px;
+} */
 
 .addCheckListFormButton {
     width:50px;
@@ -640,7 +669,7 @@ p.statusText {
 .checkListInputDiv {
     display: flex;
     gap: 5px;
-    margin-top: 5px;
+    margin-top: -15px;
     /* margin-right: 10px; */
 }
 
@@ -705,6 +734,11 @@ p.statusText {
     background-color: rgb(129, 184, 59);
     width: 40%;
     height: 500px;
+    padding: 10px;
     /* display: flex;
     align-items: center; */
+}
+
+.currentTasksDivTitle {
+    margin-bottom: 0px;
 }
