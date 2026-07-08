@@ -1979,26 +1979,71 @@ function newProject(projectName, currentProjectName){
   }
     
   let currentContainer = document.querySelector('.projectContainer');
-  let newProjectName = document.createElement('h2')
-  newProjectName.classList.add('newProjectName')
-  newProjectName.textContent = currentProjectName 
-
-  const titleContainerButtonsDiv = document.createElement('div')
-  titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
-      
-  const editProjectNameButton = document.createElement('button')
-  editProjectNameButton.textContent = 'Edit'
-  editProjectNameButton.classList.add('editProjectName')     
+  if(currentContainer.querySelector('.newProjectName')){
+    console.log('yes it is there')
+    currentContainer.querySelector('.newProjectName').remove()
+    currentContainer.querySelector('.titleContainerButtonsDiv').remove()
+    let newProjectName = document.createElement('h2')
+    newProjectName.classList.add('newProjectName')
+    newProjectName.textContent = currentProjectName 
+    currentContainer.querySelector('.todoDiv').before(newProjectName)
   
-  const deleteProjectButton = document.createElement('button')
-  deleteProjectButton.classList.add('deleteProject')
-  deleteProjectButton.textContent = 'Delete Project'
+    const titleContainerButtonsDiv = document.createElement('div')
+    titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+    
+    const editProjectNameButton = document.createElement('button')
+    editProjectNameButton.textContent = 'Edit'
+    editProjectNameButton.classList.add('editProjectName') 
+    
+    const deleteProjectButton = document.createElement('button')
+    deleteProjectButton.classList.add('deleteProject')
+    deleteProjectButton.textContent = 'Delete Project'
+    
+    currentContainer.querySelector('.newProjectName').after(titleContainerButtonsDiv)
+    titleContainerButtonsDiv.appendChild(editProjectNameButton)
+    titleContainerButtonsDiv.appendChild(deleteProjectButton)
+  }else {
+    console.log('no it is not')
+    let newProjectName = document.createElement('h2')
+    newProjectName.classList.add('newProjectName')
+    newProjectName.textContent = currentProjectName 
+    currentContainer.querySelector('.todoDiv').before(newProjectName)
+   
+    const titleContainerButtonsDiv = document.createElement('div')
+    titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+  
+    const editProjectNameButton = document.createElement('button')
+    editProjectNameButton.textContent = 'Edit'
+    editProjectNameButton.classList.add('editProjectName') 
+    
+    const deleteProjectButton = document.createElement('button')
+    deleteProjectButton.classList.add('deleteProject')
+    deleteProjectButton.textContent = 'Delete Project'
+   
+    currentContainer.querySelector('.newProjectName').after(titleContainerButtonsDiv)
+    titleContainerButtonsDiv.appendChild(editProjectNameButton)
+    titleContainerButtonsDiv.appendChild(deleteProjectButton)
+  }
+  // let newProjectName = document.createElement('h2')
+  // newProjectName.classList.add('newProjectName')
+  // newProjectName.textContent = currentProjectName 
 
-  currentContainer.querySelector('.todoDiv').before(newProjectName)
-  currentContainer.firstChild.appendChild(titleContainerButtonsDiv)
-  titleContainerButtonsDiv.appendChild(editProjectNameButton)
-  titleContainerButtonsDiv.appendChild(deleteProjectButton)
+  // const titleContainerButtonsDiv = document.createElement('div')
+  // titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+      
+  // const editProjectNameButton = document.createElement('button')
+  // editProjectNameButton.textContent = 'Edit'
+  // editProjectNameButton.classList.add('editProjectName')     
+  
+  // const deleteProjectButton = document.createElement('button')
+  // deleteProjectButton.classList.add('deleteProject')
+  // deleteProjectButton.textContent = 'Delete Project'
 
+  // currentContainer.querySelector('.todoDiv').before(newProjectName)
+  // currentContainer.firstChild.appendChild(titleContainerButtonsDiv)
+  // titleContainerButtonsDiv.appendChild(editProjectNameButton)
+  // titleContainerButtonsDiv.appendChild(deleteProjectButton)
+  // console.log(document.querySelector('.newProjectName').textContent)
 }
 
 
