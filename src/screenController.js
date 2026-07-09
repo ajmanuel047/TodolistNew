@@ -3429,9 +3429,10 @@ function createProjectContainer(todo){
     currentTaskDivTitle.textContent = 'Current Task'
     currentTaskDiv.appendChild('currentTaskDivTitle')
 
-    }
+    }    
+  }  
 
-    function createCurrentTaskBox () {
+  function createCurrentTaskBox () {
        const currentTaskBox = document.createElement('div')
        currentTaskBox.classList.add('currentTaskBox')
        document.querySelector('.currentTaskDiv').appendChild(currentTaskBox)
@@ -3475,7 +3476,6 @@ function createProjectContainer(todo){
        addCheckListFormButton.textContent = 'Add'
        checkListContainer.appendChild(addCheckListFormButton)
     }
-  }  
 
   function addTodoBox (todo) {
   const todoBoxDiv = document.createElement('div')
@@ -3493,8 +3493,34 @@ function createProjectContainer(todo){
   }
 
 }
+
+return {
+  createNewProjectContainer,
+  createCurrentTaskBox,
+  addTodoBox
+}
 }
 /* bug to fix later. Ensure just one save for edit task is
 active at a time. When one is active you should not be able 
 to save another
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
