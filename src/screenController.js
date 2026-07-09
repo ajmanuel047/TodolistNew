@@ -1898,7 +1898,15 @@ let currentTaskBox = document.querySelector('.currentTaskBox')
           todo.textContent = currentTodo
           todo.classList.add('todo') 
         }
-        // console.log(currentTaskBox)
+        console.log(currentTaskBox)
+        if(currentTaskBox == null){
+          console.log('yes')
+          const currentTaskBox = document.createElement('div')
+          currentTaskBox.classList.add('currentTaskBox')
+          document.querySelector('.currentTaskDiv').appendChild(currentTaskBox)
+
+        }
+        console.log(todo)
           currentTaskBox.appendChild(todo)
           currentTaskBox.appendChild(taskPriority)
 // console.log(targetDiv)
@@ -3375,6 +3383,117 @@ function displayAllProjects (){
   }
 }
 
+function createProjectContainer(todo){
+
+  function createNewProjectContainer () {
+    if(document.querySelector('.projectContainer')){
+    document.querySelector('.projectContainer').remove()
+  } else {
+    const projectContainer = document.createElement('div')
+    projectContainer.classList.add(projectContainer)
+    document.body.appendChild(projectContainer)
+
+    const titleContainerButtonsDiv = document.createElement('button')
+    titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+    projectContainer.appendChild(titleContainerButtonsDiv)
+
+    const editProjectName = document.createElement('button')
+    editProjectName.classList.add('editProjectName')
+    editProjectName.textContent = 'Edit'
+    titleContainerButtonsDiv.appendChild(editProjectName)
+
+    const deleteProjectName = document.createElement('button')
+    deleteProjectName.classList.add('deleteProjectName')
+    deleteProjectName.textContent = 'Delete Project'
+    titleContainerButtonsDiv.appendChild(deleteProjectName)
+
+    const todoDiv = document.createElement('div')
+    todoDiv.classList.add('todoDiv')
+    projectContainer.appendChild(todoDiv)
+
+    const taskDiv = document.createElement('div')
+    taskDiv.classList.add('taskDiv')
+    todoDiv.appendChild(taskDiv)
+
+    const tasksDivTitle = document.createElement('h3')
+    tasksDivTitle.classList.add('tasksDivTitle')
+    tasksDivTitle.textContent = 'Tasks'
+    taskDiv.appendChild(tasksDivTitle)
+
+    const currentTaskDiv = document.createElement('div')
+    currentTaskDiv.classList.add('currentTaskDiv')
+    todoDiv.appendChild(currentTaskDiv)
+
+    const currentTaskDivTitle = document.createElement('h3')
+    currentTaskDivTitle.classList.add('currentTaskDivTitle')
+    currentTaskDivTitle.textContent = 'Current Task'
+    currentTaskDiv.appendChild('currentTaskDivTitle')
+
+    }
+
+    function createCurrentTaskBox () {
+       const currentTaskBox = document.createElement('div')
+       currentTaskBox.classList.add('currentTaskBox')
+       document.querySelector('.currentTaskDiv').appendChild(currentTaskBox)
+    
+       const todo = document.createElement('h4')
+       todo.classList.add('todo')
+       currentTaskBox.appendChild(todo)
+
+       const priority = document.createElement('p')
+       priority.classList.add('priority')
+       priority.textContent = 'Task Priority : '
+       currentTaskBox.appendChild(priority)
+
+       const taskButtonsDiv = document.createElement('div')
+       taskButtonsDiv.classList.add('taskButtonsDiv')
+       currentTaskBox.appendChild(taskButtonsDiv)
+
+       const dateDiv = document.createElement('div')
+       dateDiv.classList.add('dateDiv')
+       currentTaskBox.appendChild(dateDiv)
+
+       const descriptionDiv = document.createElement('div')
+       descriptionDiv.classList.add('descriptionDiv')
+       currentTaskBox.appendChild(descriptionDiv)
+
+       const noteDiv = document.createElement('div')
+       noteDiv.classList.add('noteDiv')
+       currentTaskBox.appendChild(noteDiv)
+
+       const checkListContainer = document.createElement
+       checkListContainer.classList.add('checkListContainer')
+       currentTaskBox.appendChild(checkListContainer)
+
+       const checkListHeading = document.createElement('h5')
+       checkListHeading.classList.add('checkListHeading')
+       checkListHeading.textContent = 'Todo CheckList'
+       checkListContainer.appendChild(checkListHeading)
+
+       const addCheckListFormButton = document.createElement('button')
+       addCheckListFormButton.classList.add('addCheckListFormButton')
+       addCheckListFormButton.textContent = 'Add'
+       checkListContainer.appendChild(addCheckListFormButton)
+    }
+  }  
+
+  function addTodoBox (todo) {
+  const todoBoxDiv = document.createElement('div')
+  todoBoxDiv.classList.add('todoBox')
+  document.querySelector('.taskDiv').appendChild(todoBoxDiv)
+  console.log(todo)
+  if(todo == undefined){
+    const createNewTodo = document.createElement('button');
+    createNewTodo.classList.add('createNewTodo');
+    createNewTodo.textContent = '+';
+    todoBoxDiv.appendChild(createNewTodo)
+    eventController().runCreateTaskButton()
+  }else if(todo){
+    console.log('yes there is todo')
+  }
+
+}
+}
 /* bug to fix later. Ensure just one save for edit task is
 active at a time. When one is active you should not be able 
 to save another
