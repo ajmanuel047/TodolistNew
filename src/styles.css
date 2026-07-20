@@ -335,6 +335,7 @@ h3 {
     width: 60%;
     background-color: aquamarine;
     padding: 10px;
+    
 }
 
 .todoInput {
@@ -707,10 +708,30 @@ p.statusText {
 
 
 
-.todoBox {
+.todoBoxContainer {
     background-color: rgb(230, 63, 63);
+    /* width: 600px; */
+    /* height: 200px; */
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+    /* margin: 10px; */
+}
+
+.todoBox {
+    background-color: orange;
     width: 200px;
     height: 200px;
+}
+
+.newTodoBox  {
+    /* margin: 10px; */
+    /* background-color: orange;
+    width: 200px;
+    height: 200px; */
+    /* margin-right: -60px; */
+    /* background-color: blue; */
     display: flex;
     align-items: center;
 }
@@ -724,6 +745,18 @@ p.statusText {
     font-size: 40px;
     cursor: pointer;
     color: white;
+}
+
+.todoBoxContainer .taskName{
+    /* background-color: orange; */
+    /* margin-top: -5px; */
+    font-size: 1.17rem;
+    padding: 3px;
+}
+
+.todoBoxContainer .taskPriority, .todoBoxContainer .dateCreated, .todoBoxContainer .dueDate,.todoBoxContainer .taskStatus {
+    font-size: 1.17rem;
+    padding: 3px;
 }
 
 .todoBox .todoInput, .todoBox .descriptionInput, .todoBox .noteInput   {
@@ -741,5 +774,10 @@ p.statusText {
 }
 
 .currentTasksDivTitle {
-    margin-bottom: 0px;
+    /* margin-bottom: 0px; */
+}
+
+.todo {
+    /* background-color: orange; */
+    margin-top: -4px;
 }
