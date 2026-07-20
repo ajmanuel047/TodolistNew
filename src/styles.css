@@ -723,6 +723,9 @@ p.statusText {
     background-color: orange;
     width: 200px;
     height: 200px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
 }
 
 .newTodoBox  {
@@ -732,8 +735,8 @@ p.statusText {
     height: 200px; */
     /* margin-right: -60px; */
     /* background-color: blue; */
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
 }
 
 .todoBox .createNewTodo {
@@ -745,6 +748,12 @@ p.statusText {
     font-size: 40px;
     cursor: pointer;
     color: white;
+    position: relative;
+    top: 60px;
+    right: -3px;
+    /* display: inline-flex; */
+    /* margin: auto; */
+    /* align-self: center; */
 }
 
 .todoBoxContainer .taskName{

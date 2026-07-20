@@ -1845,7 +1845,9 @@ function createTask(currentProjectName, newProjectNameDiv){
         createTodoNote(targetDiv)
         this.remove()
     } else {
-        document.querySelector('.todoBox').appendChild(todoDivContent)
+      console.log('checking')
+     // console.log(document.querySelector('.todoBoxContainer').lastChild)
+        document.querySelector('.todoBoxContainer').lastChild.appendChild(todoDivContent)
         todoDivContent.appendChild(todoInput)
         createTodoDescription(todoInput)
         createTodoNote(targetDiv)
