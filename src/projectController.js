@@ -70,12 +70,15 @@ function editProject(value1, value2){
 }
 
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
-
+  // console.log(currentProjectName)
+  // console.log(arr)
+  // console.log(currentTodo)
+  // console.log(previousTodo)
   function pushTodo () { 
     // console.log(projects)
     projects.forEach((obj) => {
         if(typeof arr == 'string'){
-          console.log(obj)
+          // console.log(obj)
           if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
           
           let value = arr.split()[0]
