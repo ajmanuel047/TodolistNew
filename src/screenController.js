@@ -2724,11 +2724,27 @@ function todoAlreadyExistMessage(targetButton){
 
 function deleteTask(e){  
   document.body.style.backgroundColor = 'orange'
-  const currentContainer = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+  const currentContainer = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
   const currentTodo = e.target.parentElement.parentElement.querySelector('.todo')
+  const todoText = currentTodo.textContent
+  console.log(currentContainer)
+  console.log(currentTodo)
+  console.log(todoText)
   removeTaskFromArray(currentContainer, currentTodo.textContent)
+  const todoBoxContainer = document.querySelector('.todoBoxContainer')
+  // console.log(todoBoxContainer.querySelector('.taskName').textContent)
+  // console.log(`Task Name : ${todoText}`)
+  const taskNames = document.querySelectorAll('.taskName')
+  taskNames.forEach((taskName)=> {
+    console.log(taskName.parentElement)
+    if(taskName.textContent == `Task Name : ${todoText}`){
+      taskName.parentElement.remove()
+    }
+  })
+
   currentTodo.parentElement.remove()
-  storeData(currentContainer).editStorage()
+ // storeData(currentContainer).editStorage()
+ console.log(allProjects().getProjects())
 }
 
 function addTaskPriority(e){
