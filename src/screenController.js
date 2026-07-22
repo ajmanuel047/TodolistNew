@@ -825,12 +825,19 @@ const runTodoEditButton = function(){
                         let newTodo = projects[i]['project']['todos'][j]['title']
             //            console.log(newTodo)
                         currentTodo.textContent = newTodo         
-                                     
+                        console.log(newTodo)            
                     }
                   }
               }
                console.log(allProjects().getProjects())
          }     
+       const taskNames = document.querySelectorAll('.taskName')
+       taskNames.forEach((taskName)=> {       
+        const todoText = currentTodo.textContent        
+        if(taskName.textContent == `Task Name : ${previousTodo}`){
+          taskName.textContent = `Task Name : ${todoText}`          
+        }
+      })
        //  console.log('check 5')   
        //  console.log(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
        //  storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage() 
@@ -2737,6 +2744,7 @@ function deleteTask(e){
   const taskNames = document.querySelectorAll('.taskName')
   taskNames.forEach((taskName)=> {
     console.log(taskName.parentElement)
+    console.log('next stop when edit is done on current task it should also update on tasksDiv')
     if(taskName.textContent == `Task Name : ${todoText}`){
       taskName.parentElement.remove()
     }
