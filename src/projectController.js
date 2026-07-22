@@ -123,21 +123,30 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 }
 
 function dateController(currentProjectName, calenderValues, todo){
-  //console.log(currentProjectName)
+  // console.log(todo)
   for(let i = 0; i < projects.length; i++){
      if(projects[i]['project']['projectName'] == currentProjectName){
-     // console.log(projects[i]['project']['projectName'] )  
+    //  console.log(projects[i]['project']['projectName'] )  
+    //  console.log(currentProjectName)
+    //  console.log(projects[i]['project']['todo'] )  
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
-         if(projects[i]['project']['todos'][j]['title'] == todo){
+          // console.log(projects[i]['project']['todos'][j]['title'])
+          // console.log(todo)
+        if(projects[i]['project']['todos'][j]['title'] == todo){
+          // console.log(projects[i]['project']['todos'][j]['title'])
+          // console.log(todo)
            if(calenderValues == undefined){
+            // console.log('check')
                 projects[i]['project']['todos'][j].dateCreated = formatDate().getDate()
            } else {
+            // console.log('check 2')
                 projects[i]['project']['todos'][j].dueDate = formatDate(calenderValues).dueDate()
            }                  
          }
        }           
      }
   }   
+  // console.log(projects)
 }
 
  function addDescriptionToProject (projectName, description, todo) {
