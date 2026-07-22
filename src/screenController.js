@@ -512,7 +512,7 @@ function eventController(){
                         // const currentTaskBox = document.createElement('div')
                         // currentTaskBox.classList.add('currentTaskBox')
                         // document.querySelector('.currentTaskDiv').appendChild(currentTaskBox)
-                        console.log('did this run')
+                      //  console.log('did this run')
                         // console.log(document.querySelector('.currentTaskBox'))
                      // document.querySelector('.currentTaskBox').remove()
                      if(document.querySelector('.todoBox'))(
@@ -780,7 +780,7 @@ const runTodoEditButton = function(){
   if(document.querySelector('.editTodoButton')){
       editTodoButtons.forEach((buttons) => {
       buttons.onclick = function(e){
-      document.body.style.backgroundColor = 'skyblue'
+      
       // console.log(this.parentElement.parentElement.children)
       // console.log(this.parentElement.parentElement)
       // console.log(e.target.parentElement.parentElement)
@@ -790,13 +790,13 @@ const runTodoEditButton = function(){
       // console.log(this.parentElement.parentElement.children)
       let arr = [].slice.call(this.parentElement.parentElement.children)
       // console.log(arr)
-      
-      let currentProjectName = this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-   
+  //    console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
+      let currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
        if(buttons.textContent == 'Save'){
         // console.log(currentTodo)
         // console.log('na')
         // console.log(currentProjectName)
+        document.body.style.backgroundColor = 'purple'
          buttons.textContent = 'Edit'
          currentTodo.setAttribute('contenteditable', false)
          currentTodo.classList.remove('editContent')
@@ -806,7 +806,8 @@ const runTodoEditButton = function(){
          saveCompletedisplay.classList.add('saved')
         //  adjust the saveCompletedisplay because it not moving when the text
         //  is longer
-         this.parentElement.parentElement.parentElement.querySelector('.todoDivTitle').appendChild(saveCompletedisplay)
+        console.log(e.target.parentElement.parentElement)
+         e.target.parentElement.parentElement.querySelector('.priority').before(saveCompletedisplay)
         // console.log(this.parentElement.parentElement)
          setTimeout(() => {
            saveCompletedisplay.remove()
@@ -828,15 +829,16 @@ const runTodoEditButton = function(){
                     }
                   }
               }
-               
+               console.log(allProjects().getProjects())
          }     
        //  console.log('check 5')   
        //  console.log(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-         storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage() 
+       //  storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage() 
       } 
       else if(e.target.className == 'editTodoButton'){
         // console.log('yes')
         // console.log(arr)
+        document.body.style.backgroundColor = 'skyblue'
       for(let i = 0; i < arr.length; i++){
         // console.log(arr[i].className)
         

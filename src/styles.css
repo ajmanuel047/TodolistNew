@@ -312,9 +312,9 @@ h3 {
     /* display: flex;
     align-items: center;
     justify-content: center; */
-    /* position: relative;
-    bottom: -40px;
-    left: -130px; */
+    position: relative;
+    bottom: 25px;
+   
 }
 .createNewTodo {
     margin-left: 60px;
