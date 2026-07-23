@@ -2757,8 +2757,9 @@ function deleteTask(e){
 
 function addTaskPriority(e){
   // document.body.style.backgroundColor = 'blue'
+  // console.log(e.target.parentElement.parentElement)
   const projects = allProjects().getProjects()
-  const currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+  const currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
   const todo = e.target.parentElement.parentElement.querySelector('.todo').textContent
   const taskPriority = e.target.parentElement.parentElement.querySelector('.priority')
   console.log(taskPriority)
@@ -2769,24 +2770,57 @@ function addTaskPriority(e){
           if(projects[i]['project']['todos'][j]['title'] == todo){
             // console.log(projects[i]['todos'][j]['taskPriority'])
             taskPriority.textContent = `Task Priority : ${projects[i]['project']['todos'][j]['taskPriority']}`
-             if(taskPriority.textContent == 'Task Priority : High'){
+            const taskNames = document.querySelectorAll('.taskName')
+            taskNames.forEach((taskName)=> {       
+              console.log(taskName.parentElement.querySelector('.taskPriority'))
+              const currentPriorityDiv = taskName.parentElement.querySelector('.taskPriority')
+              //const priorityText = currentTodo.textContent        
+              if(taskName.textContent == `Task Name : ${todo}`){
+                // taskName.textContent = `Task Name : ${todoText}`          
+              // console.log('yes')
+              //console.log(taskName.parentElement.querySelector('.taskPriority'))
+              const todoTaskPriority = taskName.parentElement.querySelector('.taskPriority')
+              todoTaskPriority.textContent = `Task Priority : ${projects[i]['project']['todos'][j]['taskPriority']}`
+             // taskName.after(`Task Priority : ${taskPriority}`)
+            if(taskPriority.textContent == 'Task Priority : High'){
               taskPriority.classList.add('high')
+              currentPriorityDiv.classList.add('high')
               taskPriority.classList.remove('low')
               taskPriority.classList.remove('extreme')
-            }else if(taskPriority.textContent == 'Task Priority : Low'){
+              currentPriorityDiv.classList.remove('low')
+              currentPriorityDiv.classList.remove('extreme')
+            }else if(taskPriority.textContent  == 'Task Priority : Low'){
               taskPriority.classList.add('low')
+              currentPriorityDiv.classList.add('low')
               taskPriority.classList.remove('extreme')
               taskPriority.classList.remove('high')
-            }else if(taskPriority.classList.add('extreme')){
-              taskPriority.classList.add('extreme')
-              taskPriority.classList.remove('low')
-              taskPriority.classList.remove('high')
+              currentPriorityDiv.classList.remove('extreme')
+              currentPriorityDiv.classList.remove('high')
             }
+            else if(taskPriority.classList.add('extreme') || currentPriorityDiv.classList.add('extreme')){
+              console.log('check')
+              taskPriority.classList.add('extreme')              
+              currentPriorityDiv.classList.add('extreme')
+              taskPriority.classList.remove('low')
+              taskPriority.classList.remove('high')  
+              currentPriorityDiv.classList.remove('high')           
+              currentPriorityDiv.classList.remove('low')           
+            }
+            
+            }
+            })
+            console.log(document.querySelector('.taskPriority').textContent)
+         //  document.querySelector('.taskPriority').classList.add('low')
+            // if(document.querySelector('.taskPriority') == `Task Priority : Not Specified`){
+            //   console.log('yes')
+            //   document.querySelector('.taskPriority').classList.add('low')
+            // }
+       
           }
        }
     }
   }
-storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
+//storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
 }
 
 function addTaskStatus(currentProjectName, e){
