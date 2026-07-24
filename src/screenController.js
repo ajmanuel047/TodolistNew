@@ -1308,7 +1308,8 @@ const runSaveDueDate = function(){
       const targetDiv = e.target.parentElement    
       if(e.target.parentElement){     
         const calenderValues = e.target.parentElement.querySelector('.calender').value
-        const projectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+        console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement)
+        const projectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
         let dueDate = null
         let projects = allProjects().getProjects()
         let todo = targetDiv.parentElement.parentElement.querySelector('.todo').textContent
@@ -1336,9 +1337,23 @@ const runSaveDueDate = function(){
       }      
       e.target.parentElement.parentElement.querySelector('.calender').remove()
       changeDate(targetDiv)
+      console.log('due date')
+      console.log(todo)
+      const taskNames = document.querySelectorAll('.taskName')
+      
+      taskNames.forEach((taskName)=> {       
+        console.log(taskName)
+      // const todoText = currentTodo.textContent        
+        if(taskName.textContent == `Task Name : ${todo}`){
+          console.log('yes date')
+          const dueDateText = taskName.parentElement.querySelector('.dueDate')
+          const dueDateInfo = document.querySelector('.currentTaskDiv .dueDate').textContent
+          dueDateText.textContent = `${dueDateInfo}`          
+        }
+      })
          // targetDiv.querySelector('button').remove()
     //  console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement)
-      storeData(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
+     // storeData(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
       e.target.remove()
       }
      })
@@ -2701,7 +2716,7 @@ function displayUpdateMessage(targetDiv){
   dateUpdated.classList.add('dateUpdated')
   dateUpdated.textContent = 'Date Updated'
   console.log(targetDiv)
-  targetDiv.querySelector('.dueDate').appendChild(dateUpdated)
+  targetDiv.querySelector('.dueDate').after(dateUpdated)
   setTimeout(() => {
    dateUpdated.remove()
   }, 1000)
