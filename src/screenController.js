@@ -1180,16 +1180,18 @@ const runEditDescription = function () {
   })  
 }
 
-const runEditNote = function (projectName) {
+const runEditNote = function (projectName, e) {
 //  console.log('did it run')
   const editNoteButton = document.querySelectorAll('.editNote')
   
   // console.log(editNoteButton)
+ 
   editNoteButton.forEach((editButton) => {
     // console.log(this)
     editButton.onclick = function (e) {
  //     console.log(this.parentElement.querySelector('.description'))
     //  editNote()
+     console.log(e.target)
       const currentNote = this.parentElement.querySelector('.note')
       currentNote.setAttribute('contenteditable', true)
       currentNote.classList.add('editContent')
@@ -1205,8 +1207,8 @@ const runEditNote = function (projectName) {
          saveCompletedisplay.classList.add('saved')
          // adjust the saveCompletedisplay because it not moving when the text
          // is longer
-         console.log(e.parentElement)
-         e.parentElement.after(saveCompletedisplay)
+       //  console.log(e.parentElement)
+         e.target.before(saveCompletedisplay)
         //  console.log(projectName)
          storeData(projectName).populateStorage()
          setTimeout(() => {
@@ -1214,9 +1216,10 @@ const runEditNote = function (projectName) {
          }, 1000)
        // console.log(currentNote.textContent)
        //console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-       let currentTodo = this.parentElement.parentElement.querySelector('.todo').textContent
-        // console.log(currentTodo)
-       addNoteToProject(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent, currentTodo)
+    //   console.log(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent)
+       let currentTodo = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
+     //   console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement)
+       addNoteToProject(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent, currentTodo)
          
         for(let i = 0; i < allProjects().getProjects().length; i++){
           // console.log(allProjects().getProjects()[i]['projectName'])
@@ -1234,6 +1237,7 @@ const runEditNote = function (projectName) {
                   
               }
             }
+            console.log(allProjects().getProjects())
          }         
       }
 // console.log(allProjects().getProjects())
@@ -1243,7 +1247,7 @@ const runEditNote = function (projectName) {
         editButton.textContent = 'Save'
         currentNote.style.cursor = 'auto'
       })
-      storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
+    //  storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
     }
   })  
   
