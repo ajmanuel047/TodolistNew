@@ -1405,7 +1405,8 @@ const runAddTaskStatus = function(){
   const taskStatusButton = document.querySelectorAll('.taskStatusButton')
   taskStatusButton.forEach((button) => {
     button.onclick = function(e){      
-      let currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+      console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement)
+      let currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
       let todo = e.target.parentElement.parentElement.querySelector('.todo').textContent
       updateTodoStatus(currentProjectName, todo)
       addTaskStatus(currentProjectName, e)
@@ -2828,6 +2829,7 @@ function addTaskStatus(currentProjectName, e){
   const todo = e.target.parentElement.parentElement.querySelector('.todo')
   const priority = e.target.parentElement.parentElement.querySelector('.priority')
   
+  let statusText = 'Not Completed'
   if(!e.target.parentElement.parentElement.querySelector('.statusText')){
       const statusText = document.createElement('p')
       statusText.textContent = 'Completed'
@@ -2836,6 +2838,27 @@ function addTaskStatus(currentProjectName, e){
   } else {
       e.target.parentElement.parentElement.querySelector('.statusText').remove()
   }
+  document.body.style.backgroundColor = 'blue'
+  const taskNames = document.querySelectorAll('.taskName')
+  console.log(document.querySelector('.statusText'))
+ 
+  if(document.querySelector('.statusText')){
+     statusText = document.querySelector('.statusText').textContent
+  }else if(document.querySelector('.statusText') == null){
+    statusText = 'Not Completed'
+  }
+  taskNames.forEach((taskName)=> {       
+   const todoText = todo.textContent        
+   if(taskName.textContent == `Task Name : ${todoText}`){
+      // taskName.textContent = `Task Name : ${todoText}`       
+      if(taskName.parentElement.querySelector('.todoBox .taskStatus').textContent == 'Task Status : Not Completed'){
+        taskName.parentElement.querySelector('.todoBox .taskStatus').textContent = `Task Status : ${statusText}`
+      } else {
+         taskName.parentElement.querySelector('.todoBox .taskStatus').textContent = `Task Status : Not Completed`
+      }
+      console.log('it is')         
+   }
+  })
   storeData(currentProjectName).editStorage()
 }
 
@@ -3458,7 +3481,7 @@ function storeData (currentProjectName){
   })
   }  
 // console.log(arr)    // document.querySelector('.actualProject .projectName').textContent = localStorage.key(0)
-    document.querySelector('.actualProject .projectName').style.fontSize = '2.5rem' 
+  //  document.querySelector('.projectName').style.fontSize = '2.5rem' 
   }  
   }
 
