@@ -1591,6 +1591,17 @@ const saveTodoChangesAddedFromHeader = function(){
     }
   })
 }
+
+const runTodosForProjects = function(){
+    const viewTaskButtons = document.querySelectorAll('.viewTasks')
+    // console.log(projectBoxItems)
+    viewTaskButtons.forEach((taskButton) => {
+      taskButton.onclick = function(e){
+        document.body.style.backgroundColor = 'blue'
+        todosForProjects(e)
+      }
+    })
+}
   const getCurrentProjectName = () => currentProjectName
 
   return { 
@@ -1620,7 +1631,8 @@ const saveTodoChangesAddedFromHeader = function(){
           runCheckListStatus,
           runAllProjectsClick,
           runUnCompletedProjectsClick,
-          runCompletedProjectsClick
+          runCompletedProjectsClick,
+          runTodosForProjects
          }
 }
 
@@ -3663,7 +3675,7 @@ function displayAllProjects (){
 
     const viewTasksButton = document.createElement('button')
     viewTasksButton.classList.add('viewTasks')
-    viewTasksButton.textContent = 'View Tasks'
+    viewTasksButton.textContent = 'View All Tasks'
 
     const deleteProjectButton = document.createElement('button')
     deleteProjectButton.classList.add('deleteProject')
@@ -3684,6 +3696,7 @@ function displayAllProjects (){
     
   } 
     document.querySelector('.projectsBox').children[document.querySelector('.projectsBox').children.length - 1].querySelector('.deleteProject').disabled = true
+    eventController().runTodosForProjects()
 }
 
 function createProjectContainer(todo){
@@ -3855,6 +3868,11 @@ return {
   createCurrentTaskBox,
   addTodoBox
 }
+}
+
+function todosForProjects(e){
+  console.log('allTodos')
+  console.log(e.target)
 }
 // createProjectContainer()
 /* bug to fix later. Ensure just one save for edit task is

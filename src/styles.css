@@ -87,9 +87,15 @@ body {
 
 .projectsBoxItems {
     background-color: rgb(230, 63, 63);
-    width: 270px;
+    width: 290px;
     height: 250px;
     
+}
+
+.viewTasks:hover {
+    cursor: pointer;
+    background-color: rgb(247, 199, 199);
+    border: none;
 }
 
 .nameProject, span, .dateCreatedContent, .priorityContent, .projectStatus, .dueDateContent, .projectBoxButtonsDiv {
@@ -113,6 +119,10 @@ span {
     font-size: 0.85rem;
 }
 
+.addMoreInfo, .viewTasks, .deleteProject {
+    width: 85px;
+    height: 30px;
+}
 .projectContainer {    
     /* width: 80%; */
     margin: auto;
