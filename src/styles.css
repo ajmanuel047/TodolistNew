@@ -92,10 +92,14 @@ body {
     
 }
 
-.nameProject, .dateCreatedContent, .priorityContent, .projectStatus, .dueDateContent, .projectBoxButtonsDiv {
+.nameProject, span, .dateCreatedContent, .priorityContent, .projectStatus, .dueDateContent, .projectBoxButtonsDiv {
     font-size: 1.4rem;
     margin-left: 10px;
     margin-top: 25px;
+}
+
+span {
+    margin-left: 5px;
 }
 
 .projectBoxButtonsDiv {

@@ -1388,21 +1388,60 @@ const runDeleteProject = function (targetDiv){
   const projects = allProjects().getProjects()
   const deleteButtons = document.querySelectorAll('.deleteProject')
   deleteButtons.forEach((button) => {
-    button.onclick = function (e){      
-      const currentProject = e.target.parentElement.parentElement.parentElement
-      const currentProjectName = currentProject.querySelector('.newProjectName').textContent
-
+    button.onclick = function (e){    
+      
+      let currentProjectName = null
+      let targetDiv = null
+      console.log(e.target.parentElement.parentElement.className)
+     // console.log(e.target.parentElement.parentElement.querySelector('.spanElement').textContent)
+      if(e.target.parentElement.parentElement.classList == 'projectsBoxItems'){
+       
+        currentProjectName = e.target.parentElement.parentElement.querySelector('span').textContent
+        targetDiv = e.target.parentElement.parentElement
+      }else if(e.target.parentElement.parentElement.classList == 'projectContainer'){
+        currentProjectName = e.target.parentElement.parentElement.querySelector('.newProjectName').textContent
+        targetDiv = e.target.parentElement.parentElement
+        // console.log(e.target.parentElement.parentElement.querySelector('.nameProject').textContent)
+      }
+      const currentProject = document.body.querySelector('.projectContainer')
+      // console.log(currentProject)
+     // const currentProjectName = currentProject.querySelector('.newProjectName').textContent
+      // console.log(currentProject)
+      console.log(currentProjectName)
       for(let i = 0; i < projects.length; i++){
+        console.log(currentProjectName)
         if(projects[i]['project']){         
          if(projects[i]['project']['projectName'] == currentProjectName){
           const projectId = projects[i]['project ID']
           localStorage.removeItem(projectId)
+          currentProject.remove()
+          console.log(targetDiv)
+          targetDiv.remove()
+          if(targetDiv.classList == 'projectsBoxItems'){
+            currentProject.remove()
+            targetDiv.remove()
+             console.log('projectBoxItems')
+             console.log(e.target.parentElement.parentElement)
+          }else if(targetDiv.classList == 'projectContainer'){
+            console.log(e.target.parentElement.parentElement)
+            console.log('projectContainer')
+            if(document.querySelector('.projectsBoxItems span').textContent == currentProjectName){
+              console.log('check')  
+              document.querySelector('.projectsBoxItems').remove()
          }
+          }
+         // console.log(document.querySelector('.projectsBoxItems .nameProject').textContent)
+        //  if(document.querySelector('.projectsBoxItems .nameProject').textContent == `Project : ${currentProjectName}`){
+        //   console.log('check')  
+        //   document.querySelector('.projectsBoxItems').remove()
+        //  }
         }
-      } 
+        }
+      }       
       deleteProject(currentProjectName)
-      currentProject.remove()
-      updateDropDown(currentProjectName).removeProject()   
+      // currentProject.remove()
+      updateDropDown(currentProjectName).removeProject()
+      createProjectContainer().createNewProjectContainer()   
     }
   })
 }
@@ -2919,7 +2958,7 @@ function createCheckList(targetDiv, formDiv){
     // addCheckListFormButton.classList.add('addCheckListFormButton')
     // addCheckListFormButton.textContent = 'Add'
 
-    console.log('test')
+    // console.log('test')
     currentTaskDiv.querySelector('.currentTaskBox').appendChild(checkListContainer)
    // console.log(currentTaskDiv.querySelector('.currentTaskBox'))
 
@@ -3580,9 +3619,15 @@ function displayAllProjects (){
     let projectsBoxItems = document.createElement('div')
     projectsBoxItems.classList.add('projectsBoxItems')
 
+    let spanElement = document.createElement('span')
+    spanElement.classList.add('spanElement')
+    spanElement.textContent = projectName
+    
     let nameProject = document.createElement('p')
     nameProject.classList.add('nameProject')
-    nameProject.textContent = `Project : ${projectName}`
+    nameProject.textContent = 'Project :'
+
+
     // console.log( projects[i]['project']['todos'])
     // dateController(projectName)
     // console.log(formatDate().getDate())
@@ -3623,6 +3668,7 @@ function displayAllProjects (){
 
     projectsBox.appendChild(projectsBoxItems)
     projectsBoxItems.appendChild(nameProject)
+    nameProject.append(spanElement)
     projectsBoxItems.appendChild(dateCreatedContent)
     projectsBoxItems.appendChild(dueDateContent)
     // projectsBoxItems.appendChild(priorityContent)

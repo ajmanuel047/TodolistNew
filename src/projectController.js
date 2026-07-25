@@ -182,13 +182,13 @@ function dateController(currentProjectName, calenderValues, todo){
  }
 
  function deleteProject(currentProjectName){
-  console.log('delete')
+  // console.log('delete')
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
         projects.splice(i, 1)        
     }
   }
-  console.log(projects)
+  // console.log(projects)
  }
 
 function removeTaskFromArray(projectName, todo){
