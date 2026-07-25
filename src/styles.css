@@ -681,8 +681,14 @@ p.statusText {
 .checkListInputDiv {
     display: flex;
     gap: 5px;
-    margin-top: -15px;
+    /* margin-top: -15px; */
     /* margin-right: 10px; */
+}
+
+.checkItem {
+    /* background-color: blue; */
+    position: relative;
+    top: -2.3px;
 }
 
 .saveChecklist {
@@ -701,8 +707,8 @@ p.statusText {
 
 .checkDiv {
     /* margin-top: 10px; */
-    margin-left: -3px;
-    /* display: block; */
+    /* margin-left: -3px; */
+    display: block;
 }
 
 .checkDivAdjust {

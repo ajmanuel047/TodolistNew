@@ -260,7 +260,7 @@ function createTodoCheckList(currentProjectName, todo, checkInput){
             projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
             // console.log(projects)
           }else{
-            // console.log('yes')
+            console.log('yes')
             projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
             // console.log(projects)
           }
@@ -268,7 +268,7 @@ function createTodoCheckList(currentProjectName, todo, checkInput){
       }
     }
   }
-  console.log(projects)
+  // console.log(projects)
 }
 
 function updateCheckListStatus(currentProjectName, currentTodo, targetDiv){
