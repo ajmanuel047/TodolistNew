@@ -897,9 +897,10 @@ const runSaveChanges = function(){
         // console.log('it is checkList')
         createCheckList().saveCheckList(targetDiv)
         e.preventDefault()
-        // console.log('save checklist')
+        console.log('save checklist')
+        console.log(allProjects().getProjects())
       } else if (e.target.className == 'saveChanges'){
-       //  console.log('check 2')
+        console.log('check 2')
         //  console.log(userInput().getTaskNameInput())
          let todoInput = userInput().getTaskNameInput()
          let note = userInput().getNoteInput()
@@ -1481,10 +1482,10 @@ const runCheckListStatus = function(){
   const checkBoxes = document.querySelectorAll('.checkListItem')
   checkBoxes.forEach((checkBox) => {
     checkBox.onclick = function(e){
-      // console.log('checkBox')
+      console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement)
     const targetDiv = e.target.parentElement
     const formDiv = targetDiv.parentElement.parentElement.parentElement
-    const currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+    const currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
     const currentTodo = targetDiv.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
     // console.log(currentProjectName)
     // console.log(currentTodo)
@@ -3021,7 +3022,7 @@ function createCheckList(targetDiv, formDiv){
      
       //  console.log(targetButton)
       }
-          // console.log(projects)
+          // console.log(allProjects().getProjects())
   }
 
   function addCheckItem(targetButton){
