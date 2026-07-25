@@ -9,7 +9,7 @@ let projects = [
       {
         'project ID': 0,
         'project': {'projectName':'This Is A Sample Project', 'todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'checkList' : ['Sample Check Item 1', 'Sample Check Item 2']},
-              {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]}
+              {'title' : 'Sample Todo 2', 'Description' : 'Spend 30mins before leaving'}]}
    
     }
 ]
