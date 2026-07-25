@@ -154,9 +154,10 @@ function defaultProject(){
       // const projectContainer = document.createElement('div');
       // projectContainer.classList.add('projectContainer');
       // document.querySelector('.projectsBoxDiv').after(projectContainer);
-     
+      
       displayAllProjects()
       createProjectContainer().createNewProjectContainer()
+     // document.querySelector('.deleteProject').disabled = true
       // const newProjectContainer = document.createElement('div');
       // newProjectContainer.classList.add('newProjectContainer');
       // newProjectContainer.classList.add('defaultProject');
@@ -3614,6 +3615,8 @@ function displayAllProjects (){
   document.querySelector('.projectsBoxDiv').appendChild(projectsBox)
 
   for(let i = 0; i < projects.length; i++){  
+    // console.log(`${i} = ${projects}`)
+    // console.log(projects[i]['project ID'])
    // console.log(projects[projects.length - i - 1]['project']['projectName'])  
     let projectName = projects[projects.length - i - 1]['project']['projectName']
     let projectsBoxItems = document.createElement('div')
@@ -3677,7 +3680,10 @@ function displayAllProjects (){
     projectBoxButtonsDiv.appendChild(moreInfoButton)
     projectBoxButtonsDiv.appendChild(viewTasksButton)
     projectBoxButtonsDiv.appendChild(deleteProjectButton)
-  }
+   // document.querySelector('.projectsBoxDiv').firstChild.querySelector('.deleteProject').disabled = true
+    
+  } 
+    document.querySelector('.projectsBox').children[document.querySelector('.projectsBox').children.length - 1].querySelector('.deleteProject').disabled = true
 }
 
 function createProjectContainer(todo){
