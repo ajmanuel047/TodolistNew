@@ -450,6 +450,9 @@ function eventController(){
         })        
         if(!projectArray.includes(projectName)){
           // console.log('yes')
+            if(document.querySelector('.todoBoxContainer')){
+               document.querySelector('.todoBoxContainer').remove()
+            }
             inputFields.forEach((inputField) => {          
             if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender' && inputField.className !== 'checkListInput'){
               if(inputField.value !== ''){
@@ -460,12 +463,9 @@ function eventController(){
                     if(document.querySelector('.currentTaskBox')){
                       document.querySelector('.currentTaskBox').remove()
                     }
+                  
+                    console.log('check')
                     createProjectContainer().addTodoBox(undefined, e)
-                    if(document.querySelector('.newTodoBox')){
-                      document.querySelector('.newTodoBox').remove()
-                    }
-
-                    // console.log(projectName)
                     //   storeData(projectName).populateStorage()
                   //  console.log('running now')
                  if(document.querySelector('.projectContainer .newProjectName')){
@@ -474,10 +474,10 @@ function eventController(){
                     newProject(projectName, currentProjectName)
                     e.target.parentElement.querySelector('.projectNameInput').remove()
                     targetDiv = e.target.parentElement
-                    console.log(projectName)
+                  //  console.log(projectName)
                     submitTask(projectName, targetDiv)
                     createTask()       
-                    createProjectContainer().addTodoBox()           
+                    createProjectContainer().addTodoBox(undefined, e)           
                 } else {           
                     newProject(projectName, currentProjectName)
                     e.target.parentElement.querySelector('.projectNameInput').remove()
@@ -498,14 +498,14 @@ function eventController(){
                    })
                  }
                   else if(projectName && document.querySelector('.todoInput')){
-                 //   console.log(projectName)
-                   // console.log(allProjects().getProjects())
+                  //  console.log(projectName)
+                  // console.log(allProjects().getProjects())
                    let descriptionInput = e.target.parentElement.querySelector('.descriptionInput').value
                    let noteInput = e.target.parentElement.querySelector('.noteInput').value
                     // console.log(e.target.parentElement)
                     if(document.querySelector('.todoInput').value !== '' && descriptionInput !== '' && noteInput !== ''){
                         newProject(projectName, currentProjectName)
-                  //      console.log('test2')
+                    //    console.log('test2')
                     //   console.log(e.target.parentElement.querySelector('.descriptionInput'))
                       // console.log(e.target.parentElement.querySelector('.noteInput'))
                     //    console.log(e.target.parentElement.querySelector('.projectNameInput'))
@@ -513,7 +513,7 @@ function eventController(){
                         // const currentTaskBox = document.createElement('div')
                         // currentTaskBox.classList.add('currentTaskBox')
                         // document.querySelector('.currentTaskDiv').appendChild(currentTaskBox)
-                      //  console.log('did this run')
+                   //     console.log('did this run')
                         // console.log(document.querySelector('.currentTaskBox'))
                      // document.querySelector('.currentTaskBox').remove()
                      if(document.querySelector('.todoBox'))(
@@ -525,28 +525,37 @@ function eventController(){
                           console.log('check 2')
                         }
                         createProjectContainer().addTodoBox(todo[0], e)
-                        displayAllProjects()
+                        // displayAllProjects(todo[0])
+                        // console.log(todo[0])
+                        // const projectBoxItems = document.querySelectorAll('.projectsBoxItems')
+                        // console.log(projectBoxItems)
+                        // projectBoxItems.forEach((projectBox) => {
+                        //   if(todo[0]){
+                        //     console.log(this)
+                        //   //  projectBox.querySelector('.addMoreInfo').disabled = true
+                        //   }
+                        // })
                     }
                     else if(document.querySelector('.todoBoxContainer')){
                       document.querySelector('.todoBoxContainer').remove()
                        document.querySelector('.currentTaskBox').remove()
                       //  document.querySelector('.todoBox').remove()
-                      //  console.log('check')
+                        console.log('check')
                       //  if(document.querySelector('.newTodoBox')){
                       //   document.querySelector('.newTodoBox').remove()
                       //   console.log('check 2')
                       //  }
-                       
+                       console.log(e)
                       //  const currentTaskBox = document.createElement('div')
                       //  currentTaskBox.classList.add('currentTaskBox')
                       //  document.querySelector('.currentTaskDiv').appendChild(currentTaskBox)
-                       createProjectContainer().addTodoBox(todo[0])
-                       displayAllProjects()
+                       createProjectContainer().addTodoBox(todo[0], e)
+                       
                        console.log('this ran')
                     }
                     else{
                     //  createProjectContainer().addTodoBox(todo[0])
-                      displayAllProjects() 
+                      // displayAllProjects() 
                     }
    
                     e.target.parentElement.querySelector('.projectNameInput').remove()
@@ -577,7 +586,8 @@ function eventController(){
                       //  console.log(targetDiv)
                         createCheckList(targetDiv).createContainer()
                       // console.log(todo)
-                        // console.log(projectName)
+                      displayAllProjects()
+                       // console.log(e.target.parentElement)
                         storeData(projectName).populateStorage()
                        // console.log(allProjects().getProjects())
                       //  e.target.remove()
@@ -1394,7 +1404,7 @@ const runDeleteProject = function (targetDiv){
       
       let currentProjectName = null
       let targetDiv = null
-      console.log(e.target.parentElement.parentElement.className)
+    //  console.log(e.target.parentElement.parentElement.className)
      // console.log(e.target.parentElement.parentElement.querySelector('.spanElement').textContent)
       if(e.target.parentElement.parentElement.classList == 'projectsBoxItems'){
        
@@ -1409,7 +1419,7 @@ const runDeleteProject = function (targetDiv){
       // console.log(currentProject)
      // const currentProjectName = currentProject.querySelector('.newProjectName').textContent
       // console.log(currentProject)
-      console.log(currentProjectName)
+     // console.log(currentProjectName)
       for(let i = 0; i < projects.length; i++){
         console.log(currentProjectName)
         if(projects[i]['project']){         
@@ -1422,13 +1432,13 @@ const runDeleteProject = function (targetDiv){
           if(targetDiv.classList == 'projectsBoxItems'){
             currentProject.remove()
             targetDiv.remove()
-             console.log('projectBoxItems')
-             console.log(e.target.parentElement.parentElement)
+            //  console.log('projectBoxItems')
+            //  console.log(e.target.parentElement.parentElement)
           }else if(targetDiv.classList == 'projectContainer'){
-            console.log(e.target.parentElement.parentElement)
-            console.log('projectContainer')
+            // console.log(e.target.parentElement.parentElement)
+            // console.log('projectContainer')
             if(document.querySelector('.projectsBoxItems span').textContent == currentProjectName){
-              console.log('check')  
+             // console.log('check')  
               document.querySelector('.projectsBoxItems').remove()
          }
           }
@@ -1463,7 +1473,7 @@ const runAddTaskPriority = function(){
     button.onclick = function(e){
       addTaskPriority(e)
       // document.body.style.backgroundColor = 'blue'
-      console.log(allProjects().getProjects())
+     // console.log(allProjects().getProjects())
     }
   })
 }
@@ -3618,7 +3628,8 @@ function storeData (currentProjectName){
 
 // }
 
-function displayAllProjects (){
+function displayAllProjects (todo){
+  // console.log(todo)
   let projects = allProjects().getProjects()
  // console.log(projects)
   // document.body.style.backgroundColor = 'blue'
@@ -3626,10 +3637,11 @@ function displayAllProjects (){
   let projectsBox = document.createElement('div')
   projectsBox.classList.add('projectsBox')
   document.querySelector('.projectsBoxDiv').appendChild(projectsBox)
-
+// console.log(projects)
   for(let i = 0; i < projects.length; i++){  
+
     // console.log(`${i} = ${projects}`)
-    // console.log(projects[i]['project ID'])
+   // console.log(projects[i]['project'])
    // console.log(projects[projects.length - i - 1]['project']['projectName'])  
     let projectName = projects[projects.length - i - 1]['project']['projectName']
     let projectsBoxItems = document.createElement('div')
@@ -3691,13 +3703,19 @@ function displayAllProjects (){
     projectsBoxItems.appendChild(projectStatus)
     projectsBoxItems.appendChild(projectBoxButtonsDiv)
     projectBoxButtonsDiv.appendChild(moreInfoButton)
+
     projectBoxButtonsDiv.appendChild(viewTasksButton)
     projectBoxButtonsDiv.appendChild(deleteProjectButton)
    // document.querySelector('.projectsBoxDiv').firstChild.querySelector('.deleteProject').disabled = true
     
   } 
+  // if(todo){
+    
+  // }
     document.querySelector('.projectsBox').children[document.querySelector('.projectsBox').children.length - 1].querySelector('.deleteProject').disabled = true
+    document.querySelector('.projectsBox').children[document.querySelector('.projectsBox').children.length - 1].querySelector('.addMoreInfo').disabled = true
     eventController().runTodosForProjects()
+    disableMoreInfoButton()
 }
 
 function createProjectContainer(todo, e){
@@ -3820,6 +3838,7 @@ function createProjectContainer(todo, e){
 
   
   if(!document.querySelector('.todoBoxContainer')){    
+    // console.log('todoBoxContainer')
     const todoBoxContainer = document.createElement('div')
     todoBoxContainer.classList.add('todoBoxContainer')
     document.querySelector('.taskDiv').appendChild(todoBoxContainer)
@@ -3829,11 +3848,27 @@ function createProjectContainer(todo, e){
   todoBoxDiv.classList.add('todoBox')
   document.querySelector('.todoBoxContainer').appendChild(todoBoxDiv)
   // console.log(e)
+  // if(!e.target.className){
+  //   console.log('undefined')
+  // }
   if(e.target.className == 'viewTasks'){
     // console.log(e.target)
-    console.log(todos)
+    
     taskName.textContent = `Task Name : ${todos}`
     todoBoxDiv.appendChild(taskName)
+
+    taskPriority.textContent = `Task Priority : Not Specified`
+    todoBoxDiv.appendChild(taskPriority)
+
+    dateCreated.textContent =  `Date Created : ${formatDate().getDate()}`
+    todoBoxDiv.appendChild(dateCreated)
+
+    dueDate.textContent = `Due Date : Not Specified`
+    todoBoxDiv.appendChild(dueDate)
+
+    taskStatus.textContent = `Task Status : Not Completed`
+    todoBoxDiv.appendChild(taskStatus)
+ 
   }
   
   if(!todo && e.target.classList == 'submitProject'){
@@ -3890,29 +3925,103 @@ return {
 
 function todosForProjects(e){
   
-  if(document.querySelector('.todoBox')){
-    document.querySelector('.todoBox').remove()
-  }
+  // if(document.querySelector('.todoBox')){
+  //   document.querySelector('.todoBox').remove()
+  // }
+ document.querySelector('.projectContainer').remove()
+ createProjectContainer().createNewProjectContainer()
  let currentProjectName = e.target.parentElement.parentElement.querySelector('span').textContent
  let projects = allProjects().getProjects()
  
  
- console.log(projects) 
+//  console.log(projects) 
  for(let i = 0; i < projects.length; i++){
   if(projects[i]['project']['projectName'] == currentProjectName){
    for(let j = 0; j < projects[i]['project']['todos'].length; j++ ){
     let todo = projects[i]['project']['todos'][j]['title']
     createProjectContainer().addTodoBox(undefined, e, todo)
-   }
+  
+  }
   }  
+
  }
+
+    const newTodoBoxDiv = document.createElement('div')
+    newTodoBoxDiv.classList.add('todoBox')
+    newTodoBoxDiv.classList.add('newTodoBox')
+    
+    const createNewTodo = document.createElement('button');
+    createNewTodo.classList.add('createNewTodo');
+    createNewTodo.textContent = '+';
+    
+
+    if(!document.querySelector('.todoBoxContainer')){
+      const todoBoxContainer = document.createElement('div')
+      todoBoxContainer.classList.add('todoBoxContainer')
+      document.querySelector('.taskDiv').appendChild(todoBoxContainer)
+      document.querySelector('.todoBoxContainer').appendChild(newTodoBoxDiv)
+      newTodoBoxDiv.appendChild(createNewTodo)
+    } else {
+      document.querySelector('.todoBoxContainer').appendChild(newTodoBoxDiv)
+      newTodoBoxDiv.appendChild(createNewTodo)
+    }
+    // const createNewTodo = document.createElement('button');
+    // createNewTodo.classList.add('createNewTodo');
+    // createNewTodo.textContent = '+';
+    // newTodoBoxDiv.appendChild(createNewTodo)
+     eventController().runCreateTaskButton()
+    // const newTodoBoxDiv = document.createElement('div')
+    // newTodoBoxDiv.classList.add('todoBox')
+    // newTodoBoxDiv.classList.add('newTodoBox')
+
+    // const todoBoxContainer = document.querySelector('.todoBoxContainer')
+    // todoBoxContainer.classList.add('todoBoxContainer')
+    // todoBoxContainer.appendChild(newTodoBoxDiv)
+
+    // const createNewTodo = document.createElement('button');
+    // createNewTodo.classList.add('createNewTodo');
+    // createNewTodo.textContent = '+';
+    // newTodoBoxDiv.appendChild(createNewTodo)
+
+    
+    // console.log(newTodoBoxDiv)
+    console.log(allProjects().getProjects())
 }
 // createProjectContainer()
-/* bug to fix later. Ensure just one save for edit task is
-active at a time. When one is active you should not be able 
-to save another
-*/
 
+function disableMoreInfoButton(){
+ // console.log('buttons')
+ let projectBoxItems = document.querySelectorAll('.projectsBoxItems')
+ let projects = allProjects().getProjects()
+
+ projectBoxItems.forEach((box) => {
+  // console.log(box.querySelector('span').textContent)
+   for(let i = 0; i < projects.length; i++){
+    if(projects[i]['project']['projectName'] == box.querySelector('span').textContent){
+     // console.log(projects[i]['project']['todos'].length)
+      if(projects[i]['project']['todos'].length > 0){
+        box.querySelector('.addMoreInfo').disabled = true
+      }
+    }
+   }
+ })
+//  for(let i = 0; i < projects.length; i++){
+//   console.log(projects[i]['project']['projectName'])
+//   console.log(projectBoxItems[1])
+//   if(projects[i]['project']['projectName'] == projectBoxItems[i].querySelector('span').textContent){
+//     if(projects[i]['project']['todos'].length !== 0){
+//       console.log(projectBoxItems[i].querySelector('.projectBoxButtonsDiv'))
+//     }else if(projects[i]['project']['todos'].length == 0){
+//       console.log(projectBoxItems[i].querySelector('.projectBoxButtonsDiv'))
+//     }
+//   }
+//  }
+}
+
+
+// fix ----
+// 1. error message so a project will not be written twice
+// change due date in all projects boxes to number of todos or number of tasks
 
 
 
