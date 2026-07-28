@@ -3852,8 +3852,8 @@ function createProjectContainer(todo, e){
   //   console.log('undefined')
   // }
   if(e.target.className == 'viewTasks'){
-    // console.log(e.target)
-    
+   // console.log(e.target.parentElement.parentElement.querySelector('span').textContent)
+
     taskName.textContent = `Task Name : ${todos}`
     todoBoxDiv.appendChild(taskName)
 
@@ -3943,9 +3943,27 @@ function todosForProjects(e){
   
   }
   }  
-
  }
 
+    const projectName = document.createElement('h2')
+    projectName.classList.add('newProjectName')
+    projectName.textContent = e.target.parentElement.parentElement.querySelector('span').textContent
+    document.querySelector('.projectContainer').querySelector('.todoDiv').before(projectName)
+
+    const titleContainerButtonsDiv = document.createElement('div')
+    titleContainerButtonsDiv.classList.add('titleContainerButtonsDiv')
+    document.querySelector('.projectContainer').querySelector('.todoDiv').before(titleContainerButtonsDiv)
+    
+    const editProjectName = document.createElement('button')
+    editProjectName.classList.add('editProjectName')
+    editProjectName.textContent = 'Edit'
+    titleContainerButtonsDiv.appendChild(editProjectName)
+
+    const deleteProject = document.createElement('button')
+    deleteProject.classList.add('deleteProject')
+    deleteProject.textContent = 'Delete Project'
+    titleContainerButtonsDiv.appendChild(deleteProject)
+    
     const newTodoBoxDiv = document.createElement('div')
     newTodoBoxDiv.classList.add('todoBox')
     newTodoBoxDiv.classList.add('newTodoBox')
