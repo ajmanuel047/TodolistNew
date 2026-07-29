@@ -744,9 +744,11 @@ const runEditButton = function(){
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 2000)
-        //  console.log(previousValue)
-        //  console.log(currentProjectName.textContent)
+         console.log(previousValue)
+         console.log(currentProjectName.textContent)
+         console.log(allProjects().getProjects())
          editProject(previousValue, currentProjectName.textContent)
+         console.log(allProjects().getProjects())
          for(let i = 0; i < projects.length; i++){
           // console.log(projects)
              if(projects[i]['project']['projectName'] == currentProjectName.textContent){
@@ -754,6 +756,8 @@ const runEditButton = function(){
              }
          }
          console.log('check')
+        //  console.log(allProjects().getProjects())
+         displayAllProjects()
          storeData(currentProjectName.textContent).editStorage()
          localStorage.removeItem(previousValue)
       }
@@ -1401,7 +1405,7 @@ const runDeleteProject = function (targetDiv){
   const deleteButtons = document.querySelectorAll('.deleteProject')
   deleteButtons.forEach((button) => {
     button.onclick = function (e){    
-      
+      document.body.style.backgroundColor = 'skyblue'
       let currentProjectName = null
       let targetDiv = null
     //  console.log(e.target.parentElement.parentElement.className)
@@ -3641,7 +3645,7 @@ function displayAllProjects (todo){
   for(let i = 0; i < projects.length; i++){  
 
     // console.log(`${i} = ${projects}`)
-   // console.log(projects[i]['project'])
+  //  console.log(projects[i]['project'])
    // console.log(projects[projects.length - i - 1]['project']['projectName'])  
     let projectName = projects[projects.length - i - 1]['project']['projectName']
     let projectsBoxItems = document.createElement('div')
@@ -3715,7 +3719,8 @@ function displayAllProjects (todo){
     document.querySelector('.projectsBox').children[document.querySelector('.projectsBox').children.length - 1].querySelector('.deleteProject').disabled = true
     document.querySelector('.projectsBox').children[document.querySelector('.projectsBox').children.length - 1].querySelector('.addMoreInfo').disabled = true
     eventController().runTodosForProjects()
-    disableMoreInfoButton()
+    eventController().runDeleteProject()
+    disableButton()
 }
 
 function createProjectContainer(todo, e){
@@ -3853,7 +3858,7 @@ function createProjectContainer(todo, e){
   // }
   if(e.target.className == 'viewTasks'){
    // console.log(e.target.parentElement.parentElement.querySelector('span').textContent)
-
+    // console.log('viewtasks')
     taskName.textContent = `Task Name : ${todos}`
     todoBoxDiv.appendChild(taskName)
 
@@ -3868,7 +3873,7 @@ function createProjectContainer(todo, e){
 
     taskStatus.textContent = `Task Status : Not Completed`
     todoBoxDiv.appendChild(taskStatus)
- 
+    
   }
   
   if(!todo && e.target.classList == 'submitProject'){
@@ -3924,7 +3929,7 @@ return {
 }
 
 function todosForProjects(e){
-  
+  // console.log(e.target.parentElement.parentElement)
   // if(document.querySelector('.todoBox')){
   //   document.querySelector('.todoBox').remove()
   // }
@@ -3934,7 +3939,7 @@ function todosForProjects(e){
  let projects = allProjects().getProjects()
  
  
-//  console.log(projects) 
+//  console.log(e.target) 
  for(let i = 0; i < projects.length; i++){
   if(projects[i]['project']['projectName'] == currentProjectName){
    for(let j = 0; j < projects[i]['project']['todos'].length; j++ ){
@@ -3988,6 +3993,10 @@ function todosForProjects(e){
     // createNewTodo.textContent = '+';
     // newTodoBoxDiv.appendChild(createNewTodo)
      eventController().runCreateTaskButton()
+     eventController().runEditButton()
+     eventController().runDeleteProject()
+     disableDeleteButton(e)
+    //  console.log('edit Todo')
     // const newTodoBoxDiv = document.createElement('div')
     // newTodoBoxDiv.classList.add('todoBox')
     // newTodoBoxDiv.classList.add('newTodoBox')
@@ -4003,11 +4012,11 @@ function todosForProjects(e){
 
     
     // console.log(newTodoBoxDiv)
-    console.log(allProjects().getProjects())
+    // console.log(allProjects().getProjects())
 }
 // createProjectContainer()
 
-function disableMoreInfoButton(){
+function disableButton(){
  // console.log('buttons')
  let projectBoxItems = document.querySelectorAll('.projectsBoxItems')
  let projects = allProjects().getProjects()
@@ -4015,27 +4024,27 @@ function disableMoreInfoButton(){
  projectBoxItems.forEach((box) => {
   // console.log(box.querySelector('span').textContent)
    for(let i = 0; i < projects.length; i++){
+    // console.log(projects[i])
+    // console.log(i)
     if(projects[i]['project']['projectName'] == box.querySelector('span').textContent){
      // console.log(projects[i]['project']['todos'].length)
       if(projects[i]['project']['todos'].length > 0){
         box.querySelector('.addMoreInfo').disabled = true
       }
+      
     }
    }
  })
-//  for(let i = 0; i < projects.length; i++){
-//   console.log(projects[i]['project']['projectName'])
-//   console.log(projectBoxItems[1])
-//   if(projects[i]['project']['projectName'] == projectBoxItems[i].querySelector('span').textContent){
-//     if(projects[i]['project']['todos'].length !== 0){
-//       console.log(projectBoxItems[i].querySelector('.projectBoxButtonsDiv'))
-//     }else if(projects[i]['project']['todos'].length == 0){
-//       console.log(projectBoxItems[i].querySelector('.projectBoxButtonsDiv'))
-//     }
-//   }
-//  }
 }
 
+function disableDeleteButton(e){
+
+ const projectContainerDeleteButton = document.querySelector('.projectContainer .deleteProject')
+  if(e.target.parentElement.parentElement.querySelector('span').textContent == 'This Is A Sample Project')
+{
+projectContainerDeleteButton.disabled = true
+}
+}
 
 // fix ----
 // 1. error message so a project will not be written twice

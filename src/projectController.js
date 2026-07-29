@@ -60,13 +60,16 @@ function createNewProjects(value){
 }
 
 function editProject(value1, value2){
+  // console.log(value1)
+  // console.log(value2)
  for(let i = 0; i < projects.length; i++){
    if(projects[i]['project']['projectName'] == value1){
         // console.log('else ran')
     projects[i]['project']['projectName'] = value2
-    projects.splice(i + 1, 1)
+    // projects.splice(i + 1, 1)
    }
  }
+ console.log(projects)
 }
 
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
