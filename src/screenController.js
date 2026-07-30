@@ -464,7 +464,7 @@ function eventController(){
                       document.querySelector('.currentTaskBox').remove()
                     }
                   
-                    console.log('check')
+                    // console.log('check')
                     createProjectContainer().addTodoBox(undefined, e)
                     //   storeData(projectName).populateStorage()
                   //  console.log('running now')
@@ -655,6 +655,7 @@ function eventController(){
         runAddTaskPriority()
         runAddTaskStatus()
         runCreateCheckList()
+        runAddMoreInfoButton()
       })      
   }
 runCreateTaskButton()
@@ -998,6 +999,9 @@ const runSaveChanges = function(){
           runEditDescription()
           runEditNote()
           runCreateCheckList()
+          disableButton()
+          displayAllProjects()
+          runAddMoreInfoButton()
         //  storeData(e.target.parentElement.querySelector('.newProjectName').textContent).editStorage()
           e.target.remove()
           // console.log(document.querySelector('.currentTaskBox .todo'))
@@ -1067,36 +1071,7 @@ const runSaveChanges = function(){
           addDate(targetDiv).getCreateButton()
           // console.log(allProjects().getProjects())
           runCalenderButton()
-           const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')
-          //  todoDivContent.forEach((container) => {
-           
-          //   if(!container.querySelector('.currentDate')){
-          //     // console.log(container.parentElement.parentElement)
-          //     // console.log(currentProjectName)
-          //     // console.log(currentTodo)
-          //  //   console.log(container.parentElement.parentElement)
-          //     createDate(container.parentElement.parentElement).getDateDiv()
-          //     createDate(container, currentProjectName, currentTodo).getDateProjectWasCreated()
-          //     // console.log(targetDiv)
-          //     addDate(container.parentElement.parentElement).getCreateButton()
-          //     // console.log(allProjects().getProjects())
-          //     runCalenderButton()
-          //     // eventController().runCreateCheckList()
-          //     // runAddCheckItem()
-          //   //  console.log(container.parentElement.parentElement)
-          //     // container.parentElement.querySelector('.descriptionInput').remove()
-
-          //     createCheckList(container.parentElement.parentElement).createContainer()
-          //     eventController().runCreateCheckList()
-          //     container.parentElement.querySelector('.noteInput').remove()
-          //     container.parentElement.querySelector('.todoInput').remove()
-          //     // console.log(allProjects().getProjects())
-          //     // console.log(container.parentElement.parentElement)
-          //  //   storeData(container.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
-          //     // console.log('check')
-          //   }
-             
-          //  })
+           const todoDivContent = targetDiv.querySelectorAll('.todoDivContent')  
          }
          else {
           todoAlreadyExistMessage(this)
@@ -1105,6 +1080,9 @@ const runSaveChanges = function(){
       }
        })      
     }
+    // disableButton()
+    // displayAllProjects()
+    // console.log('disable')
     // console.log(allProjects().getProjects())
 }
 
@@ -1389,14 +1367,20 @@ const runSaveDueDate = function(){
 }
 
 const runAddMoreInfoButton = function (){
-  const moreInfoButton = document.querySelector('.addMoreInfo')
-  moreInfoButton.onclick = function(e){
-    let currentDiv = e.target.parentElement
-    addMoreInfo(currentDiv)
+  const moreInfoButtons = document.querySelectorAll('.addMoreInfo')
+  moreInfoButtons.forEach((moreInfoButton) => {
+    moreInfoButton.onclick = function(e){
+    document.body.style.backgroundColor = 'purple'
+    
+    let currentDiv = e.target.parentElement.parentElement
+    // console.log(currentDiv)
+    // console.log(e.target)
+    addMoreInfo(currentDiv, e)
     
     eventController().runSaveChanges()
     // console.log('check 1')
   }
+  })
   
 }
 
@@ -2047,6 +2031,17 @@ function createTask(currentProjectName, newProjectNameDiv){
         this.remove()
     }
 
+    if(document.querySelector('.iconDiv')){
+  document.querySelector('.iconDiv').style.backgroundColor = 'white'
+       document.querySelector('.iconDiv').style.display = 'none'
+       document.querySelector('.iconDiv').remove()
+     
+    } 
+    // else{
+    //   document.querySelector('.icon').style.display = 'none'
+    //   document.querySelector('.icon').remove()
+    // }
+
         // createDate(targetDiv).getDateDiv()
     //} 
   //   else{
@@ -2593,23 +2588,87 @@ function submitTodo (targetButton) {
       }
  }
 
- function addMoreInfo (currentDiv) {
+ function addMoreInfo (currentDiv, e) {
+   const todoBoxContainer = document.querySelector('.todoBoxContainer').lastChild
+  //  console.log('moreInfo')
+  //  console.log(e.target.parentElement.parentElement.querySelector('span').textContent)
+   todosForProjects(e)
+   todoBoxContainer.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
+
+    const iconDiv = document.querySelector('.iconDiv')
+    console.log(iconDiv)
+    const icon = document.createElement('p')
+    icon.classList.add('icon')
+    icon.textContent = 'Add Below'    
+      
+
+    if(!todoBoxContainer.querySelector('.todoDivContent')){
+      console.log('it is rni')
+      // todoBoxContainer.appendChild(iconDiv)
+      iconDiv.appendChild(icon)
+
+    setTimeout(() => {
+     icon.remove()
+    }, 800)
+
+    setTimeout(() => {
+     iconDiv.appendChild(icon)
+    }, 1400)
+
+    setTimeout(() => {
+     icon.remove()
+    }, 2200)
+
+    setTimeout(() => {
+     iconDiv.appendChild(icon)
+    }, 2800)
+
+    setTimeout(() => {
+     icon.remove()
+    }, 3700)
+
+    setTimeout(() => {
+     iconDiv.appendChild(icon)
+    }, 4300)
+
+    setTimeout(() => {
+     icon.remove()
+    }, 5200)
+
+        setTimeout(() => {
+     iconDiv.appendChild(icon)
+    }, 5800)
+
+    setTimeout(() => {
+     icon.remove()
+    }, 6700)
+    } 
+    // else if(todoBoxContainer.querySelector('.todoDivContent')){
+    //   if(todoBoxContainer.querySelector('.icon')){
+    //     todoBoxContainer.querySelector('.icon').remove()
+    //   }
+    // }
+    
 // console.log(currentDiv.parentElement)
-  createTodoDescription(currentDiv.parentElement)
-  createTodoNote(currentDiv.parentElement.parentElement)
+// currentDiv.style.display = 
+  // createTodoDescription(currentDiv.parentElement)
+  // createTodoNote(currentDiv.parentElement.parentElement)
 
-  currentDiv.parentElement.querySelector('.todo').style.marginBottom = '15px'
+  // currentDiv.parentElement.querySelector('.todo').style.marginBottom = '15px'
 
-  createDate(currentDiv.parentElement.parentElement).getDateDiv()
-  const saveButton = document.createElement('button');
-  saveButton.textContent = 'Submit Changes'  
-  saveButton.classList.add('saveNewChanges')          
-  currentDiv.parentElement.querySelector('.lineBreak').before(saveButton)
+  // createDate(currentDiv.parentElement.parentElement).getDateDiv()
+  // const saveButton = document.createElement('button');
+  // saveButton.textContent = 'Submit Changes'  
+  // saveButton.classList.add('saveNewChanges')          
+  // currentDiv.parentElement.querySelector('.lineBreak').before(saveButton)
   
-  currentDiv.parentElement.querySelector('.editTodoButton').remove()
-  currentDiv.parentElement.querySelector('.addMoreInfo').remove()
-  // console.log('check 4')
-  eventController().saveTodoChangesAddedFromHeader()
+  // currentDiv.parentElement.querySelector('.editTodoButton').remove()
+  // currentDiv.parentElement.querySelector('.addMoreInfo').remove()
+  // // console.log('check 4')
+  // eventController().saveTodoChangesAddedFromHeader()
  }
 
 function createDate(targetDiv, projectName, todo){
@@ -3856,9 +3915,10 @@ function createProjectContainer(todo, e){
   // if(!e.target.className){
   //   console.log('undefined')
   // }
+  // console.log(e.target)
   if(e.target.className == 'viewTasks'){
    // console.log(e.target.parentElement.parentElement.querySelector('span').textContent)
-    // console.log('viewtasks')
+    console.log('viewtasks')
     taskName.textContent = `Task Name : ${todos}`
     todoBoxDiv.appendChild(taskName)
 
@@ -3888,7 +3948,7 @@ function createProjectContainer(todo, e){
   }
   else if(todo && e.target.classList !== 'viewTasks'){
     // console.log('yes there is todo')
-    // console.log(e.target)
+    //  console.log(e.target)
     taskName.textContent = `Task Name : ${todo}`
     todoBoxDiv.appendChild(taskName)
  
@@ -3929,21 +3989,23 @@ return {
 }
 
 function todosForProjects(e){
-  // console.log(e.target.parentElement.parentElement)
+  //  console.log(e.target.parentElement.parentElement.querySelector('span').textContent)
   // if(document.querySelector('.todoBox')){
   //   document.querySelector('.todoBox').remove()
   // }
  document.querySelector('.projectContainer').remove()
  createProjectContainer().createNewProjectContainer()
+ console.log(document.querySelector('.projectContainer'))
  let currentProjectName = e.target.parentElement.parentElement.querySelector('span').textContent
  let projects = allProjects().getProjects()
- 
+
  
 //  console.log(e.target) 
  for(let i = 0; i < projects.length; i++){
   if(projects[i]['project']['projectName'] == currentProjectName){
    for(let j = 0; j < projects[i]['project']['todos'].length; j++ ){
     let todo = projects[i]['project']['todos'][j]['title']
+    console.log(todo)
     createProjectContainer().addTodoBox(undefined, e, todo)
   
   }
@@ -3988,6 +4050,14 @@ function todosForProjects(e){
       document.querySelector('.todoBoxContainer').appendChild(newTodoBoxDiv)
       newTodoBoxDiv.appendChild(createNewTodo)
     }
+
+    const todoBoxContainer = document.querySelector('.todoBoxContainer').lastChild
+    
+    const iconDiv = document.createElement('div')
+    iconDiv.classList.add('iconDiv') 
+    todoBoxContainer.appendChild(iconDiv)
+    console.log(document.querySelector('.iconDiv'))
+
     // const createNewTodo = document.createElement('button');
     // createNewTodo.classList.add('createNewTodo');
     // createNewTodo.textContent = '+';
