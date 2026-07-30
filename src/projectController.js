@@ -7,9 +7,9 @@ import { projectImportance } from "./projectPriority"
 
 let projects = [
       {
-        'project ID': 0,
-        'project': {'projectName':'This Is A Sample Project', 'todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Sample Check Item 1', 'Sample Check Item 2']},
-              {'title' : 'Sample Todo 2', 'Description' : 'Spend 30mins before leaving', 'taskStatus' : 'Completed'}]}
+        'project ID': 0,        
+        'project': {'projectName':'This Is A Sample Project', 'project status': 'Complete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Complete']},
+              {'title' : 'Sample Todo 2', 'Description' : 'Spend 30mins before leaving', 'taskStatus' : 'Completed', 'checkList' : ['Complete']}]}
    
     }
 ]
@@ -54,7 +54,8 @@ function createNewProjects(value){
   projects.push(newProject)    
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == null){             
-      projects[i]['project']['projectName'] = value       
+      projects[i]['project']['projectName'] = value   
+      projects[i]['project']['Project Status'] = 'Incomplete'   
     }
   }   
 }
