@@ -78,6 +78,7 @@ body {
     background-color: orange;
     display: flex;
     gap: 10px;
+    /* margin-bottom: 60px; */
 }
 
 .projectsBoxDiv {
@@ -87,7 +88,7 @@ body {
 
 .projectsBoxItems {
     background-color: rgb(230, 63, 63);
-    width: 290px;
+    width: 380px;
     height: 250px;
     
 }
@@ -115,7 +116,7 @@ span {
     /* background-color: orange; */
 }
 
-.projectBoxButtonsDiv .addMoreInfo,  .projectBoxButtonsDiv .viewTasks, .projectBoxButtonsDiv .deleteProject{
+.projectBoxButtonsDiv .addMoreInfo,  .projectBoxButtonsDiv .viewTasks, .projectBoxButtonsDiv .deleteProject, .projectBoxButtonsDiv .projectStatusButton{
     font-size: 0.85rem;
 }
 
@@ -335,6 +336,10 @@ h3 {
     position: relative;
     bottom: 2px;
     /* background-color: blue; */
+}
+
+.projectContainer {
+    margin-top: 100px;
 }
 
 .projectContainer .todoDiv {
