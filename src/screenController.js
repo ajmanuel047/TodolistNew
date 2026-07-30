@@ -17,6 +17,7 @@ import { createTodoCheckList } from "./projectController";
 import { updateCheckListStatus } from "./projectController";
 import { updateTodoStatus } from "./projectController";
 import { createProject } from "./createNewProject.js";
+import { updateProjectStatus } from "./projectController";
 
 
 document.addEventListener('keydown', function(e){
@@ -4162,61 +4163,86 @@ function addProjectStatus(e){
   
   function projectStatus(){     
     if(!checkTaskStatus().includes('Not Completed') && checkTaskStatus().length !== 0){
-      e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Complete`
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Complete'
+    //  e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Tasks Not Yet Completed`
+      let status = 'Completed'
+      updateProjectStatus(projectName, status)
+      console.log(allProjects().getProjects())
     } else if(checkTaskStatus().length == 0){
-      e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : No Tasks In Project`
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'No Tasks In Project'
       setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Please Add Tasks To Project`
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Please Add Tasks To Project'
       }, 3000) 
       setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Or Project Will Be Assumed To Be Completed`
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Or Project Will Be Assumed To Be Completed'
       }, 7000) 
       setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Complete`
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Complete'
+     // e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Tasks Not Yet Completed`
+      let status = 'Completed'
+      updateProjectStatus(projectName, status)
+      console.log(allProjects().getProjects())
       }, 13000) 
     }
     else {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Tasks Not Yet Completed`
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Tasks Not Yet Completed'
+      let status = 'Not Completed'
+      updateProjectStatus(projectName, status)
+      console.log(allProjects().getProjects())
     }
-    console.log(checkListCheck())
-    console.log(checkTaskStatus())
-    console.log(checkTaskStatus().includes('Not Completed'))
+    // console.log(checkListCheck())
+    // console.log(checkTaskStatus())
+    // console.log(checkTaskStatus().includes('Not Completed'))
     if(!checkTaskStatus().includes('Not Completed') && checkTaskStatus().length !== 0 && checkListCheck().includes('Incomplete')){      
-      e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : CheckList Not Completed`
-      if(e.target.parentElement.parentElement.querySelector('.projectStatus').textContent == `Project Status : CheckList Not Completed`){
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'CheckList Not Completed'
+      if(e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent == `CheckList Not Completed`){
+         // e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Tasks Not Yet Completed`
+          let status = 'Not Completed'
+          updateProjectStatus(projectName, status)
+          console.log(allProjects().getProjects())
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'orange'
-      }) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          }) 
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
-      }, 500) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          }, 500) 
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'orange'
-      }, 1000) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          }, 1000) 
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
-      }, 1500) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          }, 1500) 
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'orange'
-      }, 2000) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          }, 2000) 
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
-      }, 2500) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          }, 2500) 
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'orange'
-      }, 3000) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          }, 3000) 
 
-      setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.projectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
-      }, 3500) 
+          setTimeout(() => {
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          }, 3500) 
       }
+    }
+
+    if(!checkTaskStatus().includes('Not Completed') && !checkListCheck().includes('Incomplete')){
+      // console.log('Everything Soft')
+      // console.log(checkTaskStatus())
+      // console.log(checkListCheck())
+      // console.log(allProjects().getProjects())
+      let status = 'Completed'
+      updateProjectStatus(projectName, status)
+      console.log(allProjects().getProjects())
     }
     // else{
     //   console.log('Complete')

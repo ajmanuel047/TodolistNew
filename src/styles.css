@@ -106,11 +106,15 @@ body {
 }
 
 .projectStatus {
-    width: 302px;
+    width: 355px;
+    /* background-color: orange; */
 }
 
-span {
-    margin-left: 5px;
+.spanProjectStatus {
+    margin-left: 4px;
+    /* height: 40px; */
+    padding: 4px;
+    /* background-color: orange; */
 }
 
 .projectBoxButtonsDiv {

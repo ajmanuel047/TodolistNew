@@ -8,7 +8,7 @@ import { projectImportance } from "./projectPriority"
 let projects = [
       {
         'project ID': 0,        
-        'project': {'projectName':'This Is A Sample Project', 'project status': 'Complete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Complete']},
+        'project': {'projectName':'This Is A Sample Project', 'project status': 'Not Complete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Complete']},
               {'title' : 'Sample Todo 2', 'Description' : 'Spend 30mins before leaving', 'taskStatus' : 'Completed', 'checkList' : ['Complete']}]}
    
     }
@@ -230,6 +230,15 @@ function projectPriorityController(currentProjectName, todo){
   }
 }
 
+function updateProjectStatus(projectName, status){
+  console.log(projectName)
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['project']['projectName'] == projectName){
+      projects[i]['project']['project status'] = status
+    }
+  }
+}
+
 function updateTodoStatus(currentProjectName, todo){  
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
@@ -326,6 +335,7 @@ export {
         projectPriorityController, 
         createTodoCheckList,
         updateCheckListStatus,
+        updateProjectStatus,
         updateTodoStatus
       }
 
