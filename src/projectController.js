@@ -55,7 +55,7 @@ function createNewProjects(value){
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == null){             
       projects[i]['project']['projectName'] = value   
-      projects[i]['project']['Project Status'] = 'Incomplete'   
+      // projects[i]['project']['Project Status'] = 'Incomplete'   
     }
   }   
 }
@@ -231,7 +231,7 @@ function projectPriorityController(currentProjectName, todo){
 }
 
 function updateProjectStatus(projectName, status){
-  console.log(projectName)
+  // console.log(projectName)
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == projectName){
       projects[i]['project']['project status'] = status
@@ -246,7 +246,7 @@ function updateTodoStatus(currentProjectName, todo){
         if(projects[i]['project']['todos'][j]['title'] == todo){          
           if(!projects[i]['project']['todos'][j]['taskStatus']){
             projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-            console.log('completed')
+          //  console.log('completed')
           }else if(projects[i]['project']['todos'][j]['taskStatus'] && projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
             projects[i]['project']['todos'][j]['taskStatus'] = 'Incomplete'
             console.log('Incomplete')
@@ -258,7 +258,7 @@ function updateTodoStatus(currentProjectName, todo){
       }
     }
   }
-  console.log(projects)
+  // console.log(projects)
 }
 
 function createTodoCheckList(currentProjectName, todo, checkInput){
