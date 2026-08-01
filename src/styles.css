@@ -93,6 +93,19 @@ body {
     
 }
 
+.displayTextDiv {
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.displayText {
+    font-size: 3rem;
+    justify-self: center;
+}
+
 .viewTasks:hover {
     cursor: pointer;
     background-color: rgb(247, 199, 199);
