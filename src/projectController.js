@@ -8,8 +8,8 @@ import { projectImportance } from "./projectPriority"
 let projects = [
       {
         'project ID': 0,        
-        'project': {'projectName':'This Is A Sample Project', 'project status': 'Not Complete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `Created ${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Complete']},
-              {'title' : 'Sample Todo 2', 'Description' : 'Spend 30mins before leaving', 'taskStatus' : 'Completed', 'checkList' : ['Complete']}]}
+        'project': {'projectName':'This Is A Sample Project', 'project status': 'Not Complete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Complete']},
+              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Not Completed', 'checkList' : ['Complete']}]}
    
     }
 ]
