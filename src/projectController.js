@@ -8,8 +8,8 @@ import { projectImportance } from "./projectPriority"
 let projects = [
       {
         'project ID': 0,        
-        'project': {'projectName':'This Is A Sample Project', 'project status': 'Not Complete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Complete']},
-              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Not Completed', 'checkList' : ['Complete']}]}
+        'project': {'projectName':'This Is A Sample Project', 'project status': 'Not Completed','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Completed']},
+              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Not Completed', 'checkList' : ['Completed']}]}
    
     }
 ]
@@ -248,9 +248,9 @@ function updateTodoStatus(currentProjectName, todo){
             projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
           //  console.log('completed')
           }else if(projects[i]['project']['todos'][j]['taskStatus'] && projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
-            projects[i]['project']['todos'][j]['taskStatus'] = 'Incomplete'
+            projects[i]['project']['todos'][j]['taskStatus'] = 'Not completed'
             console.log('Incomplete')
-          }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Incomplete'){
+          }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Not complete'){
             projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
             console.log('completed again')
           }

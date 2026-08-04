@@ -158,7 +158,8 @@ function defaultProject(){
       
       displayAllProjects(null)
       createProjectContainer().createNewProjectContainer()
-     // document.querySelector('.deleteProject').disabled = true
+     displayFirstProjectTodo()
+      // document.querySelector('.deleteProject').disabled = true
       // const newProjectContainer = document.createElement('div');
       // newProjectContainer.classList.add('newProjectContainer');
       // newProjectContainer.classList.add('defaultProject');
@@ -2536,9 +2537,9 @@ function submitTodo (targetButton) {
                 taskButtonsDiv.appendChild(editTodoButton)
                 taskButtonsDiv.appendChild(moreInfoButton)
 
-                const lineBreak = document.createElement('hr')
-                lineBreak.classList.add('lineBreak')
-                targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
+                // const lineBreak = document.createElement('hr')
+                // lineBreak.classList.add('lineBreak')
+                // targetDiv.querySelector('.todoDiv').lastChild.appendChild(lineBreak)
                 // console.log('checking')
                 // console.log(targetButton.parentElement)
               //  console.log(targetDiv)
@@ -2678,7 +2679,9 @@ function createDate(targetDiv, projectName, todo){
   }
 
  function dateProjectWasCreated(){
-
+      console.log(projectName)
+      console.log(todo)
+      // console.log(projectName)
       const currentDate = document.createElement('p')
       currentDate.classList.add('currentDate')
       let calenderValues;
@@ -3657,8 +3660,9 @@ function displayAllProjects (e){
   projectsBox.classList.add('projectsBox')
   document.querySelector('.projectsBoxDiv').appendChild(projectsBox)
 // console.log(projects)
+  let projectStatus = []
   for(let i = projects.length - 1; i >= 0; i--){  
-
+    projectStatus.push(projects[i]['project']['project status'])
     // console.log(`${i} = ${projects}`)
   //  console.log(projects[i]['project'])
    // console.log(projects[projects.length - i - 1]['project']['projectName'])  
@@ -3718,14 +3722,51 @@ function displayAllProjects (e){
           let currentProjectName = projects[i]['project']['projectName']
           let dateCreated = formatDate().getDate()
           addElements(currentProjectName, dateCreated)
+          console.log('allProjects')
         }else if(e.target.className == 'completedProjects'){              
+          //  console.log(projectStatus)
           if(projects[i]['project']['project status'] == 'Completed'){  
           let currentProjectName = projects[i]['project']['projectName']
-          let dateCreated = formatDate().getDate()                 
-          addElements(currentProjectName, dateCreated, projects[i]['project']['project status'])
-          }else{            
-            addElements(undefined)
-          }
+          let dateCreated = formatDate().getDate() 
+          if(document.querySelector('.projectContainer .newProjectName')){
+              document.querySelector('.projectContainer .newProjectName').remove()
+              document.querySelector('.projectContainer .titleContainerButtonsDiv').remove()
+              document.querySelector('.projectContainer .todoBoxContainer').remove()
+              document.querySelector('.projectContainer .todo').remove()
+              document.querySelector('.projectContainer .currentTaskBox').remove()
+              // displayFirstProjectTodo()
+              console.log('checkkk')
+              // console.log(projects[i])
+              addElements(currentProjectName, dateCreated, projects[i]['project']['project status'])
+              displayFirstProjectTodo()
+          }            
+        }else if(!projectStatus.includes('Completed')){
+          console.log('che') 
+           if(document.querySelector('.projectContainer .newProjectName')){
+              document.querySelector('.projectContainer .newProjectName').remove()
+              document.querySelector('.projectContainer .titleContainerButtonsDiv').remove()
+              document.querySelector('.projectContainer .todoBoxContainer').remove()
+              document.querySelector('.projectContainer .todo').remove()
+              document.querySelector('.projectContainer .currentTaskBox').remove()
+           }
+           addElements(undefined)
+        }
+        // else if(projects[i]['project']['project status'] == 'Completed'){      
+        //   console.log('che')      
+        //     addElements(undefined)
+            // if(document.querySelector('.projectContainer')){
+            //     document.querySelector('.projectContainer .newProjectName').remove()
+            //     document.querySelector('.projectContainer .titleContainerButtonsDiv').remove()
+            //     document.querySelector('.projectContainer .todoBoxContainer').remove()
+            //     document.querySelector('.projectContainer .todo').remove()
+            //     document.querySelector('.projectContainer .currentTaskBox').remove()
+            // }
+            // document.querySelector('.projectContainer .newProjectName').remove()
+            // document.querySelector('.projectContainer .titleContainerButtonsDiv').remove()
+            // document.querySelector('.projectContainer .todoBoxContainer').remove()
+            // document.querySelector('.projectContainer .todo').remove()
+            // document.querySelector('.projectContainer .currentTaskBox').remove()
+       //   }
         }else if(e.target.className == 'unCompletedProjects'){
           if(projects[i]['project']['project status'] == 'Not Complete' || projects[i]['project']['project status'] == undefined){
             let currentProjectName = projects[i]['project']['projectName']
@@ -4151,7 +4192,7 @@ function addProjectStatus(e){
   
   function projectStatus(){     
     if(!checkTaskStatus().includes('Not Completed') && checkTaskStatus().length !== 0){
-      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Complete'
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Completed'
     //  e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Tasks Not Yet Completed`
       let status = 'Completed'
       updateProjectStatus(projectName, status)
@@ -4165,7 +4206,7 @@ function addProjectStatus(e){
       e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Or Project Will Be Assumed To Be Completed'
       }, 7000) 
       setTimeout(() => {
-      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Complete'
+      e.target.parentElement.parentElement.querySelector('.spanProjectStatus').textContent = 'Completed'
      // e.target.parentElement.parentElement.querySelector('.projectStatus').textContent = `Project Status : Tasks Not Yet Completed`
       let status = 'Completed'
       updateProjectStatus(projectName, status)
@@ -4223,7 +4264,7 @@ function addProjectStatus(e){
       }
     }
 
-    if(!checkTaskStatus().includes('Not Completed') && !checkListCheck().includes('Incomplete')){
+    if(!checkTaskStatus().includes('Not Completed') && !checkListCheck().includes('Not Completed')){
       // console.log('Everything Soft')
       // console.log(checkTaskStatus())
       // console.log(checkListCheck())
@@ -4243,6 +4284,7 @@ function addProjectStatus(e){
     for(let i = 0; i < projects.length; i++){      
       if(projects[i]['project']['projectName'] == projectName){
         // status = console.log(projects[i]['project']['todos'])
+        console.log(projectName)
         for(let j = 0; j < projects[i]['project']['todos'].length; j++){
             if(projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
               status.push('Completed')              
@@ -4253,6 +4295,8 @@ function addProjectStatus(e){
         }
       }
     }    
+    console.log(allProjects().getProjects())
+    console.log(status)
     return status
   }
 
@@ -4291,8 +4335,9 @@ function displayFirstProjectTodo(){
     // let todo = projects[0]['project']['todos'][0]['title']
     
     let projectContainer = document.querySelector('.projectContainer')
+    
     let newProjectName = document.createElement('h2')
-    newProjectName.textContent = projectName
+    newProjectName.textContent = currentProjectName
     newProjectName.classList.add('newProjectName')
     document.querySelector('.todoDiv').before(newProjectName)    
 
@@ -4324,16 +4369,17 @@ function displayFirstProjectTodo(){
     
     let todo = null
     let note = null
+
     for(let i = 0; i < projects.length; i++){
       if(projects[i]['project']['projectName'] == currentProjectName){
         for(let j = 0; j < projects[i]['project']['todos'].length; j++){
           todo = projects[i]['project']['todos'][j]['title']
           note = projects[i]['project']['todos'][j]['projectNote']
-
+          // console.log(projects[i])
           let taskPriorityStatus = 'Not Specified'
 
           let date = projects[i]['project']['todos'][j]['dateCreated']
-
+          console.log(date)
           let dueDatedata = 'Not Specified'
 
           let status = projects[i]['project']['todos'][j]['taskStatus']
@@ -4384,11 +4430,11 @@ function displayFirstProjectTodo(){
     // console.log(document.querySelector('.todoBoxContainer'))
     createProjectContainer().createCurrentTaskBox(todo)
     createTaskButtonsDiv()
-    createDate(document.querySelector('.todoBoxContainer'), projects[0]['project']['projectName'], todo).getDateProjectWasCreated()
+    createDate(document.querySelector('.todoBoxContainer'), currentProjectName, todo).getDateProjectWasCreated()
     addDate(document.querySelector('.todoBoxContainer')).getCreateButton()
     eventController().runCalenderButton()
     createDescription(currentProjectName, todo, document.querySelector('.todoBoxContainer')).getDisplayDescription()
-    createNote(projectName, note, todo, document.querySelector('.todoBoxContainer')).getDisplayNote()
+    createNote(currentProjectName, note, todo, document.querySelector('.todoBoxContainer')).getDisplayNote()
     eventController().runCreateTaskButton()
     eventController().runDeleteTask()
     eventController().runAddTaskPriority()
@@ -4401,7 +4447,7 @@ function displayFirstProjectTodo(){
     console.log(allProjects().getProjects())
   }
 
-  displayFirstProjectTodo()
+  
 
 // function displayCompletedProjects(e){
 //   // console.log('completedProjects')
@@ -4421,6 +4467,9 @@ function displayFirstProjectTodo(){
   
 // }
 // fix ----
+/* bug when completed projects is clicked after a project is completed, no completed project still 
+shows textContent still shows on the box and I am sure the same thing would happen for uncompleted projects
+*/
 // bug fix project status no longer working well
 // you have not added buttons to tasks todoboxes. Also add button that when clicked 
 // it shows the compelete details in current task div
