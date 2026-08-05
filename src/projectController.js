@@ -8,8 +8,8 @@ import { projectImportance } from "./projectPriority"
 let projects = [
       {
         'project ID': 0,        
-        'project': {'projectName':'This Is A Sample Project', 'project status': 'Not Completed','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Completed']},
-              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Not Completed', 'checkList' : ['Completed']}]}
+        'project': {'projectName':'This Is A Sample Project', 'Date Created' : `${formatDate().getDate()}`,'project status': 'InComplete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Completed']},
+              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Completed']}]}
    
     }
 ]
@@ -55,9 +55,11 @@ function createNewProjects(value){
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == null){             
       projects[i]['project']['projectName'] = value   
-      // projects[i]['project']['Project Status'] = 'Incomplete'   
+      projects[i]['project']['project status'] = 'InComplete'   
+      projects[i]['project']['Date Created'] = formatDate().getDate()  
     }
   }   
+  console.log(projects)
 }
 
 function editProject(value1, value2){

@@ -93,7 +93,7 @@ body {
     
 }
 
-.displayTextDiv {
+.displayText {
     background-color: orange;
     display: flex;
     justify-content: center;
