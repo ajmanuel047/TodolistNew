@@ -568,8 +568,8 @@ top: -5px;
 }
 
 .dueDate {
-    margin-top: -5px;
-    margin-bottom: 10px;
+    /* margin-top: -5px;
+    margin-bottom: 10px; */
 }
 
 .dueDateButton, .changeDueDate, .calender, .saveNewDate {
@@ -777,10 +777,11 @@ p.statusText {
 
 .todoBox {
     background-color: orange;
-    width: 200px;
-    height: 200px;
-    /* display: flex; */
-    /* flex-direction: column; */
+    width: 220px;
+    height: 217px;
+    display: flex; 
+    justify-content: center;
+    flex-direction: column;
     /* align-items: center; */
 }
 
@@ -804,24 +805,28 @@ p.statusText {
     font-size: 40px;
     cursor: pointer;
     color: white;
-    position: relative;
-    top: 60px;
-    right: -3px;
+    margin: auto;
+    /* position: relative; */
+    /* top: 60px;
+    right: -3px; */
     /* display: inline-flex; */
     /* margin: auto; */
     /* align-self: center; */
 }
 
-.todoBoxContainer .taskName{
-    /* background-color: orange; */
-    /* margin-top: -5px; */
-    font-size: 1.17rem;
-    padding: 3px;
+.newTodoBox .todoDivContent, .todoBox .todoDivContent {
+    margin-top: -60px;
 }
 
-.todoBoxContainer .taskPriority, .todoBoxContainer .dateCreated, .todoBoxContainer .dueDate,.todoBoxContainer .taskStatus {
+
+.todoBoxContainer .taskName, .todoBoxContainer .taskPriority, .todoBoxContainer .dateCreated, .todoBoxContainer .dueDate,.todoBoxContainer .taskStatus {
     font-size: 1.17rem;
-    padding: 3px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.todoBoxContainer .taskName {
+    margin-top: 0px;
 }
 
 .todoBox .todoInput, .todoBox .descriptionInput, .todoBox .noteInput   {
@@ -852,4 +857,19 @@ p.statusText {
     position: relative;
     top: -100px;
     left: 70px;
+}
+
+.todoBoxTaskButtonsDiv {    
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 7px;
+    width: 222px;
+    height: 20px;
+    /* background-color: blue; */
+}
+
+.todoBoxTaskButtonsDiv button {
+     width: 60px;
+     height: 20px;
 }

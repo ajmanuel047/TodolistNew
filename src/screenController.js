@@ -452,9 +452,9 @@ function eventController(){
         })        
         if(!projectArray.includes(projectName)){
           // console.log('yes')
-            // if(document.querySelector('.todoBoxContainer')){
-            //    document.querySelector('.todoBoxContainer').remove()
-            // }
+            if(document.querySelector('.todoBoxContainer')){
+               document.querySelector('.todoBoxContainer').remove()
+            }
             inputFields.forEach((inputField) => {          
             if(inputField.className !== 'headerTodoInput' && inputField.className !== 'calender' && inputField.className !== 'checkListInput'){
               if(inputField.value !== ''){
@@ -3772,21 +3772,21 @@ function displayAllProjects (e){
         let displayText = document.createElement('p')
         displayText.classList.add('displayText')
         projectsBoxItems.remove()
-        // document.querySelector('.titleContainerButtonsDiv').remove()
+
+        if(document.querySelector('.projectContainer .newProjectName')){
+          document.querySelector('.projectContainer .newProjectName').remove()
+          document.querySelector('.titleContainerButtonsDiv').remove()
+          document.querySelector('.todoBoxContainer').remove()
+        }
 
         if(e.target.className == 'completedProjects'){
           displayText.textContent = 'No Completed Project'
-          if(document.querySelector('.projectContainer .newProjectName')
-){
-  document.querySelector('.projectContainer .newProjectName').remove()
-  document.querySelector('.titleContainerButtonsDiv').remove()
-  document.querySelector('.todoBoxContainer').remove()
-}
-
         }else{
           displayText.textContent = 'All Projects Completed'
-        }        
+        }     
+
         projectsBox.appendChild(displayText)
+        
      } else {     
         projectsBoxItems.appendChild(currentProjectStatusText)
         spanElementProjectName.textContent = currentProjectName
@@ -3811,9 +3811,6 @@ function displayAllProjects (e){
         projectBoxButtonsDiv.appendChild(projectStatusButton)
         disableDeleteButton()
     }
-
-
-      // console.log(projects)
       }
         
   } 
@@ -3945,6 +3942,20 @@ function createProjectContainer(todo, e){
    const taskStatus = document.createElement('p')
    taskStatus.classList.add('taskStatus')
 
+   const todoBoxTaskButtonsDiv = document.createElement('div')
+   todoBoxTaskButtonsDiv.classList.add('todoBoxTaskButtonsDiv')
+
+   const viewMoreButton = document.createElement('button')
+   viewMoreButton.classList.add('.viewMoreInfo')
+
+   const deleteTaskButton = document.createElement('button')
+   viewMoreButton.classList.add('.deleteTask')
+
+   const editTask = document.createElement('button')
+   editTask.classList.add('editTodoButton')
+
+   
+
   
   if(!document.querySelector('.todoBoxContainer')){    
     // console.log('todoBoxContainer')
@@ -3978,7 +3989,18 @@ function createProjectContainer(todo, e){
 
     taskStatus.textContent = `Task Status : Not Completed`
     todoBoxDiv.appendChild(taskStatus)
+
+    todoBoxDiv.appendChild(todoBoxTaskButtonsDiv)
     
+    editTask.textContent = 'Edit Task'
+    todoBoxTaskButtonsDiv.appendChild(editTask)
+
+    viewMoreButton.textContent = 'More Info'
+    todoBoxTaskButtonsDiv.appendChild(viewMoreButton)
+
+    deleteTaskButton.textContent = 'Delete'
+    todoBoxTaskButtonsDiv.appendChild(deleteTaskButton)
+
   }
   
   if(!todo && e.target.classList == 'submitProject'){
@@ -4008,7 +4030,19 @@ function createProjectContainer(todo, e){
 
     taskStatus.textContent = `Task Status : Not Completed`
     todoBoxDiv.appendChild(taskStatus)
-    // console.log('box created')
+    console.log('box created')
+
+    todoBoxDiv.appendChild(todoBoxTaskButtonsDiv)
+
+    editTask.textContent = 'Edit Task'
+    todoBoxTaskButtonsDiv.appendChild(editTask)
+
+    viewMoreButton.textContent = 'More Info'
+    todoBoxTaskButtonsDiv.appendChild(viewMoreButton)
+
+    deleteTaskButton.textContent = 'Delete'
+    todoBoxTaskButtonsDiv.appendChild(deleteTaskButton)
+
 
     const newTodoBoxDiv = document.createElement('div')
     newTodoBoxDiv.classList.add('todoBox')
