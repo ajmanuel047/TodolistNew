@@ -819,7 +819,7 @@ p.statusText {
 }
 
 
-.todoBoxContainer .taskName, .todoBoxContainer .taskPriority, .todoBoxContainer .dateCreated, .todoBoxContainer .dueDate,.todoBoxContainer .taskStatus {
+.todoBoxContainer .spanTaskName, .todoBoxContainer .taskName, .todoBoxContainer .taskPriority, .todoBoxContainer .dateCreated, .todoBoxContainer .dueDate,.todoBoxContainer .taskStatus {
     font-size: 1.17rem;
     margin-bottom: 5px;
     margin-left: 10px;
