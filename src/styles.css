@@ -164,7 +164,7 @@ body {
 }
 
 .cursor {
-    background-color: orange;
+    /* background-color: orange; */
     
 }
 .cursor {
@@ -872,4 +872,32 @@ p.statusText {
 .todoBoxTaskButtonsDiv button {
      width: 60px;
      height: 20px;
+}
+
+.currentTodo {
+    background-color: orange;
+}
+
+.editDisplayIndicator {
+    /* background-color: black; */
+     position: absolute; 
+     top: 567px;
+    /* top: -479px;
+    left: 275px;
+    width: 73px;  */
+    /* color: white; */
+}
+
+.editDisplayIndicatorColor {
+    background-color: orange;
+    /* position: absolute; */
+    /* top: -479px; */
+    /* left: 275px; */
+    /* width: 73px; */
+    /* color: white; */
+}
+
+.headerAddToProjectDiv {
+    position: relative;
+    /* top: 33px; */
 }
