@@ -508,6 +508,11 @@ h4 {
     /* background-color: orange; */
 }
 
+.currentTaskBox {
+        padding: 5px;
+    border: 3px white solid;
+}
+
 .currentTaskBox .saved {
     background-color: rgb(170, 235, 170);
     color: rgb(5, 155, 214);
@@ -766,6 +771,8 @@ p.statusText {
 
 .todoBoxContainer {
     background-color: rgb(230, 63, 63);
+    padding: 5px;
+    border: 3px white solid;
     /* width: 600px; */
     /* height: 200px; */
     display: flex;
@@ -843,6 +850,15 @@ p.statusText {
     align-items: center; */
 }
 
+.tasksDivTitle, .currentTaskDivTitle {
+    background-color: orange;
+    border: 1px solid white;
+    width: 250px;
+    text-align: center;
+    padding: 3px;
+    /* margin: auto; */
+}
+
 .currentTasksDivTitle {
     /* margin-bottom: 0px; */
 }
@@ -854,9 +870,10 @@ p.statusText {
 }
 
 .icon {
-    position: relative;
-    top: -100px;
-    left: 70px;
+    position: absolute;
+    /* background-color: black; */
+    top: 564px;
+    left: 103px;
 }
 
 .todoBoxTaskButtonsDiv {    
