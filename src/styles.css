@@ -74,7 +74,7 @@ body {
 
 .projectsBox {
     /* width: 800px; */
-    height: 250px;
+    height: 266px;
     background-color: orange;
     display: flex;
     gap: 10px;
@@ -90,7 +90,8 @@ body {
     background-color: rgb(230, 63, 63);
     width: 380px;
     height: 250px;
-    
+        padding: 5px;
+    border: 3px white solid;
 }
 
 .displayText {
@@ -144,11 +145,6 @@ body {
 .addMoreInfo, .viewTasks, .deleteProject {
     width: 85px;
     height: 30px;
-}
-.projectContainer {    
-    /* width: 80%; */
-    /* margin: auto; */
-    /* background-color: aqua; */
 }
 
 .newProjectContainer {
@@ -317,7 +313,8 @@ h3 {
 
 .newProjectName {
     font-size: 1.6rem;
-    margin-top: 7px;
+    margin-bottom: 10px;
+    /* margin-top: 7px; */
     /* background-color: orange;   */
     
 }
@@ -360,7 +357,7 @@ h3 {
 }
 
 .projectContainer {
-    /* margin-top: 100px; */
+    margin-top: 70px;
 }
 
 .projectContainer .todoDiv {
@@ -898,7 +895,7 @@ p.statusText {
 .editDisplayIndicator {
     /* background-color: black; */
      position: absolute; 
-     top: 567px;
+     top: 607px;
     /* top: -479px;
     left: 275px;
     width: 73px;  */

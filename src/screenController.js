@@ -481,6 +481,9 @@ const runEditButton = function(){
   let previousValue = null
   currentEditButton.forEach((button) => {
     button.onclick = function(e){
+    if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
       document.body.style.backgroundColor = 'orange'
       let currentProjectName = this.parentElement.parentElement.querySelector('.newProjectName')
       // console.log(currentProjectName)
@@ -560,9 +563,6 @@ const runTodoEditButton = function(){
        if(buttons.textContent == 'Save'){
          if(document.querySelector('.editDisplayIndicator')){
           document.querySelector('.editDisplayIndicator').style.visibility = 'hidden'
-          // if(document.querySelector('.editDisplayIndicatorColor')){
-          //   document.querySelector('.editDisplayIndicator').classList.remove('editDisplayIndicatorColor')
-          // }
          }
         document.body.style.backgroundColor = 'purple'
          buttons.textContent = 'Edit'
@@ -581,8 +581,6 @@ const runTodoEditButton = function(){
          setTimeout(() => {
            saveCompletedisplay.remove()
          }, 1000)
-        //  console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-        // console.log(e.target.parentElement)
         console.log(myButtonState.getDiv().querySelector('.todo'))
          if(myButtonState.getDiv().querySelector('.todo')){
             console.log(myButtonState.getDiv().querySelector('.todo'))
@@ -592,9 +590,6 @@ const runTodoEditButton = function(){
           console.log(myButtonState.getDiv().querySelector('.spanTaskName'))
           createTodo(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, arr, currentTodo.textContent, myButtonState.getDiv().querySelector('.spanTaskName').textContent).editTodo()
          }
-        
-        // createTodo(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, arr, currentTodo.textContent, myButtonState.getDiv().querySelector('.spanTaskName').textContent).editTodo()
-//  console.log(e.target.parentElement.parentElement)  
          for(let i = 0; i < projects.length; i++){
              if(projects[i]['project']['projectName'] == e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent){
                 // console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
@@ -602,10 +597,7 @@ const runTodoEditButton = function(){
                     if(projects[i]['project']['todos'][j]['title'] == currentTodo.textContent){
                         console.log(currentTodo)
                       let newTodo = projects[i]['project']['todos'][j]['title']
-            //            console.log(newTodo)
-                        currentTodo.textContent = newTodo         
-                        // console.log(newTodo)   
-                              
+                      currentTodo.textContent = newTodo                               
                     }
                   }
               }
@@ -621,12 +613,8 @@ const runTodoEditButton = function(){
             console.log('first')
           }
         }else if(myButtonState.getDiv().querySelector('.todo')){
-         console.log('second check')
-         console.log(previousTodo)
-         console.log(myButtonState.getDiv().querySelector('.todo').textContent)
           if(taskName.textContent == previousTodo){
             taskName.textContent = myButtonState.getDiv().querySelector('.todo').textContent
-            console.log('second')
           }  
         }
       })
@@ -634,12 +622,9 @@ const runTodoEditButton = function(){
       } 
       else if(e.target.className == 'editTodoButton'){
         document.body.style.backgroundColor = 'grey'
-      for(let i = 0; i < arr.length; i++){
-        // console.log('check 6')
-        // console.log(arr[i])
-        //   console.log(arr[i].className == 'todo')
+      for(let i = 0; i < arr.length; i++){ 
         if(arr[i].querySelector('.spanTaskName') || arr[i].className == 'todo'){
-        //  console.log(arr[i].className == 'todo')
+      
           if(arr[i].className == 'todo' || arr[i].querySelector('.spanTaskName').className == 'spanTaskName'){
             if(arr[i].querySelector('.spanTaskName')){
               if(document.querySelector('.currentTaskBox')){
@@ -656,47 +641,32 @@ const runTodoEditButton = function(){
             
           previousTodo = arr[i].parentElement.querySelector('.spanTaskName').textContent
           currentTodo = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('h4')
-          // currentTodo.classList.add('currentTodoColor')
-          // document.querySelector('.todo').classList.add('currentTodo')
-         console.log('check 7')
-
-        }else{
-          console.log('check 5')
+        }else{          
           console.log(e.target.parentElement.parentElement)
           myButtonState.setDiv(e.target.parentElement.parentElement)
 
           previousTodo = e.target.parentElement.parentElement.children[i].textContent
           currentTodo = e.target.parentElement.parentElement.children[i]
-        }  
-        console.log('check 8')
+        }         
           currentTodo.setAttribute('contenteditable', true)
      
           currentTodo.classList.add('editContent')
           currentTodo.style.cursor = 'pointer'
-         if(document.querySelector('.todo')){
-          // document.querySelector('.todo').classList.add('currentTodo')
+
+         if(document.querySelector('.todo')){         
           const editDisplayIndicator = document.createElement('p')
           editDisplayIndicator.classList.add('editDisplayIndicator')
-          
           editDisplayIndicator.textContent = 'Click Text Below'
 
           if(!document.querySelector('.editDisplayIndicator')){
             document.querySelector('.currentTaskDivTitle').after(editDisplayIndicator)
-
-            
             addDisplayIndicator()           
           }
           else{
             document.querySelector('.editDisplayIndicator').remove()
-            
             document.querySelector('.currentTaskDivTitle').after(editDisplayIndicator)
-            
             addDisplayIndicator()     
-          } 
-          
-          // else if(document.querySelector('.editDisplayIndicator')){
-          //   document.querySelector('.editDisplayIndicator').remove()
-          // }
+          }       
         }
           currentTodo.addEventListener('focus', function(e){      
           currentTodo.parentElement.querySelector('.editTodoButton').textContent = 'Save'
@@ -705,8 +675,7 @@ const runTodoEditButton = function(){
           document.querySelector('.todo').scrollIntoView({
             behavior: 'smooth',
             block: 'center'
-          })
-          console.log(allProjects().getProjects())
+          })          
         }
         }
 
@@ -784,6 +753,15 @@ function addDisplayIndicator(){
     document.querySelector('.editDisplayIndicator').classList.add('editDisplayIndicatorColor')
     }, 10000)
   }
+  runDeleteTask()
+  runAddTaskPriority()
+  runAddTaskStatus()
+  runEditDescription()
+  runEditNote()
+  runCreateCheckList()
+  // disableButton()
+  // displayAllProjects(e)
+  // runAddMoreInfoButton()
 }
 
 
@@ -1017,35 +995,37 @@ const runEditDescription = function () {
   // console.log(editDescriptionButton)
   editDescriptionButton.forEach((editButton) => {
     // console.log(this)
-    editButton.onclick = function (e) {
-      // document.body.style.backgroundColor = 'orange'
-      console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent)
-      let currentTodo = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
-      let projectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
-   //   console.log(e.target.parentElement.parentElement.parentElement.parentElement)
-      editDescription()
-      const currentDescription = e.target.parentElement.querySelector('.description')
-      currentDescription.setAttribute('contenteditable', true)
-      currentDescription.classList.add('editContent')
-      currentDescription.style.cursor = 'pointer'
+    editButton.onclick = function (e) {     
+    if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }   
 
-      if(editButton.textContent == 'Save'){
-        // console.log('check')
-         editButton.textContent = 'Edit'
-         currentDescription.setAttribute('contenteditable', false)
-         currentDescription.classList.remove('editContent')
-         currentDescription.style.cursor = 'auto'
-         const saveCompletedisplay = document.createElement('p')
-         saveCompletedisplay.textContent = 'Saved'
-         saveCompletedisplay.classList.add('saved')
+    let currentTodo = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
+    let projectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
+    editDescription()
+    const currentDescription = e.target.parentElement.querySelector('.description')
+    currentDescription.setAttribute('contenteditable', true)
+    currentDescription.classList.add('editContent')
+    currentDescription.style.cursor = 'pointer'
 
-         e.target.parentElement.parentElement.querySelector('.descriptionContentDiv .description').after(saveCompletedisplay)
-        //  document.querySelector('.saved').style.marginTop = '10px'
-         setTimeout(() => {
-           saveCompletedisplay.remove()
-         }, 1000)
+    if(editButton.textContent == 'Save'){
+      // console.log('check')
+        editButton.textContent = 'Edit'
+        currentDescription.setAttribute('contenteditable', false)
+        currentDescription.classList.remove('editContent')
+        currentDescription.style.cursor = 'auto'
+        const saveCompletedisplay = document.createElement('p')
+        saveCompletedisplay.textContent = 'Saved'
+        saveCompletedisplay.classList.add('saved')
 
-         addDescriptionToProject(projectName, currentDescription.textContent, currentTodo)
+        e.target.parentElement.parentElement.querySelector('.descriptionContentDiv .description').after(saveCompletedisplay)
+      //  document.querySelector('.saved').style.marginTop = '10px'
+        setTimeout(() => {
+          saveCompletedisplay.remove()
+        }, 1000)
+
+        addDescriptionToProject(projectName, currentDescription.textContent, currentTodo)
+      
         for(let i = 0; i < allProjects().getProjects().length; i++){
           if(allProjects().getProjects()[i]['projectName'] == projectName){
             currentDescription.textContent = allProjects().getProjects()[i]['description']
@@ -1057,7 +1037,6 @@ const runEditDescription = function () {
             }
           }
         }    
-       // console.log(e.target.parentElement.parentElement.parentElement.parentElement)     
       //  storeData(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent).editStorage()
       }
       currentDescription.addEventListener('focus', function(e){
@@ -1070,57 +1049,45 @@ const runEditDescription = function () {
 }
 
 const runEditNote = function (projectName, e) {
-//  console.log('did it run')
   const editNoteButton = document.querySelectorAll('.editNote')
   
-  // console.log(editNoteButton)
- 
-  editNoteButton.forEach((editButton) => {
-    // console.log(this)
+  editNoteButton.forEach((editButton) => {   
     editButton.onclick = function (e) {
- //     console.log(this.parentElement.querySelector('.description'))
-    //  editNote()
-     console.log(e.target)
-      const currentNote = this.parentElement.querySelector('.note')
-      currentNote.setAttribute('contenteditable', true)
-      currentNote.classList.add('editContent')
-      currentNote.style.cursor = 'pointer'
+    if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
 
-      if(editButton.textContent == 'Save'){
-         editButton.textContent = 'Edit'
-         currentNote.setAttribute('contenteditable', false)
-         currentNote.classList.remove('editContent')
-         currentNote.style.cursor = 'auto'
-         const saveCompletedisplay = document.createElement('p')
-         saveCompletedisplay.textContent = 'Saved'
-         saveCompletedisplay.classList.add('saved')
-         // adjust the saveCompletedisplay because it not moving when the text
-         // is longer
-       //  console.log(e.parentElement)
-         e.target.before(saveCompletedisplay)
-        //  console.log(projectName)
-         storeData(projectName).populateStorage()
-         setTimeout(() => {
-           saveCompletedisplay.remove()
-         }, 1000)
-       // console.log(currentNote.textContent)
-       //console.log(this.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent)
-    //   console.log(e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent)
+    const currentNote = this.parentElement.querySelector('.note')
+    currentNote.setAttribute('contenteditable', true)
+    currentNote.classList.add('editContent')
+    currentNote.style.cursor = 'pointer'
+
+    if(editButton.textContent == 'Save'){
+        editButton.textContent = 'Edit'
+        currentNote.setAttribute('contenteditable', false)
+        currentNote.classList.remove('editContent')
+        currentNote.style.cursor = 'auto'
+        const saveCompletedisplay = document.createElement('p')
+        saveCompletedisplay.textContent = 'Saved'
+        saveCompletedisplay.classList.add('saved')
+        // adjust the saveCompletedisplay because it not moving when the text
+        // is longer
+      //  console.log(e.parentElement)
+        e.target.before(saveCompletedisplay)
+      //  console.log(projectName)
+        storeData(projectName).populateStorage()
+        setTimeout(() => {
+          saveCompletedisplay.remove()
+        }, 1000)
+    
        let currentTodo = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.todo').textContent
-     //   console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement)
        addNoteToProject(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent, currentNote.textContent, currentTodo)
          
-        for(let i = 0; i < allProjects().getProjects().length; i++){
-          // console.log(allProjects().getProjects()[i]['projectName'])
-          // console.log(projectName)
+        for(let i = 0; i < allProjects().getProjects().length; i++){          
              if(allProjects().getProjects()[i]['project']['projectName'] == projectName){
-                // console.log(projectName)
-                // console.log(allProjects().getProjects()[i]['projectName'])
-                // console.log(allProjects().getProjects()[i]['todos'])
                 currentNote.textContent = allProjects().getProjects()[i]['projectNote']
               for(let j = 0; j < allProjects().getProjects()[i]['project']['todos'].length; j++){
                 if(projects[i]['project']['todos'][j]['title'] == currentTodo){
-                  // console.log(allProjects().getProjects())
                   currentNote.textContent= allProjects().getProjects()[i]['project']['todos'][j]['projectNote'] 
                 }
                   
@@ -1129,7 +1096,6 @@ const runEditNote = function (projectName, e) {
             console.log(allProjects().getProjects())
          }         
       }
-// console.log(allProjects().getProjects())
 // storeData(e.target.parentElement.querySelector('.newProjectName').textContent).populateStorage()
       currentNote.addEventListener('focus', function(e){
         // document.body.style.backgroundColor = 'skyblue'
@@ -1145,16 +1111,15 @@ const runEditNote = function (projectName, e) {
 const runCalenderButton = function(projectName){
   const calerderButtons = document.querySelectorAll('.dueDateButton')
 
-  calerderButtons.forEach((button) => {
-    // button.onclick = addDate().getDisplayCalender()
-   
-    button.onclick = function(e){
-      // document.body.style.backgroundColor = 'orange'
-      const targetDiv = e.target.parentElement
- //     console.log(targetDiv.parentElement.parentElement.querySelector('.newProjectName'))
- console.log(targetDiv)     
- addDate(targetDiv).getDisplayCalender()
-      runCalender(targetDiv)
+  calerderButtons.forEach((button) => {   
+  button.onclick = function(e){   
+  if(document.querySelector('.editDisplayIndicator')){
+    document.querySelector('.editDisplayIndicator').style.display = 'none'
+  }  
+  const targetDiv = e.target.parentElement 
+  console.log(targetDiv)     
+  addDate(targetDiv).getDisplayCalender()
+  runCalender(targetDiv)
     }
   })
 }
@@ -1201,6 +1166,7 @@ const runSaveDueDate = function(){
   
   saveNewDateButtons.forEach((button) => {
     button.addEventListener('click', function(e){
+      
       const targetDiv = e.target.parentElement    
       if(e.target.parentElement){     
         const calenderValues = e.target.parentElement.querySelector('.calender').value
@@ -1350,9 +1316,10 @@ const runAddTaskPriority = function(){
   const taskPriorityButtons = document.querySelectorAll('.priorityButton')
   taskPriorityButtons.forEach((button) => {
     button.onclick = function(e){
+    if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
       addTaskPriority(e)
-      // document.body.style.backgroundColor = 'blue'
-     // console.log(allProjects().getProjects())
     }
   })
 }
@@ -1361,6 +1328,9 @@ const runAddTaskStatus = function(){
   const taskStatusButton = document.querySelectorAll('.taskStatusButton')
   taskStatusButton.forEach((button) => {
     button.onclick = function(e){      
+    if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
      // console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement)
       let currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
       let todo = e.target.parentElement.parentElement.querySelector('.todo').textContent
@@ -1373,25 +1343,17 @@ const runAddTaskStatus = function(){
 
 const runCreateCheckList = function(){
   const createCheckListButton = document.querySelector('.addCheckListFormButton')
-  
-  // createCheckListButton.forEach((button) => {
-    // console.log(this)
-    // console.log(todo)
-    // console.log(targetDiv)
     if(createCheckListButton){
       createCheckListButton.onclick = function(e){
       const targetButton = e.target
-      
+    if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
       createCheckList().addCheckListForm(e.target)
-   //   console.log(targetButton)
       runAddCheckItem()
       runSaveChanges()
-      // console.log(e.target.classList)
-      // console.log(targetButton)
     }
     }
-
-  // })
 }
 
 const runAddCheckItem = function(){
@@ -1489,15 +1451,12 @@ const runTodosForProjects = function(){
     // clicking viewTaskButton this creates contents in todoBox
     viewTaskButtons.forEach((taskButton) => {
       taskButton.onclick = function(e){
-        console.log('test')
-        document.body.style.backgroundColor = 'purple'
-        // todosForProjects(e)
-     // creates newProjectName and titleContaineButtonsDiv
-     // also creates empty todoBoxContainer and newTodoBox and plus button
-    displayFirstProjectTodo(e)
-    // this recreates projectContainer by creating newProjectName and titleContainerButtons Div
-// it also creates newTodoBox and the plus button
-// It also creates contents in todoBox and creates the contents in currentTaskDiv
+        // console.log('test')
+    if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
+    document.body.style.backgroundColor = 'purple'    
+    displayFirstProjectTodo(e) 
         runDeleteTask()
         runTodoEditButton()
       }
@@ -1508,6 +1467,9 @@ const runAddProjectStatus = function(){
   const addProjectStatusButtons = document.querySelectorAll('.projectStatusButton')
   addProjectStatusButtons.forEach((projectStatusButon) => {
     projectStatusButon.onclick = function(e){
+      if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
       projectStatusButon.style.backgroundColor = 'orange'
       addProjectStatus(e).getProjectStatus()
     }
@@ -1526,6 +1488,9 @@ const runCurrentDivInfo = function(){
   moreInfoButtons.forEach((button) => {
     // console.log('chck')
     button.onclick = function(e){
+      if(document.querySelector('.editDisplayIndicator')){
+      document.querySelector('.editDisplayIndicator').style.display = 'none'
+    }
       let projects = allProjects().getProjects()
       todo = e.target.parentElement.parentElement.querySelector('.spanTaskName').textContent
       // console.log(todo)
@@ -2227,7 +2192,7 @@ function createDescription (projectName, todo, targetDiv, e){
           if(projects[i]['project']['todos'][j]['title'] == todo){
             
             description.textContent = projects[i]['project']['todos'][j]['description']     
-            console.log(projects[i]['project']['todos'][j]['description'])
+            // console.log(projects[i]['project']['todos'][j]['description'])
             if(!projects[i]['project']['todos'][j]['description']){
               editDescription.textContent = 'Add Description'
             }else{
@@ -4002,7 +3967,7 @@ function createProjectContainer(todo, e){
   //   console.log('undefined')
   // }
   // console.log(e.target)
-  if(e.target.className == 'viewTasks'){
+  if(e.target.className == 'viewTasks'){  
    // console.log(e.target.parentElement.parentElement.querySelector('span').textContent)
     // console.log('viewtasks')
     taskName.textContent = `Task Name :`
@@ -4573,14 +4538,14 @@ function displayFirstProjectTodo(e){
   let currentProjectName = null
  
   if(e){    
-     console.log(e)
+    //  console.log(e)
     if(e.target.className == 'viewTasks'){
       document.querySelector('.newProjectName').remove()
       document.querySelector('.titleContainerButtonsDiv').remove()
       document.querySelector('.todoBoxContainer').remove()
       currentProjectName = e.target.parentElement.parentElement.querySelector('.spanProjectName').textContent
     }else if(e.target.className == 'todoSubmitButton'){
-      console.log(e.target)
+      // console.log(e.target)
       document.querySelector('.newProjectName').remove()
       document.querySelector('.titleContainerButtonsDiv').remove()
       document.querySelector('.todoBoxContainer').remove()
@@ -4588,7 +4553,7 @@ function displayFirstProjectTodo(e){
       // console.log(currentProjectName)
     }
   }else {
-    console.log('check 2')
+    // console.log('check 2')
     currentProjectName = document.querySelector('.projectsBox').children[0].querySelector('.spanProjectName').textContent
   }
   // console.log(document.querySelector('.todoBoxContainer'))
@@ -4637,7 +4602,7 @@ function displayFirstProjectTodo(e){
     let todo = null
     let note = null
   
-      console.log(currentProjectName)
+      // console.log(currentProjectName)
     for(let i = 0; i < projects.length; i++){
     
       if(projects[i]['project']['projectName'] == currentProjectName){
@@ -4802,7 +4767,7 @@ displayFirstProjectTodo()
   
 // }
 // fix ----
-// when edit todo color is blinking and view all tasks is clicked, an error displays and i am sure it happens for other buttons also
+// done --- when edit todo color is blinking and view all tasks is clicked, an error displays and i am sure it happens for other buttons also
 // edit projectName does not seem to be working well. Also, it cleans up projectsBox instead of updating it so you need to call something there when editing, i think...
 // ensure an exiting project name cannot be used
 // when you finish, test everythng. So many tings not workimg. Save due date no longer working properly
@@ -4822,22 +4787,8 @@ shows textContent still shows on the box and I am sure the same thing would happ
 // depending on what i want. I might want to automatically update project status when task status is clicked or manually do it. Depends on what you want
 // line 3495
 // when submitting without todo currentTaskdiv is not cleaned
+// when project is added without todo and the projects viewtasks is clicked ones or twice just after, the createNewTodo plus button stopped responding
+// current task information priority button giving error when clicked
+// add date now giving error message
+// i don't like the way task status is working. it is not properly syncing with all projects task
 
-
-// // function displayCompletedProjects(e){
-// //   // console.log('completedProjects')
-  
-// //   let projects = allProjects().getProjects()
-// //   for(let i = 0; i < projects.length; i++){
-// //   //  console.log(projects[i]['project']['project status'])
-// //     if(projects[i]['project']['project status'] == 'Complete'){
-// //       console.log('yes')
-// //       console.log(projects[i]['project'])
-// //       displayAllProjects(e)
-// //     }else{
-// //       console.log('no')
-// //       console.log(console.log(projects[i]['project']))
-// //     }
-// //   }
-  
-// // }
