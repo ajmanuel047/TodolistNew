@@ -74,7 +74,7 @@ body {
 
 .projectsBox {
     /* width: 800px; */
-    height: 266px;
+    height: 262px;
     background-color: orange;
     display: flex;
     gap: 10px;
@@ -90,8 +90,8 @@ body {
     background-color: rgb(230, 63, 63);
     width: 380px;
     height: 250px;
-        padding: 5px;
-    border: 3px white solid;
+    padding: 3px;
+    border: 3px skyblue solid;
 }
 
 .displayText {
