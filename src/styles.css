@@ -56,7 +56,7 @@ body {
     /* text-align: center; */
 }
 
-.allProjects, .completedProjects, .unCompletedProjects, .addTodo {
+.allProjects, .completedProjects, .unCompletedProjects, .addTodo, .deleteAllProjects {
     font-size: 1.1rem;
     cursor: pointer;
 }
@@ -100,6 +100,8 @@ body {
     justify-content: center;
     align-items: center;
     margin: auto;
+    border: 2px solid white;
+    padding: 10px;
 }
 
 .displayText {
@@ -914,4 +916,24 @@ p.statusText {
 .headerAddToProjectDiv {
     position: relative;
     /* top: 33px; */
+}
+
+.emptyBox, .emptyCurrentTaskDivBox {
+    width: 100%;
+    height: 85%;
+    background-color: rgb(14, 174, 202);
+    border: 2px white solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyBoxContent, .emptyCurrentTaskDivBoxContent {
+    font-size: 3rem;
+}
+
+.projectsBoxBorderBox {
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
 }
