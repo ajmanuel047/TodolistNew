@@ -9,7 +9,7 @@ let projects = [
       {
         'project ID': 0,        
         'project': {'projectName':'This Is A Sample Project', 'Date Created' : `${formatDate().getDate()}`,'project status': 'InComplete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Completed']},
-              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Completed']}]}
+              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'InComplete', 'checkList' : ['Completed']}]}
    
     }
 ]
@@ -154,7 +154,7 @@ function dateController(currentProjectName, calenderValues, todo){
             // console.log('check')
                 projects[i]['project']['todos'][j].dateCreated = formatDate().getDate()
            } else {
-            // console.log('check 2')
+            console.log('check 2')
                 projects[i]['project']['todos'][j].dueDate = formatDate(calenderValues).dueDate()
            }                  
          }
@@ -228,13 +228,15 @@ function projectPriorityController(currentProjectName, todo){
            let currentProjectPriority = projects[i]['project']['todos'][j]['taskPriority']
            let newProjectPriority = projectImportance(currentProjectPriority).currentValue()
            projects[i]['project']['todos'][j].taskPriority = newProjectPriority
+          //  console.log(newProjectPriority)
           }
         }
       }
     }
+      // console.log(projects)
   }
 
-  // console.log(projects)
+
 
   return {
     addPriorityToProject
@@ -250,20 +252,23 @@ function updateProjectStatus(projectName, status){
   }
 }
 
-function updateTodoStatus(currentProjectName, todo){  
+function updateTodoStatus(currentProjectName, todo){
+  // console.log('check')  
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         if(projects[i]['project']['todos'][j]['title'] == todo){          
+          // console.log(projects[i]['project']['todos'][j]['taskStatus'])
           if(!projects[i]['project']['todos'][j]['taskStatus']){
             projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
           //  console.log('completed')
           }else if(projects[i]['project']['todos'][j]['taskStatus'] && projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
-            projects[i]['project']['todos'][j]['taskStatus'] = 'Not completed'
-            console.log('Incomplete')
-          }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Not complete'){
+            projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+            // console.log('Incomplete')
+            // console.log(projects[i]['project']['todos'][j]['taskStatus'])
+          }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'InComplete'){
             projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-            console.log('completed again')
+            // console.log('completed again')
           }
         }
       }
@@ -296,35 +301,36 @@ function createTodoCheckList(currentProjectName, todo, checkInput){
 }
 
 function updateCheckListStatus(currentProjectName, currentTodo, targetDiv){
-
-for(let i = 0; i < projects.length; i++){
-  if(projects[i]['project']['projectName'] == currentProjectName){
-    for(let j = 0; j < projects[i]['project']['todos'].length; j++){
-      if(projects[i]['project']['todos'][j]['title'] == currentTodo){
-     //  console.log(projects[i]['todos'][j]['checkList'])
-       for(let prop in projects[i]['project']['todos'][j]['checkList']){
-        if(prop == targetDiv){         
-          if(projects[i]['project']['todos'][j]['checkList'][prop] == 'Incomplete'){
-              projects[i]['project']['todos'][j]['checkList'][prop] = 'Complete'
-            } else{
-            projects[i]['project']['todos'][j]['checkList'][prop] = 'Incomplete'
-              // console.log('start here')
-              /*
-              next task is to update localstorage
-              */
-            }          
+  for(let i = 0; i < projects.length; i++){
+    if(projects[i]['project']['projectName'] == currentProjectName){
+      for(let j = 0; j < projects[i]['project']['todos'].length; j++){
+        if(projects[i]['project']['todos'][j]['title'] == currentTodo){
+      //  console.log(projects[i]['todos'][j]['checkList'])
+        for(let prop in projects[i]['project']['todos'][j]['checkList']){
+          if(prop == targetDiv){         
+            if(projects[i]['project']['todos'][j]['checkList'][prop] == 'Incomplete'){
+                projects[i]['project']['todos'][j]['checkList'][prop] = 'Complete'
+              } else{
+              projects[i]['project']['todos'][j]['checkList'][prop] = 'Incomplete'
+                // console.log('start here')
+                /*
+                next task is to update localstorage
+                */
+              }          
+            }
           }
         }
       }
     }
   }
 }
-  // we have to loop through the right project so we need
-  // projectname
 
-  // 
-
+function deleteAllProjects(){    
+  let newProject = projects.slice(0, 1)
+  projects = newProject
+  
 }
+
 function allProjects(value){
   
   const getProjects = () => projects
@@ -347,7 +353,8 @@ export {
         createTodoCheckList,
         updateCheckListStatus,
         updateProjectStatus,
-        updateTodoStatus
+        updateTodoStatus,
+        deleteAllProjects
       }
 
 
