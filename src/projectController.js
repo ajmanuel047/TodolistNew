@@ -109,23 +109,23 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
    }
 
  function editTodo(){
-console.log('check 4')
- console.log(currentProjectName)
+// console.log('check 4')
+//  console.log(currentProjectName)
   // console.log(arr)
-  console.log(currentTodo)
-  console.log(previousTodo)
+  // console.log(currentTodo)
+  // console.log(previousTodo)
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
       // console.log(currentProjectName)
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         if(projects[i]['project']['todos'][j]['title'] == previousTodo){
-          console.log(previousTodo)
+          // console.log(previousTodo)
           projects[i]['project']['todos'][j]['title'] = currentTodo
         }       
       }
     }
   }
-  console.log(projects)
+  // console.log(projects)
  }
  
   const createObject = () => pushTodo()
