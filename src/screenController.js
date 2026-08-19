@@ -431,7 +431,7 @@ const runEditButton = function(){
   // if(document.querySelector('.editDisplayIndicator')){
   //   document.querySelector('.editDisplayIndicator').style.display = 'none'
   // }
-    document.body.style.backgroundColor = 'orange'
+    // document.body.style.backgroundColor = 'orange'
     let currentProjectName = this.parentElement.parentElement.querySelector('.newProjectName')
     
     currentProjectName.setAttribute('contenteditable', true)
@@ -4803,9 +4803,16 @@ function addDisplayIndicator(e){
 
     if(!document.querySelector('.taskButtonsDiv .editDisplayIndicator')){    
      taskButtonsDiv.appendChild(editDisplayIndicator)
+     document.querySelector('.editDisplayIndicator').classList.add('editDisplayIndicatorColor')
+     showDisplayIndicatorColor(e)
     //  console.log('checj')
-   } else if(todoButton.className.split(' ')[1] == 'saveTodo'){    
-      document.querySelector('.editDisplayIndicator').remove()
+   } else if(document.querySelector('.taskButtonsDiv .editDisplayIndicator').style.visibility == 'hidden'){
+      document.querySelector('.taskButtonsDiv .editDisplayIndicator').style.visibility = 'visible'
+      showDisplayIndicatorColor(e)
+    }
+   else if(todoButton.className.split(' ')[1] == 'saveTodo'){    
+      // document.querySelector('.editDisplayIndicator').remove()
+       document.querySelector('.editDisplayIndicator').style.visibility = 'hidden'
       // console.log(document.querySelectorAll('.taskButtonsDiv .editDisplayIndicator'))
       document.querySelector('.saveTodo').classList.remove('saveTodo')      
   } 
@@ -4820,43 +4827,48 @@ function addDisplayIndicator(e){
   }   
    else if(!document.querySelector('.descriptionDiv .editDisplayIndicator') && document.querySelector('.description').textContent !== ''){    
      descriptionHeading.after(editDisplayIndicator)
-   } else if(e.target.className.split(' ')[1] == 'saveDescription'){    
-      document.querySelector('.descriptionDiv .editDisplayIndicator').remove()
+     document.querySelector('.descriptionDiv .editDisplayIndicator').classList.add('editDisplayIndicatorColor')
+     showDisplayIndicatorColor(e)
+   }else if(document.querySelector('.descriptionDiv .editDisplayIndicator').style.display == 'none'){
+     document.querySelector('.descriptionDiv .editDisplayIndicator').style.display = 'block'
+     showDisplayIndicatorColor(e)
+   }
+    else if(e.target.className.split(' ')[1] == 'saveDescription'){    
+      // document.querySelector('.descriptionDiv .editDisplayIndicator').remove()
+      document.querySelector('.descriptionDiv .editDisplayIndicator').style.display = 'none'
       document.querySelector('.saveDescription').classList.remove('saveDescription')      
   } 
  }
  else if(e.target.className.split(' ')[0] == 'editNote'){ 
-  if(document.querySelector('.note').textContent == ''){
+   if(document.querySelector('.note').textContent == ''){
      editDisplayIndicator.textContent = 'Click Space Below'
      noteHeading.after(editDisplayIndicator)
   }   
-   else if(!document.querySelector('.noteDiv .editDisplayIndicator') && document.querySelector('.note').textContent !== ''){
+   else if(!document.querySelector('.noteDiv .editDisplayIndicator') && document.querySelector('.note').textContent !== ''){    
      noteHeading.after(editDisplayIndicator)
-   } else if(e.target.className.split(' ')[1] == 'saveNote'){
-      document.querySelector('.noteDiv .editDisplayIndicator').remove()
+     document.querySelector('.noteDiv .editDisplayIndicator').classList.add('editDisplayIndicatorColor')
+     showDisplayIndicatorColor(e)
+   }else if(document.querySelector('.noteDiv .editDisplayIndicator').style.display == 'none'){
+     document.querySelector('.noteDiv .editDisplayIndicator').style.display = 'block'
+     showDisplayIndicatorColor(e)
+   }
+    else if(e.target.className.split(' ')[1] == 'saveNote'){    
+      // document.querySelector('.descriptionDiv .editDisplayIndicator').remove()
+      document.querySelector('.noteDiv .editDisplayIndicator').style.display = 'none'
       document.querySelector('.saveNote').classList.remove('saveNote')      
-  } 
+  }  
  }
  else if(e.target.className.split(' ')[0] == 'editProjectName'){   
    if(!document.querySelector('.titleContainerButtonsDiv .editDisplayIndicator')){  
     titleContainerButtonsDiv.appendChild(editDisplayIndicator)
+         showDisplayIndicatorColor(e)
+
   } else if(e.target.className.split(' ')[1] == 'saveProjectName'){
       document.querySelector('.editDisplayIndicator').remove()
       document.querySelector('.titleContainerButtonsDiv .editProjectName').classList.remove('saveProjectName')      
   }      
  }
-      //        if(document.querySelector('.editDisplayIndicator')){
-      //   document.querySelector('.descriptionDiv .editDisplayIndicator').style.visibility = 'hidden'
-      //  }       
 
-
-  //         if(!document.querySelector('.editDisplayIndicator')){
-  //           document.querySelector('.descriptionHeading').after(editDisplayIndicator)
-  //         }
-  //         else{
-  //           document.querySelector('.editDisplayIndicator').remove()
-  //           document.querySelector('.descriptionHeading').after(editDisplayIndicator)
-  //         } 
 
   // if(document.querySelector('.todo')){         
   //     const editDisplayIndicator = document.createElement('p')
@@ -4946,6 +4958,88 @@ function addDisplayIndicator(e){
   // disableButton()
   // displayAllProjects(e)
   // runAddMoreInfoButton()
+}
+
+function showDisplayIndicatorColor(e){
+  // if(document.querySelector('.editDisplayIndicator')){
+  //     setTimeout(() => {
+  //     document.querySelector('.editDisplayIndicator').classList.remove('editDisplayIndicatorColor')
+  //     }, 1000)
+  //   }
+console.log(e.target.parentElement)//
+let targetDiv = null
+if(e.target.className == 'editDescription'){
+  targetDiv = e.target.parentElement.parentElement.className
+}else if(e.target.className == 'editTodoButton'){
+  targetDiv = e.target.parentElement.className
+}else if(e.target.className == 'editNote'){
+  console.log('cjeck')
+  targetDiv = e.target.parentElement.parentElement.className
+}else if(e.target.className == 'editProjectName'){
+    targetDiv = e.target.parentElement.className
+}
+// console.log(document.querySelector('+'+'.'+e.target.parentElement.parentElement+'+'))
+console.log(targetDiv)
+console.log(document.querySelector(`.${targetDiv} .editDisplayIndicator`))
+
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.remove('editDisplayIndicatorColor')
+      }, 700)
+    }
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.add('editDisplayIndicatorColor')
+      }, 700)
+    }
+
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.remove('editDisplayIndicatorColor')
+      }, 1300)
+    }
+      
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.add('editDisplayIndicatorColor')
+      }, 1900)
+    }
+              
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.remove('editDisplayIndicatorColor')
+      }, 2500)
+    }
+
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.add('editDisplayIndicatorColor')
+      }, 3100)
+    }
+
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.remove('editDisplayIndicatorColor')
+      }, 3700)
+    }
+      
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.add('editDisplayIndicatorColor')
+      }, 4300)
+    }
+      
+    if(document.querySelector('.editDisplayIndicator')){
+      setTimeout(() => {
+      document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.remove('editDisplayIndicatorColor')
+      }, 4900)
+    } 
+
+    if(document.querySelector('.editDisplayIndicator')){
+    setTimeout(() => {
+    document.querySelector(`.${targetDiv} .editDisplayIndicator`).classList.add('editDisplayIndicatorColor')
+    }, 5500)
+  }
 }
 
 displayFirstProjectTodo()

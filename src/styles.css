@@ -925,7 +925,7 @@ p.statusText {
 .titleContainerButtonsDiv .editDisplayIndicator {
     /* background-color: black; */
      position: absolute; 
-      width: 80px; 
+      width: 73px; 
       top: 445px;
       /* left: -128px; */
       margin-bottom: -7px;
@@ -952,6 +952,7 @@ p.statusText {
     /* left: 275px; */
     /* width: 73px; */
     /* color: white; */
+     
 }
 
 .headerAddToProjectDiv {
