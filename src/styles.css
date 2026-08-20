@@ -421,12 +421,13 @@ h4 {
     margin-top: 27px;
 }
 
-.errorMessage, .selectProjectErrorMessage{
+.errorMessage .selectProjectErrorMessage{
     color: red;
     font-size: 0.7rem;
     /* font-style: italic; */
-    margin-top: -10px;
+    /* margin-top: -10px; */
     position: absolute;
+    top: 10px;
 }
 
 .projectErrorMessage, .projectErrorMessage2 {
@@ -467,8 +468,6 @@ h4 {
 .descriptionDiv .descriptionHeading, .noteDiv .noteHeading {
     font-size: 1.5rem;
 }
-
-
 
 .noteDiv {
     margin-top: 20px;
@@ -523,8 +522,20 @@ h4 {
     width: 25px;
 }
 
-.descriptionDiv .saved {
-top: -5px;
+.todoSaved {
+    background-color: rgb(170, 235, 170);
+    color: rgb(5, 155, 214);
+    position: relative;
+    top: -28px;
+    /* left: -10px; */
+    /* margin-right: 150px; */
+    width: 43px;
+}
+
+.descriptionDiv .saved, .noteDiv .saved  {    
+    position: relative;
+    left: 35px;
+    top: -21px;
 }
 
 .descriptionDiv {
@@ -537,11 +548,11 @@ top: -5px;
     margin-top: -10px;
 }
 
-.noteDiv .saved {
+/* .noteDiv .saved {
     position: relative;
-    top: 0px;
+    top: 0px; */
     /* background-color: orange; */
-}
+/* } */
 
 .editDescription {
    font-size: 0.65rem;
@@ -766,9 +777,21 @@ p.statusText {
     background-color: aqua;
 }
 
-.todoDivContent_2 .errorMessage{
-    margin-top: 3px;
-    /* background-color: blue; */
+.todoDivContent .errorMessage{
+    /* margin-top: 30px;
+    background-color: blue; */
+    color: red;
+    font-size: 0.6rem;
+    /* font-style: italic; */
+    /* margin-top: -10px; */
+    position: absolute;
+    top: 676px;
+    left: 28px;
+    font-weight: bold;
+}
+
+.headerTodoDiv .errorMessage {
+      color: red;
 }
 
 

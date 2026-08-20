@@ -85,14 +85,14 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
     projects.forEach((obj) => {
         if(typeof arr == 'string'){
           // console.log(obj)
-          console.log('check 1')
+          // console.log('check 1')
           if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
           
           let value = arr.split()[0]
           let newObject = {}
           newObject.title = value
           obj.project.todos.push(newObject)  
-          console.log('check 2')
+          // console.log('check 2')
           }
         }
         else{          
