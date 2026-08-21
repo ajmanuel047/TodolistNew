@@ -421,6 +421,12 @@ h4 {
     margin-top: 27px;
 }
 
+.projectInputDiv .errorMessage {
+    /* background-color: blue; */
+    /* position: absolute;
+    left: 50px; */
+}
+
 .errorMessage .selectProjectErrorMessage{
     color: red;
     font-size: 0.7rem;
@@ -777,16 +783,16 @@ p.statusText {
     background-color: aqua;
 }
 
-.todoDivContent .errorMessage{
+.projectInputDiv .errorMessage{
     /* margin-top: 30px;
     background-color: blue; */
     color: red;
     font-size: 0.6rem;
     /* font-style: italic; */
     /* margin-top: -10px; */
-    position: absolute;
+    /* position: absolute;
     top: 676px;
-    left: 28px;
+    left: 28px; */
     font-weight: bold;
 }
 
@@ -1035,4 +1041,26 @@ p.statusText {
     height: 40px;
     width:  70px;
     font-size: 1rem;
+}
+
+.displayWaitingMessage {
+    font-size: 1.1rem;
+    transition: font-size 0.5s ease-in-out;
+    position: relative;
+    /* right: 10px;
+    left: 10px; */
+    /* bottom: 88px; */
+    /* background-color: skyBlue; */
+    /* width: 100px; */
+    /* margin-left: 93px; */
+    margin-top: 7px;
+}
+
+.displayWaitingMessage.shrink {
+    font-size: 1.2rem;
+}
+
+.todoBox .displayWaitingMessage {
+   position: absolute;   
+   margin-left: 3px;
 }
