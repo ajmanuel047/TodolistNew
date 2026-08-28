@@ -767,6 +767,7 @@ p.statusText {
     font-size: 1.4rem;
     margin-bottom: 7px;
     font-weight: 600;
+    /* margin-bottom: -10px; */
 }
 
 .checkListForm {
@@ -780,7 +781,7 @@ p.statusText {
 .addCheckListFormButton {
     width:50px;
     /* text-align: left; */
-    margin-bottom: 0px;
+    /* margin-bottom: 15px; */
     
 }
 

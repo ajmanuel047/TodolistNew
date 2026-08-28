@@ -8,8 +8,8 @@ import { projectImportance } from "./projectPriority"
 let projects = [
       {
         'project ID': 0,        
-        'project': {'projectName':'This Is A Sample Project', 'Date Created' : `${formatDate().getDate()}`,'project status': 'InComplete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : ['Completed']},
-              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'InComplete', 'checkList' : ['Completed']}]}
+        'project': {'projectName':'This Is A Sample Project', 'Date Created' : `${formatDate().getDate()}`,'project status': 'InComplete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : {'Sample Item1' : 'Complete', 'Sample Item2' : 'InComplete'}},
+              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'InComplete', 'checkList' : {'Sample Item3' : 'InComplete', 'Sample Item4' : 'Complete'}}]}
    
     }
 ]
@@ -32,7 +32,7 @@ function callStorage(){
   })
 
   projects.push(...storedProjects)
-  // console.log(projects)
+  console.log(projects)
   }
 }
 
