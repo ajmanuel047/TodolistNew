@@ -151,6 +151,10 @@ body {
     height: 30px;
 }
 
+.projectStatusButton:active {    
+    border: none;   
+}
+
 /* .projectStatusButton {
     width: 65px;
 } */

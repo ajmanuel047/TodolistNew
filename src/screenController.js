@@ -1321,7 +1321,15 @@ const runAddProjectStatus = function(){
     //   if(document.querySelector('.editDisplayIndicator')){
     //   document.querySelector('.editDisplayIndicator').style.display = 'none'
     // }
-      projectStatusButon.style.backgroundColor = 'orange'
+      projectStatusButon.style.backgroundColor = 'rgb(79, 126, 126)'
+      // projectStatusButon.style.borderStyle = 'none'
+      projectStatusButon.style.color = 'white'
+      setTimeout(() => {
+        projectStatusButon.style.backgroundColor = ''
+        projectStatusButon.style.color = 'black'
+        // projectStatusButon.style.border = 'none'
+        // projectStatusButon.style.height = '20px'
+      }, 3500)
       addProjectStatus(e).getProjectStatus()
     }
   })
@@ -1994,7 +2002,6 @@ function createDescription (projectName, todo, targetDiv, e,description){
 }
 
 function editDescription (){
-  // document.body.style.backgroundColor = 'orange'
 }
 
 function createNote (projectName, note, todo, targetDiv){ 
@@ -3428,7 +3435,8 @@ function displayAllProjects (e){
         }
         // document.querySelector('.currentTaskBox').remove()
         
-     } else {     
+     } else {    
+  
         projectsBoxItems.appendChild(currentProjectStatusText)
         spanElementProjectName.textContent = currentProjectName
         currentProjectStatusText.appendChild(spanElementProjectName)
@@ -3963,35 +3971,35 @@ function addProjectStatus(e){
           console.log(allProjects().getProjects())
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(39,42,42)'
           }) 
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(55,96,127)'
           }, 500) 
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(39,42,42)'
           }, 1000) 
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(55,96,127)'
           }, 1500) 
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(39,42,42)'
           }, 2000) 
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(55,96,127)'
           }, 2500) 
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'orange'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(39,42,42)'
           }, 3000) 
 
           setTimeout(() => {
-          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(230, 63, 63)'
+          e.target.parentElement.parentElement.querySelector('.spanProjectStatus').style.backgroundColor = 'rgb(55,96,127)'
           }, 3500) 
       }
     }
@@ -4939,7 +4947,8 @@ shows textContent still shows on the box and I am sure the same thing would happ
 // will still need to checklist not completed in projectsBoxItems
 // work on display date save color
 // seems like delete button for not default projects is been disabled 
-
+// maybe instead of making display all projects responsive you can put a next button or arrow to display four four projects but the issue it will still need to be 
+// responsive especially when page size is reduced or you can still add media query. Just think about it if it would work
 
 // after storage bugs
 // plus button for todoBox not working after reload for when only project name is added

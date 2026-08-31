@@ -23,8 +23,10 @@ function callStorage(){
       newProject['project ID'] = Number(localStorage.key(i))     
       newProject.project = {}
       newProject.project['projectName'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['projectName']
+      newProject.project['Date Created'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['Date Created']
+      newProject.project['project status'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['project status']
       newProject.project['todos'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['todos']
-      console.log(newProject)
+      // console.log(newProject)
       // for(let key in newProject){
       //   if(newProject[key] == 0){
       //     console.log(key)
