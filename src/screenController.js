@@ -1131,14 +1131,11 @@ const runDeleteProject = function (targetDiv){
          }
         }
       }       
-
-
       deleteProject(currentProjectName)
-      // currentProject.remove()
       updateDropDown(currentProjectName).removeProject()
       createProjectContainer().createNewProjectContainer() 
-      // createDeleteBoxes().createEmptyTaskBox()
-      displayFirstProjectTodo(e)     
+      displayFirstProjectTodo(e) 
+      createDeleteBoxes(e).createEmptyTaskBox()    
     }
   })
 }
@@ -1304,7 +1301,15 @@ const runTodosForProjects = function(){
         if(document.querySelector('.todoBoxContainer').children.length > 1){
         
         }
-         addCheckItemsOnNewScreen(e)
+        createDeleteBoxes(e).createEmptyTaskBox()
+
+        let todo = null
+        let currentProjectName = e.target.parentElement.parentElement.querySelector('.spanProjectName').textContent
+        let projects = allProjects().getProjects()
+
+        if(document.querySelector('.currentTaskBox')){
+           addCheckItemsOnNewScreen(e)
+        }
      }
   })
 }
@@ -4235,7 +4240,7 @@ function displayFirstProjectTodo(e){
         deleteProject.disabled = true
         eventController().runEditButton()
         eventController().runCreateCheckList()
-        addCheckItemsOnNewScreen()
+        addCheckItemsOnNewScreen(e)
     }
     eventController().runEditButton()
     // console.log(allProjects().getProjects())
@@ -4678,7 +4683,7 @@ function addLinesToHeaderButtons(){
 }
 
 function createDeleteBoxes(e){
-  // console.log('create it')
+  console.log('create it')
   function createEmptyTaskBox(){
       if(!document.querySelector('.emptyCurrentTaskDivBoxContent')){
         const currentTaskDiv = document.querySelector('.currentTaskDiv')
@@ -4693,7 +4698,9 @@ function createDeleteBoxes(e){
            document.querySelector('.tasksDivTitle').after(todoBoxContainer)
         } 
         if(document.querySelector('.todoBoxContainer').children.length < 2){
+          console.log('runnigin')
           currentTaskDiv.appendChild(emptyCurrentTaskDivBox)
+          console.log(document.querySelector('.emptyCurrentTaskDivBox'))
           emptyCurrentTaskDivBox.appendChild(emptyCurrentTaskDivBoxContent)
         }   
       }
@@ -4754,8 +4761,11 @@ function addCheckItemsOnNewScreen(e){
   let projects = allProjects().getProjects()
   let currentProjectName = null
   let currentTodo = null
+  
   if(e){
     console.log(e.target.className)
+   
+
 
    if(e.target.className == 'viewTasks' || e.target.className == 'completedProjects'){
     currentProjectName = e.target.parentElement.parentElement.querySelector('.spanProjectName').textContent
@@ -4766,7 +4776,9 @@ function addCheckItemsOnNewScreen(e){
     currentProjectName = document.querySelector('.projectsBox').children[0].querySelector('.spanProjectName').textContent
   }
 
-  document.querySelector('.checkListContainer').remove()
+  if(document.querySelector('.checkListContainer')){
+    document.querySelector('.checkListContainer').remove()
+  }
   const currentTaskBox = document.querySelector('.currentTaskBox')
 
   const checkListContainer = document.createElement('div')
@@ -4799,6 +4811,7 @@ function addCheckItemsOnNewScreen(e){
     if(projects[i]['project']['projectName'] == currentProjectName){
       let currentTodo = null
       if(e){
+      console.log(e.target)
         if(e.target.className == 'viewTasks' || e.target.className == 'completedProjects'){
           currentTodo = projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1]['checkList']
         }else if(e.target.className == 'viewMoreInfo'){
@@ -4810,6 +4823,8 @@ function addCheckItemsOnNewScreen(e){
           }
         }
       }else{
+          console.log(projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1])
+          console.log(projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1]['checkList'])
           currentTodo = projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1]['checkList']
       }
       for(let key in currentTodo){
@@ -4836,34 +4851,9 @@ function addCheckItemsOnNewScreen(e){
         checkDiv.appendChild(label)
 
       }
-      //   let todos = projects[i]['project']['todos']
-    //   for(let j = 0; j < todos.length; j++){
-    //       for(let key in todos[j]['checkList']){
-    //         console.log(key)
-    //       }
-
-
-    //     const checkListDiv = document.createElement('div')
-    //     checkListDiv.classList.add('checkListDiv')
-    //     checkListForm.appendChild(checkListDiv)
-
-    //     const checkDiv = document.createElement('div')
-    //     checkDiv.classList.add('checkDiv')
-    //     checkListDiv.appendChild(checkDiv)
-    //     console.log(document.querySelector('.checkDiv'))
-    //   }
     }
   }
-  // console.log(currentTodo)
-  for(let key in checkList){
-  let value = key
-  let checkStatus = checkList[key]
-  // const checkDiv = document.createElement('div')
-  // checkDiv.classList.add('checkDiv')
-  // checkListDiv.appendChild(checkDiv)
-
-   
-}  
+ 
       eventController().runCreateCheckList()    
       eventController().runCheckListStatus()
 }
