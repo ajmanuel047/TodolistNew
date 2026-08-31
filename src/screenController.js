@@ -245,7 +245,7 @@ function eventController(){
       // runAddTaskPriority()
       // runAddTaskStatus()
       // runCreateCheckList()
-      // runAddMoreInfoButton() 
+      runAddMoreInfoButton() 
       createDeleteBoxes(e).createEmptyTaskBox()
         }, 5000);
       }
@@ -420,9 +420,8 @@ const deleteProjectsDeclineButton = function(){
 const runCreateTaskButton = function(){   
   const currentTodo = document.querySelectorAll('.createNewTodo')
   const taskCreator = createTask()
-  currentTodo.forEach((button) => {    
+  currentTodo.forEach((button) => {  
     button.onclick = function(e){
-      // console.log('check')
       createTask(undefined, undefined, e).createInputAndButton()
     }     
   })          
@@ -695,7 +694,7 @@ const runSaveChanges = function(){
             setTimeout(() => {        
               createDeleteBoxes().deleteEmptyCurrentTaskDivBox()
               createDeleteBoxes().deleteCurrentTaskBox()
-              console.log('test')
+              // console.log('test')
               if(document.querySelector('.todoInput')){
                 currentProjectName = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.newProjectName').textContent
                 createTodo(currentProjectName, arr[arr.length - 1], currentTodo).createObject()
@@ -729,7 +728,7 @@ const runSaveChanges = function(){
 
                 container.parentElement.remove()
                 createProjectContainer().addTodoBox(currentTodo, e)
-                console.log('run eventcontroller also here for maybe edit and delete of task')
+                // console.log('run eventcontroller also here for maybe edit and delete of task')
                 runCurrentDivInfo()
                 runDeleteTask()
                 runTodoEditButton()
@@ -1072,9 +1071,10 @@ const runSaveDueDate = function(){
 
 const runAddMoreInfoButton = function (){
   const moreInfoButtons = document.querySelectorAll('.addMoreInfo')
+  // console.log(moreInfoButtons)
   moreInfoButtons.forEach((moreInfoButton) => {
     moreInfoButton.onclick = function(e){
-    document.body.style.backgroundColor = 'purple'
+    // document.body.style.backgroundColor = 'purple'
     let currentDiv = e.target.parentElement.parentElement
     // console.log(currentDiv)
     // console.log(e.target)
@@ -1198,6 +1198,12 @@ const runAddCheckItem = function(){
   addCheckItemButtons.forEach((currentButton) => {
       currentButton.onclick = function(e){
         const targetButton = this
+        if(!document.querySelector('.checkListInput').value){
+          // document.querySelector('.addItemButton').style.backgroundColor = 'blue'
+          document.querySelector('.addItemButton').style.marginLeft = '-45px'
+          // document.querySelector('.checkListInput').style.height = '80px'
+       
+        }
         // console.log('check')
           createCheckList().addCheckItem(targetButton)
           e.preventDefault()
@@ -1749,7 +1755,6 @@ function displayProject(){
 }
      
 function createTask(currentProjectName, newProjectNameDiv, e){
-
   function createInputAndButton(){     
     const todoInput = document.createElement('input');
     todoInput.classList.add('todoInput');
@@ -1825,7 +1830,7 @@ function editContent (contentToEdit){
 
 function errorMessage(){
   const message = document.createElement('p')
-  message.textContent = 'Please fill empty field(s) and submit'
+  message.textContent = 'Fill empty field(s) and submit'
   message.classList.add('errorMessage')
   return message
 }
@@ -2224,60 +2229,64 @@ function submitTodo (targetButton) {
   //   iconDiv.classList.add('iconDiv') 
   //   todoBoxContainer.appendChild(iconDiv)
     
-   todoBoxContainer.scrollIntoView({
+   
+      
+    
+
+    if(!todoBoxContainer.querySelector('.icon')){
+
+      todoBoxContainer.scrollIntoView({
       behavior: 'smooth',
       block: 'center'
     })
 
-    const iconDiv = document.createElement('div')
+      const iconDiv = document.createElement('div')
     iconDiv.classList.add('iconDiv') 
     todoBoxContainer.appendChild(iconDiv)
 
     const icon = document.createElement('p')
     icon.classList.add('icon')
-    icon.textContent = 'Add Below'    
-      
-
-    if(!todoBoxContainer.querySelector('.todoDivContent')){
+    icon.classList.add('iconIndicator')
+    icon.textContent = 'Add Below'  
       console.log('it is rni')
       // todoBoxContainer.appendChild(iconDiv)
       iconDiv.appendChild(icon)
 
     setTimeout(() => {
-     icon.remove()
-    }, 800)
+     icon.classList.remove('iconIndicator')
+    }, 600)
 
     setTimeout(() => {
-     iconDiv.appendChild(icon)
-    }, 1400)
+     icon.classList.add('iconIndicator')
+    }, 1200)
 
     setTimeout(() => {
-     icon.remove()
-    }, 2200)
+     icon.classList.remove('iconIndicator')
+    }, 1800)
 
     setTimeout(() => {
-     iconDiv.appendChild(icon)
-    }, 2800)
+     icon.classList.add('iconIndicator')
+    }, 2400)
 
     setTimeout(() => {
-     icon.remove()
-    }, 3700)
+     icon.classList.remove('iconIndicator')
+    }, 3000)
 
     setTimeout(() => {
-     iconDiv.appendChild(icon)
-    }, 4300)
+     icon.classList.add('iconIndicator')
+    }, 3600)
 
     setTimeout(() => {
-     icon.remove()
-    }, 5200)
-
-        setTimeout(() => {
-     iconDiv.appendChild(icon)
-    }, 5800)
+     icon.classList.remove('.iconIndicator')
+    }, 4200)
 
     setTimeout(() => {
-     icon.remove()
-    }, 6700)
+     icon.classList.add('iconIndicator')
+    }, 4800)
+
+    setTimeout(() => {
+     icon.classList.remove('iconIndicator')
+    }, 5400)
     } 
     // else if(todoBoxContainer.querySelector('.todoDivContent')){
     //   if(todoBoxContainer.querySelector('.icon')){
@@ -2777,9 +2786,9 @@ function createCheckList(targetDiv, formDiv){
            targetButton.parentElement.querySelector('.errorMessage').style.marginTop = '23px'
         //   this.after(document.querySelector('.todoInput'), errorMessage())
           if(targetButton.parentElement.querySelector('.errorMessage')){
-             setTimeout(() => {
-               document.querySelector('.errorMessage').remove()
-            }, 2000)
+            //  setTimeout(() => {
+            //    document.querySelector('.errorMessage').remove()
+            // }, 2000)
           }
         }
       }   
@@ -2889,14 +2898,14 @@ function storeData (currentProjectName){
   // console.log(projects.length)
   function populateStorage(){
     for(let i = 0; i < projects.length; i++){  
-        console.log(currentProjectName)
+        // console.log(currentProjectName)
       if(projects[i]['project']['projectName'] == currentProjectName){
-          console.log(currentProjectName)
+          // console.log(currentProjectName)
         if(typeof projects[i]['project']['todos'] == 'object'){
         // console.log('check a') 
           localStorage.setItem(`${increment()}`, JSON.stringify(projects[i]))
         }else if (typeof projects[i]['project']['todos'] == 'string'){
-          console.log('check b') 
+          // console.log('check b') 
         //  localStorage.setItem(`${projects[i]['project']['projectName']}`, projects[i]['project']['todos'])
         }
       }
@@ -3871,7 +3880,7 @@ function todosForProjects(e){
 // createProjectContainer()
 
 function disableButton(){
- // console.log('buttons')
+//  console.log('buttons')
  let projectBoxItems = document.querySelectorAll('.projectsBoxItems')
  let projects = allProjects().getProjects()
 
@@ -3896,16 +3905,18 @@ function disableButton(){
 function disableDeleteButton(e){
 
  const deleteButtons = document.querySelectorAll('.projectsBox .deleteProject')
-  deleteButtons.forEach((container) => {
-   // console.log(container.parentElement.parentElement.querySelector('.spanProjectName'))
-  //  console.log(allProjects().getProjects()[0]['project']['projectName'])
-    if(container.parentElement.parentElement.querySelector('.spanProjectName').textContent == allProjects().getProjects()[0]['project']['projectName']){
+  deleteButtons.forEach((button) => {
+  //  console.log(document.querySelector('.projectsBox').children.length)
+  //   console.log(allProjects().getProjects()[0]['project']['projectName'])
+    if(button.parentElement.parentElement.querySelector('.spanProjectName').textContent == allProjects().getProjects()[0]['project']['projectName']){
     //  console.log('yes')
-    //  console.log(container)
-      container.disabled = true
+    //  console.log(allProjects().getProjects()[0]['project']['projectName'])
+      button.disabled = true
+      // console.log(document.querySelector('.titleContainerButtonsDiv'))
       if(document.querySelector('.titleContainerButtonsDiv')){
+        // console.log('chgecj')
         if(document.querySelector('.projectContainer .newProjectName').textContent == allProjects().getProjects()[0]['project']['projectName']){
-          // console.log('yes')
+    //  console.log(allProjects().getProjects()[0]['project']['projectName'])
           document.querySelector('.titleContainerButtonsDiv .deleteProject').disabled = true
         }
       }
@@ -4214,6 +4225,7 @@ function displayFirstProjectTodo(e){
         }
       }
        eventController().runCurrentDivInfo()
+       eventController().runAddMoreInfoButton()
     }
     if(!document.querySelector('.todoBoxContainer')){
       // console.log('check')
@@ -4245,12 +4257,23 @@ function displayFirstProjectTodo(e){
         eventController().runAddTaskStatus()
         eventController().runEditDescription()
         eventController().runEditNote()
-        deleteProject.disabled = true
+        // deleteProject.disabled = true
         eventController().runEditButton()
         eventController().runCreateCheckList()
         addCheckItemsOnNewScreen(e)
+        eventController().runAddMoreInfoButton()
+      // addMoreInfo()
     }
+  //  console.log(document.querySelector('.projectsBox').children.length)
+  //   console.log(allProjects().getProjects()[0]['project']['projectName'])
+  //   console.log(document.querySelector('.newProjectName').textContent)
+    if(document.querySelector('.newProjectName').textContent == allProjects().getProjects()[0]['project']['projectName']){
+      console.log(allProjects().getProjects()[0]['project']['projectName'])
+      document.querySelector('.titleContainerButtonsDiv .deleteProject').disabled = true
+     }
     eventController().runEditButton()
+    eventController().runCreateTaskButton()
+    createDeleteBoxes(e).createEmptyTaskBox()
     // console.log(allProjects().getProjects())
   }
  
@@ -4535,10 +4558,13 @@ function showDisplayIndicatorColor(e){
 function positionEditColorIndicator(){
   if(document.querySelector('.projectInputDiv')){
     if(document.querySelector('.titleContainerButtonsDiv .editDisplayIndicator')){
-      document.querySelector('.titleContainerButtonsDiv .editDisplayIndicator').style.top = '750px'
+      document.querySelector('.titleContainerButtonsDiv .editDisplayIndicator').classList.add('editDisplayIndicatorTitleButtonsDiv')
     }
     if(document.querySelector('.taskButtonsDiv .editDisplayIndicator')){
-      document.querySelector('.taskButtonsDiv .editDisplayIndicator').style.top = '915px'
+      // document.querySelector('.taskButtonsDiv .editDisplayIndicator').style.marginTop = '340px'
+    }
+    if(document.querySelector('.taskButtonsDiv .editDisplayIndicator')){
+      document.querySelector('.taskButtonsDiv .editDisplayIndicator').classList.add('editDisplayIndicatorTaskDiv')
     }
   }
 }
@@ -4691,7 +4717,7 @@ function addLinesToHeaderButtons(){
 }
 
 function createDeleteBoxes(e){
-  console.log('create it')
+  // console.log('create it')
   function createEmptyTaskBox(){
       if(!document.querySelector('.emptyCurrentTaskDivBoxContent')){
         const currentTaskDiv = document.querySelector('.currentTaskDiv')
@@ -4713,7 +4739,8 @@ function createDeleteBoxes(e){
         }   
       }
 
-
+      if(e){
+        
       if(!document.querySelector('.emptyBox') && e.target.className !== 'submitProject'){
         if(document.querySelector('.todoBoxContainer')){
           // document.querySelector('.todoBoxContainer').remove()
@@ -4738,6 +4765,8 @@ function createDeleteBoxes(e){
           
         }
      } 
+      }
+
       // else{
       //   document.querySelector('.emptyCurrentTaskDivBoxContent').remove()
       // }     
@@ -4751,9 +4780,9 @@ function createDeleteBoxes(e){
 
   function deleteCurrentTaskBox(){
     if(document.querySelector('.currentTaskBox')){
-      console.log('check')
+      // console.log('check')
       document.querySelector('.currentTaskBox').remove()
-      console.log('check')
+      // console.log('check')
     }
   }
 
@@ -4771,7 +4800,7 @@ function addCheckItemsOnNewScreen(e){
   let currentTodo = null
   
   if(e){
-    console.log(e.target.className)
+    // console.log(e.target.className)
    
 
 
@@ -4819,7 +4848,7 @@ function addCheckItemsOnNewScreen(e){
     if(projects[i]['project']['projectName'] == currentProjectName){
       let currentTodo = null
       if(e){
-      console.log(e.target)
+      // console.log(e.target)
         if(e.target.className == 'viewTasks' || e.target.className == 'completedProjects'){
           currentTodo = projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1]['checkList']
         }else if(e.target.className == 'viewMoreInfo'){
@@ -4831,14 +4860,14 @@ function addCheckItemsOnNewScreen(e){
           }
         }
       }else{
-          console.log(projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1])
-          console.log(projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1]['checkList'])
+          // console.log(projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1])
+          // console.log(projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1]['checkList'])
           currentTodo = projects[i]['project']['todos'][projects[i]['project']['todos'].length - 1]['checkList']
       }
       for(let key in currentTodo){
         // console.log(key)
         let checkStatus = currentTodo[key]
-        console.log(checkStatus)
+        // console.log(checkStatus)
         const checkDiv = document.createElement('div')
         checkDiv.classList.add('checkDiv')
         checkListDiv.appendChild(checkDiv)
@@ -4936,27 +4965,30 @@ shows textContent still shows on the box and I am sure the same thing would happ
 // done --- work on the error message in todobox
 // done --- edit button nolonger working after new project isadded
 // done --- see if it is necessary or not when the last task is deleted try and reactivate add more info butto
-// na wa but when the page size is changed click text below for project name changes position and i am sure the same woluld be for todoedit
-// clikck text below for projectname and todoedit is fucking up when projectnameinput plus button is clicked
-// i am tired of adjusting elick text below.maybe if any button is clicked just make the click item below not visible
+// done --- na wa but when the page size is changed click text below for project name changes position and i am sure the same woluld be for todoedit
+// done --- clikck text below for projectname and todoedit is fucking up when projectnameinput plus button is clicked
+// done --- i am tired of adjusting elick text below.maybe if any button is clicked just make the click item below not visible
 // done --- addmore indicator text not showing again
 // bonus task -- make sure written text in todoBoxes does not pass a certain width
-// error message when you try to add an empty checkList
-// error now happening cannot add single project without todo
+// done --- error message when you try to add an empty checkList
+// done --- error now happening cannot add single project without todo
 // bonus task - completed for todo when task status is clicked should not show completed unless checkLists if present have been completed. Think about if you 
-// will still need to checklist not completed in projectsBoxItems
-// work on display date save color
-// seems like delete button for not default projects is been disabled 
+// done -- will still need to checklist not completed in projectsBoxItems
+// done --- work on display date save color
+// done --- seems like delete button for not default projects is been disabled 
 // maybe instead of making display all projects responsive you can put a next button or arrow to display four four projects but the issue it will still need to be 
 // responsive especially when page size is reduced or you can still add media query. Just think about it if it would work
+// think about how you would do due date on projectboxitems
+// bonus task - due date should be ahead not behind and it should be actual active dates
+// done --- more info button not displaying 'add below'
 
 // after storage bugs
-// plus button for todoBox not working after reload for when only project name is added
-// delete button for newProjectName is being disabled. should only be for the sample project
-// emptycurrenttaskdivbox and other not working on reload
-// this is a sample project is appearing twice in header todo. it appears twice after the page is reloaded.
-// it also appears twice in allProjects and even in projectsBox
-// it seems to create the second when a particular button is clicked. Not sure which yet
-// same thing seems to be happening to todoBox for this same "this is a sample project".
-// delete Project not creating empty boxes on current tASK
-// on reload, emptycurrenttaskdivbox not showing which should show if there is no task
+// done --- plus button for todoBox not working after reload for when only project name is added
+// done --- delete button for newProjectName is being disabled. should only be for the sample project
+// done --- emptycurrenttaskdivbox and other not working on reload
+// done --- this is a sample project is appearing twice in header todo. it appears twice after the page is reloaded.
+// done --- it also appears twice in allProjects and even in projectsBox
+// done --- it seems to create the second when a particular button is clicked. Not sure which yet
+// done --- same thing seems to be happening to todoBox for this same "this is a sample project".
+// done --- delete Project not creating empty boxes on current tASK
+// done --- on reload, emptycurrenttaskdivbox not showing which should show if there is no task

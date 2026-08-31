@@ -42,7 +42,7 @@ function callStorage(){
   })
 
   projects.push(...storedProjects)
-  console.log(projects)
+  // console.log(projects)
   }
 }
 

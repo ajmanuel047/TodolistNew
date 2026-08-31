@@ -317,7 +317,6 @@ h2 {
 }
 
 h3 {
-    /* background-color: blue; */
     display: inline-block;
     font-size: 1.5rem;
     
@@ -366,7 +365,12 @@ h3 {
     margin-left: 60px;
     position: relative;
     bottom: 2px; 
-    background-color: blue;
+  
+ }
+
+ .todoDiv .createNewTodo {
+    color: rgb(42, 42, 44);
+    background-color: rgb(245, 243, 243);
  }
 
 .todoBox .createNewTodo:hover {
@@ -658,10 +662,10 @@ h4 {
 }
 
 .dateUpdated {
-    background-color: rgb(170, 235, 170);
-    color: rgb(5, 155, 214);
-    font-size: 0.7rem;
-    font-weight: bold;
+   color: rgb(204, 204, 226);
+    background-color: rgb(68, 68, 68);
+    font-size: 0.8rem;
+    /* font-weight: bold; */
     text-align: center;
     width: 60px;
     position: relative;
@@ -800,6 +804,7 @@ p.statusText {
     /* background-color: blue; */
     position: relative;
     top: -2.3px;
+    font-size: 1rem;
 }
 
 .saveChecklist {
@@ -812,8 +817,22 @@ p.statusText {
     margin-top: 20px;
 }
 
+.checkListContainer p.errorMessage {   
+    /* position: absolute;
+    top: 985px; */
+    position: relative;
+    top: 3px;
+    margin-left: -123px;
+    color: rgb(204, 226, 204);
+    background-color: rgb(68, 68, 68);
+    /* text-align: center; */
+    font-size: 0.8rem;
+    width: 161px;
+    letter-spacing: 0.1rem;
+}
 .addItemButton {
     /* margin-top: 10px; */
+    /* margin-left: -80px; */
 }
 
 .checkDiv {
@@ -885,14 +904,15 @@ p.statusText {
 }
 
 .todoBox .createNewTodo {
-    background-color: skyblue;
+    color: rgb(42, 42, 44);
+    background-color: rgb(250, 248, 248);
     border-radius: 50%;
     border-style: none;
     height: 70px;
     width: 70px;
     font-size: 40px;
     cursor: pointer;
-    color: white;
+  
     margin: auto;
     /* position: relative; */
     /* top: 60px;
@@ -967,9 +987,30 @@ p.statusText {
 
 .icon {
     position: absolute;
+    /* top: -216px;
+    right: -100px; */
+    margin-top: -240px;
+    margin-left: 97px;
+    font-size: 0.9rem;
+    /* color: rgb(204, 226, 204);
+    background-color: rgb(68, 68, 68); */
+    width: 56px;
+    text-align: center;
+    /* position: absolute; */
     /* background-color: black; */
-    top: 606px;
-    left: 103px;
+    /* top: 606px;
+    left: 103px; */
+}
+
+.iconIndicator {
+    /* position: absolute; */
+    /* top: -216px;
+    right: -100px; */
+    /* margin-top: -240px;
+    margin-left: 97px; */
+    /* width: 56px; */
+    color: rgb(26, 27, 26);
+    background-color: rgb(245, 229, 229);
 }
 
 .todoBoxTaskButtonsDiv {    
@@ -980,7 +1021,6 @@ p.statusText {
     width: 222px;
     height: 20px;
     margin-left: -3px;
-    /* background-color: blue; */
 }
 
 .todoBoxTaskButtonsDiv button {
@@ -1105,7 +1145,6 @@ p.statusText {
 }
 
 .deleteProjectsConfirmationDiv {    
-    /* background-color: blue; */
     width: 200px;
     margin: auto;
     display: flex;
@@ -1126,7 +1165,6 @@ p.statusText {
     /* right: 10px;
     left: 10px; */
     /* bottom: 88px; */
-    /* background-color: skyBlue; */
     /* width: 100px; */
     /* margin-left: 93px; */
     margin-top: 7px;
@@ -1161,7 +1199,6 @@ p.statusText {
 }
 
 .projectContainer .errorMessage {
-    /* background-color: blue; */
     margin-left: 3px;
     width: 200px;
     color: red;
@@ -1188,3 +1225,33 @@ p.statusText {
 .headerDiv button:hover {
     transform: scale(1.01);
 }
+
+@media only screen and (max-width: 390px){ 
+
+    .titleContainerButtonsDiv .editDisplayIndicator { 
+        margin-top: 408px;
+    }
+}
+
+@media only screen and (min-width: 390px){
+
+     .editDisplayIndicatorTitleButtonsDiv {
+        margin-top: 339px;
+    }
+}
+
+@media only screen and (max-width: 390px){   
+
+    .editDisplayIndicatorTaskDiv { 
+        margin-top: 407px;
+    }
+}
+
+@media only screen and (min-width: 390px){
+
+     .editDisplayIndicatorTaskDiv {
+        margin-top: 337.5px;
+        
+    }
+}
+
