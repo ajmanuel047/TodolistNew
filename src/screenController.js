@@ -56,10 +56,14 @@ const newProjectButton = (function(){
   const headerDiv = document.createElement('div')
   headerDiv.classList.add('headerDiv')
   document.body.appendChild(headerDiv)
+
+  const container = document.createElement('div')
+  container.classList.add('container')
+  document.body.appendChild(container)
   
   const projectsBoxDiv = document.createElement('div')
   projectsBoxDiv.classList.add('projectsBoxDiv')
-  document.body.appendChild(projectsBoxDiv)
+  container.appendChild(projectsBoxDiv)
 
   const projectTitle = document.createElement('h2')
   projectTitle.classList.add('projectTitle')
@@ -160,10 +164,7 @@ const newProjectButton = (function(){
 
 
 function defaultProject(){
-      // const projectContainer = document.createElement('div');
-      // projectContainer.classList.add('projectContainer');
-      // document.querySelector('.projectsBoxDiv').after(projectContainer);
-      
+
       displayAllProjects(null)
       createProjectContainer().createNewProjectContainer()
 }
@@ -719,7 +720,9 @@ const runSaveChanges = function(){
               runAddMoreInfoButton()          
               e.target.remove()
               runCurrentDivInfo()
-              // console.log('check savechanges')          
+
+              
+              console.log('check savechanges')          
               targetDiv.querySelectorAll('.todoDivContent').forEach((container) => {
               if(container.querySelector('.todoInput').value == currentTodo){
                 createNote(currentProjectName, note, currentTodo).getNoteInput()
@@ -765,6 +768,10 @@ const runSaveChanges = function(){
                 }
               })   
              }    
+             document.querySelector('.checkListContainer').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+             })
               createDate(targetDiv).getDateDiv()
               createDate(targetDiv, currentProjectName, currentTodo).getDateProjectWasCreated()
               addDate(targetDiv).getCreateButton()
@@ -3489,7 +3496,7 @@ function createProjectContainer(todo, e){
   } else {
     const projectContainer = document.createElement('div')
     projectContainer.classList.add('projectContainer')
-    document.body.appendChild(projectContainer)
+    document.querySelector('.container').appendChild(projectContainer)
     const todoDiv = document.createElement('div')
     todoDiv.classList.add('todoDiv')
     projectContainer.appendChild(todoDiv)
@@ -4976,11 +4983,21 @@ shows textContent still shows on the box and I am sure the same thing would happ
 // done -- will still need to checklist not completed in projectsBoxItems
 // done --- work on display date save color
 // done --- seems like delete button for not default projects is been disabled 
-// maybe instead of making display all projects responsive you can put a next button or arrow to display four four projects but the issue it will still need to be 
+// maybe instead of making display all projects responsive you can put a next button or arrow to display four four projects but the issue it 
+// will still need to be 
 // responsive especially when page size is reduced or you can still add media query. Just think about it if it would work
 // think about how you would do due date on projectboxitems
 // bonus task - due date should be ahead not behind and it should be actual active dates
 // done --- more info button not displaying 'add below'
+// submit todo for header fly to one side when page is minimized
+// deleting task is making currentaskdiv to be empty
+// spantaskname not positioned properly
+// task started adding ontop eacothr again.don't know how bt i was addding alot of todo and doing css alott.seems like it is when i add task from todobox not sure
+// smple project starting to appear twice again i thik it has something to with the error in checklikst comig up when i add task without description or note i think anyway. i alson think it started when i introducded container div to house projectsboxdiv and projectcontainer. not too sure though
+// taskpriority for todoBox showing undefined on reload
+// on using media query, this like editDisplayIndicator is totally lost
+// project edit button throwing error
+// another error unlocked when edit button is clicked and i clicked all tasks, error showed cus the editDisplayIndicator was already active 
 
 // after storage bugs
 // done --- plus button for todoBox not working after reload for when only project name is added
