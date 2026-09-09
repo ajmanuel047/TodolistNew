@@ -9,7 +9,7 @@ let projects = [
       {
         'project ID': 0,        
         'project': {'projectName':'This Is A Sample Project', 'Date Created' : `${formatDate().getDate()}`,'project status': 'InComplete','todos':[{'title' : 'Sample Todo 1', 'description' : 'Sample Description 1', 'projectNote' : 'Sample Note 1', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : {'Sample Item1' : 'Complete', 'Sample Item2' : 'InComplete'}},
-              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : {'Sample Item3' : 'InComplete', 'Sample Item4' : 'Complete'}}]}
+              {'title' : 'Sample Todo 2', 'description' : 'Spend 30mins before leaving', 'projectNote' : 'Sample Note 2', 'dateCreated' : `${formatDate().getDate()}`, 'taskStatus' : 'Completed', 'checkList' : {'Sample Item3' : 'Complete', 'Sample Item4' : 'Complete'}}]}
    
     }
 ]
@@ -40,8 +40,11 @@ function callStorage(){
   storedProjects.sort(function(a,b){
    return a['project ID'] - b['project ID']
   })
-
+  let newProject = []
   projects.push(...storedProjects)
+  // projects = newProject
+  // console.log(newProject)
+  // console.log(projects)
   // console.log(projects)
   }
 }
@@ -237,8 +240,7 @@ function projectPriorityController(currentProjectName, todo){
           if(projects[i]['project']['todos'][j]['title'] == todo){
            let currentProjectPriority = projects[i]['project']['todos'][j]['taskPriority']
            let newProjectPriority = projectImportance(currentProjectPriority).currentValue()
-           projects[i]['project']['todos'][j].taskPriority = newProjectPriority
-          //  console.log(newProjectPriority)
+             projects[i]['project']['todos'][j].taskPriority = newProjectPriority
           }
         }
       }
@@ -254,7 +256,7 @@ function projectPriorityController(currentProjectName, todo){
 }
 
 function updateProjectStatus(projectName, status){
-  // console.log(projectName)
+  // console.log(status)
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == projectName){
       projects[i]['project']['project status'] = status
@@ -263,23 +265,74 @@ function updateProjectStatus(projectName, status){
 }
 
 function updateTodoStatus(currentProjectName, todo){
-  // console.log('check')  
+  // console.log('chec')
+  // console.log(currentProjectName)
+  // console.log(todo)
+  let checkListStatus = null
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         if(projects[i]['project']['todos'][j]['title'] == todo){          
-          // console.log(projects[i]['project']['todos'][j]['taskStatus'])
           if(!projects[i]['project']['todos'][j]['taskStatus']){
-            projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-          //  console.log('completed')
-          }else if(projects[i]['project']['todos'][j]['taskStatus'] && projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
-            projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
-            // console.log('Incomplete')
-            // console.log(projects[i]['project']['todos'][j]['taskStatus'])
-          }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'InComplete'){
-            projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-            // console.log('completed again')
+            projects[i]['project']['todos'][j]['taskStatus'] = ''
+           console.log('check 7')
+           if(projects[i]['project']['todos'][j]['checkList']){
+               checkListStatus = Object.values(projects[i]['project']['todos'][j]['checkList'])
+               if(!checkListStatus.includes('Incomplete')){
+                  projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+                  // console.log(checkListStatus)
+                  console.log('1')
+               }else if(checkListStatus.includes('Incomplete')){
+                  projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+                  // console.log(checkListStatus)
+                  console.log('2')
+               }
+            }else if(!projects[i]['project']['todos'][j]['checkList']){
+                  projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+                  // console.log(checkListStatus)
+                  console.log('3')
+            }
+          }else if(projects[i]['project']['todos'][j]['taskStatus']){
+            if(projects[i]['project']['todos'][j]['checkList']){
+               checkListStatus = Object.values(projects[i]['project']['todos'][j]['checkList'])
+              //  console.log(checkListStatus)
+               if(!checkListStatus.includes('Incomplete')){
+                  projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+                  // console.log(checkListStatus)
+                  // console.log('4')
+               }else if(checkListStatus.includes('Incomplete')){
+                  projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+                  // console.log(checkListStatus)
+                  // console.log('5')
+               }
+            }else if(!projects[i]['project']['todos'][j]['checkList']){
+                    //  console.log(projects[i]['project']['todos'][j]['taskStatus'])
+                  if(projects[i]['project']['todos'][j]['taskStatus'] == 'InComplete'){
+                     projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+                    //  console.log('6')
+                  }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
+                     projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+                    //  console.log('7')
+                  }
+                  // console.log(checkListStatus)
+            }
           }
+          // else if(projects[i]['project']['todos'][j]['taskStatus'] && projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
+          //   projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+          //   console.log('check 8')
+          //   console.log('Incomplete')
+          //   console.log(projects[i]['project']['todos'][j]['taskStatus'])
+          // }
+          // else if(projects[i]['project']['todos'][j]['taskStatus'] == 'InComplete'){
+          //   projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+          //   // console.log('completed again')
+          //   console.log('check 9')
+          // }
+          // else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
+          //   projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+          //   // console.log('completed again')
+          //   console.log('check 10')
+          // }
         }
       }
     }
@@ -287,45 +340,45 @@ function updateTodoStatus(currentProjectName, todo){
   // console.log(projects)
 }
 
-function createTodoCheckList(currentProjectName, todo, checkInput){
-  // console.log(currentProjectName, todo, checkInput)
+function createTodoCheckList(currentProjectName, todo, checkInput, status){
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
         for(let j = 0; j < projects[i]['project']['todos'].length; j++){
           if(projects[i]['project']['todos'][j]['title'] == todo){
             if(!projects[i]['project']['todos'][j]['checkList']){
-            // console.log('no')
-            projects[i]['project']['todos'][j]['checkList'] = {}
-            projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
-            // console.log(projects)
-          }else{
-            console.log('yes')
-            projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
-            // console.log(projects)
+              projects[i]['project']['todos'][j]['checkList'] = {}    
+                if(status == true){
+                  projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Complete'
+                }else if(status == false){
+                  projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
+                }
+          }else if(projects[i]['project']['todos'][j]['checkList']){
+              if(status == true){
+                 projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Complete'
+              }else if(status == false){
+                 projects[i]['project']['todos'][j]['checkList'][`${checkInput}`] = 'Incomplete'
+              }
           }
         }
       }
     }
   }
-  // console.log(projects)
 }
 
-function updateCheckListStatus(currentProjectName, currentTodo, targetDiv){
+function updateCheckListStatus(currentProjectName, currentTodo, checkItem){
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         if(projects[i]['project']['todos'][j]['title'] == currentTodo){
       //  console.log(projects[i]['todos'][j]['checkList'])
         for(let prop in projects[i]['project']['todos'][j]['checkList']){
-          if(prop == targetDiv){         
+          if(prop == checkItem){      
+            console.log(checkItem)   
+            console.log(projects[i]['project']['todos'][j]['checkList'][prop])   
             if(projects[i]['project']['todos'][j]['checkList'][prop] == 'Incomplete'){
                 projects[i]['project']['todos'][j]['checkList'][prop] = 'Complete'
               } else{
-              projects[i]['project']['todos'][j]['checkList'][prop] = 'Incomplete'
-                // console.log('start here')
-                /*
-                next task is to update localstorage
-                */
+              projects[i]['project']['todos'][j]['checkList'][prop] = 'Incomplete' 
               }          
             }
           }
