@@ -10,9 +10,9 @@ function projectImportance(currentProjectPriority){
   } else if(currentProjectPriority == projectPriorityArr[1]){
         value = projectPriorityArr[2]
   }
-    // console.log(value)
+    // 
  const currentValue = () => value
-//  console.log(allProjects)
+//  
  return { currentValue }
 
 }

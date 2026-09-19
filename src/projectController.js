@@ -1,9 +1,7 @@
-// import { createNewProject } from "./eventController"
 import { createEmptyProject } from "./createNewProject"
 import { createProject } from "./createNewProject"
 import { formatDate } from "./dateformatter"
 import { projectImportance } from "./projectPriority"
-// import { storageCall } from "./screenController"
 
 let projects = [
       {
@@ -26,14 +24,6 @@ function callStorage(){
       newProject.project['Date Created'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['Date Created']
       newProject.project['project status'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['project status']
       newProject.project['todos'] = JSON.parse(localStorage.getItem(localStorage.key(i)))['project']['todos']
-      // console.log(newProject)
-      // for(let key in newProject){
-      //   if(newProject[key] == 0){
-      //     console.log(key)
-      //     delete newProject[key];
-      //     break;
-      //   }
-      // }
       storedProjects.push(newProject)      
     }
 
@@ -41,11 +31,7 @@ function callStorage(){
    return a['project ID'] - b['project ID']
   })
   let newProject = []
-  projects.push(...storedProjects)
-  // projects = newProject
-  // console.log(newProject)
-  // console.log(projects)
-  // console.log(projects)
+  projects.push(...storedProjects) 
   }
 }
 
@@ -72,40 +58,31 @@ function createNewProjects(value){
       projects[i]['project']['Date Created'] = formatDate().getDate()  
     }
   }   
-  // console.log(projects)
 }
 
 function editProject(value1, value2){
-  // console.log(value1)
-  // console.log(value2)
+
  for(let i = 0; i < projects.length; i++){
    if(projects[i]['project']['projectName'] == value1){
-        // console.log('else ran')
     projects[i]['project']['projectName'] = value2
-    // projects.splice(i + 1, 1)
    }
  }
-//  console.log(projects)
 }
 
 function createTodo(currentProjectName, arr, currentTodo, previousTodo){
-  // console.log(currentProjectName)
-  // console.log(arr)
-  // console.log(currentTodo)
-  // console.log(previousTodo)
+ 
   function pushTodo () { 
-    // console.log(projects)
+    // 
     projects.forEach((obj) => {
         if(typeof arr == 'string'){
-          // console.log(obj)
-          // console.log('check 1')
+          // 
+          // 
           if(obj.project.projectName.toLowerCase() == currentProjectName.toLowerCase()){
           
           let value = arr.split()[0]
           let newObject = {}
           newObject.title = value
           obj.project.todos.push(newObject)  
-          // console.log('check 2')
           }
         }
         else{          
@@ -114,31 +91,25 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
                   let newObject = {}
                   newObject.title = `${arr[i]}`
                   obj.project.todos.push(newObject)   
-                  // console.log('check 3')
+                  // 
                 }
              }  
           }
       })  
    }
 
- function editTodo(){
-// console.log('check 4')
-//  console.log(currentProjectName)
-  // console.log(arr)
-  // console.log(currentTodo)
-  // console.log(previousTodo)
+ function editTodo(){ 
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
-      // console.log(currentProjectName)
+      // 
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         if(projects[i]['project']['todos'][j]['title'] == previousTodo){
-          // console.log(previousTodo)
+          // 
           projects[i]['project']['todos'][j]['title'] = currentTodo
         }       
       }
     }
   }
-  // console.log(projects)
  }
  
   const createObject = () => pushTodo()
@@ -151,39 +122,29 @@ function createTodo(currentProjectName, arr, currentTodo, previousTodo){
 }
 
 function dateController(currentProjectName, calenderValues, todo){
-  // console.log(todo)
   for(let i = 0; i < projects.length; i++){
      if(projects[i]['project']['projectName'] == currentProjectName){
-    //  console.log(projects[i]['project']['projectName'] )  
-    //  console.log(currentProjectName)
-    //  console.log(projects[i]['project']['todo'] )  
+ 
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
-          // console.log(projects[i]['project']['todos'][j]['title'])
-          // console.log(todo)
+      
         if(projects[i]['project']['todos'][j]['title'] == todo){
-          // console.log(projects[i]['project']['todos'][j]['title'])
-          // console.log(todo)
            if(calenderValues == undefined){
-            // console.log('check')
                 projects[i]['project']['todos'][j].dateCreated = formatDate().getDate()
            } else {
-            console.log('check 2')
                 projects[i]['project']['todos'][j].dueDate = formatDate(calenderValues).dueDate()
            }                  
          }
        }           
      }
   }   
-  // console.log(projects)
 }
 
  function addDescriptionToProject (projectName, description, todo) {
-  // console.log(description)
-  // console.log(todo)
+
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['project']['projectName'] == projectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
-        // console.log(projects[i]['todos'][j]['title'] == todo)
+        // 
           if(projects[i]['project']['todos'][j]['title'] == todo){
              projects[i]['project']['todos'][j].description = description
           }       
@@ -193,34 +154,29 @@ function dateController(currentProjectName, calenderValues, todo){
  }
  
  function addNoteToProject (projectName, note, todo) {
-  //  console.log(note)
-  //  console.log(todo)
-  //  console.log(projectName)
+ 
    for(let i = 0; i < projects.length; i++){
      if(projects[i]['project']['projectName'] == projectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
-        // console.log(projects[i]['todos'][j]['title'] == todo)
         if(projects[i]['project']['todos'][j]['title'] == todo){
             projects[i]['project']['todos'][j].projectNote = note
         }       
       }
      }
    }
-  //  console.log(projects)
  }
 
  function deleteProject(currentProjectName){
-  // console.log('delete')
+  // 
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
         projects.splice(i, 1)        
     }
   }
-  // console.log(projects)
  }
 
 function removeTaskFromArray(projectName, todo){
-  // console.log(projectName, todo)
+  // 
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == projectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
@@ -245,7 +201,6 @@ function projectPriorityController(currentProjectName, todo){
         }
       }
     }
-      // console.log(projects)
   }
 
 
@@ -256,7 +211,6 @@ function projectPriorityController(currentProjectName, todo){
 }
 
 function updateProjectStatus(projectName, status){
-  // console.log(status)
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == projectName){
       projects[i]['project']['project status'] = status
@@ -264,80 +218,48 @@ function updateProjectStatus(projectName, status){
   }
 }
 
-function updateTodoStatus(currentProjectName, todo){
-  // console.log('chec')
-  // console.log(currentProjectName)
-  // console.log(todo)
+function updateTodoStatus(currentProjectName, todo, targetDiv){
+
   let checkListStatus = null
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
-        if(projects[i]['project']['todos'][j]['title'] == todo){          
-          if(!projects[i]['project']['todos'][j]['taskStatus']){
-            projects[i]['project']['todos'][j]['taskStatus'] = ''
-           console.log('check 7')
-           if(projects[i]['project']['todos'][j]['checkList']){
-               checkListStatus = Object.values(projects[i]['project']['todos'][j]['checkList'])
-               if(!checkListStatus.includes('Incomplete')){
-                  projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-                  // console.log(checkListStatus)
-                  console.log('1')
-               }else if(checkListStatus.includes('Incomplete')){
+        if(projects[i]['project']['todos'][j]['title'] == todo){
+            if(!projects[i]['project']['todos'][j]['taskStatus']){
+             if(targetDiv == 'todoSubmitButton'){
+                projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+             }else{
+               projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+             }
+             if(projects[i]['project']['todos'][j]['checkList']){
+                let checkListStatus = Object.values(projects[i]['project']['todos'][j]['checkList'])
+                if(checkListStatus.includes('Incomplete')){
                   projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
-                  // console.log(checkListStatus)
-                  console.log('2')
-               }
-            }else if(!projects[i]['project']['todos'][j]['checkList']){
+                }else if(!checkListStatus.includes('Incomplete')){
                   projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-                  // console.log(checkListStatus)
-                  console.log('3')
-            }
-          }else if(projects[i]['project']['todos'][j]['taskStatus']){
-            if(projects[i]['project']['todos'][j]['checkList']){
-               checkListStatus = Object.values(projects[i]['project']['todos'][j]['checkList'])
-              //  console.log(checkListStatus)
-               if(!checkListStatus.includes('Incomplete')){
-                  projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-                  // console.log(checkListStatus)
-                  // console.log('4')
-               }else if(checkListStatus.includes('Incomplete')){
-                  projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
-                  // console.log(checkListStatus)
-                  // console.log('5')
-               }
-            }else if(!projects[i]['project']['todos'][j]['checkList']){
-                    //  console.log(projects[i]['project']['todos'][j]['taskStatus'])
-                  if(projects[i]['project']['todos'][j]['taskStatus'] == 'InComplete'){
-                     projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-                    //  console.log('6')
-                  }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
-                     projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
-                    //  console.log('7')
-                  }
-                  // console.log(checkListStatus)
+                }
+             }
+          }else if(projects[i]['project']['todos'][j]['taskStatus']){   
+            if(projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
+               projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+            }else if(projects[i]['project']['todos'][j]['taskStatus'] == 'InComplete'){
+              if(projects[i]['project']['todos'][j]['checkList']){
+                let checkListStatus = Object.values(projects[i]['project']['todos'][j]['checkList'])
+                if(!checkListStatus.includes('Incomplete')){
+                    projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+                }else if(checkListStatus.includes('Incomplete')){
+                    projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
+                }
+              }else if(!projects[i]['project']['todos'][j]['checkList']){
+                 projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
+              }
             }
           }
-          // else if(projects[i]['project']['todos'][j]['taskStatus'] && projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
-          //   projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
-          //   console.log('check 8')
-          //   console.log('Incomplete')
-          //   console.log(projects[i]['project']['todos'][j]['taskStatus'])
-          // }
-          // else if(projects[i]['project']['todos'][j]['taskStatus'] == 'InComplete'){
-          //   projects[i]['project']['todos'][j]['taskStatus'] = 'Completed'
-          //   // console.log('completed again')
-          //   console.log('check 9')
-          // }
-          // else if(projects[i]['project']['todos'][j]['taskStatus'] == 'Completed'){
-          //   projects[i]['project']['todos'][j]['taskStatus'] = 'InComplete'
-          //   // console.log('completed again')
-          //   console.log('check 10')
-          // }
         }
       }
     }
   }
-  // console.log(projects)
+  // 
 }
 
 function createTodoCheckList(currentProjectName, todo, checkInput, status){
@@ -370,11 +292,8 @@ function updateCheckListStatus(currentProjectName, currentTodo, checkItem){
     if(projects[i]['project']['projectName'] == currentProjectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
         if(projects[i]['project']['todos'][j]['title'] == currentTodo){
-      //  console.log(projects[i]['todos'][j]['checkList'])
         for(let prop in projects[i]['project']['todos'][j]['checkList']){
-          if(prop == checkItem){      
-            console.log(checkItem)   
-            console.log(projects[i]['project']['todos'][j]['checkList'][prop])   
+          if(prop == checkItem){             
             if(projects[i]['project']['todos'][j]['checkList'][prop] == 'Incomplete'){
                 projects[i]['project']['todos'][j]['checkList'][prop] = 'Complete'
               } else{
@@ -397,7 +316,6 @@ function deleteAllProjects(){
 function allProjects(value){
   
   const getProjects = () => projects
-  // console.log(projects)
   return { getProjects }
 }
 
@@ -419,79 +337,3 @@ export {
         updateTodoStatus,
         deleteAllProjects
       }
-
-
-// function createProject(value){
-     
-//   function newProject (){
-//     let project = {
-//         'projectName' : null,
-//         'todos' : []
-//     }
-    
-//     const getNewProject = () => project
-//     return { project, getNewProject }
-//   }
-
-//   const getEmptyProject = () => newProject().getNewProject();
-//   const getNewProject = () => newProject().project
-//   console.log(getEmptyProject())
-//   console.log(getNewProject())
-//   const pushProject = () => projects.push(newProject())
-  
-//   console.log(projects)
-//   return { pushProject }
-// }
-
-
-// greeting.js
-
-// let projects = [
-//     {
-//      'projectName': 'church',
-//      'todo' : [{'title' : 'Wake up early', 'Description' : 'So I can prepare for service'},
-//               {'title' : 'read bible', 'Description' : 'Spend 30mins before leaving'}]   
-//     },
-//     {
-//      'projectName' : 'school',
-//      'todo' : [{'title' : 'study for exam', 'Description' : 'Spend 30mins studying'}, 
-//               {'title' : 'attend lectures', 'Description' : 'attend additional tutorial'}]    
-//     }]
-// let projectNames = []
-// let todoNames = []
-// for(let i = 0; i < projects.length; i++){
-//     projectNames.push(projects[i][0])
-//    let requiredKeys =Object.keys(projects[i])[1]
-   
-//    for(let j = 0; j < projects[i][Object.keys(projects[i])[1]].length; j++){
-//             todoNames.push(projects[i]['todo'][j]['title'])
-//         }
-    
-// }
-// console.log(todoNames)
-    
-// export const greeting = "Hello, Odinite!";
-/*
-let project = [
-{'projectName' : null, 'todo' : [{'todoName' : null},{'todoName' : null},{'todoName' : null}]},
-{'projectName' : null, 'todo' : [{'todoName' : null},{'todoName' : null},{'todoName' : null}]},
-{'projectName' : null, 'todo' : [{'todoName' : null},{'todoName' : null},{'todoName' : null}]}
-]
-*/
-
-// import { createProject } from "./projectController";
-// import { createEmptyProject } from "./createNewProject";
-
-// function createNewProject (){
-//     let newProject = null;
-//     document.querySelector('.newProjectButton').addEventListener('click', function(){
-//         document.body.style.backgroundColor = 'purple'
-//         newProject = createEmptyProject().getEmptyProject()
-//         console.log('no')
-//     })
-//     const getNewProject = () => newProject;
-    
-//     return { getNewProject };
-// }
-
-// export { createNewProject };
