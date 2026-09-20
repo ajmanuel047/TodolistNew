@@ -1497,3 +1497,11 @@ p.statusText {
         margin-top: 13px;
     }
 }
+
+@media only screen and (max-width: 550px){   
+
+    .tasksDivTitle {
+        margin-left: 54px;
+        background-color: blue;
+    }
+}
