@@ -1,7 +1,4 @@
 import { add, format } from "date-fns";
-import { addDays } from "date-fns";
-import { parse } from "date-fns";
-import { dateController } from "./projectController";
 
 function formatDate (calenderValues) {
   // 
@@ -11,9 +8,8 @@ function formatDate (calenderValues) {
 
   let dueYear;
   let dueMonth;
-  let dueWeek;
+  // let dueWeek;
   let dueDay;
-
   if(calenderValues){
     dueYear = Number(calenderValues.slice(0, 4))
     dueMonth = Number(calenderValues.slice(5, 7))
@@ -28,18 +24,19 @@ function formatDate (calenderValues) {
     const result = add(new Date(formattedDate1), {
           years: dueYear - currentYear,
           months: dueMonth - currentMonth,
-          weeks: dueWeek,
+          // weeks: dueWeek,
           days: dueDay - currentDay,
         })
     const getDate = () => formattedDate1
     const dueDate = () => result.toDateString()
-    
+      console.log(dueDate)
+
     return { getDate, dueDate }
 }
 
 
-const startDate = new Date(2023, 6, 15); 
+// const startDate = new Date(2023, 6, 15); 
 
-const fiveDaysLater = addDays(startDate, 5).toLocaleDateString();
+// const fiveDaysLater = addDays(startDate, 5).toLocaleDateString();
 
 export { formatDate }

@@ -1,4 +1,4 @@
-function createProject(name){
+function createProject(){
 
   let projects = {
     'projectName' : null,

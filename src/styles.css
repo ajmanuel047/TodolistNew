@@ -1,271 +1,289 @@
 * {
-    font-size: 0.7rem;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 0.7rem;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: rgb(39,42,42);
-    color: white;   
+  background-color: rgb(39, 42, 42);
+  color: white;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .headerDiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
 }
 
 .newProjectButtonDiv {
-    width: 70px; 
-    text-align: center;
+  width: 70px;
+  text-align: center;
 }
 
 .newProjectButton {
-    background-color: skyblue;
-    border-radius: 50%;
-    border-style: none;
-    height: 70px;
-    width: 70px;
-    font-size: 33px;
-    cursor: pointer;
-    color: white;    
+  background-color: skyblue;
+  border-radius: 50%;
+  border-style: none;
+  height: 70px;
+  width: 70px;
+  font-size: 33px;
+  cursor: pointer;
+  color: white;
 }
 
 .addNewProject {
-    font-size: 1.1rem;
-    margin-top: 5px;
-    position: absolute;
+  font-size: 1.1rem;
+  margin-top: 5px;
+  position: absolute;
 }
 
-.allProjects, .completedProjects, .unCompletedProjects, .addTodo, .deleteAllProjects {
-    font-size: 1.1rem;
-    cursor: pointer;
+.allProjects,
+.completedProjects,
+.unCompletedProjects,
+.addTodo,
+.deleteAllProjects {
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .projectsBoxDiv .projectTitle {
-    text-align: center;
-    margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .projectsBox {
-    width: 100%;
-    background-color: rgb(47, 49, 49);
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 6px;
-    gap: 5px;
+  width: 100%;
+  background-color: rgb(47, 49, 49);
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 6px;
+  gap: 5px;
 }
 
 .projectsBoxDiv {
-    margin-top: -30px;
-    margin-bottom: -40px;
-    
+  margin-top: -30px;
+  margin-bottom: -40px;
 }
 
 .projectsBoxItems {
-    background-color: rgb(55,96,127);
-    width: 23.5%;
-    height: 250px;
-    padding: 3px;
-    border: 3px skyblue solid;
-    color: rgb(243, 243, 240);
+  background-color: rgb(55, 96, 127);
+  width: 23.5%;
+  height: 250px;
+  padding: 3px;
+  border: 3px skyblue solid;
+  color: rgb(243, 243, 240);
 }
 
 .displayText {
-    background-color: orange;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    border: 2px solid white;
-    padding: 10px;
-    
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 2px solid white;
+  padding: 10px;
 }
 
 .displayText {
-    font-size: 3rem;
-    justify-self: center;
+  font-size: 3rem;
+  justify-self: center;
 }
 
-.viewTasks:hover, .deleteProject:hover, .projectStatusButton:hover, .addMoreInfo:hover {
-    cursor: pointer;
-    border: none;
+.viewTasks:hover,
+.deleteProject:hover,
+.projectStatusButton:hover,
+.addMoreInfo:hover {
+  cursor: pointer;
+  border: none;
 }
 
-.nameProject, span, .dateCreatedProject, .priorityContent, .projectStatusText, .dueDateProjectText, .projectBoxButtonsDiv {
-    font-size: 1rem;
-    margin-left: 10px;
-    margin-top: 25px;
+.nameProject,
+span,
+.dateCreatedProject,
+.priorityContent,
+.projectStatusText,
+.dueDateProjectText,
+.projectBoxButtonsDiv {
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-top: 25px;
 }
 
 .projectStatus {
-    width: 355px;
+  width: 355px;
 }
 
 .spanProjectStatus {
-    margin-left: 4px;
-    padding: 4px;
+  margin-left: 4px;
+  padding: 4px;
 }
 
 .projectBoxButtonsDiv {
-    display: flex;
-    gap: 3px;
+  display: flex;
+  gap: 3px;
 }
 
-.projectBoxButtonsDiv .addMoreInfo,  .projectBoxButtonsDiv .viewTasks, .projectBoxButtonsDiv .deleteProject, .projectBoxButtonsDiv .projectStatusButton{
-    font-size: 0.85rem;
+.projectBoxButtonsDiv .addMoreInfo,
+.projectBoxButtonsDiv .viewTasks,
+.projectBoxButtonsDiv .deleteProject,
+.projectBoxButtonsDiv .projectStatusButton {
+  font-size: 0.85rem;
 }
 
-.addMoreInfo, .viewTasks, .deleteProject, .projectStatusButton {
-    width: 65px;
-    height: 30px;
+.addMoreInfo,
+.viewTasks,
+.deleteProject,
+.projectStatusButton {
+  width: 65px;
+  height: 30px;
 }
 
-.projectStatusButton:active {    
-    border: none;   
+.projectStatusButton:active {
+  border: none;
 }
 
 .projectName {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .cursor {
-    position: relative;
-    width: 250px;
-    margin: auto;
+  position: relative;
+  width: 250px;
+  margin: auto;
 }
 
 .cursor i {
-    position: absolute;
-    width: 1px;
-    height: 80%;
-    background-color: gray;
-    left: 2px;
-    top: 10%;
-    animation-name: blink;
-    animation-duration: 1000ms;
-    animation-iteration-count: infinite;
-    opacity: 1;
+  position: absolute;
+  width: 1px;
+  height: 80%;
+  background-color: gray;
+  left: 2px;
+  top: 10%;
+  animation-name: blink;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  opacity: 1;
 }
 
-.cursor input:focus+i{
-    display: none;
+.cursor input:focus + i {
+  display: none;
 }
 
 @keyframes blink {
-    from {
-        opacity: 1;
-    }
+  from {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-    }
+  to {
+    opacity: 0;
+  }
 }
 
 .projectInputDiv {
-    text-align: center;
-    margin-top: -30px;
-    margin-bottom: 40px;
+  text-align: center;
+  margin-top: -30px;
+  margin-bottom: 40px;
 }
 
 .projectInputDiv .newProjectContainer {
-    width: 80%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
 }
 .projectInputDiv .newProjectContainer .projectName {
-    font-size: 4rem;
-    margin-top: -10px;
+  font-size: 4rem;
+  margin-top: -10px;
 }
 
 .projectInputDiv .newProjectContainer .projectNameInput {
-    width: 250px;
-    height: 30px;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    font-size: 1.5rem;
+  width: 250px;
+  height: 30px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  font-size: 1.5rem;
 }
 
 .projectInputDiv .newProjectContainer .todoDivContent input {
-    width: 250px;
-    height: 30px;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    font-size: 1.3rem;
+  width: 250px;
+  height: 30px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  font-size: 1.3rem;
 }
 .projectInputDiv .newProjectContainer input:focus {
-    background-color: rgb(250, 248, 248);
-    outline:none!important;
+  background-color: rgb(250, 248, 248);
+  outline: none !important;
 }
 
 .projectInputDiv .createNewTodo {
-    border-radius: 50%;
-    border-style: none;
-    height: 70px;
-    width: 70px;
-    font-size: 3rem;
-    margin-left: 0px;
-    margin-top: -15px;
-    cursor: pointer;
+  border-radius: 50%;
+  border-style: none;
+  height: 70px;
+  width: 70px;
+  font-size: 3rem;
+  margin-left: 0px;
+  margin-top: -15px;
+  cursor: pointer;
 }
 
 .projectInputDiv .todoDivTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
 .projectInputDiv .task {
-    font-size: 3rem;
-    margin-top: 25px;
+  font-size: 3rem;
+  margin-top: 25px;
 }
 
 .projectInputDiv .todoDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .projectInputDiv .descriptionHeading {
-    font-size: 1.5rem;
-    margin-top: 20px;
+  font-size: 1.5rem;
+  margin-top: 20px;
 }
 
 .todoInput {
-    margin-bottom: -14px;
+  margin-bottom: -14px;
 }
 
 .submitProject {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    cursor: pointer;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2px;
+  font-size: 2.5rem;
+  margin-bottom: 2px;
 }
 
 h3 {
-    display: inline-block;
-    font-size: 1.5rem;
-    
+  display: inline-block;
+  font-size: 1.5rem;
 }
 
 .newProjectName {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    width: 300px;    
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  width: 300px;
 }
 
 [contenteditable]:focus {
@@ -274,89 +292,89 @@ h3 {
 }
 
 .saved {
-    font-size: 0.8rem;
-    text-align: center;   
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .createNewTodo {
-    margin-left: 60px;
-    position: relative;
-    bottom: 2px;   
- }
+  margin-left: 60px;
+  position: relative;
+  bottom: 2px;
+}
 
- .todoDiv .createNewTodo {
-    color: rgb(42, 42, 44);
-    background-color: rgb(245, 243, 243);
- }
+.todoDiv .createNewTodo {
+  color: rgb(42, 42, 44);
+  background-color: rgb(245, 243, 243);
+}
 
 .todoBox .createNewTodo:hover {
-    background-color: rgb(173, 217, 235);
-   
+  background-color: rgb(173, 217, 235);
 }
 
 .projectContainer {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .projectContainer .todoDiv {
-   background-color: rgb(47, 49, 49);
-   margin-top: 20px;
-   display: flex;
-   width: 100%;
+  background-color: rgb(47, 49, 49);
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
 }
 
 .taskDiv {
-    width: 70%;
-    background-color: rgb(47, 49, 49);
-    padding: 10px;
+  width: 70%;
+  background-color: rgb(47, 49, 49);
+  padding: 10px;
 }
 
 .todoInput {
-    position: relative;
-    bottom: 14px;
-    display: block;
+  position: relative;
+  bottom: 14px;
+  display: block;
 }
 
 .submitTaskButton {
-    position: relative;
-    bottom: 14px;    
+  position: relative;
+  bottom: 14px;
 }
 
 h4 {
-    font-size: 1.5rem;
-    margin-top: 10px;
+  font-size: 1.5rem;
+  margin-top: 10px;
 }
 
 .task {
-    margin-bottom: 2px;    
+  margin-bottom: 2px;
 }
 
-.editTodoButton, .editProjectName {
-    font-size: 0.8rem;
-    display: block;
+.editTodoButton,
+.editProjectName {
+  font-size: 0.8rem;
+  display: block;
 }
 
 .editNote {
-    font-size: 0.7rem;
+  font-size: 0.7rem;
 }
 
 .todoInput {
-    margin-top: 27px;
+  margin-top: 27px;
 }
 
-.errorMessage .selectProjectErrorMessage{
-    color: red;
-    font-size: 0.7rem;
-    position: absolute;
-    top: 10px;
+.errorMessage .selectProjectErrorMessage {
+  color: red;
+  font-size: 0.7rem;
+  position: absolute;
+  top: 10px;
 }
 
 .selectProjectErrorMessage {
-    color: rgb(245, 123, 123);
-    position: absolute;
-    top: 57px;
-    font-size: 0.79rem;
-    left: 7px;
+  color: rgb(245, 123, 123);
+  position: absolute;
+  top: 57px;
+  font-size: 0.79rem;
+  left: 7px;
 }
 
 .headerErrorMessage {
@@ -367,215 +385,227 @@ h4 {
   width: 200px;
 }
 
-.projectErrorMessage, .projectErrorMessage2 {
-    color: red;
-    font-size: 0.8rem;
+.projectErrorMessage,
+.projectErrorMessage2 {
+  color: red;
+  font-size: 0.8rem;
 }
 
-.saveChanges, .saveNewChanges {
-    margin-top: 17px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-left: 2px;
+.saveChanges,
+.saveNewChanges {
+  margin-top: 17px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 2px;
 }
 
 .selectProject {
-    margin-bottom: 5px;    
-    position: absolute;
-    margin-top: 25px;
-    margin-left: 7px;
-    width: 120px;
-    font-size: 0.9rem;
+  margin-bottom: 5px;
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 7px;
+  width: 120px;
+  font-size: 0.9rem;
 }
 
 .selectProject option {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .headerTodoInput {
-    position: absolute;
-    margin-top: 35px;
-    margin-left: 7px;
+  position: absolute;
+  margin-top: 35px;
+  margin-left: 7px;
 }
 
 .todoSubmitButton {
-    position: relative;
-    top: 66px;
-    left: 8px;
+  position: relative;
+  top: 66px;
+  left: 8px;
 }
 
 .addTodo {
-    cursor: pointer;
-    width:fit-content;
-}
-
-.descriptionDiv{
-    margin-top: 10px;    
-}
-
-.currentTaskDiv .descriptionDiv {
-    margin-top: -35px;
-}
-
-.descriptionDiv .descriptionHeading, .noteDiv .noteHeading {
-    font-size: 1.5rem;
-}
-
-.noteDiv {
-    margin-top: 20px;
-}
-.descriptionHeading, .noteHeading {
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.descriptionInput, .noteInput {
-    display: block;
-}
-
-.description, .note {
-    margin-top: -6px;
-    margin-bottom: 0px;
-    font-weight: normal;    
-    font-size: 1.5rem;
-}
-
-.descriptionDiv, .noteDiv {
-    word-break: break-all;
-}
-
-.currentTaskBox {
-    padding: 5px;
-    border: 3px white solid;
-}
-
-.currentTaskBox .saved {
-    color: rgb(204, 204, 226);
-    background-color: rgb(68, 68, 68);
-    position: relative;    
-    font-size: 0.8rem;
-    width: 30px;
-}
-
-.todoSaved {
-    color: rgb(204, 204, 226);
-    background-color: rgb(68, 68, 68);
-    position: relative;
-    top: -25px;
-    width: 25px;
-    text-align: center;
-}
-
-.descriptionDiv .saved, .noteDiv .saved  {    
-    position: relative;
-    left: 35px;
-    top: -23px;
-    font-weight: 100;
+  cursor: pointer;
+  width: fit-content;
 }
 
 .descriptionDiv {
-    margin-bottom: -10px;
+  margin-top: 10px;
+}
+
+.currentTaskDiv .descriptionDiv {
+  margin-top: -35px;
+}
+
+.descriptionDiv .descriptionHeading,
+.noteDiv .noteHeading {
+  font-size: 1.5rem;
+}
+
+.noteDiv {
+  margin-top: 20px;
+}
+.descriptionHeading,
+.noteHeading {
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.descriptionInput,
+.noteInput {
+  display: block;
+}
+
+.description,
+.note {
+  margin-top: -6px;
+  margin-bottom: 0px;
+  font-weight: normal;
+  font-size: 1.5rem;
+}
+
+.descriptionDiv,
+.noteDiv {
+  word-break: break-all;
+}
+
+.currentTaskBox {
+  padding: 5px;
+  border: 3px white solid;
+}
+
+.currentTaskBox .saved {
+  color: rgb(204, 204, 226);
+  background-color: rgb(68, 68, 68);
+  position: relative;
+  font-size: 0.8rem;
+  width: 30px;
+}
+
+.todoSaved {
+  color: rgb(204, 204, 226);
+  background-color: rgb(68, 68, 68);
+  position: relative;
+  top: -25px;
+  width: 25px;
+  text-align: center;
+}
+
+.descriptionDiv .saved,
+.noteDiv .saved {
+  position: relative;
+  left: 35px;
+  top: -23px;
+  font-weight: 100;
+}
+
+.descriptionDiv {
+  margin-bottom: -10px;
 }
 
 .noteInput {
-    margin-top: -10px;
+  margin-top: -10px;
 }
 
 .editDescription {
-   font-size: 0.65rem;
+  font-size: 0.65rem;
 }
 
 .noteHeading {
-    margin-top: 25px;
-    margin-bottom: 10px;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 .defaultProject .dateDiv {
-     margin-bottom: -16px;
-     margin-top: 15px;
+  margin-bottom: -16px;
+  margin-top: 15px;
 }
 
 .currentDate {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .dueDateDiv .dueDate {
-    margin-top: -10px;
-    margin-left: 1px;
-    font-size: 1rem;
+  margin-top: -10px;
+  margin-left: 1px;
+  font-size: 1rem;
 }
 
-.dueDateButton, .changeDueDate, .calender, .saveNewDate {
-    margin-bottom: 10px;
-    font-size: 0.8rem;
-    position: relative;
-    top: -7px;
-    width: fit-content;
+.dueDateButton,
+.changeDueDate,
+.calender,
+.saveNewDate {
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  position: relative;
+  top: -7px;
+  width: fit-content;
 }
 
 .changeDueDate {
-    margin-top: -18x;
+  margin-top: -18x;
 }
 
 .calender {
-    margin-left: 10px;
-    height: 14.5px;
-    position: relative;
-    top: -7px;
+  margin-left: 10px;
+  height: 14.5px;
+  position: relative;
+  top: -7px;
 }
 
 .dateUpdated {
-   color: rgb(204, 204, 226);
-    background-color: rgb(68, 68, 68);
-    font-size: 0.8rem;
-    text-align: center;
-    width: 60px;
-    position: relative;
-    top: -5px;
+  color: rgb(204, 204, 226);
+  background-color: rgb(68, 68, 68);
+  font-size: 0.8rem;
+  text-align: center;
+  width: 60px;
+  position: relative;
+  top: -5px;
 }
 
 .editAndInfoDiv {
-    margin-top: -30px;
+  margin-top: -30px;
 }
 
 .addMoreInfo {
-    font-size: 0.6rem;
-    position: relative;
-    margin-bottom: 0px;
+  font-size: 0.6rem;
+  position: relative;
+  margin-bottom: 0px;
 }
 
-.titleContainerButtonsDiv, .taskButtonsDiv {
-    display: flex;
-    gap: 5px;
+.titleContainerButtonsDiv,
+.taskButtonsDiv {
+  display: flex;
+  gap: 5px;
 }
 
-.titleContainerButtonsDiv .saved{
-    color: rgb(204, 226, 204);
-    background-color: rgb(68, 68, 68);
-    font-size: 0.9;
-    position: relative;
-    top: 6px;
-    width: 29px;
-    text-align: center;
+.titleContainerButtonsDiv .saved {
+  color: rgb(204, 226, 204);
+  background-color: rgb(68, 68, 68);
+  font-size: 0.9;
+  position: relative;
+  top: 6px;
+  width: 29px;
+  text-align: center;
 }
 
 .titleContainerButtonsDiv button {
-    font-size: 0.9rem;
-    width: 90px;
-    cursor: pointer;
+  font-size: 0.9rem;
+  width: 90px;
+  cursor: pointer;
 }
 
 .currentTaskDiv button {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .priority {
- margin-top: -15px;   
- font-size: 1rem;
+  margin-top: -15px;
+  font-size: 1rem;
 }
 
 .high {
-  color : yellow
+  color: yellow;
 }
 
 .low {
@@ -583,925 +613,924 @@ h4 {
 }
 
 .extreme {
-  color : rgb(248, 148, 148)
+  color: rgb(248, 148, 148);
 }
 
 p.statusText {
-    position: relative;
-    top: -22px;
-    font-size: 0.8rem;
-    margin-bottom: -20px;
-    color: rgb(204, 226, 204);
-    background-color: rgb(68, 68, 68);
-    width: 112px;
+  position: relative;
+  top: -22px;
+  font-size: 0.8rem;
+  margin-bottom: -20px;
+  color: rgb(204, 226, 204);
+  background-color: rgb(68, 68, 68);
+  width: 112px;
 }
 
 .checkListContainer {
-    margin-top: -14px;
+  margin-top: -14px;
 }
 
 .checkListContainer .checkListHeading {
-    font-size: 1.4rem;
-    margin-bottom: 7px;
-    font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 7px;
+  font-weight: 600;
 }
 
 .checkListForm {
-    margin-top: -10px;
+  margin-top: -10px;
 }
 
 .addCheckListFormButton {
-    width:50px;    
+  width: 50px;
 }
 
 .checkListInputDiv {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
 }
 
 .checkItem {
-    position: relative;
-    top: -2.3px;
-    font-size: 1rem;
+  position: relative;
+  top: -2.3px;
+  font-size: 1rem;
 }
 
 .saveChecklist {
-   margin-top: 15px;
+  margin-top: 15px;
 }
 
 .checkListDiv {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-.checkListContainer p.errorMessage {  
-    position: relative;
-    top: 3px;
-    margin-left: -123px;
-    color: rgb(204, 226, 204);
-    background-color: rgb(68, 68, 68);
-    font-size: 0.8rem;
-    width: 161px;
-    letter-spacing: 0.1rem;
+.checkListContainer p.errorMessage {
+  position: relative;
+  top: 3px;
+  margin-left: -123px;
+  color: rgb(204, 226, 204);
+  background-color: rgb(68, 68, 68);
+  font-size: 0.8rem;
+  width: 161px;
+  letter-spacing: 0.1rem;
 }
 
 .checkDiv {
-    display: block;
+  display: block;
 }
 
 .checkDivAdjust {
-    margin-top: 30px;
-    margin-left: -3px;
-    background-color: aqua;
+  margin-top: 30px;
+  margin-left: -3px;
+  background-color: aqua;
 }
 
-.projectInputDiv .errorMessage{
-    color: red;
-    font-size: 0.6rem;
-    font-weight: bold;
+.projectInputDiv .errorMessage {
+  color: red;
+  font-size: 0.6rem;
+  font-weight: bold;
 }
 
 .headerTodoDiv .errorMessage {
-      color: red;
-      position: absolute;
-      top: 66px;
-      font-size: 0.8rem;
-      left: 6px;
+  color: red;
+  position: absolute;
+  top: 66px;
+  font-size: 0.8rem;
+  left: 6px;
 }
 
 .todoBoxContainer {
-    background-color: rgb(78,82,85);
-    padding: 5px;
-    border: 3px white solid;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-direction: row;
-    gap: 5px;
+  background-color: rgb(78, 82, 85);
+  padding: 5px;
+  border: 3px white solid;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
 }
 
 .todoBox {
-    background-color: rgb(56,94,122);
-    width: 32.9%;
-    height: 217px;
-    display: flex; 
-    justify-content: center;
-    flex-direction: column;
+  background-color: rgb(56, 94, 122);
+  width: 32.9%;
+  height: 217px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .todoBox button {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .todoBox .createNewTodo {
-    color: rgb(42, 42, 44);
-    background-color: rgb(250, 248, 248);
-    border-radius: 50%;
-    border-style: none;
-    height: 70px;
-    width: 70px;
-    font-size: 33px;
-    cursor: pointer;  
-    margin: auto;
+  color: rgb(42, 42, 44);
+  background-color: rgb(250, 248, 248);
+  border-radius: 50%;
+  border-style: none;
+  height: 70px;
+  width: 70px;
+  font-size: 33px;
+  cursor: pointer;
+  margin: auto;
 }
 
-.newTodoBox .todoDivContent, .todoBox .todoDivContent {
-    margin-top: -60px;
+.newTodoBox .todoDivContent,
+.todoBox .todoDivContent {
+  margin-top: -60px;
 }
 
-.todoBoxContainer .spanTaskName, 
-.todoBoxContainer .taskName, 
-.todoBoxContainer .taskPriority, 
-.todoBoxContainer .dateCreated, 
+.todoBoxContainer .spanTaskName,
+.todoBoxContainer .taskName,
+.todoBoxContainer .taskPriority,
+.todoBoxContainer .dateCreated,
 .todoBoxContainer .dueDate,
-.todoBoxContainer .taskStatus, 
+.todoBoxContainer .taskStatus,
 .spanTaskStatus {
-    font-size: 1.17rem;
-    margin-bottom: 5px;
-    margin-left: 7px;
+  font-size: 1.17rem;
+  margin-bottom: 5px;
+  margin-left: 7px;
 }
 
 .spanTaskStatus {
-    margin-left: 0px;
+  margin-left: 0px;
 }
 
 .spanTaskName {
-    position: absolute;
-    margin-top: 1px;
-    width: 12%;
-    word-wrap: break-word;
-    line-height: 1.5;
+  position: absolute;
+  margin-top: 1px;
+  width: 12%;
+  word-wrap: break-word;
+  line-height: 1.5;
 }
 
 .todoBoxContainer .taskName {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
-.todoBox .todoInput, .todoBox .descriptionInput, .todoBox .noteInput   {
-    font-size: 1.17rem;
-    margin-left: 2px;
-}
-
-.currentTaskDiv {
-    background-color: rgb(78,82,85);
-    width: 30%;
-    padding: 10px;
-}
-
-.tasksDivTitle, .currentTaskDivTitle {
-    border: 1px solid white;
-    width: 250px;
-    text-align: center;
-    padding: 3px;
-    font-weight: normal;
+.todoBox .todoInput,
+.todoBox .descriptionInput,
+.todoBox .noteInput {
+  font-size: 1.17rem;
+  margin-left: 2px;
 }
 
 .currentTaskDiv {
-      font-weight: 100;
+  background-color: rgb(78, 82, 85);
+  width: 30%;
+  padding: 10px;
+}
+
+.tasksDivTitle,
+.currentTaskDivTitle {
+  border: 1px solid white;
+  width: 250px;
+  text-align: center;
+  padding: 3px;
+  font-weight: normal;
+}
+
+.currentTaskDiv {
+  font-weight: 100;
 }
 
 .todo {
-    margin-top: -4px;
+  margin-top: -4px;
 }
 
 .iconDiv {
-    position: absolute;
-    margin-top: -250px;
-    margin-left: 117px;
-    text-align: center;
+  position: absolute;
+  margin-top: -250px;
+  margin-left: 117px;
+  text-align: center;
 }
 
 .icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .iconIndicator {
-    color: rgb(26, 27, 26);
-    background-color: rgb(245, 229, 229);
+  color: rgb(26, 27, 26);
+  background-color: rgb(245, 229, 229);
 }
 
-.todoBoxTaskButtonsDiv {    
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 7px;
-    width: 222px;
-    height: 20px;
-    margin-left: -3px;
+.todoBoxTaskButtonsDiv {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 7px;
+  width: 222px;
+  height: 20px;
+  margin-left: -3px;
 }
 
 .todoBoxTaskButtonsDiv button {
-     width: 60px;
-     height: 20px;
+  width: 60px;
+  height: 20px;
 }
 
 .descriptionDiv .editDisplayIndicator {
-     position: absolute; 
-     width: 73px; 
-     margin-top: -14px;
-     margin-bottom: -7px;
-     text-align: center;
-     font-size: 0.8rem;
-
+  position: absolute;
+  width: 73px;
+  margin-top: -14px;
+  margin-bottom: -7px;
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .noteDiv .editDisplayIndicator {
-     position: absolute; 
-     width: 76px; 
-     margin-top: -14px;
-     margin-bottom: -7px;
-     text-align: center;
-     font-size: 0.8rem;
+  position: absolute;
+  width: 76px;
+  margin-top: -14px;
+  margin-bottom: -7px;
+  text-align: center;
+  font-size: 0.8rem;
 }
 .titleContainerButtonsDiv .editDisplayIndicator {
-      position: absolute; 
-      width: 73px; 
-      margin-top: -55px;
-      font-size: 0.8rem;
+  position: absolute;
+  width: 73px;
+  margin-top: -55px;
+  font-size: 0.8rem;
 }
 
 .editDisplayIndicatorColor {
-    color: rgb(26, 27, 26);
-    background-color: rgb(245, 229, 229);   
-    font-size: 0.8rem;     
+  color: rgb(26, 27, 26);
+  background-color: rgb(245, 229, 229);
+  font-size: 0.8rem;
 }
 
 .headerAddToProjectDiv {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.emptyBox, .emptyCurrentTaskDivBox {
-    width: 100%;
-    background-color: rgb(54,96,127);
-    border: 2px white solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.emptyBox,
+.emptyCurrentTaskDivBox {
+  width: 100%;
+  background-color: rgb(54, 96, 127);
+  border: 2px white solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.emptyBoxContent, .emptyCurrentTaskDivBoxContent {
-    font-size: 3rem;
+.emptyBoxContent,
+.emptyCurrentTaskDivBoxContent {
+  font-size: 3rem;
 }
 
 .projectsBoxBorderBox {
-    width: 100%;
-    height: 300px;
-    border: 2px solid white;
-    
+  width: 100%;
+  height: 300px;
+  border: 2px solid white;
 }
 
 .deleteAllProjects {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 .deleteAllProjectsPopUpDiv {
-    width: 400px;
-    height: 100px;
-    margin: auto;
-    margin-bottom: 50px;
-    margin-top: -30px;
+  width: 400px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 50px;
+  margin-top: -30px;
 }
 
-.deleteAllProjectsPopUpMessage{
-    font-size: 2rem;
-    text-align: center;
-    position: relative;
-    top: 10px;
+.deleteAllProjectsPopUpMessage {
+  font-size: 2rem;
+  text-align: center;
+  position: relative;
+  top: 10px;
 }
 
-.deleteProjectsConfirmationDiv {    
-    width: 200px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+.deleteProjectsConfirmationDiv {
+  width: 200px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
-.deleteProjectsConfirmationButton1, .deleteProjectsDeclineButton {
-    height: 40px;
-    width:  70px;
-    font-size: 1rem;
+.deleteProjectsConfirmationButton1,
+.deleteProjectsDeclineButton {
+  height: 40px;
+  width: 70px;
+  font-size: 1rem;
 }
 
 .displayWaitingMessage {
-    font-size: 1.1rem;
-    transition: font-size 0.5s ease-in-out;
-    margin-top: 7px;
+  font-size: 1.1rem;
+  transition: font-size 0.5s ease-in-out;
+  margin-top: 7px;
 }
 
 .displayWaitingMessage.shrink {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .todoBox .displayWaitingMessage {
-   position: absolute;   
-   margin-left: 3px;
+  position: absolute;
+  margin-left: 3px;
 }
 
-.deleteAllProjectsPopUpDiv .displayWaitingMessage{
-   position: absolute;   
-   margin-left: 168px;
+.deleteAllProjectsPopUpDiv .displayWaitingMessage {
+  position: absolute;
+  margin-left: 168px;
 }
 
 .headerDiv button {
-   border: none;
-   background-color: rgb(39,42,42);
-   color: white;
+  border: none;
+  background-color: rgb(39, 42, 42);
+  color: white;
 }
 
 .headerDiv .todoSubmitButton {
-    background-color: rgb(245, 244, 243);
-    color: black;
-    font-size: 0.9rem;
+  background-color: rgb(245, 244, 243);
+  color: black;
+  font-size: 0.9rem;
 }
 
 .headerDiv .newProjectButton {
-    background-color: skyblue;
+  background-color: skyblue;
 }
 
 .newProjectButton:hover {
-    background-color: rgb(173, 217, 235)
+  background-color: rgb(173, 217, 235);
 }
 
 .projectContainer .errorMessage {
-    margin-left: 3px;
-    width: 200px;
-    color: red;
-    position: relative;
-    top: -5px;
-    margin-bottom: -13px;
+  margin-left: 3px;
+  width: 200px;
+  color: red;
+  position: relative;
+  top: -5px;
+  margin-bottom: -13px;
 }
 
 .errorMessageText {
-    width: 140px;
-    background-color: rgb(68, 68, 68);
-    font-size: 0.8rem;
-    margin-top: -27px;
-    margin-left: 0px;
-    position: absolute;
+  width: 140px;
+  background-color: rgb(68, 68, 68);
+  font-size: 0.8rem;
+  margin-top: -27px;
+  margin-left: 0px;
+  position: absolute;
 }
 
 .lineBreak {
-    width: 80px;
+  width: 80px;
 }
 
 .headerDiv button:hover {
-    transform: scale(1.01);
+  transform: scale(1.01);
 }
 
+@media only screen and (max-width: 1219px) {
+  .projectsBoxBorderBox {
+    width: 100%;
+    height: 300px;
+    border: 2px solid white;
+  }
 
-@media only screen and (max-width: 1219px){ 
+  .displayText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: 120px;
+  }
 
-   .projectsBoxBorderBox {
-        width: 100%;
-        height: 300px;
-        border: 2px solid white;    
-   }
+  .displayText {
+    font-size: 3rem;
+    justify-self: center;
+  }
 
-   .displayText {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        margin-top: 120px;    
-   }
+  .projectsBox {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 
-   .displayText {
-        font-size: 3rem;
-        justify-self: center;
-   }
-
-    .projectsBox {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-
-    .projectsBoxItems {
-       width: 350px;
-    }
+  .projectsBoxItems {
+    width: 350px;
+  }
 }
 
-@media only screen and (max-width: 1137px){     
-
-   .projectsBoxItems {
-       width: 100%;
-   }
+@media only screen and (max-width: 1137px) {
+  .projectsBoxItems {
+    width: 100%;
+  }
 }
 
-@media only screen and (max-width: 950px){ 
-
-   .projectsBoxItems .nameProject,
-   .projectsBoxItems span,
-   .projectsBoxItems .dateCreatedProject,
-   .projectsBoxItems .dueDateProjectText,
-   .projectsBoxItems .projectStatusText {
-        font-size: 1.3rem;
-     }
+@media only screen and (max-width: 950px) {
+  .projectsBoxItems .nameProject,
+  .projectsBoxItems span,
+  .projectsBoxItems .dateCreatedProject,
+  .projectsBoxItems .dueDateProjectText,
+  .projectsBoxItems .projectStatusText {
+    font-size: 1.3rem;
+  }
 }
 
-@media only screen and (max-width: 800px){ 
-
-    .projectsBoxItems .nameProject, 
-    .projectsBoxItems span, 
-    .projectsBoxItems .dateCreatedProject, 
-    .projectsBoxItems .dueDateProjectText, 
-    .projectsBoxItems .projectStatusText {
-      font-size: 1rem;
-    }
+@media only screen and (max-width: 800px) {
+  .projectsBoxItems .nameProject,
+  .projectsBoxItems span,
+  .projectsBoxItems .dateCreatedProject,
+  .projectsBoxItems .dueDateProjectText,
+  .projectsBoxItems .projectStatusText {
+    font-size: 1rem;
+  }
 }
 
-@media only screen and (max-width: 635px){   
+@media only screen and (max-width: 635px) {
+  .projectsBoxItems {
+    width: 70%;
+    justify-self: center;
+    position: relative;
+    top: 10px;
+  }
 
-    .projectsBoxItems {
-       width: 70%;  
-       justify-self: center;  
-       position: relative;
-       top: 10px;
-    } 
+  .projectsBoxItems:first-child {
+    margin-top: 5px;
+  }
 
-    .projectsBoxItems:first-child {
-        margin-top: 5px;
-    }
+  .projectsBoxItems:last-child {
+    margin-bottom: 30px;
+  }
 
-    .projectsBoxItems:last-child {
-        margin-bottom: 30px;
-    }
+  .todoBox:first-child {
+    margin-top: 10px;
+  }
 
-    .todoBox:first-child {
-        margin-top: 10px;
-    }
+  .todoBox:last-child {
+    margin-bottom: 10px;
+  }
 
-    .todoBox:last-child {
-        margin-bottom: 10px;
-    }
+  .projectsBoxItems .nameProject,
+  .projectsBoxItems span,
+  .projectsBoxItems .dateCreatedProject,
+  .projectsBoxItems .dueDateProjectText,
+  .projectsBoxItems .projectStatusText {
+    font-size: 1.3rem;
+  }
 
-    .projectsBoxItems .nameProject, 
-    .projectsBoxItems span, 
-    .projectsBoxItems .dateCreatedProject, 
-    .projectsBoxItems .dueDateProjectText, 
-    .projectsBoxItems .projectStatusText {
-      font-size: 1.3rem;
-    }
-
-    .icon{
-      margin-left: 20px;  
-      margin-top: -10px;
-      width: 270px;
-    }
-    
+  .icon {
+    margin-left: 20px;
+    margin-top: -10px;
+    width: 270px;
+  }
 }
 
-@media only screen and (max-width: 1191px){ 
-    .todoBox {
-        width: 32.8%;
-    } 
+@media only screen and (max-width: 1191px) {
+  .todoBox {
+    width: 32.8%;
+  }
 }
 
-@media only screen and (max-width: 1143px){ 
-    .todoBox {
-        width: 32.8%;
-    } 
+@media only screen and (max-width: 1143px) {
+  .todoBox {
+    width: 32.8%;
+  }
 }
 
-@media only screen and (max-width: 1063px){ 
-    .todoBox {
-        width: 49.5%;
-    } 
+@media only screen and (max-width: 1063px) {
+  .todoBox {
+    width: 49.5%;
+  }
 
-    .spanTaskName {
-        width: 19%;
-    }
+  .spanTaskName {
+    width: 19%;
+  }
 
-    .taskDiv {
-       width: 80%;
-    }
+  .taskDiv {
+    width: 80%;
+  }
 
-    .currentTaskDiv {
-        width: 50%;
-    }
+  .currentTaskDiv {
+    width: 50%;
+  }
 
-     .icon{
-      margin-left: 25px;  
-    }
+  .icon {
+    margin-left: 25px;
+  }
 }
 
-@media only screen and (max-width: 986px){ 
-    .todoBoxContainer {
-        width: 97%;
-    }
+@media only screen and (max-width: 986px) {
+  .todoBoxContainer {
+    width: 97%;
+  }
 
-    .spanTaskName {
-        width: 18.6%;
-    }
+  .spanTaskName {
+    width: 18.6%;
+  }
 
-    .todoBox {
-        width: 49%;
-        margin-left: 2px;
-    } 
+  .todoBox {
+    width: 49%;
+    margin-left: 2px;
+  }
 
-    .currentTaskDiv {
-        width: 40%;
-    }
+  .currentTaskDiv {
+    width: 40%;
+  }
 }
 
-@media only screen and (max-width: 986px){   
-
-    .spanTaskName {
-        width: 17.5%;
-    }
-
+@media only screen and (max-width: 986px) {
+  .spanTaskName {
+    width: 17.5%;
+  }
 }
-@media only screen and (max-width: 915px){   
-
-    .spanTaskName {
-        width: 16.5%;
-    }
-
+@media only screen and (max-width: 915px) {
+  .spanTaskName {
+    width: 16.5%;
+  }
 }
 
-@media only screen and (max-width: 900px){   
-
-    .spanTaskName {
-        width: 15.5%;
-    }
-
+@media only screen and (max-width: 900px) {
+  .spanTaskName {
+    width: 15.5%;
+  }
 }
 
-@media only screen and (max-width: 826px){   
-
-    .todoBox span.spanTaskName {
-        width: 28%;
-    }
-
+@media only screen and (max-width: 826px) {
+  .todoBox span.spanTaskName {
+    width: 28%;
+  }
 }
 
-@media only screen and (max-width: 862px){ 
-    .todoBoxContainer {
-        width: 95%;
-        justify-content: center;
-    }
+@media only screen and (max-width: 862px) {
+  .todoBoxContainer {
+    width: 95%;
+    justify-content: center;
+  }
 
-    .todoBox {
-        width: 90%;
-        margin-left: 2px;
-        height: 250px;
-        
-    } 
-     .todoBox .taskName, 
-     .todoBox .spanTaskName, 
-     .todoBox .taskPriority, 
-     .todoBox .dateCreated, 
-     .todoBox .dueDate, 
-     .todoBox .taskStatus{
-        font-size: 1.2rem;
-        margin-left: 14px;
-        width: 260px;
-    }
+  .todoBox {
+    width: 90%;
+    margin-left: 2px;
+    height: 250px;
+  }
+  .todoBox .taskName,
+  .todoBox .spanTaskName,
+  .todoBox .taskPriority,
+  .todoBox .dateCreated,
+  .todoBox .dueDate,
+  .todoBox .taskStatus {
+    font-size: 1.2rem;
+    margin-left: 14px;
+    width: 260px;
+  }
 
-    .todoBox button {
-        font-size: 0.9rem;
-        height: 25px;
-        width: 90px;        
-    }
+  .todoBox button {
+    font-size: 0.9rem;
+    height: 25px;
+    width: 90px;
+  }
 
-    .todoBox .todoBoxTaskButtonsDiv {
-        margin-left: 14px;
-        width: 80%;
-    }
+  .todoBox .todoBoxTaskButtonsDiv {
+    margin-left: 14px;
+    width: 80%;
+  }
 
-    .todoBox input {
-        width: 80%;
-        height: 27px;
-        position: relative;
-        left: 5px;
-    }
+  .todoBox input {
+    width: 80%;
+    height: 27px;
+    position: relative;
+    left: 5px;
+  }
 
-    .todoBox button {
-        margin-left: 8px;
-    }
+  .todoBox button {
+    margin-left: 8px;
+  }
 
-    .currentTaskDiv {
-        width: 60%;
-    }
+  .currentTaskDiv {
+    width: 60%;
+  }
 
-    .emptyCurrentTaskDivBox {
-        height: 79%;
-    }
+  .emptyCurrentTaskDivBox {
+    height: 79%;
+  }
 
-    .tasksDivTitle {
-        width: 70%;
-        margin-left: 50px;
-    }
+  .tasksDivTitle {
+    width: 70%;
+    margin-left: 50px;
+  }
 
-    .headerErrorMessage {
-        margin-left: 7px;
-    }
+  .headerErrorMessage {
+    margin-left: 7px;
+  }
 
-    .iconDiv{
-      margin-right: -10px;  
-      width: 180px;
-      margin-top: -280px;
-    }
+  .iconDiv {
+    margin-right: -10px;
+    width: 180px;
+    margin-top: -280px;
+  }
 
-    .todoBox .taskName {
-      margin-top: 2px;
-    }
+  .todoBox .taskName {
+    margin-top: 2px;
+  }
 }
 
-@media only screen and (max-width: 685px){ 
+@media only screen and (max-width: 685px) {
+  .tasksDivTitle {
+    margin-left: 44px;
+  }
 
-    .tasksDivTitle {
-        margin-left: 44px;
-    }
+  .currentTaskDivTitle {
+    margin-left: 10px;
+  }
 
-    .currentTaskDivTitle {
-        margin-left: 10px;
-    }
-  
-    .todoBox .taskName, 
-    .todoBox .spanTaskName, 
-    .todoBox .taskPriority, 
-    .todoBox .dateCreated, 
-    .todoBox .dueDate, 
-    .todoBox .taskStatus{
-        font-size: 1.1rem;
-    }
+  .todoBox .taskName,
+  .todoBox .spanTaskName,
+  .todoBox .taskPriority,
+  .todoBox .dateCreated,
+  .todoBox .dueDate,
+  .todoBox .taskStatus {
+    font-size: 1.1rem;
+  }
 }
 
-@media only screen and (max-width: 780px){   
-
-    .todoBox span.spanTaskName {
-        width: 27%;
-    }
-
+@media only screen and (max-width: 780px) {
+  .todoBox span.spanTaskName {
+    width: 27%;
+  }
 }
-@media only screen and (max-width: 768px){   
-
-    .todoBox span.spanTaskName {
-        width: 26%;
-    }
+@media only screen and (max-width: 768px) {
+  .todoBox span.spanTaskName {
+    width: 26%;
+  }
 }
 
-@media only screen and (max-width: 720px){ 
+@media only screen and (max-width: 720px) {
+  .projectContainer .todoDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .projectContainer .todoDiv {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-    }
+  .newProjectName {
+    width: 100%;
+    text-align: center;
+  }
 
-    .newProjectName {      
-      width: 100%;
-      text-align: center;
-    }
+  .titleContainerButtonsDiv {
+    margin: auto;
+    justify-content: center;
+  }
 
-    .titleContainerButtonsDiv {
-        margin: auto;
-        justify-content: center;
-    }
+  .todoBoxContainer {
+    justify-self: center;
+  }
 
+  .todoBox .taskName,
+  .todoBox .spanTaskName,
+  .todoBox .taskPriority,
+  .todoBox .dateCreated,
+  .todoBox .dueDate,
+  .todoBox .taskStatus,
+  .todoBox .spanTaskStatus {
+    font-size: 1.4rem;
+    width: 250px;
+    word-wrap: break-word;
+  }
 
-    .todoBoxContainer {
-        justify-self: center;   
-    }
+  .currentTaskDiv {
+    margin-top: 20px;
+    width: 405px;
+  }
 
-     .todoBox .taskName, 
-     .todoBox .spanTaskName, 
-     .todoBox .taskPriority, 
-     .todoBox .dateCreated, 
-     .todoBox .dueDate, 
-     .todoBox .taskStatus{
-        font-size: 1.4rem;  
-        width: 250px; 
-        word-wrap: break-word;
-    }
+  .tasksDivTitle {
+    margin-left: 66px;
+  }
 
-    .currentTaskDiv {
-        margin-top: 20px;
-        width: 405px;
-    }
+  .currentTaskDivTitle {
+    margin-left: 75px;
+  }
 
-    .tasksDivTitle {
-        margin-left: 66px;
-    }
+  .todoBoxContainer .saveChanges {
+    width: 90px;
+  }
 
-    .currentTaskDivTitle {
-        margin-left: 75px;
-    }
+  .emptyCurrentTaskDivBox {
+    height: 250px;
+  }
 
-    .todoBoxContainer .saveChanges{
-        width: 90px;
-    }
+  p.emptyCurrentTaskDivBoxContent {
+    font-size: 3rem;
+  }
 
-    .emptyCurrentTaskDivBox {
-        height: 250px;
-    }
+  .iconDiv {
+    width: 320px;
+  }
 
-    
-    p.emptyCurrentTaskDivBoxContent {
-        font-size: 3rem;
-    }
+  .todoBoxTaskButtonsDiv {
+    margin-top: 3px;
+  }
 
-   .iconDiv{
-      width: 320px;
-    }
-
-    .todoBoxTaskButtonsDiv {
-        margin-top: 3px;
-    }
-
-     .todoBox span.spanTaskName {
-        width: 45%;
-    }
+  .todoBox span.spanTaskName {
+    width: 45%;
+  }
 }
 
-@media only screen and (max-width: 986px){  
+@media only screen and (max-width: 986px) {
+  .todoBox .spanTaskName {
+    line-height: 1.3;
+    margin-top: 2.6px;
+  }
 
-    .todoBox .spanTaskName {
-        line-height: 1.3;
-        margin-top: 2.6px;
-    }
-
-    .todoBox { 
-        margin-left: 2px;
-    } 
+  .todoBox {
+    margin-left: 2px;
+  }
 }
 
 .editDisplayIndicatorDiv .editDisplayIndicator {
-     position: absolute; 
-     margin-top: -22.5px;
-     width: 73px;
-     font-size: 0.8rem;
-     color: rgb(75, 73, 73);
-   
+  position: absolute;
+  margin-top: -22.5px;
+  width: 73px;
+  font-size: 0.8rem;
+  color: rgb(75, 73, 73);
 }
 
-@media only screen and (max-width: 722px){ 
-    .headerDiv button {
-        font-size: 1rem;
-    }
+@media only screen and (max-width: 722px) {
+  .headerDiv button {
+    font-size: 1rem;
+  }
 }
 
-@media only screen and (max-width: 767px){ 
-    .headerDiv button {
-        font-size: 1rem;
-    }
+@media only screen and (max-width: 767px) {
+  .headerDiv button {
+    font-size: 1rem;
+  }
 
-    .headerAddToProjectDiv {
-        display: none;
-    }
+  .headerAddToProjectDiv {
+    display: none;
+  }
 }
-@media only screen and (max-width: 594px){ 
-    .headerDiv hr {
-        width: 50px;
-    }
+@media only screen and (max-width: 594px) {
+  .headerDiv hr {
+    width: 50px;
+  }
 }
-@media only screen and (max-width: 510px){ 
-     .todoBox span.spanTaskName {
-        width: 42%;
-    }
-}
-
-@media only screen and (max-width: 857px){   
-
-    .addTodo {
-        font-size: 1rem;
-    }
+@media only screen and (max-width: 510px) {
+  .todoBox span.spanTaskName {
+    width: 42%;
+  }
 }
 
-@media only screen and (max-width: 719px){    
-
-    .addTodo {
-        font-size: 1rem;
-    }
-
-    .emptyCurrentTaskDivBoxContent {
-        font-size: 2.6rem;
-    }
+@media only screen and (max-width: 857px) {
+  .addTodo {
+    font-size: 1rem;
+  }
 }
 
-@media only screen and (max-width: 905px){ 
+@media only screen and (max-width: 719px) {
+  .addTodo {
+    font-size: 1rem;
+  }
 
-    .emptyCurrentTaskDivBoxContent {
-        font-size: 2.7rem;
-    }
+  .emptyCurrentTaskDivBoxContent {
+    font-size: 2.6rem;
+  }
 }
 
-@media only screen and (max-width: 1316px){ 
-
-     .iconDiv{
-      margin-left: 110px;  
-    }
+@media only screen and (max-width: 905px) {
+  .emptyCurrentTaskDivBoxContent {
+    font-size: 2.7rem;
+  }
 }
 
-@media only screen and (max-width: 1232px){ 
-     .iconDiv{
-      margin-left: 100px;  
-    }
+@media only screen and (max-width: 1316px) {
+  .iconDiv {
+    margin-left: 110px;
+  }
 }
 
-@media only screen and (max-width: 1122px){ 
-     .iconDiv{
-      margin-left: 90px;  
-    }
+@media only screen and (max-width: 1232px) {
+  .iconDiv {
+    margin-left: 100px;
+  }
 }
 
-@media only screen and (max-width: 942px){ 
-     .icon{
-      margin-left: 20px;  
-    }
+@media only screen and (max-width: 1122px) {
+  .iconDiv {
+    margin-left: 90px;
+  }
 }
 
-@media only screen and (max-width: 903px){ 
-     .icon{
-      margin-left: 10px;  
-    }
+@media only screen and (max-width: 942px) {
+  .icon {
+    margin-left: 20px;
+  }
 }
 
-@media only screen and (max-width: 839px){ 
-     .iconDiv{
-      margin-left: 80px;  
-    }
+@media only screen and (max-width: 903px) {
+  .icon {
+    margin-left: 10px;
+  }
 }
 
-@media only screen and (max-width: 770px){ 
-     .iconDiv{
-      margin-left: 70px;  
-    }
+@media only screen and (max-width: 839px) {
+  .iconDiv {
+    margin-left: 80px;
+  }
 }
 
-@media only screen and (max-width: 712px){ 
-     .iconDiv{
-      margin-left: 60px;  
-    }
+@media only screen and (max-width: 770px) {
+  .iconDiv {
+    margin-left: 70px;
+  }
 }
 
-@media only screen and (max-width: 683px){ 
-     .iconDiv{
-      margin-left: 50px;  
-    }
+@media only screen and (max-width: 712px) {
+  .iconDiv {
+    margin-left: 60px;
+  }
 }
 
-@media only screen and (max-width: 578px){ 
-     .iconDiv{
-      margin-left: 35px;  
-    }
+@media only screen and (max-width: 683px) {
+  .iconDiv {
+    margin-left: 50px;
+  }
 }
 
-@media only screen and (max-width: 543px){ 
-     .iconDiv{
-      margin-left: 30px;  
-    }
+@media only screen and (max-width: 578px) {
+  .iconDiv {
+    margin-left: 35px;
+  }
 }
 
-@media only screen and (max-width: 510px){ 
-     .iconDiv{
-      margin-left: 10px;  
-      /* background-color: orange; */
-    }
+@media only screen and (max-width: 543px) {
+  .iconDiv {
+    margin-left: 30px;
+  }
 }
 
-@media only screen and (max-width: 576px){   
-
-    .todoBox .spanTaskName, 
-    .todoBox .taskName, 
-    .todoBox .taskPriority, 
-    .todoBox .dateCreated, 
-    .todoBox .dueDate, 
-    .todoBox .taskStatus, 
-    .todoBox .spanTaskStatus{
-        font-size: 1.2rem;
-    }
-
-    .todoBox .todoBoxTaskButtonsDiv {
-        margin-top: 13px;
-    }
+@media only screen and (max-width: 510px) {
+  .iconDiv {
+    margin-left: 10px;
+    /* background-color: orange; */
+  }
 }
 
-@media only screen and (max-width: 528px){   
+@media only screen and (max-width: 576px) {
+  .todoBox .spanTaskName,
+  .todoBox .taskName,
+  .todoBox .taskPriority,
+  .todoBox .dateCreated,
+  .todoBox .dueDate,
+  .todoBox .taskStatus,
+  .todoBox .spanTaskStatus {
+    font-size: 1.2rem;
+  }
 
-   .projectsBoxItems .nameProject, 
-   .projectsBoxItems .spanProjectName, 
-   .projectsBoxItems .dateCreatedProject, 
-   .projectsBoxItems .spanElementDateCreated, 
-   .projectsBoxItems .dueDateProjectText, 
-   .projectsBoxItems .spanDueDateProject, 
-   .projectsBoxItems .spanProjectStatus{
-        font-size: 1.2rem;
-    }
-
-    .todoBox .todoBoxTaskButtonsDiv {
-        margin-top: 13px;
-    }
+  .todoBox .todoBoxTaskButtonsDiv {
+    margin-top: 13px;
+  }
 }
 
-@media only screen and (max-width: 550px){   
+@media only screen and (max-width: 528px) {
+  .projectsBoxItems .nameProject,
+  .projectsBoxItems .spanProjectName,
+  .projectsBoxItems .dateCreatedProject,
+  .projectsBoxItems .spanElementDateCreated,
+  .projectsBoxItems .dueDateProjectText,
+  .projectsBoxItems .spanDueDateProject,
+  .projectsBoxItems .spanProjectStatus {
+    font-size: 1.2rem;
+  }
 
-    .tasksDivTitle {
-        margin-left: 54px;
-        background-color: blue;
-    }
+  .todoBox .todoBoxTaskButtonsDiv {
+    margin-top: 13px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .tasksDivTitle {
+    margin-left: 54px;
+  }
+}
+
+@media only screen and (max-width: 456px) {
+  .tasksDivTitle {
+    margin-left: 46px;
+    /* background-color: blue; */
+  }
+
+  .todoBox .todoBoxTaskButtonsDiv {
+    /* background-color: orange; */
+    width: 250px;
+    margin-left: 8px;
+    /* display: flex;
+        justify-content: space-between; */
+  }
+
+  .todoBoxTaskButtonsDiv .editTodoButton,
+  .todoBoxTaskButtonsDiv .viewMoreInfo,
+  .todoBoxTaskButtonsDiv .deleteTask {
+    width: 100px;
+    margin-right: -14px;
+  }
+
+  .addNewProject {
+    margin-left: 3px;
+  }
+
 }

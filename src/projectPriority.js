@@ -1,4 +1,3 @@
-import { allProjects } from "./projectController";
 let value;
 function projectImportance(currentProjectPriority){
  let projectPriorityArr = ['Low', 'High', 'Extremely High'];

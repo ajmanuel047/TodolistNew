@@ -1,4 +1,3 @@
-import { createEmptyProject } from "./createNewProject"
 import { createProject } from "./createNewProject"
 import { formatDate } from "./dateformatter"
 import { projectImportance } from "./projectPriority"
@@ -30,7 +29,6 @@ function callStorage(){
   storedProjects.sort(function(a,b){
    return a['project ID'] - b['project ID']
   })
-  let newProject = []
   projects.push(...storedProjects) 
   }
 }
@@ -220,7 +218,6 @@ function updateProjectStatus(projectName, status){
 
 function updateTodoStatus(currentProjectName, todo, targetDiv){
 
-  let checkListStatus = null
   for(let i = 0; i < projects.length; i++){
     if(projects[i]['project']['projectName'] == currentProjectName){
       for(let j = 0; j < projects[i]['project']['todos'].length; j++){
@@ -313,7 +310,7 @@ function deleteAllProjects(){
   
 }
 
-function allProjects(value){
+function allProjects(){
   
   const getProjects = () => projects
   return { getProjects }
