@@ -1532,5 +1532,23 @@ p.statusText {
   .addNewProject {
     margin-left: 3px;
   }
+}
+
+@media only screen and (max-width: 430px) {
+  .tasksDivTitle {
+    margin-left: 40px;
+  }
+
+  .todoBox .todoBoxTaskButtonsDiv {
+    width: 235px;
+    margin-left: 8px;
+  }
+
+  .todoBoxTaskButtonsDiv .editTodoButton,
+  .todoBoxTaskButtonsDiv .viewMoreInfo,
+  .todoBoxTaskButtonsDiv .deleteTask {
+    width: 100px;
+    margin-right: -14px;
+  }
 
 }
