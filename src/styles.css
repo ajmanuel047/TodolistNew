@@ -1509,34 +1509,12 @@ p.statusText {
 }
 
 @media only screen and (max-width: 456px) {
-  .tasksDivTitle {
-    margin-left: 46px;
-    /* background-color: blue; */
+  body {
+    background-color: orange;
   }
-
-  .todoBox .todoBoxTaskButtonsDiv {
-    /* background-color: orange; */
-    width: 250px;
-    margin-left: 8px;
-    /* display: flex;
-        justify-content: space-between; */
-  }
-
-  .todoBoxTaskButtonsDiv .editTodoButton,
-  .todoBoxTaskButtonsDiv .viewMoreInfo,
-  .todoBoxTaskButtonsDiv .deleteTask {
-    width: 100px;
-    margin-right: -14px;
-  }
-
-  .addNewProject {
-    margin-left: 3px;
-  }
-}
-
-@media only screen and (max-width: 430px) {
   .tasksDivTitle {
     margin-left: 40px;
+    /* background-color: blue; */
   }
 
   .todoBox .todoBoxTaskButtonsDiv {
@@ -1551,4 +1529,7 @@ p.statusText {
     margin-right: -14px;
   }
 
+  .addNewProject {
+    margin-left: 3px;
+  }
 }
